@@ -46,6 +46,28 @@
     aside ul, aside ol { margin:0; padding-left:18px; }
     aside li { margin-bottom:6px; }
 
+    /* 공지/이벤트 박스 스타일 */
+    .aside-box {
+      margin-bottom: 20px;
+      padding: 12px;
+      border-radius: 10px;
+      background: #ffffff;
+    }
+    .aside-box h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .aside-box ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+    .aside-box li {
+      margin-bottom: 6px;
+    }
+
     .hero {
       text-align:center; padding:40px; border-radius:16px;
       background:linear-gradient(135deg,#bbf7d0,#ecfdf5);
@@ -107,6 +129,9 @@
       display:inline-block; background:#dcfce7; color:#065f46;
       font-weight:700; font-size:18px; padding:8px 16px; border-radius:50px;
     }
+
+    .up { color:var(--up); font-weight:700; }
+    .down { color:var(--down); font-weight:700; }
   </style>
 </head>
 <body>
@@ -115,14 +140,26 @@
   <div class="layout">
     <!-- 왼쪽 -->
     <aside>
-      <h3>📢 공지사항</h3>
-      <ul>
-        <li>신규 아이템 업데이트 예정</li>
-        <li>거래 수수료 이벤트 진행중</li>
-        <li>주간 인기 아이템 발표!</li>
-        <li>다음주 점검 안내</li>
-        <li>업데이트 패치노트 공개</li>
-      </ul>
+      <div class="aside-box">
+        <h3>📢 공지사항</h3>
+        <ul>
+          <li>신규 아이템 업데이트 예정</li>
+          <li>거래 수수료 이벤트 진행중</li>
+          <li>주간 인기 아이템 발표!</li>
+          <li>다음주 점검 안내</li>
+          <li>업데이트 패치노트 공개</li>
+        </ul>
+      </div>
+
+      <div class="aside-box">
+        <h3>🎉 다가오는 이벤트</h3>
+        <ul>
+          <li>9/15 🍂 가을맞이 할인 이벤트</li>
+          <li>9/20 🎁 특별 출석 보상 지급</li>
+          <li>9/25 🗺 신규 맵 업데이트</li>
+          <li>10/01 🛒 한정판 아이템 공개</li>
+        </ul>
+      </div>
     </aside>
 
     <!-- 중앙 -->
@@ -154,6 +191,7 @@
       <!-- 카테고리 -->
       <section id="category" class="page">
         <h2>📂 카테고리별 시세표</h2>
+
         <div class="quick-nav">
           <button onclick="scrollToSection('chair')">🪑 의자 종류</button>
           <button onclick="scrollToSection('support-car')">🚗 후원 차량</button>
@@ -165,7 +203,8 @@
         </div>
 
         <h3 id="chair">🪑 의자 종류</h3>
-        <table><tr><th>아이템</th><th>시세</th></tr>
+        <table>
+          <tr><th>아이템</th><th>시세</th></tr>
           <tr><td>달의자</td><td>230억~250억</td></tr>
           <tr><td>커피의자</td><td>230억~250억</td></tr>
           <tr><td>새장의자</td><td>110억~150억</td></tr>
@@ -173,7 +212,8 @@
         </table>
 
         <h3 id="support-car">🚗 후원 차량</h3>
-        <table><tr><th>아이템</th><th>시세</th></tr>
+        <table>
+          <tr><th>아이템</th><th>시세</th></tr>
           <tr><td>테저렉트</td><td>230억~250억</td></tr>
           <tr><td>M1</td><td>170억~200억</td></tr>
           <tr><td>미니바티</td><td>150억~180억</td></tr>
@@ -189,14 +229,16 @@
         </table>
 
         <h3 id="island-car">🏝 극락도 차량</h3>
-        <table><tr><th>아이템</th><th>시세</th></tr>
+        <table>
+          <tr><th>아이템</th><th>시세</th></tr>
           <tr><td>바나나카</td><td>60억~80억</td></tr>
           <tr><td>고양카</td><td>70억~100억</td></tr>
           <tr><td>피넛카</td><td>70억~100억</td></tr>
         </table>
 
         <h3 id="effect">✨ 이펙트</h3>
-        <table><tr><th>아이템</th><th>시세</th></tr>
+        <table>
+          <tr><th>아이템</th><th>시세</th></tr>
           <tr><td>불손</td><td>180억~200억</td></tr>
           <tr><td>불발</td><td>180억~200억</td></tr>
           <tr><td>리프</td><td>130억~150억</td></tr>
@@ -205,7 +247,8 @@
         </table>
 
         <h3 id="skin">🎭 스킨</h3>
-        <table><tr><th>아이템</th><th>시세</th></tr>
+        <table>
+          <tr><th>아이템</th><th>시세</th></tr>
           <tr><td>다니엘</td><td>170억~230억</td></tr>
           <tr><td>HJ</td><td>150억~200억</td></tr>
           <tr><td>YH</td><td>140억~180억</td></tr>
@@ -217,7 +260,8 @@
         </table>
 
         <h3 id="dance">💃 행동·댄스·동상</h3>
-        <table><tr><th>아이템</th><th>시세</th></tr>
+        <table>
+          <tr><th>아이템</th><th>시세</th></tr>
           <tr><td>브레이크댄스</td><td>10억~15억</td></tr>
           <tr><td>오징어댄스</td><td>10억~15억</td></tr>
           <tr><td>브로큰레그</td><td>5억~8억</td></tr>
@@ -249,13 +293,13 @@
           <tr><td>냄새나</td><td>10억~15억</td></tr>
           <tr><td>쓰러지기</td><td>5억~7억</td></tr>
           <tr><td>내빵뎅이</td><td>10억~15억</td></tr>
-          </table>
+        </table>
 
-        <h3 id="effect">✨ 기타 아이템</h3>
-        <table><tr><th>아이템</th><th>시세</th></tr>
+        <h3 id="item">✨ 기타 아이템</h3>
+        <table>
+          <tr><th>아이템</th><th>시세</th></tr>
           <tr><td>롤러</td><td>60억~80억</td></tr>
           <tr><td>팻 입양권</td><td>160억~200억</td></tr>
-    
         </table>
       </section>
 
@@ -308,7 +352,7 @@
       tbody.innerHTML="";
       items.forEach(it=>{
         let cls = it.change>0?"up":it.change<0?"down":"";
-        tbody.innerHTML+=
+        tbody.innerHTML+=`
         <tr>
           <td>${it.name}</td>
           <td>${it.volume}</td>
@@ -316,16 +360,17 @@
           <td class="${cls}">
             ${it.change>0?"▲":it.change<0?"▼":"-"} ${it.change}%
           </td>
-        </tr>;
+        </tr>`;
       });
     }
 
     function renderTop(){
       const ul=document.querySelector("#topList");
       ul.innerHTML=items
+        .slice() /* 원본 보존 */
         .sort((a,b)=>b.volume-a.volume)
         .slice(0,5)
-        .map(it=><li>${it.name} (${it.volume}건)</li>)
+        .map(it=>`<li>${it.name} (${it.volume}건)</li>`)
         .join("");
     }
 
@@ -339,7 +384,3 @@
   </script>
 </body>
 </html>
-
-
-
-
