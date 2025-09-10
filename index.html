@@ -103,15 +103,13 @@
     .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9999;visibility:hidden;opacity:0;transition:opacity .22s var(--e),visibility .22s var(--e)}
     .modal.show{visibility:visible;opacity:1}
     .modal-content{
-      position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(.98);
+      position:absolute;left:50%;top:50%;transform:translate(-50%, -50%) scale(.98);
       width:clamp(360px,92vw,1000px);height:85vh;overflow-y:auto;background:#fff;border-radius:16px;
       box-shadow:0 12px 30px rgba(0,0,0,.25);padding:22px 22px 26px;font-size:17.5px;text-align:center;
       transition:transform .22s var(--e), opacity .22s var(--e); will-change:transform,opacity; opacity:0;
     }
-    /* 닫기 버튼과 겹치지 않도록 우측 여백 강화 */
     .modal-content{ padding-right:56px; }
-
-    .modal.show .modal-content{transform:translateY(-50%) translateX(-50%) scale(1);opacity:1}
+    .modal.show .modal-content{transform:translate(-50%, -50%) scale(1);opacity:1}
     .modal h3{margin:0 0 4px;color:#111827;font-size:24px}
     .modal-tagline{margin:0 0 8px;color:var(--muted);font-weight:700}
     .modal-nav{margin:12px 0 14px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
@@ -122,18 +120,10 @@
     .modal-tab ul{list-style-position:inside;padding-left:0;margin:8px auto}
     .modal-tab p,.modal-tab li{text-align:center;line-height:1.8;margin:6px 0}
 
-    /* 닫기 버튼: 오른쪽 상단 고정 (우선순위 강화) */
-    .modal .close-btn,
-    #helpModal .close-btn{
-      position: absolute !important;
-      top: 12px !important;
-      right: 12px !important;
-      left: auto !important;
-      margin: 0 !important;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 2;
+    /* 닫기 버튼 위치 */
+    .modal .close-btn, #helpModal .close-btn{
+      position:absolute !important; top:12px !important; right:12px !important; left:auto !important;
+      margin:0 !important; display:inline-flex; align-items:center; justify-content:center; z-index:2;
     }
     .close-btn{background:#ef4444;color:#fff;border:none;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:800}
     .close-btn:hover{filter:brightness(.95)}
@@ -166,10 +156,7 @@
 
     /* 도움말 모달(보기 전용) */
     .help-body{max-width:760px;margin:8px auto 0;text-align:left}
-    .help-view{
-      background:#f8fafc;border:1px solid var(--border);border-radius:12px;
-      padding:14px 16px;font-size:15.5px;line-height:1.75;
-    }
+    .help-view{ background:#f8fafc;border:1px solid var(--border);border-radius:12px; padding:14px 16px;font-size:15.5px;line-height:1.75;}
     .help-view ul{margin:0;padding-left:20px}
     .help-view li{margin:6px 0}
 
@@ -210,11 +197,35 @@
     .modal.show .modal-content > *:nth-child(1){ animation-delay:.02s}
     .modal.show .modal-content > *:nth-child(2){ animation-delay:.04s}
     .modal.show .modal-content > *:nth-child(3){ animation-delay:.06s}
+
+    /* ====== (추가) 리얼 방송국 영역 ====== */
+    #broadcastBox{background:#fff;border-radius:14px;box-shadow:0 4px 12px rgba(0,0,0,.06);padding:22px}
+    #broadcastBox h2{margin:0 0 10px; color:var(--accent); font-size:21px; font-weight:800}
+    #broadcastBox .desc{margin:0 0 16px; color:#374151; font-size:15.5px}
+    .broadcast-grid{display:grid;grid-template-columns:1fr 1fr; gap:20px}
+    @media (max-width: 980px){ .broadcast-grid{ grid-template-columns:1fr } }
+
+    .story-card,.chat-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px}
+    .story-card h3,.chat-card h3{margin:0 0 8px;font-size:18px;font-weight:800;color:#111827}
+    .story-form .row{display:grid;grid-template-columns:120px 1fr; align-items:center; gap:10px; margin:8px 0}
+    .story-form input,.story-form textarea{width:100%; padding:10px 12px; border:1px solid var(--border); border-radius:10px; font-size:15px}
+    .story-form textarea{min-height:120px; resize:vertical}
+    .btn{display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      padding:10px 14px; border:none; border-radius:10px; background:var(--accent); color:#fff; font-weight:800; cursor:pointer;
+      transition:transform .18s var(--e), filter .18s var(--e)}
+    .btn:hover{filter:brightness(.96); transform:translateY(-2px)}
+
+    .chat-wrap{display:flex; flex-direction:column; gap:10px}
+    .chat-log{height:340px; overflow-y:auto; border:1px solid var(--border); border-radius:12px; padding:12px; background:#f9fafb}
+    .chat-item{background:#fff; border:1px solid #e5e7eb; border-radius:10px; padding:8px 10px; margin:6px 0}
+    .chat-item .meta{font-size:12px; color:#6b7280; margin-bottom:4px}
+    .chat-input{display:flex; gap:10px}
+    .chat-input input{flex:1; padding:10px 12px; border:1px solid var(--border); border-radius:10px; font-size:15px}
+    .chat-hint{font-size:12.5px; color:#6b7280}
   </style>
 </head>
 <body>
   <header><h1 onclick="goHome()">떡잎방범대 정보 센터</h1></header>
-  <!-- (추가) 스크롤 진행바 -->
   <div id="scrollProgress" aria-hidden="true"></div>
 
   <div class="layout">
@@ -324,6 +335,48 @@
             </div>
           </div>
         </div>
+
+        <!-- ====== 리얼 방송국 (홈 섹션 바로 밑, 항상 보임) ====== -->
+        <div id="broadcastBox" class="reveal">
+          <h2>📡 리얼 방송국</h2>
+          <p class="desc">사연 신청과 실시간 채팅(최근 50개)을 한 곳에서! <span class="chat-hint">* 메시지는 로그인 없이 익명으로 참여됩니다.</span></p>
+          <div class="broadcast-grid">
+            <!-- 사연 신청 -->
+            <div class="story-card">
+              <h3>📝 사연 신청</h3>
+              <form id="storyForm" class="story-form">
+                <div class="row">
+                  <label for="storyNick">닉네임(고번)</label>
+                  <input id="storyNick" type="text" placeholder="예: 신짱(251)" required />
+                </div>
+                <div class="row">
+                  <label for="storyTitle">제목</label>
+                  <input id="storyTitle" type="text" placeholder="사연 제목" maxlength="60" required />
+                </div>
+                <div class="row" style="align-items:start">
+                  <label for="storyBody">내용</label>
+                  <textarea id="storyBody" placeholder="사연 내용을 입력하세요" required></textarea>
+                </div>
+                <button type="submit" class="btn">사연 보내기</button>
+                <div id="storyMsg" class="chat-hint" style="margin-top:8px"></div>
+              </form>
+            </div>
+
+            <!-- 실시간 채팅 -->
+            <div class="chat-card">
+              <h3>💬 실시간 채팅 <span class="chat-hint">(최근 50개)</span></h3>
+              <div id="chatLog" class="chat-log" aria-live="polite"></div>
+              <form id="chatForm" class="chat-input" autocomplete="off">
+                <input id="chatNick" type="text" placeholder="닉네임(고번) — 예: 신짱(251)" required />
+                <input id="chatText" type="text" placeholder="메시지를 입력하세요" required />
+                <button class="btn" type="submit">전송</button>
+              </form>
+              <div class="chat-hint">* 부적절한 내용은 운영진 판단으로 삭제될 수 있습니다.</div>
+            </div>
+          </div>
+        </div>
+        <!-- ====== /리얼 방송국 ====== -->
+
       </section>
 
       <!-- 당근마켓 -->
@@ -511,457 +564,51 @@
     </div>
   </div>
 
+  <!-- 기본 JS (네비, 렌더 등) -->
   <script>
     /* ---------- 데이터 (조직/기업/공무원/판매물품/설명) ---------- */
-    const ENTITIES = {
-      company: {
-        tteok: {
-          name: "떡잎방범대",
-          tagline: "“떡잎에서 시작해 방탄처럼 지켜낸다.”",
-          info: "지역 커뮤니티 기반 정보·거래 허브를 지향합니다.",
-          products: [
-            {name:"전투 방탄복", price:"2,000,000원", note:"일일 제한: 최소 10개 ~ 무제한"},
-            {name:"확장 탄창", price:"1,500,000원", note:"일일 제한: 최소 10개 ~ 무제한"},
-            {name:"소음기", price:"1,000,000원", note:"일일 제한: 최소 10개 ~ 무제한"}
-          ],
-          org: [
-            "<strong>떡잎방범대 직급표</strong>",
-            "",
-            "[고위직]",
-            "회장(1): 신짱(251)",
-            "부회장(1): 빅토르(525)",
-            "사장(1): 민돌(545)",
-            "부사장(1): 찰리리차드(556)",
-            "",
-            "[간부직]",
-            "전무(2): 마틴(553), 김남정(703)",
-            "상무(2): 악마(1025), 길태미(597)",
-            "이사(1): 나몽이흙먹지마(958)",
-            "",
-            "[특수직]",
-            "비서(2): 신짱구(1094), 나몽(957)",
-            "비서실장(1): 민중(2388)",
-            "해외출장파견(1): 투반(459)",
-            "",
-            "[일반직]",
-            "부장(0): 공석",
-            "차장(0): 공석",
-            "과장(0): 공석",
-            "떡잎대리(2): 뇸이(), 똘마니(2806)",
-            "떡잎주임(1): 공석",
-            "행동대원(5): 김쿵짝(2573), 마이너(393), 한지우(2547), 참마(2548), 함찌(3796)",
-            "수습원(2): 한이(2700), 김똥땅(1838)",
-            "총 인원: 22/25"
-          ]
-        },
-        inback: {
-          name: "InBack",
-          tagline: "“이 스테이크가 식기 전에 돌아올게.”",
-          info: "데이터 분석과 자동화를 통해 의사결정을 지원합니다.",
-          products: [
-            {name:"와인", price:"1,000,000원", note:"목마름 20% 회복"},
-            {name:"치킨 스테이크", price:"1,000,000원", note:"배고픔 30% 회복"},
-            {name:"척아이롤 스테이크", price:"1,500,000원", note:"배고픔 70% 회복"},
-            {name:"강아지 연어사료", price:"1,500,000원", note:"배고픔 50% 회복"},
-            {name:"캣 연어통조림", price:"1,500,000원", note:"배고픔 50% 회복"},
-            {name:"강아지 오리비스킷", price:"800,000원", note:"배고픔 30% 회복"}
-          ],
-          org: [
-           "<strong>inback 직급표</strong>",
-            "",
-            "[고위직]",
-            "사장: 김민삼(2530)",
-            "부사장: 유헴(2216)",
-            "매니저: 충서(216), 대꾸(234)",
-            "",
-            "[간부직]",
-            "시니어키: 얌표(224), 핑크(244), 하늘(298), 뚜기(1038), 코인(2122)",
-            "슈퍼바이저: 몽쉘(738), 짭구(1586), 루이(3120)",
-            "",
-            "[일반직]",
-            "웨이터(4): 코넛(502), 강준혁(3376), 정케천(3395), 레모나(3625)",
-            "호스트(1): 도로로(947)",
-            "인턴(4): 투반(459), 페네사(3326), 인직(3626), 김두지(3682)",
-            "",
-            "[기타]",
-            "고라니(202)",
-            "총 인원: 22명"
-          ]
-        },
-        chakani: {
-          name: "차카니",
-          tagline: "“차카니 건들면 안착하다!!”",
-          info: "신뢰 기반의 중고·한정판 거래 플랫폼.",
-          products: [
-            {name:"딸기바나나 스무디", price:"2,000,000원"},
-            {name:"아이스 아메리카노", price:"1,000,000원"},
-            {name:"전남친 토스트", price:"1,000,000원"},
-            {name:"펫 미네랄워터", price:"2,000,000원", note:"목마름 50%"},
-            {name:"펫워터", price:"1,000,000원", note:"목마름 30%"},
-            {name:"고양이 츄르", price:"1,000,000원", note:"배고픔 30%"}
-          ],
-          org: [
-            "<strong>차카니 직급표</strong>",
-            "",
-            "[고위직]",
-            "뽀스: 서화(3434)",
-            "뿌뽀스: 텐시(2600)",
-            "미니뽀스: 장덕촌(2132)",
-            "",
-            "[간부직]",
-            "삐서: 아가(662)",
-            "쓰앵님: 유실(1143)",
-            "씩씩이: 하루(236)",
-            "특별이: —",
-            "",
-            "[인사팀]",
-            "반짝이: —",
-            "",
-            "[특수직]",
-            "금쪽이: 김봉남(291)",
-            "",
-            "[일반직]",
-            "친절이: 알렉산드론비치(1675)",
-            "성실이: 무거미(2277)",
-            "바른이: 하냥이(269), 고옹자(2128)",
-            "어린이: 미니(2774), 뽕미선(3844), 영월(3219), 신형만(3833)",
-            "총 인원: 15명"
-          ]
-        }
+    const ENTITIES = { /* ===== 기존 ENTITIES 전체 동일 (생략 없음) ===== */ 
+      company:{ tteok:{name:"떡잎방범대",tagline:"“떡잎에서 시작해 방탄처럼 지켜낸다.”",info:"지역 커뮤니티 기반 정보·거래 허브를 지향합니다.",
+        products:[{name:"전투 방탄복", price:"2,000,000원", note:"일일 제한: 최소 10개 ~ 무제한"},{name:"확장 탄창", price:"1,500,000원", note:"일일 제한: 최소 10개 ~ 무제한"},{name:"소음기", price:"1,000,000원", note:"일일 제한: 최소 10개 ~ 무제한"}],
+        org:["<strong>떡잎방범대 직급표</strong>","","[고위직]","회장(1): 신짱(251)","부회장(1): 빅토르(525)","사장(1): 민돌(545)","부사장(1): 찰리리차드(556)","",
+          "[간부직]","전무(2): 마틴(553), 김남정(703)","상무(2): 악마(1025), 길태미(597)","이사(1): 나몽이흙먹지마(958)","",
+          "[특수직]","비서(2): 신짱구(1094), 나몽(957)","비서실장(1): 민중(2388)","해외출장파견(1): 투반(459)","",
+          "[일반직]","부장(0): 공석","차장(0): 공석","과장(0): 공석","떡잎대리(2): 뇸이(), 똘마니(2806)","떡잎주임(1): 공석","행동대원(5): 김쿵짝(2573), 마이너(393), 한지우(2547), 참마(2548), 함찌(3796)","수습원(2): 한이(2700), 김똥땅(1838)","총 인원: 22/25"]},
+        inback:{name:"InBack",tagline:"“이 스테이크가 식기 전에 돌아올게.”",info:"데이터 분석과 자동화를 통해 의사결정을 지원합니다.",
+          products:[{name:"와인",price:"1,000,000원",note:"목마름 20% 회복"},{name:"치킨 스테이크",price:"1,000,000원",note:"배고픔 30% 회복"},{name:"척아이롤 스테이크",price:"1,500,000원",note:"배고픔 70% 회복"},{name:"강아지 연어사료",price:"1,500,000원",note:"배고픔 50% 회복"},{name:"캣 연어통조림",price:"1,500,000원",note:"배고픔 50% 회복"},{name:"강아지 오리비스킷",price:"800,000원",note:"배고픔 30% 회복"}],
+          org:["<strong>inback 직급표</strong>","","[고위직]","사장: 김민삼(2530)","부사장: 유헴(2216)","매니저: 충서(216), 대꾸(234)","","[간부직]","시니어키: 얌표(224), 핑크(244), 하늘(298), 뚜기(1038), 코인(2122)","슈퍼바이저: 몽쉘(738), 짭구(1586), 루이(3120)","","[일반직]","웨이터(4): 코넛(502), 강준혁(3376), 정케천(3395), 레모나(3625)","호스트(1): 도로로(947)","인턴(4): 투반(459), 페네사(3326), 인직(3626), 김두지(3682)","","[기타]","고라니(202)","총 인원: 22명"]},
+        chakani:{name:"차카니",tagline:"“차카니 건들면 안착하다!!”",info:"신뢰 기반의 중고·한정판 거래 플랫폼.",
+          products:[{name:"딸기바나나 스무디",price:"2,000,000원"},{name:"아이스 아메리카노",price:"1,000,000원"},{name:"전남친 토스트",price:"1,000,000원"},{name:"펫 미네랄워터",price:"2,000,000원",note:"목마름 50%"},{name:"펫워터",price:"1,000,000원",note:"목마름 30%"},{name:"고양이 츄르",price:"1,000,000원",note:"배고픔 30%"}],
+          org:["<strong>차카니 직급표</strong>","","[고위직]","뽀스: 서화(3434)","뿌뽀스: 텐시(2600)","미니뽀스: 장덕촌(2132)","","[간부직]","삐서: 아가(662)","쓰앵님: 유실(1143)","씩씩이: 하루(236)","특별이: —","","[인사팀]","반짝이: —","","[특수직]","금쪽이: 김봉남(291)","","[일반직]","친절이: 알렉산드론비치(1675)","성실이: 무거미(2277)","바른이: 하냥이(269), 고옹자(2128)","어린이: 미니(2774), 뽕미선(3844), 영월(3219), 신형만(3833)","총 인원: 15명"]}
       },
-      civil: {
-        ems: {
-          name: "EMS",
-          tagline: "“우리의 출동 하나가, 서버 분위기를 바꾼다.”",
-          info: "응급의료와 재난 골든타임을 책임집니다.",
-          products: [
-            {name:"진통제", price:"1,000,000원", note:"하루 최대 100개 구매 가능"},
-            {name:"애완동물 치료제", price:"3,000,000원", note:"하루 최대 10개 구매 가능 (임시)"}
-          ],
-          org: [
-            "<strong>EMS 직급표</strong>",
-            "의료국장(1/1): 박지(105)",
-            "",
-            "[고위직]",
-            "병원장(0/1): —",
-            "부원장(2/2): 보름달(616), 하즈루(129)",
-            "센터장(2/3): 재훈(541), 박칠순(386)",
-            "",
-            "[간부직]",
-            "본부장(0/4): —",
-            "구급과장(0/4): —",
-            "구급대장(3/4): 옥슈슈(2763), 쵸파(1982), 승주(2036)",
-            "",
-            "[일반직]",
-            "구급팀장(1/6): 리윤(263)",
-            "선임 구급대원(1/10): 채언(395)",
-            "구급대원(6/∞): 이온(392), 똥냥꿍(2522), 토요일(2685), 마공포(258), 땅코(2099), 이프(3516)",
-            "구급대원 인턴(5/∞): 장광남(2504), 위도(3104), 브기(619), 홍예린(342), 이숙희(3458)",
-            "",
-            "[대기발령]",
-            "부라보콘(177) — 병원장 / 엔젤(199) — 센터장 / 갓상현(1164) — 구급팀장 / 새월이(117), 이우연(865) — 구급대원",
-            "",
-            "[인사과]",
-            "인사과장: 부라보콘(616)",
-            "인사대원: 하즈루(129), 쵸파(1982), 승주(2036)",
-            "",
-            "[감찰과]",
-            "감찰과장: 보름달(616)",
-            "감찰대원: 박칠순(386), 군반(2058), 옥슈슈(2763)",
-            "총 인원: 27명"
-          ]
-        },
-        southpd: {
-          name: "남부경찰",
-          tagline: "“시민을 위한 가장 가까운 힘”",
-          info: "",
-          products: [],
-          org: [
-            "<strong>남부경찰 직급표</strong>",
-            "[고위직]",
-            "치안총감: 뭉콩(301)",
-            "치안정감: 이만득(257)",
-            "치안감: 스왓(120)",
-            "경무관: 윈스턴(687)",
-            "",
-            "[간부직]",
-            "행정관(명예직급): 칸콩(150)",
-            "총경: 백마(212)",
-            "경정: 이글(672), 김선우(1603)",
-            "경감 3호봉: 듀니(601)",
-            "경감 2호봉: —",
-            "경감 1호봉: 황창수(225), 송송(387), 정훈(624)",
-            "",
-            "[일반직]",
-            "경위 3호봉: 바엘(273)",
-            "경위 2호봉: —",
-            "경위 1호봉: 하하(420)",
-            "경사 3호봉: 키티(1540)",
-            "경사 2호봉: 매월(1212)",
-            "경사 1호봉: 고영희(104), 세이(268), 윤윤(1766)",
-            "경장 3호봉: 헬사(431)",
-            "경장 2호봉: 신태양(2562)",
-            "경장 1호봉: 치나츠(2629)",
-            "순경 3호봉: 황병장(2541), 박카수(2714)",
-            "순경 2호봉: 하나둘셋(3636)",
-            "순경 1호봉: 시나(2040), 공공팔(2778), 공공칠(2779), 백강혁(3215), 탄두리마스터(3890), 탄두리치킨(3891)",
-            "훈련생: 뿡뿡이(157), 이상현(260), 배팔식(266), 카로(767), 대한(784), 윈스텅(1780), 썸머(3476), 마키(3978)",
-            "청소부: 아싸(1544), 으뇽(3202)",
-            "",
-            "[조직도]",
-            "경찰특공대(ESU): 대장 이만득 / 부대장 듀니 / 대원: 백마, 황창수, 송송, 정훈, 탄두리마스터",
-            "행정팀: 팀장 윈스턴 / 부팀장 김선우 / 팀원: 스왓, 이글, 바엘, 고영희, 하하, 키티, 공공팔",
-            "총 인원: 41명"
-          ]
-        },
-        northpd: {
-          name: "북부경찰",
-          tagline: "“도망쳐봐야 소용없다~ 북부경찰 출동이다!” 🚓✨",
-          info: "",
-          products: [],
-          org: [
-            "<strong>북부경찰 직급표</strong>",
-            "[고위직]",
-            "경찰청장: 김동행(261)",
-            "경찰차장: 마필재(1021), 이재성(152)",
-            "치안감: 원두(1228), 랜스(712)",
-            "경무관: —",
-            "총경: —",
-            "",
-            "[간부직]",
-            "경정 3호봉: —",
-            "경정 2호봉: —",
-            "경정 1호봉: 가마니(656), 호마위(2690)",
-            "경감 3호봉: 김류찌(340)",
-            "경감 2호봉: —",
-            "경감 1호봉: 다니(2456), 임성완(2499), 고영태(985), 민쵸(580)",
-            "",
-            "[일반직]",
-            "경위 3호봉: —",
-            "경위 2호봉: —",
-            "경위 1호봉: —",
-            "경사 3호봉: —",
-            "경사 2호봉: —",
-            "경사 1호봉: —",
-            "경장 3호봉: —",
-            "경장 2호봉: —",
-            "경장 1호봉: —",
-            "순경 3호봉: 김승현(1471), 고로케를왜고로케먹어(2035)",
-            "순경 2호봉: 김완숙(1170), 짜쿠(965), 우끼(1700), 춘호(1121), 봉춘(1312), 설여우(2719)",
-            "순경 1호봉: 곽창식(2660), 유영경(1278), 보보(2991), 함싸울래(3342), 투팍(2373), 박춘봉(2636), 영띠(3686), 시드(2760), 용용이(772), 충주(1205), 씽냥(115), 낭낭이(1332), 노인간박광우(2794), 모코코(769)",
-            "",
-            "[교육/기타]",
-            "교육생: 뭉이(1047), 만월(562), 춘자(2144)",
-            "총 인원: 37명"
-          ]
-        },
-        castillo: {
-          name: "카스틸로",
-          tagline: "“엔진은 멎어도 카스틸로는 멎지 않는다.”",
-          info: "",
-          products: [
-            {name:"방문 수리", price:"3,000,000원"},
-            {name:"출장 수리", price:"5,000,000원"},
-            {name:"북부 출장 수리", price:"6,000,000원"},
-            {name:"극락도 출장 수리", price:"6,000,000원"},
-            {name:"긴급 수리 키트", price:"7,000,000원", note:"하루 최대 5개"}
-          ],
-          org: [
-            "<strong>카스틸로 직급표</strong>",
-            "",
-            "[임원]",
-            "대표이사(1/1): 베베(281)",
-            "전무이사(1/1): 사하(201)",
-            "본부장(2/2): 장경철(339), 이현(245)",
-            "비서팀장(1/1): 강하진(447)",
-            "",
-            "[기술/운영]",
-            "명장(1/1): 곽한구(107)",
-            "정비팀장(0/1): —",
-            "정비사(7): 피스마이너스원(293), 뿌칙(299), 또미(516), 김연차(627), 모코코(769), 독주(2559), 용궁(719)",
-            "인턴(8): 이춘배(3379), 반반(3495), 새벽(1084), 벌레(3868), 양정팔(3588), 이덕팔(3794), 박정호(3658), 권건(3824)",
-            "총 인원: 21명"
-          ]
-        },
-        broadcast: {
-          name: "방송국",
-          tagline: "“시작은 미약해도 끝은 민중이다.”",
-          info: "",
-          products: [],
-          org: [
-            "<strong>방송국 직급표</strong>",
-            "",
-            "[조직]",
-            "보도국 / 편성국 / 제작국 / 기술국",
-            "[간부]",
-            "보도국장, 편성국장, 제작국장, 기술국장"
-          ]
-        }
+      civil:{
+        ems:{name:"EMS",tagline:"“우리의 출동 하나가, 서버 분위기를 바꾼다.”",info:"응급의료와 재난 골든타임을 책임집니다.",
+          products:[{name:"진통제",price:"1,000,000원",note:"하루 최대 100개 구매 가능"},{name:"애완동물 치료제",price:"3,000,000원",note:"하루 최대 10개 구매 가능 (임시)"}],
+          org:["<strong>EMS 직급표</strong>","의료국장(1/1): 박지(105)","","[고위직]","병원장(0/1): —","부원장(2/2): 보름달(616), 하즈루(129)","센터장(2/3): 재훈(541), 박칠순(386)","","[간부직]","본부장(0/4): —","구급과장(0/4): —","구급대장(3/4): 옥슈슈(2763), 쵸파(1982), 승주(2036)","","[일반직]","구급팀장(1/6): 리윤(263)","선임 구급대원(1/10): 채언(395)","구급대원(6/∞): 이온(392), 똥냥꿍(2522), 토요일(2685), 마공포(258), 땅코(2099), 이프(3516)","구급대원 인턴(5/∞): 장광남(2504), 위도(3104), 브기(619), 홍예린(342), 이숙희(3458)","","[대기발령]","부라보콘(177) — 병원장 / 엔젤(199) — 센터장 / 갓상현(1164) — 구급팀장 / 새월이(117), 이우연(865) — 구급대원","","[인사과]","인사과장: 부라보콘(616)","인사대원: 하즈루(129), 쵸파(1982), 승주(2036)","","[감찰과]","감찰과장: 보름달(616)","감찰대원: 박칠순(386), 군반(2058), 옥슈슈(2763)","총 인원: 27명"]},
+        southpd:{name:"남부경찰",tagline:"“시민을 위한 가장 가까운 힘”",info:"",products:[],
+          org:["<strong>남부경찰 직급표</strong>","[고위직]","치안총감: 뭉콩(301)","치안정감: 이만득(257)","치안감: 스왓(120)","경무관: 윈스턴(687)","","[간부직]","행정관(명예직급): 칸콩(150)","총경: 백마(212)","경정: 이글(672), 김선우(1603)","경감 3호봉: 듀니(601)","경감 2호봉: —","경감 1호봉: 황창수(225), 송송(387), 정훈(624)","","[일반직]","경위 3호봉: 바엘(273)","경위 2호봉: —","경위 1호봉: 하하(420)","경사 3호봉: 키티(1540)","경사 2호봉: 매월(1212)","경사 1호봉: 고영희(104), 세이(268), 윤윤(1766)","경장 3호봉: 헬사(431)","경장 2호봉: 신태양(2562)","경장 1호봉: 치나츠(2629)","순경 3호봉: 황병장(2541), 박카수(2714)","순경 2호봉: 하나둘셋(3636)","순경 1호봉: 시나(2040), 공공팔(2778), 공공칠(2779), 백강혁(3215), 탄두리마스터(3890), 탄두리치킨(3891)","훈련생: 뿡뿡이(157), 이상현(260), 배팔식(266), 카로(767), 대한(784), 윈스텅(1780), 썸머(3476), 마키(3978)","청소부: 아싸(1544), 으뇽(3202)","","[조직도]","경찰특공대(ESU): 대장 이만득 / 부대장 듀니 / 대원: 백마, 황창수, 송송, 정훈, 탄두리마스터","행정팀: 팀장 윈스턴 / 부팀장 김선우 / 팀원: 스왓, 이글, 바엘, 고영희, 하하, 키티, 공공팔","총 인원: 41명"]},
+        northpd:{name:"북부경찰",tagline:"“도망쳐봐야 소용없다~ 북부경찰 출동이다!” 🚓✨",info:"",products:[],
+          org:["<strong>북부경찰 직급표</strong>","[고위직]","경찰청장: 김동행(261)","경찰차장: 마필재(1021), 이재성(152)","치안감: 원두(1228), 랜스(712)","경무관: —","총경: —","","[간부직]","경정 3호봉: —","경정 2호봉: —","경정 1호봉: 가마니(656), 호마위(2690)","경감 3호봉: 김류찌(340)","경감 2호봉: —","경감 1호봉: 다니(2456), 임성완(2499), 고영태(985), 민쵸(580)","","[일반직]","경위 3호봉: —","경위 2호봉: —","경위 1호봉: —","경사 3호봉: —","경사 2호봉: —","경사 1호봉: —","경장 3호봉: —","경장 2호봉: —","경장 1호봉: —","순경 3호봉: 김승현(1471), 고로케를왜고로케먹어(2035)","순경 2호봉: 김완숙(1170), 짜쿠(965), 우끼(1700), 춘호(1121), 봉춘(1312), 설여우(2719)","순경 1호봉: 곽창식(2660), 유영경(1278), 보보(2991), 함싸울래(3342), 투팍(2373), 박춘봉(2636), 영띠(3686), 시드(2760), 용용이(772), 충주(1205), 씽냥(115), 낭낭이(1332), 노인간박광우(2794), 모코코(769)","","[교육/기타]","교육생: 뭉이(1047), 만월(562), 춘자(2144)","총 인원: 37명"]},
+        castillo:{name:"카스틸로",tagline:"“엔진은 멎어도 카스틸로는 멎지 않는다.”",info:"",products:[
+            {name:"방문 수리", price:"3,000,000원"},{name:"출장 수리", price:"5,000,000원"},{name:"북부 출장 수리", price:"6,000,000원"},{name:"극락도 출장 수리", price:"6,000,000원"},{name:"긴급 수리 키트", price:"7,000,000원", note:"하루 최대 5개"}],
+          org:["<strong>카스틸로 직급표</strong>","","[임원]","대표이사(1/1): 베베(281)","전무이사(1/1): 사하(201)","본부장(2/2): 장경철(339), 이현(245)","비서팀장(1/1): 강하진(447)","","[기술/운영]","명장(1/1): 곽한구(107)","정비팀장(0/1): —","정비사(7): 피스마이너스원(293), 뿌칙(299), 또미(516), 김연차(627), 모코코(769), 독주(2559), 용궁(719)","인턴(8): 이춘배(3379), 반반(3495), 새벽(1084), 벌레(3868), 양정팔(3588), 이덕팔(3794), 박정호(3658), 권건(3824)","총 인원: 21명"]},
+        broadcast:{name:"방송국",tagline:"“시작은 미약해도 끝은 민중이다.”",info:"",products:[],org:["<strong>방송국 직급표</strong>","","[조직]","보도국 / 편성국 / 제작국 / 기술국","[간부]","보도국장, 편성국장, 제작국장, 기술국장"]}
       },
-      org: {
-        bigdick: {
-          name: "빅딕",
-          tagline: "“크기는 우연이지만, 위대함은 선택이다.”",
-          info: "",
-          products: [
-            {name:"권총", price:"20,000,000원"},
-            {name:"SMG", price:"40,000,000원"},
-            {name:"어썰트 라이플", price:"40,000,000원"},
-            {name:"탄약 (500발)", price:"3,000,000원"},
-            {name:"야구빠따/손도끼", price:"10,000,000원"},
-            {name:"김장 (일반 시민)", price:"700,000,000원"},
-            {name:"김장 (공무원·팩션)", price:"1,500,000,000원"}
-          ],
-          org: [
-            "<strong>빅딕 직급표</strong>",
-            "",
-            "[수뇌부]",
-            "두목: 김편집(179)",
-            "부두목: 우기지마우기(1763), 정우(270)",
-            "빅브라더: 도광철(2542), 나기(174)",
-            "비서: 츄츄(1593)",
-            "",
-            "[특별직]",
-            "빅딕공주(1): 라희(3667)",
-            "",
-            "[간부직]",
-            "총사령관(0): 공석",
-            "부사령관(0): 공석",
-            "도살자(0): 공석",
-            "무기총책(2): 가영(3088), 킬러조(3096)",
-            "마약총책(1): 황춘식(3066)",
-            "",
-            "[일반직]",
-            "척살대장(2): 박정식(1701), 굿땡(134)",
-            "척살대원(0): 공석",
-            "행동대장(1): 윤미자(3382)",
-            "행동대원(2): 사랑이(782), 넨내(3150)",
-            "조직원(3): 재웅(3139), 종근(272), 김묵직(3493)",
-            "수습원(6): 엽이(3358), 강대근(3933), 하우(3976), 윤끼르까끼르르(3980), 강산(3465), 벙어리(2973)",
-            "",
-            "[팀 편제]",
-            "총관리팀: 김편집(179), 정우(270) | 감사팀: 우기지마우기(1763) | 인사팀: 츄츄(1593), 도광철(2542) | RP지도관리팀: 나기(174)",
-            "총 인원: 24/25"
-          ]
-        },
-        cheongryong: {
-          name: "청룡",
-          tagline: "“천상천하 유아독존, 청룡이 하늘로 서겠다.”",
-          info: "",
-          products: [
-            {name:"SMG", price:"40,000,000원"},
-            {name:"AK 소총", price:"40,000,000원"},
-            {name:"권총", price:"20,000,000원"},
-            {name:"총알 (500발)", price:"3,000,000원"},
-            {name:"근접무기", price:"10,000,000원"}
-          ],
-          org: [
-            "<strong>청룡그룹 직급표</strong>",
-            "",
-            "[고위직]",
-            "회장: 구실수(254)",
-            "부회장: 김실망(377), 김편짚(252)",
-            "실장: 설이(137)",
-            "비서실장: 연매화(486)",
-            "",
-            "[간부직]",
-            "참모장: 우식(564)",
-            "비서: 하린(230)",
-            "고문장: 브라이언근철(1757)",
-            "관리대장: —",
-            "행동대장: 태무(614), 오대수(771)",
-            "",
-            "[일반직]",
-            "행동팀장: 강태공(233)",
-            "행동원: 토마토우(143), 박가람, 멩멩(3221)",
-            "조직원: 조광철(2782), 태윤(3709)",
-            "수습일원: 효끼르까끼르(3983), 궤민(3979)",
-            "",
-            "[팀 편제](참고)",
-            "총관리팀: 구실수 | 부총관리팀: 김편짚 | 인사 팀장: 설이 | 인사 팀원: 김실망",
-            "총 인원: 19명"
-          ]
-        },
-        sakura: {
-          name: "사쿠라",
-          tagline: "“벚꽃은 만개할 때 화려한 법이다.”",
-          info: "",
-          products: [
-            {name:"조선백자", price:"10,000,000원"},
-            {name:"분청사기", price:"10,000,000원"},
-            {name:"고려청자", price:"10,000,000원"},
-            {name:"기타 장물", price:"4,000,000원", note:"참치 오도로 / 벨루가 캐비어 / 푸아그라 / 산삼"},
-            {name:"금 귀걸이", price:"72,000,000원"},
-            {name:"명품 시계", price:"72,000,000원"},
-            {name:"다이아몬드 반지", price:"64,000,000원"},
-            {name:"금괴", price:"64,000,000원"},
-            {name:"블랙머니 수수료", price:"30%", note:"구매가의 30%"}
-          ],
-          org: [
-            "<strong>사쿠라 직급표</strong>",
-            "",
-            "[고위직]",
-            "오야붕: 애기(708)",
-            "부오야붕: 르시(907)",
-            "행동대장: 릴딕(907)",
-            "",
-            "[간부직]",
-            "만개: —",
-            "볒바람: —",
-            "낙화: 핑퐁(714)",
-            "",
-            "[일반직]",
-            "꽃받침: —",
-            "꽃줄기: —",
-            "꽃잎: 훈재(939), 흑백(1426)",
-            "꽃봉오리: 현우(2634), 스컬(2724), 서하늘(2739), 파링(2490), 딸통(3218), 노칠(652)",
-            "꽃눈: 피로(1987), 푸른하늘(581)",
-            "",
-            "[특별직]",
-            "천본앵: 히힛(768)",
-            "장로: 아키라(248), 데키(571)",
-            "화검대: —",
-            "총원: 17 / 25"
-          ]
-        },
-        jakdu: {
-          name: "작두",
-          tagline: "“와신상담(臥薪嘗膽)”",
-          info: "",
-          products: [
-            {name:"어썰트 라이플", price:"40,000,000원"},
-            {name:"SMG", price:"40,000,000원"},
-            {name:"권총", price:"20,000,000원"},
-            {name:"탄약 (500발)", price:"3,000,000원"},
-            {name:"식칼/손도끼", price:"10,000,000원"}
-          ],
-          org: [
-            "<strong>작두 직급표</strong>",
-            "",
-            "[고위직]",
-            "회장(삼팔광땡): 조근식(1275)",
-            "부회장(일팔광땡): 박형식(660)",
-            "일삼광땡: 너구리(219)",
-            "암행어사 참모: 러버덕(796), 덕출(227)",
-            "[간부직]",
-            "알리: 정부장(891)",
-            "독사: 이쨔(1839)",
-            "구삥: 대머리신사(2728)",
-            "장삥: 조쿠와라(1810)",
-            "",
-            "",
-            "[특수직]",
-            "예림이: 박말순(654)",
-            "[일반직]",
-            "갑오: 공석 ",
-            "한끗: 홍금쪽(3845), 주야(3432)",
-            "끗: 르마(2544), 송실수(2553), 고도리(3161), 미스터갱(130), 유월(3462)",
-            "",
-            "[수습원]",
-            "망통: 베배(1712), 짱돌(3566), 귤탱이(3652), 두꺼비(3461), 반하준(1160), 키위믹스(3889), 최동웅(3934)",
-            "총 인원: 25/25"
-          ]
-        }
+      org:{
+        bigdick:{name:"빅딕",tagline:"“크기는 우연이지만, 위대함은 선택이다.”",info:"",products:[
+            {name:"권총", price:"20,000,000원"},{name:"SMG", price:"40,000,000원"},{name:"어썰트 라이플", price:"40,000,000원"},{name:"탄약 (500발)", price:"3,000,000원"},
+            {name:"야구빠따/손도끼", price:"10,000,000원"},{name:"김장 (일반 시민)", price:"700,000,000원"},{name:"김장 (공무원·팩션)", price:"1,500,000,000원"}],
+          org:["<strong>빅딕 직급표</strong>","","[수뇌부]","두목: 김편집(179)","부두목: 우기지마우기(1763), 정우(270)","빅브라더: 도광철(2542), 나기(174)","비서: 츄츄(1593)","","[특별직]","빅딕공주(1): 라희(3667)","","[간부직]","총사령관(0): 공석","부사령관(0): 공석","도살자(0): 공석","무기총책(2): 가영(3088), 킬러조(3096)","마약총책(1): 황춘식(3066)","","[일반직]","척살대장(2): 박정식(1701), 굿땡(134)","척살대원(0): 공석","행동대장(1): 윤미자(3382)","행동대원(2): 사랑이(782), 넨내(3150)","조직원(3): 재웅(3139), 종근(272), 김묵직(3493)","수습원(6): 엽이(3358), 강대근(3933), 하우(3976), 윤끼르까끼르르(3980), 강산(3465), 벙어리(2973)","","[팀 편제]","총관리팀: 김편집(179), 정우(270) | 감사팀: 우기지마우기(1763) | 인사팀: 츄츄(1593), 도광철(2542) | RP지도관리팀: 나기(174)","총 인원: 24/25"]},
+        cheongryong:{name:"청룡",tagline:"“천상천하 유아독존, 청룡이 하늘로 서겠다.”",info:"",products:[
+            {name:"SMG", price:"40,000,000원"},{name:"AK 소총", price:"40,000,000원"},{name:"권총", price:"20,000,000원"},{name:"총알 (500발)", price:"3,000,000원"},{name:"근접무기", price:"10,000,000원"}],
+          org:["<strong>청룡그룹 직급표</strong>","","[고위직]","회장: 구실수(254)","부회장: 김실망(377), 김편짚(252)","실장: 설이(137)","비서실장: 연매화(486)","","[간부직]","참모장: 우식(564)","비서: 하린(230)","고문장: 브라이언근철(1757)","관리대장: —","행동대장: 태무(614), 오대수(771)","","[일반직]","행동팀장: 강태공(233)","행동원: 토마토우(143), 박가람, 멩멩(3221)","조직원: 조광철(2782), 태윤(3709)","수습일원: 효끼르까끼르(3983), 궤민(3979)","","[팀 편제](참고)","총관리팀: 구실수 | 부총관리팀: 김편짚 | 인사 팀장: 설이 | 인사 팀원: 김실망","총 인원: 19명"]},
+        sakura:{name:"사쿠라",tagline:"“벚꽃은 만개할 때 화려한 법이다.”",info:"",products:[
+            {name:"조선백자", price:"10,000,000원"},{name:"분청사기", price:"10,000,000원"},{name:"고려청자", price:"10,000,000원"},{name:"기타 장물", price:"4,000,000원", note:"참치 오도로 / 벨루가 캐비어 / 푸아그라 / 산삼"},
+            {name:"금 귀걸이", price:"72,000,000원"},{name:"명품 시계", price:"72,000,000원"},{name:"다이아몬드 반지", price:"64,000,000원"},{name:"금괴", price:"64,000,000원"},{name:"블랙머니 수수료", price:"30%", note:"구매가의 30%"}],
+          org:["<strong>사쿠라 직급표</strong>","","[고위직]","오야붕: 애기(708)","부오야붕: 르시(907)","행동대장: 릴딕(907)","","[간부직]","만개: —","볒바람: —","낙화: 핑퐁(714)","","[일반직]","꽃받침: —","꽃줄기: —","꽃잎: 훈재(939), 흑백(1426)","꽃봉오리: 현우(2634), 스컬(2724), 서하늘(2739), 파링(2490), 딸통(3218), 노칠(652)","꽃눈: 피로(1987), 푸른하늘(581)","","[특별직]","천본앵: 히힛(768)","장로: 아키라(248), 데키(571)","화검대: —","총원: 17 / 25"]},
+        jakdu:{name:"작두",tagline:"“와신상담(臥薪嘗膽)”",info:"",products:[
+            {name:"어썰트 라이플", price:"40,000,000원"},{name:"SMG", price:"40,000,000원"},{name:"권총", price:"20,000,000원"},{name:"탄약 (500발)", price:"3,000,000원"},{name:"식칼/손도끼", price:"10,000,000원"}],
+          org:["<strong>작두 직급표</strong>","","[고위직]","회장(삼팔광땡): 조근식(1275)","부회장(일팔광땡): 박형식(660)","일삼광땡: 너구리(219)","암행어사 참모: 러버덕(796), 덕출(227)","[간부직]","알리: 정부장(891)","독사: 이쨔(1839)","구삥: 대머리신사(2728)","장삥: 조쿠와라(1810)","","","","[특수직]","예림이: 박말순(654)","[일반직]","갑오: 공석 ","한끗: 홍금쪽(3845), 주야(3432)","끗: 르마(2544), 송실수(2553), 고도리(3161), 미스터갱(130), 유월(3462)","","[수습원]","망통: 베배(1712), 짱돌(3566), 귤탱이(3652), 두꺼비(3461), 반하준(1160), 키위믹스(3889), 최동웅(3934)","총 인원: 25/25"]}
       }
     };
 
@@ -1033,21 +680,17 @@
       const ent=group[key];
       if(!ent) return;
 
-      // 제목/한마디
       document.getElementById("modalTitle").textContent=ent.name;
       document.getElementById("modalTagline").textContent = ent.tagline || "—";
 
-      // 탭 초기화
       document.querySelectorAll('.modal-tab').forEach(t=>t.classList.remove('active'));
       document.getElementById("modal-org").classList.add('active');
 
-      // 조직도
       const orgUL=document.getElementById("modalOrgList");
       orgUL.innerHTML = (ent.org && ent.org.length)
         ? formatOrg(ent.org)
         : "<li class='org-item'><span class='dot'></span>등록된 조직도 정보가 없습니다.</li>";
 
-      // 판매물품 (1열 스택 카드)
       const prodUL = document.getElementById("modalProdList");
       const hasProducts = Array.isArray(ent.products) && ent.products.length > 0;
       if (hasProducts) {
@@ -1066,15 +709,12 @@
         prodUL.innerHTML = "";
       }
 
-      // 기업/조직 정보
       const info=document.getElementById("modalInfoText");
       info.innerHTML=`<b>한 마디:</b> ${ent.tagline||"—"}<br>${ent.info||""}`;
 
-      // 탭 버튼 표시/숨김
       const btnProducts = document.querySelector('.modal-nav button[data-tab="products"]');
       btnProducts.style.display = hasProducts ? '' : 'none';
 
-      // 모달 열기
       document.getElementById("modal").classList.add('show');
       document.body.style.overflow = 'hidden';
       document.getElementById("modal").setAttribute('aria-hidden','false');
@@ -1135,8 +775,6 @@
     /* =======================
        (추가) Scroll reveal + Click ripple/pop + Scroll progress
        ======================= */
-
-    // 스크롤 등장: 보이면 .show 붙이기
     const io = new IntersectionObserver((entries)=>{
       entries.forEach(entry=>{
         if(entry.isIntersecting){
@@ -1154,16 +792,16 @@
         ...document.querySelectorAll('section.page'),
         ...document.querySelectorAll('.aside-box'),
         ...document.querySelectorAll('#category table tr'),
-        ...document.querySelectorAll('#itemTable tbody tr')
-      ];
+        ...document.querySelectorAll('#itemTable tbody tr'),
+        document.querySelector('#broadcastBox')
+      ].filter(Boolean);
       targets.forEach(el=>{
-        if(el.matches('tr')) el.classList.add('reveal','lift');
+        if(el.matches && el.matches('tr')) el.classList.add('reveal','lift');
         else el.classList.add('reveal');
         io.observe(el);
       });
     }
 
-    // 클릭 팝 + 리플
     function addTapAndRipple(selector){
       document.querySelectorAll(selector).forEach(el=>{
         el.classList.add('tap-anim','rippleable');
@@ -1181,7 +819,6 @@
       });
     }
 
-    // 스크롤 진행바
     function onScrollProgress(){
       const h = document.documentElement;
       const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight || 1);
@@ -1190,7 +827,6 @@
     }
     window.addEventListener('scroll', onScrollProgress, { passive:true });
 
-    // 페이지 전환/서브전환 훅 덮어쓰기
     const _showPage = window.showPage;
     window.showPage = function(pageId){
       _showPage(pageId);
@@ -1207,16 +843,122 @@
       });
     };
 
-    // 초기화
     document.addEventListener('DOMContentLoaded', ()=>{
-      addTapAndRipple('.nav-card, .card, .market-card, .modal-nav button, .help-pill, .quick-nav button, .close-btn');
+      addTapAndRipple('.nav-card, .card, .market-card, .modal-nav button, .help-pill, .quick-nav button, .close-btn, .btn');
       attachReveals();
       onScrollProgress();
     });
   </script>
+
+  <!-- ===== Firebase + Firestore (script tag CDN, 실시간 채팅/사연신청) ===== -->
+  <script type="module">
+    // Firebase SDK
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-analytics.js";
+    import { getFirestore, collection, addDoc, serverTimestamp, query, orderBy, limit, onSnapshot } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+    import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+    // ⚙️ 네가 준 프로젝트 설정
+    const firebaseConfig = {
+      apiKey: "AIzaSyBQt_sPa5B4rHWAHTn9piQ6mYYmTDpxykM",
+      authDomain: "information-5461a.firebaseapp.com",
+      projectId: "information-5461a",
+      storageBucket: "information-5461a.firebasestorage.app",
+      messagingSenderId: "1051085585657",
+      appId: "1:1051085585657:web:c9b43d1b000aa30a233628",
+      measurementId: "G-2VD58S8V9C"
+    };
+
+    // Initialize
+    const app = initializeApp(firebaseConfig);
+    try { getAnalytics(app); } catch(e){ /* analytics optional on http */ }
+    const db = getFirestore(app);
+    const auth = getAuth(app);
+
+    // 익명 로그인 (실시간 권한용)
+    signInAnonymously(auth).catch(console.error);
+
+    // ====== Firestore refs
+    const chatsRef = collection(db, "chats");     // {nick, text, createdAt}
+    const storiesRef = collection(db, "stories"); // {nick, title, body, createdAt}
+
+    // ====== 실시간 채팅 최근 50개
+    const chatLog = document.getElementById("chatLog");
+    const chatQ = query(chatsRef, orderBy("createdAt","desc"), limit(50));
+    onSnapshot(chatQ, (snap)=>{
+      const docs = [];
+      snap.forEach(d=> docs.push({id:d.id, ...d.data()}));
+      // 최신순으로 가져왔으니 화면엔 오래된 것부터 보이도록 역순
+      docs.reverse();
+      chatLog.innerHTML = docs.map(doc=>{
+        const time = doc.createdAt?.toDate?.() ? doc.createdAt.toDate() : null;
+        const hh = time ? String(time.getHours()).padStart(2,"0") : "--";
+        const mm = time ? String(time.getMinutes()).padStart(2,"0") : "--";
+        const meta = `[${hh}:${mm}] ${doc.nick||"익명"}`;
+        const safeText = (doc.text||"").toString().replace(/[<>&]/g, s=>({ '<':'&lt;','>':'&gt;','&':'&amp;' }[s]));
+        return `<div class="chat-item">
+          <div class="meta">${meta}</div>
+          <div class="text">${safeText}</div>
+        </div>`;
+      }).join("");
+      // 맨 아래로 스크롤
+      chatLog.scrollTop = chatLog.scrollHeight;
+    });
+
+    // ====== 채팅 전송
+    const chatForm = document.getElementById("chatForm");
+    const chatNick = document.getElementById("chatNick");
+    const chatText = document.getElementById("chatText");
+    chatForm.addEventListener("submit", async (e)=>{
+      e.preventDefault();
+      const nick = (chatNick.value||"").trim();
+      const text = (chatText.value||"").trim();
+      if(!nick || !text) return;
+      chatForm.querySelector("button[type=submit]").disabled = true;
+      try{
+        await addDoc(chatsRef, { nick, text, createdAt: serverTimestamp() });
+        chatText.value = "";
+        chatText.focus();
+      }catch(err){
+        alert("메시지 전송 실패: " + (err?.message||err));
+      }finally{
+        chatForm.querySelector("button[type=submit]").disabled = false;
+      }
+    });
+
+    // ====== 사연 신청
+    const storyForm = document.getElementById("storyForm");
+    const storyNick = document.getElementById("storyNick");
+    const storyTitle = document.getElementById("storyTitle");
+    const storyBody = document.getElementById("storyBody");
+    const storyMsg = document.getElementById("storyMsg");
+
+    storyForm.addEventListener("submit", async (e)=>{
+      e.preventDefault();
+      const nick = (storyNick.value||"").trim();
+      const title = (storyTitle.value||"").trim();
+      const body = (storyBody.value||"").trim();
+      if(!nick || !title || !body){
+        storyMsg.textContent = "모든 항목을 입력해 주세요.";
+        storyMsg.style.color = "#dc2626";
+        return;
+      }
+      storyForm.querySelector("button[type=submit]").disabled = true;
+      storyMsg.textContent = "전송 중...";
+      storyMsg.style.color = "#6b7280";
+      try{
+        await addDoc(storiesRef, { nick, title, body, createdAt: serverTimestamp() });
+        storyMsg.textContent = "사연이 접수되었습니다! 감사합니다.";
+        storyMsg.style.color = "#16a34a";
+        storyTitle.value = "";
+        storyBody.value = "";
+      }catch(err){
+        storyMsg.textContent = "사연 전송 실패: " + (err?.message||err);
+        storyMsg.style.color = "#dc2626";
+      }finally{
+        storyForm.querySelector("button[type=submit]").disabled = false;
+      }
+    });
+  </script>
 </body>
 </html>
-
-
-
-
