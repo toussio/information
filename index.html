@@ -115,7 +115,7 @@
     .modal-content{ padding-right:56px; }
     .modal.show .modal-content{transform:translate(-50%, -50%) scale(1);opacity:1}
     .modal h3{margin:0 0 4px;color:#111827;font-size:24px}
-    .modal-tagline{margin:0 0 8px;color:#var(--muted);font-weight:700}
+    .modal-tagline{margin:0 0 8px;color:var(--muted);font-weight:700}
     .modal-nav{margin:12px 0 14px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
     .modal-nav button{padding:10px 18px;border:none;border-radius:8px;background:var(--m-accent);color:#fff;cursor:pointer;font-weight:700;font-size:15.5px;transition:transform .18s var(--e), filter .18s var(--e)}
     .modal-nav button:hover{filter:brightness(.96); transform:translateY(-2px)}
@@ -137,6 +137,7 @@
     #modalOrgList.org-list{line-height:1.9; max-width:820px; margin:0 auto}
     #modalOrgList .org-title{font-size:20px;font-weight:900;margin:4px 0 12px}
     #modalOrgList .org-section{list-style:none;margin:16px 0 10px;display:flex;justify-content:center}
+    /* ⬇ 테마 변수 사용 */
     #modalOrgList .org-section span{
       background:var(--m-chip-bg);border:1px solid var(--m-chip-border);color:var(--m-chip-ink);
       padding:6px 12px;border-radius:999px;font-weight:800;letter-spacing:.3px
@@ -146,9 +147,10 @@
     #modalOrgList .org-gap{height:6px;list-style:none}
     #modalOrgList .org-total{list-style:none;margin-top:14px;padding:10px 12px;background:#f1f5f9;border-radius:10px;font-weight:800;color:#0f172a;border:1px solid #e2e8f0}
 
-    /* 판매물품(모달) */
+    /* 판매물품(모달) : 1열 카드 */
     #modalProdList{max-width:680px; margin:6px auto 0; padding:0; display:flex; flex-direction:column; gap:12px;}
     #modalProdList .prod-card{list-style:none; background:#fff; border:1px solid #e6efe9; border-radius:14px; box-shadow:0 2px 10px rgba(0,0,0,.04); padding:14px 16px; position:relative; overflow:hidden; opacity:0; transform:translateY(6px); animation:listIn .34s var(--e) forwards; will-change:transform,opacity;}
+    /* ⬇ 테마 변수 사용 */
     #modalProdList .prod-card::before{content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background:linear-gradient(180deg,var(--m-accent),rgba(0,0,0,.08)); opacity:.6;}
     #modalProdList .prod-title{font-weight:900; font-size:16.75px; color:var(--ink); letter-spacing:.2px;}
     #modalProdList .prod-price{display:inline-block; margin-top:6px; background:var(--m-badge-bg); border:1px solid var(--m-badge-border); color:var(--m-badge-ink); font-weight:900; font-size:14.5px; border-radius:999px; padding:6px 12px;}
@@ -161,7 +163,7 @@
       #modalProdList .prod-price{ font-size:14px }
     }
 
-    /* 도움말 모달 */
+    /* 도움말 모달(보기 전용) */
     .help-body{max-width:760px;margin:8px auto 0;text-align:left}
     .help-view{ background:#f8fafc;border:1px solid var(--border);border-radius:12px; padding:14px 16px;font-size:15.5px;line-height:1.75;}
     .help-view ul{margin:0;padding-left:20px}
@@ -174,7 +176,7 @@
     @keyframes listIn{from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none}}
     @media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important} }
 
-    /* ====== 효과들 ====== */
+    /* ====== Scroll-reveal, 클릭 리플, 스크롤 진행바 ====== */
     .reveal { opacity: 0; transform: translateY(10px) scale(.98); transition: opacity .5s var(--e), transform .5s var(--e); will-change: opacity, transform; }
     .reveal.show { opacity: 1; transform: none; }
     .reveal.lift { transform: translateY(14px) scale(.97); }
@@ -190,14 +192,19 @@
     }
     @keyframes rippleIn { to { transform: scale(1); opacity: 0; } }
 
-    #scrollProgress { position: fixed; left: 0; top: 0; height: 3px; width: 0%; background: linear-gradient(90deg, #22c55e, #86efac); z-index: 99999; box-shadow: 0 0 8px rgba(34,197,94,.5); }
+    #scrollProgress {
+      position: fixed; left: 0; top: 0; height: 3px; width: 0%;
+      background: linear-gradient(90deg, #22c55e, #86efac);
+      z-index: 99999; box-shadow: 0 0 8px rgba(34,197,94,.5);
+    }
 
+    /* 모달 열릴 때 내부 요소 순차 등장 */
     .modal.show .modal-content > * { animation: fadeIn .35s var(--e) both; }
     .modal.show .modal-content > *:nth-child(1){ animation-delay:.02s}
     .modal.show .modal-content > *:nth-child(2){ animation-delay:.04s}
     .modal.show .modal-content > *:nth-child(3){ animation-delay:.06s}
 
-    /* ====== 리얼 방송국 (홈 전용) ====== */
+    /* ====== 리얼 방송국 영역 (홈에서만 보임 – 홈 섹션 내부로 이동) ====== */
     #broadcastBox{background:#fff;border-radius:14px;box-shadow:0 4px 12px rgba(0,0,0,.06);padding:22px;margin-top:18px}
     #broadcastBox h2{margin:0 0 10px; color:var(--accent); font-size:21px; font-weight:800}
     #broadcastBox .desc{margin:0 0 16px; color:#374151; font-size:15.5px}
@@ -207,29 +214,34 @@
     .story-form .row{display:grid;grid-template-columns:120px 1fr; align-items:center; gap:10px; margin:8px 0}
     .story-form input,.story-form textarea{width:100%; padding:10px 12px; border:1px solid var(--border); border-radius:10px; font-size:15px}
     .story-form textarea{min-height:120px; resize:vertical}
-    .btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:10px 14px; border:none; border-radius:10px; background:var(--accent); color:#fff; font-weight:800; cursor:pointer; transition:transform .18s var(--e), filter .18s var(--e)}
+    .btn{display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      padding:10px 14px; border:none; border-radius:10px; background:var(--accent); color:#fff; font-weight:800; cursor:pointer;
+      transition:transform .18s var(--e), filter .18s var(--e)}
     .btn:hover{filter:brightness(.96); transform:translateY(-2px)}
     .chat-hint{font-size:12.5px; color:#6b7280}
 
-    /* ========= 모달 배경 & 테마 ========= */
-    /* 기업: 벌집(bee) 테마 */
-    .bg-tteok{
-      /* 꿀색 그라데와 은은한 블랙 비네트 섞기 */
+    /* ========= 파스텔톤 모달 배경 + 테마 변수 세트 ========= */
+    /* 기업 - (기존) 초록 테마 */
+    .bg-tteok{ background:linear-gradient(135deg,#bbf7d0,#a7f3d0,#f0fdf4);}
+    .bg-tteok{ --m-accent:#16a34a; --m-chip-bg:#ecfdf5; --m-chip-border:#bbf7d0; --m-chip-ink:#065f46; --m-badge-bg:#ecfdf5; --m-badge-border:#86efac; --m-badge-ink:#065f46; }
+
+    /* 🐝 벌집(노랑+블랙) 테마 */
+    .bg-beehive{
       background:
-        radial-gradient(120% 160% at 110% -20%, rgba(17,24,39,.18) 0%, rgba(17,24,39,0) 45%),
-        radial-gradient(120% 160% at -20% 110%, rgba(17,24,39,.14) 0%, rgba(17,24,39,0) 45%),
-        linear-gradient(135deg,#fff7ed 0%, #fde68a 30%, #fbbf24 65%, #f59e0b 100%);
-      /* 테마 컬러 (꿀벌) */
-      --m-accent:#f59e0b; /* amber-500 */
-      --m-chip-bg:#fffbeb; --m-chip-border:#fde68a; --m-chip-ink:#7c2d12;
-      --m-badge-bg:#fff7ed; --m-badge-border:#fcd34d; --m-badge-ink:#78350f;
+        radial-gradient(1200px 600px at 100% -50%, rgba(15,23,42,.55), transparent 60%),
+        linear-gradient(135deg,#fef3c7,#fde68a,#0f172a);
+      --m-accent:#111827; /* 버튼/포인트는 블랙 */
+      --m-chip-bg:#fff7ed; --m-chip-border:#fcd34d; --m-chip-ink:#78350f;  /* 꿀색 칩 */
+      --m-badge-bg:#fffbeb; --m-badge-border:#fde68a; --m-badge-ink:#111827;/* 배지 글자는 블랙 */
     }
 
-    .bg-inback{ background:linear-gradient(135deg,#ede9fe,#f5d0fe,#fce7f3);}
-    .bg-inback{ --m-accent:#8b5cf6; --m-chip-bg:#f5f3ff; --m-chip-border:#ddd6fe; --m-chip-ink:#5b21b6; --m-badge-bg:#faf5ff; --m-badge-border:#e9d5ff; --m-badge-ink:#6b21a8; }
-
-    .bg-chakani{ background:linear-gradient(135deg,#fff7ed,#fde68a,#fef3c7);}
-    .bg-chakani{ --m-accent:#f59e0b; --m-chip-bg:#fffbeb; --m-chip-border:#fde68a; --m-chip-ink:#92400e; --m-badge-bg:#fff7ed; --m-badge-border:#fcd34d; --m-badge-ink:#92400e; }
+    /* 떡잎(복구용 초록 테마 별칭) */
+    .bg-tteok-green{
+      background:linear-gradient(135deg,#bbf7d0,#a7f3d0,#f0fdf4);
+      --m-accent:#16a34a;
+      --m-chip-bg:#ecfdf5; --m-chip-border:#bbf7d0; --m-chip-ink:#065f46;
+      --m-badge-bg:#ecfdf5; --m-badge-border:#86efac; --m-badge-ink:#065f46;
+    }
 
     /* 공무원 */
     .bg-ems{ background:linear-gradient(135deg,#fee2e2,#fecaca,#fef2f2);}
@@ -272,7 +284,7 @@
         <h3>📢 공지사항</h3>
         <ul>
           <li>떡잎방범대 정보 센터 OPEN</li>
-          <li>떡잎방범대 투자 센터 리뉴얼 </li>
+        <li>떡잎방범대 투자 센터 리뉴얼 </li>
           <li>🙏문의: 703 김남정, 디코 dm</li>
         </ul>
       </div>
@@ -311,8 +323,8 @@
         <div id="company" class="sub-page active">
           <h3>🏢 기업</h3>
           <div class="card-grid">
-            <!-- 떡잎방범대 → 벌집 & 아이콘 🍀 → 🐝 -->
-            <div class="card company-card" onclick="openEntity('company','tteok')">
+            <!-- 🐝 벌집 -->
+            <div class="card company-card" onclick="openEntity('company','beehive')">
               <div class="icon">🐝</div><h4>벌집</h4><p>-</p>
             </div>
             <div class="card company-card" onclick="openEntity('company','inback')">
@@ -320,6 +332,10 @@
             </div>
             <div class="card company-card" onclick="openEntity('company','chakani')">
               <div class="icon">🦄</div><h4>차카니</h4><p>-</p>
+            </div>
+            <!-- 🍀 떡잎방범대(복사본) -->
+            <div class="card company-card" onclick="openEntity('company','tteokleaf')">
+              <div class="icon">🍀</div><h4>떡잎방범대</h4><p>-</p>
             </div>
           </div>
         </div>
@@ -375,7 +391,7 @@
           </div>
         </div>
 
-        <!-- 리얼 방송국 -->
+        <!-- ✅ 홈에서만 보이는 리얼 방송국 -->
         <div id="broadcastBox" class="reveal">
           <h2>📡 리얼 방송국</h2>
           <p class="desc">사연 신청만 가능합니다. <span class="chat-hint">* 메시지는 로그인 없이 익명으로 접수됩니다.</span></p>
@@ -575,7 +591,7 @@
     </div>
   </div>
 
-  <!-- 도움말 모달 -->
+  <!-- 도움말 모달 (보기 전용) -->
   <div id="helpModal" class="modal" aria-hidden="true">
     <div class="modal-content" role="dialog" aria-modal="true">
       <button class="close-btn" onclick="closeHelp()">닫기</button>
@@ -592,13 +608,22 @@
     /* ---------- 데이터 ---------- */
     const ENTITIES = { 
       company:{ 
-        /* 떡잎방범대 → 벌집 (이름/직급표 타이틀만 변경) */
-        tteok:{name:"벌집",tagline:"“떡잎에서 시작해 방탄처럼 지켜낸다.”",info:"지역 커뮤니티 기반 정보·거래 허브를 지향합니다.",
+        /* 🐝 벌집(원래 떡잎방범대에서 변경) */
+        beehive:{name:"벌집",tagline:"“떡잎에서 시작해 방탄처럼 지켜낸다.”",info:"지역 커뮤니티 기반 정보·거래 허브를 지향합니다.",
           products:[{name:"전투 방탄복", price:"2,000,000원", note:"일일 제한: 최소 10개 ~ 무제한"},{name:"확장 탄창", price:"1,500,000원", note:"일일 제한: 최소 10개 ~ 무제한"},{name:"소음기", price:"1,000,000원", note:"일일 제한: 최소 10개 ~ 무제한"}],
           org:["<strong>벌집 직급표</strong>","","[고위직]","회장(1): 신짱(251)","부회장(1): 빅토르(525)","사장(1): 민돌(545)","부사장(1): 찰리리차드(556)","",
             "[간부직]","전무(2): 마틴(553), 김남정(703)","상무(2): 악마(1025), 길태미(597)","이사(1): 나몽이흙먹지마(958)","",
             "[특수직]","비서(2): 신짱구(1094), 나몽(957)","비서실장(1): 민중(2388)","해외출장파견(1): 투반(459)","",
             "[일반직]","부장(0): 공석","차장(0): 공석","과장(0): 공석","떡잎대리(2): 뇸이(), 똘마니(2806)","떡잎주임(1): 공석","행동대원(5): 김쿵짝(2573), 마이너(393), 한지우(2547), 참마(2548), 함찌(3796)","수습원(2): 한이(2700), 김똥땅(1838)","총 인원: 22/25"]},
+
+        /* 🍀 떡잎방범대(복사본) */
+        tteokleaf:{name:"떡잎방범대",tagline:"“떡잎에서 시작해 방탄처럼 지켜낸다.”",info:"지역 커뮤니티 기반 정보·거래 허브를 지향합니다.",
+          products:[{name:"전투 방탄복", price:"2,000,000원", note:"일일 제한: 최소 10개 ~ 무제한"},{name:"확장 탄창", price:"1,500,000원", note:"일일 제한: 최소 10개 ~ 무제한"},{name:"소음기", price:"1,000,000원", note:"일일 제한: 최소 10개 ~ 무제한"}],
+          org:["<strong>떡잎방범대 직급표</strong>","","[고위직]","회장(1): 신짱(251)","부회장(1): 빅토르(525)","사장(1): 민돌(545)","부사장(1): 찰리리차드(556)","",
+            "[간부직]","전무(2): 마틴(553), 김남정(703)","상무(2): 악마(1025), 길태미(597)","이사(1): 나몽이흙먹지마(958)","",
+            "[특수직]","비서(2): 신짱구(1094), 나몽(957)","비서실장(1): 민중(2388)","해외출장파견(1): 투반(459)","",
+            "[일반직]","부장(0): 공석","차장(0): 공석","과장(0): 공석","떡잎대리(2): 뇸이(), 똘마니(2806)","떡잎주임(1): 공석","행동대원(5): 김쿵짝(2573), 마이너(393), 한지우(2547), 참마(2548), 함찌(3796)","수습원(2): 한이(2700), 김똥땅(1838)","총 인원: 22/25"]},
+
         inback:{name:"InBack",tagline:"“이 스테이크가 식기 전에 돌아올게.”",info:"데이터 분석과 자동화를 통해 의사결정을 지원합니다.",
           products:[{name:"와인",price:"1,000,000원",note:"목마름 20% 회복"},{name:"치킨 스테이크",price:"1,000,000원",note:"배고픔 30% 회복"},{name:"척아이롤 스테이크",price:"1,500,000원",note:"배고픔 70% 회복"},{name:"강아지 연어사료",price:"1,500,000원",note:"배고픔 50% 회복"},{name:"캣 연어통조림",price:"1,500,000원",note:"배고픔 50% 회복"},{name:"강아지 오리비스킷",price:"800,000원",note:"배고픔 30% 회복"}],
           org:["<strong>inback 직급표</strong>","","[고위직]","사장: 김민삼(2530)","부사장: 유헴(2216)","매니저: 충서(216), 대꾸(234)","","[간부직]","시니어키: 얌표(224), 핑크(244), 하늘(298), 뚜기(1038), 코인(2122)","슈퍼바이저: 몽쉘(738), 짭구(1586), 루이(3120)","","[일반직]","웨이터(4): 코넛(502), 강준혁(3376), 정케천(3395), 레모나(3625)","호스트(1): 도로로(947)","인턴(4): 투반(459), 페네사(3326), 인직(3626), 김두지(3682)","","[기타]","고라니(202)","총 인원: 22명"]},
@@ -637,7 +662,7 @@
       }
     };
 
-    /* 네비/서브페이지 */
+    /* ---------- 네비/서브페이지 ---------- */
     function showPage(pageId){
       document.querySelectorAll('.page').forEach(s=>s.classList.remove('active'));
       const el=document.getElementById(pageId);
@@ -649,13 +674,13 @@
       document.getElementById(id).classList.add('active');
     }
 
-    /* 카테고리 퀵 이동 */
+    /* ---------- 카테고리 퀵 이동 ---------- */
     function scrollToSection(id){
       const el=document.getElementById(id);
       if(el) el.scrollIntoView({behavior:"smooth",block:"start"});
     }
 
-    /* 거래 통계/인기 TOP5 */
+    /* ---------- 거래 통계/인기 TOP5 ---------- */
     const items=[
       {name:"펫 입양권",volume:0,price:200,change:0},
       {name:"트월킹",volume:0,price:30,change:0},
@@ -682,7 +707,7 @@
         .map(it=>`<li>${it.name} (${it.volume}건)</li>`).join("");
     }
 
-    /* 조직도 포맷터 */
+    /* ---------- 조직도 포맷터 ---------- */
     function formatOrg(lines){
       return lines.map(raw=>{
         const t=(raw??"").trim();
@@ -699,9 +724,11 @@
       }).join("");
     }
 
-    /* 엔티티 모달 */
+    /* ---------- 엔티티 모달 ---------- */
     const KEY_TO_BG = {
-      tteok:'bg-tteok', inback:'bg-inback', chakani:'bg-chakani',
+      beehive:'bg-beehive',         /* 벌집 */
+      tteokleaf:'bg-tteok-green',   /* 떡잎(복사본) */
+      inback:'bg-inback', chakani:'bg-chakani',
       ems:'bg-ems', southpd:'bg-southpd', northpd:'bg-northpd', castillo:'bg-castillo', broadcast:'bg-broadcast',
       bigdick:'bg-bigdick', cheongryong:'bg-cheongryong', sakura:'bg-sakura', jakdu:'bg-jakdu',
     };
@@ -766,7 +793,7 @@
       document.getElementById("modal-"+id).classList.add('active');
     }
 
-    /* 도움말 */
+    /* ---------- 도움말(보기 전용) ---------- */
     const HELP_TEXTS = {
       market: `
         <ul>
@@ -809,7 +836,9 @@
     /* 초기 렌더 */
     renderTable(); renderTop();
 
-    /* 인터랙션 효과 */
+    /* =======================
+       Scroll reveal + Click ripple + Scroll progress
+       ======================= */
     const io = new IntersectionObserver((entries)=>{
       entries.forEach(entry=>{
         if(entry.isIntersecting){
@@ -885,7 +914,7 @@
     });
   </script>
 
-  <!-- Firebase (사연 신청) -->
+  <!-- ===== Firebase + Firestore (사연 신청만) ===== -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-analytics.js";
