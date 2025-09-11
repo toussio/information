@@ -137,7 +137,6 @@
     #modalOrgList.org-list{line-height:1.9; max-width:820px; margin:0 auto}
     #modalOrgList .org-title{font-size:20px;font-weight:900;margin:4px 0 12px}
     #modalOrgList .org-section{list-style:none;margin:16px 0 10px;display:flex;justify-content:center}
-    /* ⬇ 테마 변수 사용 */
     #modalOrgList .org-section span{
       background:var(--m-chip-bg);border:1px solid var(--m-chip-border);color:var(--m-chip-ink);
       padding:6px 12px;border-radius:999px;font-weight:800;letter-spacing:.3px
@@ -147,10 +146,9 @@
     #modalOrgList .org-gap{height:6px;list-style:none}
     #modalOrgList .org-total{list-style:none;margin-top:14px;padding:10px 12px;background:#f1f5f9;border-radius:10px;font-weight:800;color:#0f172a;border:1px solid #e2e8f0}
 
-    /* 판매물품(모달) : 1열 카드 */
+    /* 판매물품(모달) */
     #modalProdList{max-width:680px; margin:6px auto 0; padding:0; display:flex; flex-direction:column; gap:12px;}
     #modalProdList .prod-card{list-style:none; background:#fff; border:1px solid #e6efe9; border-radius:14px; box-shadow:0 2px 10px rgba(0,0,0,.04); padding:14px 16px; position:relative; overflow:hidden; opacity:0; transform:translateY(6px); animation:listIn .34s var(--e) forwards; will-change:transform,opacity;}
-    /* ⬇ 테마 변수 사용 */
     #modalProdList .prod-card::before{content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background:linear-gradient(180deg,var(--m-accent),rgba(0,0,0,.08)); opacity:.6;}
     #modalProdList .prod-title{font-weight:900; font-size:16.75px; color:var(--ink); letter-spacing:.2px;}
     #modalProdList .prod-price{display:inline-block; margin-top:6px; background:var(--m-badge-bg); border:1px solid var(--m-badge-border); color:var(--m-badge-ink); font-weight:900; font-size:14.5px; border-radius:999px; padding:6px 12px;}
@@ -204,56 +202,35 @@
     .modal.show .modal-content > *:nth-child(2){ animation-delay:.04s}
     .modal.show .modal-content > *:nth-child(3){ animation-delay:.06s}
 
-    /* ====== 리얼 방송국 영역 (홈에서만 보임 – 홈 섹션 내부로 이동) ====== */
-    #broadcastBox{background:#fff;border-radius:14px;box-shadow:0 4px 12px rgba(0,0,0,.06);padding:22px;margin-top:18px}
-    #broadcastBox h2{margin:0 0 10px; color:var(--accent); font-size:21px; font-weight:800}
-    #broadcastBox .desc{margin:0 0 16px; color:#374151; font-size:15.5px}
-    .broadcast-grid{display:grid;grid-template-columns:1fr; gap:20px}
-    .story-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px}
-    .story-card h3{margin:0 0 8px;font-size:18px;font-weight:800;color:#111827}
-    .story-form .row{display:grid;grid-template-columns:120px 1fr; align-items:center; gap:10px; margin:8px 0}
-    .story-form input,.story-form textarea{width:100%; padding:10px 12px; border:1px solid var(--border); border-radius:10px; font-size:15px}
-    .story-form textarea{min-height:120px; resize:vertical}
-    .btn{display:inline-flex; align-items:center; justify-content:center; gap:8px;
-      padding:10px 14px; border:none; border-radius:10px; background:var(--accent); color:#fff; font-weight:800; cursor:pointer;
-      transition:transform .18s var(--e), filter .18s var(--e)}
-    .btn:hover{filter:brightness(.96); transform:translateY(-2px)}
-    .chat-hint{font-size:12.5px; color:#6b7280}
-
-    /* ========= 파스텔톤 모달 배경 + 테마 변수 세트 ========= */
-    /* 기업 - (기존) 초록 테마 */
+    /* ========= 파스텔톤 모달 배경 + 테마 변수 ========= */
     .bg-tteok{ background:linear-gradient(135deg,#bbf7d0,#a7f3d0,#f0fdf4);}
     .bg-tteok{ --m-accent:#16a34a; --m-chip-bg:#ecfdf5; --m-chip-border:#bbf7d0; --m-chip-ink:#065f46; --m-badge-bg:#ecfdf5; --m-badge-border:#86efac; --m-badge-ink:#065f46; }
 
-    /* 🐝 벌집(노랑+블랙) 테마 */
+    /* 🐝 벌집(노랑+블랙) */
     .bg-beehive{
       background:
         radial-gradient(1200px 600px at 100% -50%, rgba(15,23,42,.55), transparent 60%),
         linear-gradient(135deg,#fef3c7,#fde68a,#0f172a);
-      --m-accent:#111827; /* 버튼/포인트는 블랙 */
-      --m-chip-bg:#fff7ed; --m-chip-border:#fcd34d; --m-chip-ink:#78350f;  /* 꿀색 칩 */
-      --m-badge-bg:#fffbeb; --m-badge-border:#fde68a; --m-badge-ink:#111827;/* 배지 글자는 블랙 */
+      --m-accent:#111827;
+      --m-chip-bg:#fff7ed; --m-chip-border:#fcd34d; --m-chip-ink:#78350f;
+      --m-badge-bg:#fffbeb; --m-badge-border:#fde68a; --m-badge-ink:#111827;
     }
-    
+
+    /* InBack / 차카니 테마 복구 */
+    .bg-inback{ background:linear-gradient(135deg,#ede9fe,#f5d0fe,#fce7f3);}
     .bg-inback{
-  background:linear-gradient(135deg,#ede9fe,#f5d0fe,#fce7f3);
-}
-.bg-inback{
-  --m-accent:#8b5cf6;
-  --m-chip-bg:#f5f3ff; --m-chip-border:#ddd6fe; --m-chip-ink:#5b21b6;
-  --m-badge-bg:#faf5ff; --m-badge-border:#e9d5ff; --m-badge-ink:#6b21a8;
-}
+      --m-accent:#8b5cf6;
+      --m-chip-bg:#f5f3ff; --m-chip-border:#ddd6fe; --m-chip-ink:#5b21b6;
+      --m-badge-bg:#faf5ff; --m-badge-border:#e9d5ff; --m-badge-ink:#6b21a8;
+    }
+    .bg-chakani{ background:linear-gradient(135deg,#fff7ed,#fde68a,#fef3c7);}
+    .bg-chakani{
+      --m-accent:#f59e0b;
+      --m-chip-bg:#fffbeb; --m-chip-border:#fde68a; --m-chip-ink:#92400e;
+      --m-badge-bg:#fff7ed; --m-badge-border:#fcd34d; --m-badge-ink:#92400e;
+    }
 
-.bg-chakani{
-  background:linear-gradient(135deg,#fff7ed,#fde68a,#fef3c7);
-}
-.bg-chakani{
-  --m-accent:#f59e0b;
-  --m-chip-bg:#fffbeb; --m-chip-border:#fde68a; --m-chip-ink:#92400e;
-  --m-badge-bg:#fff7ed; --m-badge-border:#fcd34d; --m-badge-ink:#92400e;
-}
-
-    /* 떡잎(복구용 초록 테마 별칭) */
+    /* 떡잎(복사본) 별칭 */
     .bg-tteok-green{
       background:linear-gradient(135deg,#bbf7d0,#a7f3d0,#f0fdf4);
       --m-accent:#16a34a;
@@ -289,6 +266,61 @@
 
     .bg-jakdu{ background:linear-gradient(135deg,#f3f4f6,#fecaca,#e5e7eb);}
     .bg-jakdu{ --m-accent:#b91c1c; --m-chip-bg:#fff1f2; --m-chip-border:#fecaca; --m-chip-ink:#7f1d1d; --m-badge-bg:#fef2f2; --m-badge-border:#fecaca; --m-badge-ink:#7f1d1d; }
+
+    /* ===== 리얼 방송국 (홈 밖) ===== */
+    #broadcastBox{background:#fff;border-radius:14px;box-shadow:0 4px 12px rgba(0,0,0,.06);padding:22px;margin-top:6px}
+    #broadcastBox h2{margin:0 0 10px; color:var(--accent); font-size:21px; font-weight:800}
+    #broadcastBox .desc{margin:0 0 16px; color:#374151; font-size:15.5px}
+    .broadcast-grid{display:grid;grid-template-columns:1.2fr .8fr; gap:20px}
+    @media (max-width: 980px){ .broadcast-grid{ grid-template-columns:1fr } }
+
+    /* 신청 폼 – 예쁘게 */
+    .story-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:18px}
+    .story-card h3{margin:0 0 12px;font-size:18px;font-weight:800;color:#111827}
+    .story-form{display:grid; gap:12px}
+    .story-row{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+    .story-row.single{grid-template-columns:1fr}
+    .story-field{display:flex;flex-direction:column; gap:6px}
+    .story-label{font-size:13px; font-weight:800; color:#065f46; letter-spacing:.2px}
+    .story-form input,.story-form textarea{
+      width:100%; padding:12px 12px; border:1px solid var(--border); border-radius:10px; font-size:15px; background:#fff;
+      transition:border-color .15s var(--e), box-shadow .15s var(--e)
+    }
+    .story-form input:focus,.story-form textarea:focus{outline:none; border-color:#86efac; box-shadow:0 0 0 3px rgba(134,239,172,.35)}
+    .story-form textarea{min-height:140px; resize:vertical}
+    .btn{display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      padding:12px 16px; border:none; border-radius:10px; background:var(--accent); color:#fff; font-weight:800; cursor:pointer;
+      transition:transform .18s var(--e), filter .18s var(--e)}
+    .btn:hover{filter:brightness(.96); transform:translateY(-2px)}
+    .btn[disabled]{opacity:.5; cursor:not-allowed}
+
+    /* 익명 스위치 */
+    .anon-line{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 12px; background:#f8fafc; border:1px solid var(--border); border-radius:10px}
+    .switch{position:relative; width:44px; height:26px}
+    .switch input{display:none}
+    .slider{
+      position:absolute; cursor:pointer; inset:0; background:#e5e7eb; border-radius:999px; transition:.2s var(--e)
+    }
+    .slider:before{
+      content:""; position:absolute; width:20px; height:20px; left:3px; top:3px; background:#fff; border-radius:999px; transition:.2s var(--e); box-shadow:0 1px 3px rgba(0,0,0,.2)
+    }
+    .switch input:checked + .slider{ background:#86efac }
+    .switch input:checked + .slider:before{ transform:translateX(18px) }
+
+    .muted{color:#6b7280; font-size:12.5px}
+    .hint{font-size:12.5px; color:#64748b}
+    .bad{color:#dc2626} .good{color:#16a34a}
+
+    /* 사연 목록 */
+    .list-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:16px}
+    .list-head{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:8px}
+    .list-title{font-weight:900; font-size:16.5px; color:#111827}
+    .list-meta{font-size:12.5px; color:#6b7280}
+    .tag{display:inline-block; padding:4px 8px; border-radius:999px; font-size:12px; font-weight:800; border:1px solid #e5e7eb; background:#f8fafc}
+    .song{font-size:13px; font-weight:800; color:#1f2937}
+    .list-body{font-size:14.5px; color:#374151; white-space:pre-wrap; margin-top:8px}
+    .empty{font-size:14px; color:#6b7280; text-align:center; padding:16px 0}
+
   </style>
 </head>
 <body>
@@ -302,7 +334,7 @@
         <h3>📢 공지사항</h3>
         <ul>
           <li>떡잎방범대 정보 센터 OPEN</li>
-        <li>떡잎방범대 투자 센터 리뉴얼 </li>
+          <li>떡잎방범대 투자 센터 리뉴얼 </li>
           <li>🙏문의: 703 김남정, 디코 dm</li>
         </ul>
       </div>
@@ -408,34 +440,75 @@
             </div>
           </div>
         </div>
+      </section>
 
-        <!-- ✅ 홈에서만 보이는 리얼 방송국 -->
-        <div id="broadcastBox" class="reveal">
-          <h2>📡 리얼 방송국</h2>
-          <p class="desc">사연 신청만 가능합니다. <span class="chat-hint">* 메시지는 로그인 없이 익명으로 접수됩니다.</span></p>
-          <div class="broadcast-grid">
-            <div class="story-card">
-              <h3>📝 사연 신청</h3>
-              <form id="storyForm" class="story-form">
-                <div class="row">
-                  <label for="storyNick">닉네임(고번)</label>
-                  <input id="storyNick" type="text" placeholder="예: 신짱(251)" required />
+      <!-- ✅ 홈 밖으로 뺀 리얼 방송국 (항상 홈 바로 아래에 위치) -->
+      <section id="broadcastBox" class="reveal">
+        <h2>📡 리얼 방송국</h2>
+        <p class="desc">사연 신청 및 최신 사연 목록입니다. <span class="hint">* 익명 전송 가능</span></p>
+        <div class="broadcast-grid">
+          <!-- 신청 카드 -->
+          <div class="story-card">
+            <h3>📝 사연 신청</h3>
+            <form id="storyForm" class="story-form">
+              <div class="anon-line">
+                <div class="muted">개인정보 보호를 위해 <b>익명</b> 전송을 선택할 수 있습니다.</div>
+                <label class="switch" title="익명으로 보내기">
+                  <input id="storyAnon" type="checkbox" />
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="story-row">
+                <div class="story-field">
+                  <label class="story-label" for="storyNick">닉네임</label>
+                  <input id="storyNick" type="text" placeholder="예: 신짱" />
                 </div>
-                <div class="row">
-                  <label for="storyTitle">제목</label>
-                  <input id="storyTitle" type="text" placeholder="사연 제목" maxlength="60" required />
+                <div class="story-field">
+                  <label class="story-label" for="storyGovon">고번</label>
+                  <input id="storyGovon" type="text" placeholder="예: 251" />
                 </div>
-                <div class="row" style="align-items:start">
-                  <label for="storyBody">내용</label>
+              </div>
+
+              <div class="story-row single">
+                <div class="story-field">
+                  <label class="story-label" for="storyTitle">제목</label>
+                  <input id="storyTitle" type="text" placeholder="사연 제목 (최대 60자)" maxlength="60" required />
+                </div>
+              </div>
+
+              <div class="story-row single">
+                <div class="story-field">
+                  <label class="story-label" for="storySong">신청곡 (선택)</label>
+                  <input id="storySong" type="text" placeholder="예: 아이유 - 라일락" />
+                </div>
+              </div>
+
+              <div class="story-row single" style="align-items:start">
+                <div class="story-field">
+                  <label class="story-label" for="storyBody">내용</label>
                   <textarea id="storyBody" placeholder="사연 내용을 입력하세요" required></textarea>
                 </div>
+              </div>
+
+              <div style="display:flex; align-items:center; gap:10px; justify-content:flex-end">
+                <span id="storyMsg" class="muted" aria-live="polite"></span>
                 <button type="submit" class="btn">사연 보내기</button>
-                <div id="storyMsg" class="chat-hint" style="margin-top:8px"></div>
-              </form>
+              </div>
+            </form>
+          </div>
+
+          <!-- 목록 카드 -->
+          <div class="list-card">
+            <div class="list-head">
+              <div class="list-title">📚 최신 사연</div>
+              <div class="list-meta" id="storyCount">–</div>
+            </div>
+            <div id="storyList" class="story-list">
+              <div class="empty">사연을 불러오는 중...</div>
             </div>
           </div>
         </div>
-        <!-- /리얼 방송국 -->
       </section>
 
       <!-- 당근마켓 -->
@@ -609,7 +682,7 @@
     </div>
   </div>
 
-  <!-- 도움말 모달 (보기 전용) -->
+  <!-- 도움말 모달 -->
   <div id="helpModal" class="modal" aria-hidden="true">
     <div class="modal-content" role="dialog" aria-modal="true">
       <button class="close-btn" onclick="closeHelp()">닫기</button>
@@ -626,14 +699,13 @@
     /* ---------- 데이터 ---------- */
     const ENTITIES = { 
       company:{ 
-        /* 🐝 벌집(원래 떡잎방범대에서 변경) */
+        /* 🐝 벌집 */
         beehive:{name:"벌집",tagline:"“ - ”",info:"지역 커뮤니티 기반 정보·거래 허브를 지향합니다.",
           products:[{name:"전투 방탄복", price:"2,000,000원", note:"일일 제한: 최소 10개 ~ 무제한"},{name:"확장 탄창", price:"1,500,000원", note:"일일 제한: 최소 10개 ~ 무제한"},{name:"소음기", price:"1,000,000원", note:"일일 제한: 최소 10개 ~ 무제한"}],
           org:["<strong>벌집 직급표</strong>","","[고위직]","회장(1): 신짱(251)","부회장(1): 빅토르(525)","사장(1): 민돌(545)","부사장(1): 찰리리차드(556)","",
             "[간부직]","전무(2): 마틴(553), 김남정(703)","상무(2): 악마(1025), 길태미(597)","이사(1): 나몽이흙먹지마(958)","",
             "[특수직]","비서(2): 신짱구(1094), 나몽(957)","비서실장(1): 민중(2388)","해외출장파견(1): 투반(459)","",
             "[일반직]","부장(0): 공석","차장(0): 공석","과장(0): 공석","떡잎대리(2): 뇸이(), 똘마니(2806)","떡잎주임(1): 공석","행동대원(5): 김쿵짝(2573), 마이너(393), 한지우(2547), 참마(2548), 함찌(3796)","수습원(2): 한이(2700), 김똥땅(1838)","총 인원: 22/25"]},
-
         /* 🍀 떡잎방범대(복사본) */
         tteokleaf:{name:"떡잎방범대",tagline:"“떡잎에서 시작해 방탄처럼 지켜낸다.”",info:"지역 커뮤니티 기반 정보·거래 허브를 지향합니다.",
           products:[{name:"전투 방탄복", price:"2,000,000원", note:"일일 제한: 최소 10개 ~ 무제한"},{name:"확장 탄창", price:"1,500,000원", note:"일일 제한: 최소 10개 ~ 무제한"},{name:"소음기", price:"1,000,000원", note:"일일 제한: 최소 10개 ~ 무제한"}],
@@ -641,7 +713,6 @@
             "[간부직]","전무(2): 마틴(553), 김남정(703)","상무(2): 악마(1025), 길태미(597)","이사(1): 나몽이흙먹지마(958)","",
             "[특수직]","비서(2): 신짱구(1094), 나몽(957)","비서실장(1): 민중(2388)","해외출장파견(1): 투반(459)","",
             "[일반직]","부장(0): 공석","차장(0): 공석","과장(0): 공석","떡잎대리(2): 뇸이(), 똘마니(2806)","떡잎주임(1): 공석","행동대원(5): 김쿵짝(2573), 마이너(393), 한지우(2547), 참마(2548), 함찌(3796)","수습원(2): 한이(2700), 김똥땅(1838)","총 인원: 22/25"]},
-
         inback:{name:"InBack",tagline:"“이 스테이크가 식기 전에 돌아올게.”",info:"데이터 분석과 자동화를 통해 의사결정을 지원합니다.",
           products:[{name:"와인",price:"1,000,000원",note:"목마름 20% 회복"},{name:"치킨 스테이크",price:"1,000,000원",note:"배고픔 30% 회복"},{name:"척아이롤 스테이크",price:"1,500,000원",note:"배고픔 70% 회복"},{name:"강아지 연어사료",price:"1,500,000원",note:"배고픔 50% 회복"},{name:"캣 연어통조림",price:"1,500,000원",note:"배고픔 50% 회복"},{name:"강아지 오리비스킷",price:"800,000원",note:"배고픔 30% 회복"}],
           org:["<strong>inback 직급표</strong>","","[고위직]","사장: 김민삼(2530)","부사장: 유헴(2216)","매니저: 충서(216), 대꾸(234)","","[간부직]","시니어키: 얌표(224), 핑크(244), 하늘(298), 뚜기(1038), 코인(2122)","슈퍼바이저: 몽쉘(738), 짭구(1586), 루이(3120)","","[일반직]","웨이터(4): 코넛(502), 강준혁(3376), 정케천(3395), 레모나(3625)","호스트(1): 도로로(947)","인턴(4): 투반(459), 페네사(3326), 인직(3626), 김두지(3682)","","[기타]","고라니(202)","총 인원: 22명"]},
@@ -681,10 +752,14 @@
     };
 
     /* ---------- 네비/서브페이지 ---------- */
+    const broadcastEl = null;
     function showPage(pageId){
       document.querySelectorAll('.page').forEach(s=>s.classList.remove('active'));
       const el=document.getElementById(pageId);
       if(el){ el.classList.add('active'); window.scrollTo({top:0,behavior:'smooth'}); }
+      // 홈일 때만 방송국 보이기
+      const bb=document.getElementById('broadcastBox');
+      if(bb) bb.style.display = (pageId==='home') ? '' : 'none';
     }
     function goHome(){ showPage('home'); }
     function showSubPage(id){
@@ -744,8 +819,8 @@
 
     /* ---------- 엔티티 모달 ---------- */
     const KEY_TO_BG = {
-      beehive:'bg-beehive',         /* 벌집 */
-      tteokleaf:'bg-tteok-green',   /* 떡잎(복사본) */
+      beehive:'bg-beehive',
+      tteokleaf:'bg-tteok-green',
       inback:'bg-inback', chakani:'bg-chakani',
       ems:'bg-ems', southpd:'bg-southpd', northpd:'bg-northpd', castillo:'bg-castillo', broadcast:'bg-broadcast',
       bigdick:'bg-bigdick', cheongryong:'bg-cheongryong', sakura:'bg-sakura', jakdu:'bg-jakdu',
@@ -758,8 +833,6 @@
 
       const modal=document.getElementById("modal");
       const content=document.getElementById("modalContent");
-
-      /* 배경 + 테마 변수 클래스 교체 */
       content.className = "modal-content " + (KEY_TO_BG[key] || "");
 
       document.getElementById("modalTitle").textContent=ent.name;
@@ -818,9 +891,9 @@
           <li><b>당근마켓</b>은 개인 간 아이템 거래를 위한 커뮤니티 장터입니다.</li>
           <li>당근마켓 이용 시 <b>기재비용 1억</b>입니다. 이 점 유의하시길 바랍니다.</li>
           <li>기재를 위해 <b>703 김남정 디스코드 DM</b>을 해주시길 바랍니다.</li>
-          <li><b>닉네임(고번)</b>, <b>품목</b>, <b>가격</b>을 명확히 기재해 주세요.</li>
+          <li><b>닉네임</b>, <b>고번</b>, <b>품목</b>, <b>가격</b>을 명확히 기재해 주세요.</li>
           <li>안전 거래 팁: 거래 전·후 <b>스크린샷</b>을 남기고, <b>조건/수수료</b>를 사전에 합의하세요.</li>
-          <li>운영진은 거래에 직접 개입하지 않으며, 당근마켓은 <b>중매를 하는 역활</b>입니다.</li>
+          <li>운영진은 거래에 직접 개입하지 않으며, 당근마켓은 <b>중매를 하는 역할</b>입니다.</li>
           <li>신고/문의는 좌측 <b>공지사항</b>을 참고해 주세요.</li>
         </ul>`
     };
@@ -932,11 +1005,11 @@
     });
   </script>
 
-  <!-- ===== Firebase + Firestore (사연 신청만) ===== -->
+  <!-- ===== Firebase + Firestore (사연 신청 + 목록) ===== -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-analytics.js";
-    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+    import { getFirestore, collection, addDoc, serverTimestamp, query, orderBy, limit, onSnapshot } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
     import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
 
     const firebaseConfig = {
@@ -958,40 +1031,115 @@
 
     const storiesRef = collection(db, "stories");
 
+    /* ====== DOM ====== */
     const storyForm = document.getElementById("storyForm");
+    const storyAnon = document.getElementById("storyAnon");
     const storyNick = document.getElementById("storyNick");
+    const storyGovon = document.getElementById("storyGovon");
     const storyTitle = document.getElementById("storyTitle");
+    const storySong = document.getElementById("storySong");
     const storyBody = document.getElementById("storyBody");
     const storyMsg  = document.getElementById("storyMsg");
+    const storyList = document.getElementById("storyList");
+    const storyCount= document.getElementById("storyCount");
 
+    function esc(s=''){
+      return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+    }
+    function fmtTime(ts){
+      try{
+        const d = ts?.toDate ? ts.toDate() : (ts instanceof Date ? ts : new Date());
+        const pad = n => (n<10?'0':'')+n;
+        return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+      }catch{ return '' }
+    }
+
+    // 익명 토글 시 닉/고번 비활성화
+    function updateAnonState(){
+      const anon = storyAnon.checked;
+      [storyNick, storyGovon].forEach(el=>{
+        el.disabled = anon;
+        el.placeholder = anon ? "익명으로 전송됩니다" : (el===storyNick?"예: 신짱":"예: 251");
+        el.style.opacity = anon ? .6 : 1;
+      });
+    }
+    storyAnon?.addEventListener('change', updateAnonState);
+    updateAnonState();
+
+    /* ====== 제출 ====== */
     storyForm?.addEventListener("submit", async (e)=>{
       e.preventDefault();
+      const anon = !!storyAnon.checked;
       const nick  = (storyNick.value||"").trim();
+      const govon = (storyGovon.value||"").trim();
       const title = (storyTitle.value||"").trim();
+      const song  = (storySong.value||"").trim();
       const body  = (storyBody.value||"").trim();
-      if(!nick || !title || !body){
-        storyMsg.textContent = "모든 항목을 입력해 주세요.";
-        storyMsg.style.color = "#dc2626";
+
+      // 유효성: 익명이 아니면 닉/고번 필수
+      if(!title || !body || (!anon && (!nick || !govon))){
+        storyMsg.textContent = "필수 항목을 확인해 주세요.";
+        storyMsg.className = "bad";
         return;
       }
+
       storyForm.querySelector("button[type=submit]").disabled = true;
       storyMsg.textContent = "전송 중...";
-      storyMsg.style.color = "#6b7280";
+      storyMsg.className = "muted";
+
       try{
-        await addDoc(storiesRef, { nick, title, body, createdAt: serverTimestamp() });
+        await addDoc(storiesRef, {
+          nick: anon ? "익명" : nick,
+          govon: anon ? "" : govon,
+          title, song, body,
+          anonymous: anon,
+          createdAt: serverTimestamp()
+        });
         storyMsg.textContent = "사연이 접수되었습니다! 감사합니다.";
-        storyMsg.style.color = "#16a34a";
-        storyTitle.value = "";
-        storyBody.value = "";
+        storyMsg.className = "good";
+        if(!anon){ storyNick.value = ""; storyGovon.value = ""; }
+        storyTitle.value = ""; storySong.value = ""; storyBody.value = "";
       }catch(err){
         storyMsg.textContent = "사연 전송 실패: " + (err?.message||err);
-        storyMsg.style.color = "#dc2626";
+        storyMsg.className = "bad";
       }finally{
         storyForm.querySelector("button[type=submit]").disabled = false;
       }
     });
+
+    /* ====== 목록 (실시간) ====== */
+    const q = query(storiesRef, orderBy('createdAt','desc'), limit(30));
+    onSnapshot(q, (snap)=>{
+      const arr = [];
+      snap.forEach(doc=> arr.push({ id: doc.id, ...doc.data() }));
+      renderStoryList(arr);
+    }, (err)=>{
+      storyList.innerHTML = `<div class="empty">사연을 불러오지 못했어요: ${esc(err?.message||err)}</div>`;
+    });
+
+    function renderStoryList(items){
+      storyCount.textContent = items?.length ? `최근 ${items.length}건` : "0건";
+      if(!items || !items.length){
+        storyList.innerHTML = `<div class="empty">아직 등록된 사연이 없습니다.</div>`;
+        return;
+      }
+      storyList.innerHTML = items.map(it=>{
+        const who = it.anonymous ? '익명' : `${esc(it.nick)}${it.govon?` (${esc(it.govon)})`:''}`;
+        const when = it.createdAt ? fmtTime(it.createdAt) : '';
+        const song = it.song ? `<div class="song">🎵 신청곡: ${esc(it.song)}</div>` : '';
+        return `
+          <article class="story-item" style="border-top:1px dashed #e5e7eb; padding-top:10px; margin-top:10px">
+            <div class="list-head">
+              <div class="list-title">${esc(it.title)}</div>
+              <span class="tag">${who}</span>
+            </div>
+            <div class="list-meta">${when}</div>
+            ${song}
+            <div class="list-body">${esc(it.body)}</div>
+          </article>
+        `;
+      }).join("");
+    }
   </script>
 </body>
 </html>
-
-
