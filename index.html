@@ -103,11 +103,9 @@
     .modal.show{visibility:visible;opacity:1}
     .modal-content{
       position:absolute;left:50%;top:50%;transform:translate(-50%, -50%) scale(.98);
-      width:clamp(360px,92vw,1000px);height:85vh;overflow-y:auto;background:#fff;border-radius:16px;
+      width:clamp(360px,92vw,1000px);max-height:85vh;overflow-y:auto;background:#fff;border-radius:16px;
       box-shadow:0 12px 30px rgba(0,0,0,.25);padding:22px 22px 26px;font-size:17.5px;text-align:center;
       transition:transform .22s var(--e), opacity .22s var(--e); will-change:transform,opacity; opacity:0;
-
-      /* ✨ 모달 테마 공통 변수 (기본값: 녹색) */
       --m-accent:#16a34a;
       --m-chip-bg:#ecfdf5; --m-chip-border:#bbf7d0; --m-chip-ink:#065f46;
       --m-badge-bg:#ecfdf5; --m-badge-border:#86efac; --m-badge-ink:#065f46;
@@ -123,8 +121,6 @@
     .modal-tab.active{display:block;animation:tabIn .24s var(--e)}
     .modal-tab ul{list-style-position:inside;padding-left:0;margin:8px auto}
     .modal-tab p,.modal-tab li{text-align:center;line-height:1.8;margin:6px 0}
-
-    /* 닫기 버튼 위치 */
     .modal .close-btn, #helpModal .close-btn{
       position:absolute !important; top:12px !important; right:12px !important; left:auto !important;
       margin:0 !important; display:inline-flex; align-items:center; justify-content:center; z-index:2;
@@ -161,7 +157,7 @@
       #modalProdList .prod-price{ font-size:14px }
     }
 
-    /* 도움말 모달(보기 전용) */
+    /* 도움말 모달 */
     .help-body{max-width:760px;margin:8px auto 0;text-align:left}
     .help-view{ background:#f8fafc;border:1px solid var(--border);border-radius:12px; padding:14px 16px;font-size:15.5px;line-height:1.75;}
     .help-view ul{margin:0;padding-left:20px}
@@ -196,12 +192,6 @@
       z-index: 99999; box-shadow: 0 0 8px rgba(34,197,94,.5);
     }
 
-    /* 모달 열릴 때 내부 요소 순차 등장 */
-    .modal.show .modal-content > * { animation: fadeIn .35s var(--e) both; }
-    .modal.show .modal-content > *:nth-child(1){ animation-delay:.02s}
-    .modal.show .modal-content > *:nth-child(2){ animation-delay:.04s}
-    .modal.show .modal-content > *:nth-child(3){ animation-delay:.06s}
-
     /* ========= 파스텔톤 모달 배경 + 테마 변수 ========= */
     .bg-tteok{ background:linear-gradient(135deg,#bbf7d0,#a7f3d0,#f0fdf4);}
     .bg-tteok{ --m-accent:#16a34a; --m-chip-bg:#ecfdf5; --m-chip-border:#bbf7d0; --m-chip-ink:#065f46; --m-badge-bg:#ecfdf5; --m-badge-border:#86efac; --m-badge-ink:#065f46; }
@@ -216,19 +206,11 @@
       --m-badge-bg:#fffbeb; --m-badge-border:#fde68a; --m-badge-ink:#111827;
     }
 
-    /* InBack / 차카니 테마 복구 */
+    /* InBack / 차카니 테마 */
     .bg-inback{ background:linear-gradient(135deg,#ede9fe,#f5d0fe,#fce7f3);}
-    .bg-inback{
-      --m-accent:#8b5cf6;
-      --m-chip-bg:#f5f3ff; --m-chip-border:#ddd6fe; --m-chip-ink:#5b21b6;
-      --m-badge-bg:#faf5ff; --m-badge-border:#e9d5ff; --m-badge-ink:#6b21a8;
-    }
+    .bg-inback{ --m-accent:#8b5cf6; --m-chip-bg:#f5f3ff; --m-chip-border:#ddd6fe; --m-chip-ink:#5b21b6; --m-badge-bg:#faf5ff; --m-badge-border:#e9d5ff; --m-badge-ink:#6b21a8;}
     .bg-chakani{ background:linear-gradient(135deg,#fff7ed,#fde68a,#fef3c7);}
-    .bg-chakani{
-      --m-accent:#f59e0b;
-      --m-chip-bg:#fffbeb; --m-chip-border:#fde68a; --m-chip-ink:#92400e;
-      --m-badge-bg:#fff7ed; --m-badge-border:#fcd34d; --m-badge-ink:#92400e;
-    }
+    .bg-chakani{ --m-accent:#f59e0b; --m-chip-bg:#fffbeb; --m-chip-border:#fde68a; --m-chip-ink:#92400e; --m-badge-bg:#fff7ed; --m-badge-border:#fcd34d; --m-badge-ink:#92400e;}
 
     /* 떡잎(복사본) 별칭 */
     .bg-tteok-green{
@@ -241,69 +223,57 @@
     /* 공무원 */
     .bg-ems{ background:linear-gradient(135deg,#fee2e2,#fecaca,#fef2f2);}
     .bg-ems{ --m-accent:#ef4444; --m-chip-bg:#fef2f2; --m-chip-border:#fecaca; --m-chip-ink:#7f1d1d; --m-badge-bg:#fff1f2; --m-badge-border:#fecdd3; --m-badge-ink:#7f1d1d; }
-
     .bg-southpd{ background:linear-gradient(135deg,#dbeafe,#bfdbfe,#e0f2fe);}
     .bg-southpd{ --m-accent:#3b82f6; --m-chip-bg:#eff6ff; --m-chip-border:#bfdbfe; --m-chip-ink:#1e40af; --m-badge-bg:#eff6ff; --m-badge-border:#bfdbfe; --m-badge-ink:#1e40af; }
-
     .bg-northpd{ background:linear-gradient(135deg,#f9fafb,#d1d5db,#e5e7eb);}
     .bg-northpd{ --m-accent:#374151; --m-chip-bg:#f3f4f6; --m-chip-border:#d1d5db; --m-chip-ink:#111827; --m-badge-bg:#f8fafc; --m-badge-border:#e5e7eb; --m-badge-ink:#111827; }
-
     .bg-castillo{ background:linear-gradient(135deg,#fef9c3,#fde68a,#fff7ed);}
     .bg-castillo{ --m-accent:#eab308; --m-chip-bg:#fffbeb; --m-chip-border:#fef3c7; --m-chip-ink:#78350f; --m-badge-bg:#fffbeb; --m-badge-border:#fde68a; --m-badge-ink:#78350f; }
-
     .bg-broadcast{ background:linear-gradient(135deg,#e0f2fe,#c7d2fe,#bfdbfe);}
     .bg-broadcast{ --m-accent:#1e3a8a; --m-chip-bg:#eef2ff; --m-chip-border:#c7d2fe; --m-chip-ink:#1e3a8a; --m-badge-bg:#eff6ff; --m-badge-border:#bfdbfe; --m-badge-ink:#1e3a8a; }
 
     /* 조직 */
     .bg-bigdick{ background:linear-gradient(135deg,#fff7ed,#fef9c3,#fde68a);}
     .bg-bigdick{ --m-accent:#eab308; --m-chip-bg:#fffbeb; --m-chip-border:#fde68a; --m-chip-ink:#78350f; --m-badge-bg:#fff7ed; --m-badge-border:#fcd34d; --m-badge-ink:#78350f; }
-
     .bg-cheongryong{ background:linear-gradient(135deg,#bae6fd,#7dd3fc,#e0f2fe);}
     .bg-cheongryong{ --m-accent:#0ea5e9; --m-chip-bg:#e0f2fe; --m-chip-border:#bae6fd; --m-chip-ink:#075985; --m-badge-bg:#e0f2fe; --m-badge-border:#93c5fd; --m-badge-ink:#075985; }
-
     .bg-sakura{ background:linear-gradient(135deg,#fce7f3,#fbcfe8,#ffe4e6);}
     .bg-sakura{ --m-accent:#ec4899; --m-chip-bg:#fdf2f8; --m-chip-border:#fbcfe8; --m-chip-ink:#86198f; --m-badge-bg:#fdf2f8; --m-badge-border:#f5d0fe; --m-badge-ink:#86198f; }
-
     .bg-jakdu{ background:linear-gradient(135deg,#f3f4f6,#fecaca,#e5e7eb);}
     .bg-jakdu{ --m-accent:#b91c1c; --m-chip-bg:#fff1f2; --m-chip-border:#fecaca; --m-chip-ink:#7f1d1d; --m-badge-bg:#fef2f2; --m-badge-border:#fecaca; --m-badge-ink:#7f1d1d; }
 
     /* ===== 리얼 방송국 (홈 밖) ===== */
-    #broadcastBox{background:#fff;border-radius:14px;box-shadow:0 4px 12px rgba(0,0,0,.06);padding:22px;margin-top:6px}
+    #broadcastBox{background:#ffffff;border-radius:18px;box-shadow:0 8px 28px rgba(0,0,0,.08);padding:26px;margin-top:6px;border:1px solid #e8f3ec}
     #broadcastBox h2{margin:0 0 10px; color:var(--accent); font-size:21px; font-weight:800}
     #broadcastBox .desc{margin:0 0 16px; color:#374151; font-size:15.5px}
-    .broadcast-grid{display:grid;grid-template-columns:1.2fr .8fr; gap:20px}
+    .broadcast-grid{display:grid;grid-template-columns:1.1fr .9fr; gap:22px}
     @media (max-width: 980px){ .broadcast-grid{ grid-template-columns:1fr } }
 
-    /* 신청 폼 – 예쁘게 */
-    .story-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:18px}
-    .story-card h3{margin:0 0 12px;font-size:18px;font-weight:800;color:#111827}
+    /* 신청 폼 – 리디자인 */
+    .story-card{background:linear-gradient(180deg,#ffffff,#f9fffb);border:1px solid #e9f5ee;border-radius:16px;padding:18px 18px 16px}
+    .story-card h3{margin:0 0 12px;font-size:18px;font-weight:900;color:#0b3b26}
     .story-form{display:grid; gap:12px}
     .story-row{display:grid; grid-template-columns:1fr 1fr; gap:10px}
     .story-row.single{grid-template-columns:1fr}
-    .story-field{display:flex;flex-direction:column; gap:6px}
-    .story-label{font-size:13px; font-weight:800; color:#065f46; letter-spacing:.2px}
-    .story-form input,.story-form textarea{
-      width:100%; padding:12px 12px; border:1px solid var(--border); border-radius:10px; font-size:15px; background:#fff;
-      transition:border-color .15s var(--e), box-shadow .15s var(--e)
-    }
-    .story-form input:focus,.story-form textarea:focus{outline:none; border-color:#86efac; box-shadow:0 0 0 3px rgba(134,239,172,.35)}
-    .story-form textarea{min-height:140px; resize:vertical}
+    .field{display:flex;flex-direction:column;gap:6px; position:relative}
+    .story-label{font-size:12.5px; font-weight:900; color:#0b3b26; letter-spacing:.2px}
+    .ctrl{display:flex;align-items:center; gap:8px; border:1px solid var(--border); background:#fff; border-radius:12px; padding:10px 12px; transition:border-color .15s var(--e), box-shadow .15s var(--e)}
+    .ctrl:focus-within{border-color:#86efac; box-shadow:0 0 0 3px rgba(134,239,172,.35)}
+    .ctrl .ico{font-size:18px; opacity:.6}
+    .ctrl input,.ctrl textarea,.ctrl select{width:100%; border:none; outline:none; font-size:15px; background:transparent}
+    .ctrl textarea{min-height:140px; resize:vertical}
     .btn{display:inline-flex; align-items:center; justify-content:center; gap:8px;
-      padding:12px 16px; border:none; border-radius:10px; background:var(--accent); color:#fff; font-weight:800; cursor:pointer;
+      padding:12px 16px; border:none; border-radius:12px; background:var(--accent); color:#fff; font-weight:900; cursor:pointer;
       transition:transform .18s var(--e), filter .18s var(--e)}
     .btn:hover{filter:brightness(.96); transform:translateY(-2px)}
     .btn[disabled]{opacity:.5; cursor:not-allowed}
 
     /* 익명 스위치 */
-    .anon-line{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 12px; background:#f8fafc; border:1px solid var(--border); border-radius:10px}
+    .anon-line{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 12px; background:#f4fbf7; border:1px solid #e5f3ea; border-radius:12px}
     .switch{position:relative; width:44px; height:26px}
     .switch input{display:none}
-    .slider{
-      position:absolute; cursor:pointer; inset:0; background:#e5e7eb; border-radius:999px; transition:.2s var(--e)
-    }
-    .slider:before{
-      content:""; position:absolute; width:20px; height:20px; left:3px; top:3px; background:#fff; border-radius:999px; transition:.2s var(--e); box-shadow:0 1px 3px rgba(0,0,0,.2)
-    }
+    .slider{position:absolute; cursor:pointer; inset:0; background:#e5e7eb; border-radius:999px; transition:.2s var(--e)}
+    .slider:before{content:""; position:absolute; width:20px; height:20px; left:3px; top:3px; background:#fff; border-radius:999px; transition:.2s var(--e); box-shadow:0 1px 3px rgba(0,0,0,.2)}
     .switch input:checked + .slider{ background:#86efac }
     .switch input:checked + .slider:before{ transform:translateX(18px) }
 
@@ -311,16 +281,30 @@
     .hint{font-size:12.5px; color:#64748b}
     .bad{color:#dc2626} .good{color:#16a34a}
 
-    /* 사연 목록 */
-    .list-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:16px}
-    .list-head{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:8px}
+    /* 사연 목록 & 필터 */
+    .list-card{background:#fff;border:1px solid #e9eef4;border-radius:16px;padding:14px}
+    .list-head{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px}
     .list-title{font-weight:900; font-size:16.5px; color:#111827}
     .list-meta{font-size:12.5px; color:#6b7280}
+    .chipbar{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 10px}
+    .chip{border:1px solid #e5e7eb; background:#f8fafc; border-radius:999px; padding:6px 10px; font-size:12.5px; font-weight:800; cursor:pointer; transition:transform .12s var(--e), filter .12s var(--e)}
+    .chip:hover{filter:brightness(.98); transform:translateY(-1px)}
+    .chip.active{background:#e8fbef;border-color:#9ae6b4;color:#065f46}
+
+    .story-item{padding:12px;border:1px solid #eef2f7;border-radius:12px;margin-top:10px;cursor:pointer;transition:transform .16s var(--e), box-shadow .16s var(--e), border-color .16s var(--e)}
+    .story-item:hover{transform:translateY(-2px); box-shadow:0 10px 24px rgba(0,0,0,.06); border-color:#dbeafe}
     .tag{display:inline-block; padding:4px 8px; border-radius:999px; font-size:12px; font-weight:800; border:1px solid #e5e7eb; background:#f8fafc}
+    .tag.cat{border-color:#fde68a;background:#fffbeb;color:#7a4b00}
+    .tag.anon{border-color:#d1fae5;background:#ecfdf5;color:#065f46}
     .song{font-size:13px; font-weight:800; color:#1f2937}
     .list-body{font-size:14.5px; color:#374151; white-space:pre-wrap; margin-top:8px}
-    .empty{font-size:14px; color:#6b7280; text-align:center; padding:16px 0}
+    .line-clamp-3{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 
+    /* 스토리 모달(전용 폭) */
+    .story-modal{width:clamp(360px,92vw,760px)}
+    .smodal-body{margin-top:12px;text-align:left}
+    .smodal-body .meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:6px 0 2px}
+    .smodal-body .content{white-space:pre-wrap; background:#f8fafc;border:1px solid var(--border); border-radius:12px; padding:14px; font-size:15.5px}
   </style>
 </head>
 <body>
@@ -373,7 +357,6 @@
         <div id="company" class="sub-page active">
           <h3>🏢 기업</h3>
           <div class="card-grid">
-            <!-- 🐝 벌집 -->
             <div class="card company-card" onclick="openEntity('company','beehive')">
               <div class="icon">🐝</div><h4>벌집</h4><p>-</p>
             </div>
@@ -383,7 +366,6 @@
             <div class="card company-card" onclick="openEntity('company','chakani')">
               <div class="icon">🦄</div><h4>차카니</h4><p>-</p>
             </div>
-            <!-- 🍀 떡잎방범대(복사본) -->
             <div class="card company-card" onclick="openEntity('company','tteokleaf')">
               <div class="icon">🍀</div><h4>떡잎방범대</h4><p>-</p>
             </div>
@@ -442,10 +424,10 @@
         </div>
       </section>
 
-      <!-- ✅ 홈 밖으로 뺀 리얼 방송국 (항상 홈 바로 아래에 위치) -->
+      <!-- ✅ 홈 밖: 리얼 방송국 -->
       <section id="broadcastBox" class="reveal">
         <h2>📡 리얼 방송국</h2>
-        <p class="desc">사연 신청 및 최신 사연 목록입니다. <span class="hint">* 익명 전송 가능</span></p>
+        <p class="desc">사연 신청 및 최신 사연 목록입니다. <span class="hint">* 익명 전송 가능 / 카테고리 필터 지원</span></p>
         <div class="broadcast-grid">
           <!-- 신청 카드 -->
           <div class="story-card">
@@ -460,34 +442,46 @@
               </div>
 
               <div class="story-row">
-                <div class="story-field">
+                <div class="field">
                   <label class="story-label" for="storyNick">닉네임</label>
-                  <input id="storyNick" type="text" placeholder="예: 신짱" />
+                  <div class="ctrl"><span class="ico">👤</span><input id="storyNick" type="text" placeholder="예: 신짱"/></div>
                 </div>
-                <div class="story-field">
+                <div class="field">
                   <label class="story-label" for="storyGovon">고번</label>
-                  <input id="storyGovon" type="text" placeholder="예: 251" />
+                  <div class="ctrl"><span class="ico">#️⃣</span><input id="storyGovon" type="text" placeholder="예: 251"/></div>
                 </div>
               </div>
 
-              <div class="story-row single">
-                <div class="story-field">
+              <div class="story-row">
+                <div class="field">
                   <label class="story-label" for="storyTitle">제목</label>
-                  <input id="storyTitle" type="text" placeholder="사연 제목 (최대 60자)" maxlength="60" required />
+                  <div class="ctrl"><span class="ico">📝</span><input id="storyTitle" type="text" placeholder="사연 제목 (최대 60자)" maxlength="60" required/></div>
+                </div>
+                <div class="field">
+                  <label class="story-label" for="storyCategory">카테고리</label>
+                  <div class="ctrl">
+                    <span class="ico">🏷️</span>
+                    <select id="storyCategory">
+                      <option value="연애">연애</option>
+                      <option value="고민">고민</option>
+                      <option value="사건/신고">사건/신고</option>
+                      <option value="유머">유머</option>
+                      <option value="힐링">힐링</option>
+                      <option value="신청곡">신청곡</option>
+                      <option value="기타" selected>기타</option>
+                    </select>
+                  </div>
                 </div>
               </div>
 
-              <div class="story-row single">
-                <div class="story-field">
+              <div class="story-row">
+                <div class="field">
                   <label class="story-label" for="storySong">신청곡 (선택)</label>
-                  <input id="storySong" type="text" placeholder="예: 아이유 - 라일락" />
+                  <div class="ctrl"><span class="ico">🎵</span><input id="storySong" type="text" placeholder="예: 아이유 - 라일락"/></div>
                 </div>
-              </div>
-
-              <div class="story-row single" style="align-items:start">
-                <div class="story-field">
+                <div class="field">
                   <label class="story-label" for="storyBody">내용</label>
-                  <textarea id="storyBody" placeholder="사연 내용을 입력하세요" required></textarea>
+                  <div class="ctrl"><span class="ico">💬</span><textarea id="storyBody" placeholder="사연 내용을 입력하세요" required></textarea></div>
                 </div>
               </div>
 
@@ -504,8 +498,9 @@
               <div class="list-title">📚 최신 사연</div>
               <div class="list-meta" id="storyCount">–</div>
             </div>
+            <div class="chipbar" id="chipBar"></div>
             <div id="storyList" class="story-list">
-              <div class="empty">사연을 불러오는 중...</div>
+              <div class="muted">사연을 불러오는 중...</div>
             </div>
           </div>
         </div>
@@ -672,12 +667,8 @@
         <button data-tab="products" onclick="showModalTab('products')">판매물품</button>
         <button data-tab="info" onclick="showModalTab('info')">기업정보</button>
       </div>
-      <div id="modal-org" class="modal-tab">
-        <ul id="modalOrgList" class="org-list"></ul>
-      </div>
-      <div id="modal-products" class="modal-tab">
-        <ul id="modalProdList"></ul>
-      </div>
+      <div id="modal-org" class="modal-tab"><ul id="modalOrgList" class="org-list"></ul></div>
+      <div id="modal-products" class="modal-tab"><ul id="modalProdList"></ul></div>
       <div id="modal-info" class="modal-tab"><p id="modalInfoText"></p></div>
     </div>
   </div>
@@ -688,8 +679,19 @@
       <button class="close-btn" onclick="closeHelp()">닫기</button>
       <h3 id="helpTitle">당근마켓 도움말</h3>
       <p class="modal-tagline" id="helpTagline">커뮤니티 장터 이용 안내</p>
-      <div class="help-body">
-        <div id="helpContent" class="help-view"></div>
+      <div class="help-body"><div id="helpContent" class="help-view"></div></div>
+    </div>
+  </div>
+
+  <!-- 사연 상세 모달 -->
+  <div id="storyModal" class="modal" aria-hidden="true">
+    <div class="modal-content story-modal" role="dialog" aria-modal="true">
+      <button class="close-btn" onclick="closeStoryModal()">닫기</button>
+      <h3 id="sModalTitle"></h3>
+      <div class="smodal-body">
+        <div class="meta" id="sModalMeta"></div>
+        <div class="meta" id="sModalSong"></div>
+        <div id="sModalBody" class="content"></div>
       </div>
     </div>
   </div>
@@ -699,14 +701,12 @@
     /* ---------- 데이터 ---------- */
     const ENTITIES = { 
       company:{ 
-        /* 🐝 벌집 */
         beehive:{name:"벌집",tagline:"“ - ”",info:"지역 커뮤니티 기반 정보·거래 허브를 지향합니다.",
           products:[{name:"전투 방탄복", price:"2,000,000원", note:"일일 제한: 최소 10개 ~ 무제한"},{name:"확장 탄창", price:"1,500,000원", note:"일일 제한: 최소 10개 ~ 무제한"},{name:"소음기", price:"1,000,000원", note:"일일 제한: 최소 10개 ~ 무제한"}],
           org:["<strong>벌집 직급표</strong>","","[고위직]","회장(1): 신짱(251)","부회장(1): 빅토르(525)","사장(1): 민돌(545)","부사장(1): 찰리리차드(556)","",
             "[간부직]","전무(2): 마틴(553), 김남정(703)","상무(2): 악마(1025), 길태미(597)","이사(1): 나몽이흙먹지마(958)","",
             "[특수직]","비서(2): 신짱구(1094), 나몽(957)","비서실장(1): 민중(2388)","해외출장파견(1): 투반(459)","",
             "[일반직]","부장(0): 공석","차장(0): 공석","과장(0): 공석","떡잎대리(2): 뇸이(), 똘마니(2806)","떡잎주임(1): 공석","행동대원(5): 김쿵짝(2573), 마이너(393), 한지우(2547), 참마(2548), 함찌(3796)","수습원(2): 한이(2700), 김똥땅(1838)","총 인원: 22/25"]},
-        /* 🍀 떡잎방범대(복사본) */
         tteokleaf:{name:"떡잎방범대",tagline:"“떡잎에서 시작해 방탄처럼 지켜낸다.”",info:"지역 커뮤니티 기반 정보·거래 허브를 지향합니다.",
           products:[{name:"전투 방탄복", price:"2,000,000원", note:"일일 제한: 최소 10개 ~ 무제한"},{name:"확장 탄창", price:"1,500,000원", note:"일일 제한: 최소 10개 ~ 무제한"},{name:"소음기", price:"1,000,000원", note:"일일 제한: 최소 10개 ~ 무제한"}],
           org:["<strong>떡잎방범대 직급표</strong>","","[고위직]","회장(1): 신짱(251)","부회장(1): 빅토르(525)","사장(1): 민돌(545)","부사장(1): 찰리리차드(556)","",
@@ -752,12 +752,10 @@
     };
 
     /* ---------- 네비/서브페이지 ---------- */
-    const broadcastEl = null;
     function showPage(pageId){
       document.querySelectorAll('.page').forEach(s=>s.classList.remove('active'));
       const el=document.getElementById(pageId);
       if(el){ el.classList.add('active'); window.scrollTo({top:0,behavior:'smooth'}); }
-      // 홈일 때만 방송국 보이기
       const bb=document.getElementById('broadcastBox');
       if(bb) bb.style.display = (pageId==='home') ? '' : 'none';
     }
@@ -884,7 +882,7 @@
       document.getElementById("modal-"+id).classList.add('active');
     }
 
-    /* ---------- 도움말(보기 전용) ---------- */
+    /* ---------- 도움말 ---------- */
     const HELP_TEXTS = {
       market: `
         <ul>
@@ -897,39 +895,22 @@
           <li>신고/문의는 좌측 <b>공지사항</b>을 참고해 주세요.</li>
         </ul>`
     };
-
     function openHelp(key){
       const modal = document.getElementById('helpModal');
       const title = document.getElementById('helpTitle');
       const tagline = document.getElementById('helpTagline');
       const content = document.getElementById('helpContent');
-
-      if(key==='market'){
-        title.textContent = '당근마켓 도움말';
-        tagline.textContent = '커뮤니티 장터 이용 안내';
-      } else {
-        title.textContent = '도움말';
-        tagline.textContent = '안내';
-      }
+      if(key==='market'){ title.textContent = '당근마켓 도움말'; tagline.textContent = '커뮤니티 장터 이용 안내'; }
+      else { title.textContent = '도움말'; tagline.textContent = '안내'; }
       content.innerHTML = HELP_TEXTS[key] || '<p class="help-view">안내가 없습니다.</p>';
-
-      modal.classList.add('show');
-      modal.setAttribute('aria-hidden','false');
-      document.body.style.overflow='hidden';
+      modal.classList.add('show'); modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden';
     }
-    function closeHelp(){
-      const modal = document.getElementById('helpModal');
-      modal.classList.remove('show');
-      modal.setAttribute('aria-hidden','true');
-      document.body.style.overflow='';
-    }
+    function closeHelp(){ const m=document.getElementById('helpModal'); m.classList.remove('show'); m.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
 
     /* 초기 렌더 */
     renderTable(); renderTop();
 
-    /* =======================
-       Scroll reveal + Click ripple + Scroll progress
-       ======================= */
+    /* Reveal + Ripple + Scroll bar */
     const io = new IntersectionObserver((entries)=>{
       entries.forEach(entry=>{
         if(entry.isIntersecting){
@@ -985,24 +966,53 @@
     const _showPage = window.showPage;
     window.showPage = function(pageId){
       _showPage(pageId);
-      requestAnimationFrame(()=>{
-        attachReveals();
-        onScrollProgress();
-      });
+      requestAnimationFrame(()=>{ attachReveals(); onScrollProgress(); });
     };
     const _showSubPage = window.showSubPage;
     window.showSubPage = function(id){
       _showSubPage(id);
-      requestAnimationFrame(()=>{
-        attachReveals();
-      });
+      requestAnimationFrame(()=>{ attachReveals(); });
     };
 
     document.addEventListener('DOMContentLoaded', ()=>{
-      addTapAndRipple('.nav-card, .card, .market-card, .modal-nav button, .help-pill, .quick-nav button, .close-btn, .btn');
+      addTapAndRipple('.nav-card, .card, .market-card, .modal-nav button, .help-pill, .quick-nav button, .close-btn, .btn, .story-item');
       attachReveals();
       onScrollProgress();
     });
+
+    /* ===== 스토리 모달 열기/닫기 ===== */
+    function openStoryModal(item){
+      const m = document.getElementById('storyModal');
+      const title = document.getElementById('sModalTitle');
+      const meta = document.getElementById('sModalMeta');
+      const song = document.getElementById('sModalSong');
+      const body = document.getElementById('sModalBody');
+
+      title.textContent = item.title || '제목 없음';
+      const who = item.anonymous ? '익명' : `${esc(item.nick||'')}${item.govon?` (${esc(item.govon)})`:''}`;
+      const when = item.createdAt ? fmtTime(item.createdAt) : '';
+      meta.innerHTML = `
+        <span class="tag anon">${who}</span>
+        <span class="tag cat">🏷 ${esc(item.category||'기타')}</span>
+        <span class="muted">${when}</span>
+      `;
+      song.innerHTML = item.song ? `<span class="song">🎵 신청곡: ${esc(item.song)}</span>` : '';
+      body.textContent = item.body || '';
+      m.classList.add('show'); m.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden';
+    }
+    function closeStoryModal(){
+      const m=document.getElementById('storyModal');
+      m.classList.remove('show'); m.setAttribute('aria-hidden','true'); document.body.style.overflow='';
+    }
+
+    /* ===== 유틸 ===== */
+    function esc(s=''){ return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+    function fmtTime(ts){
+      try{ const d = ts?.toDate ? ts.toDate() : (ts instanceof Date ? ts : new Date());
+        const p = n=> (n<10?'0':'')+n;
+        return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}`;
+      }catch{ return '' }
+    }
   </script>
 
   <!-- ===== Firebase + Firestore (사연 신청 + 목록) ===== -->
@@ -1026,12 +1036,11 @@
     try { getAnalytics(app); } catch(e){}
     const db = getFirestore(app);
     const auth = getAuth(app);
-
     signInAnonymously(auth).catch(console.error);
 
     const storiesRef = collection(db, "stories");
 
-    /* ====== DOM ====== */
+    /* ===== DOM ===== */
     const storyForm = document.getElementById("storyForm");
     const storyAnon = document.getElementById("storyAnon");
     const storyNick = document.getElementById("storyNick");
@@ -1039,34 +1048,43 @@
     const storyTitle = document.getElementById("storyTitle");
     const storySong = document.getElementById("storySong");
     const storyBody = document.getElementById("storyBody");
+    const storyCat  = document.getElementById("storyCategory");
     const storyMsg  = document.getElementById("storyMsg");
     const storyList = document.getElementById("storyList");
     const storyCount= document.getElementById("storyCount");
+    const chipBar   = document.getElementById("chipBar");
 
-    function esc(s=''){
-      return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+    /* ===== 카테고리 칩 ===== */
+    const CATEGORIES = ["전체","연애","고민","사건/신고","유머","힐링","신청곡","기타"];
+    let currentCategory = "전체";
+    function renderChips(){
+      chipBar.innerHTML = CATEGORIES.map(cat => `<button class="chip ${cat===currentCategory?'active':''}" data-cat="${cat}">${cat}</button>`).join('');
     }
-    function fmtTime(ts){
-      try{
-        const d = ts?.toDate ? ts.toDate() : (ts instanceof Date ? ts : new Date());
-        const pad = n => (n<10?'0':'')+n;
-        return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
-      }catch{ return '' }
-    }
+    chipBar.addEventListener('click', (e)=>{
+      const btn = e.target.closest('.chip'); if(!btn) return;
+      currentCategory = btn.dataset.cat || "전체";
+      renderChips();
+      renderStoryList(storiesData);
+    });
+    renderChips();
 
-    // 익명 토글 시 닉/고번 비활성화
+    /* ===== 익명 토글 ===== */
     function updateAnonState(){
       const anon = storyAnon.checked;
       [storyNick, storyGovon].forEach(el=>{
         el.disabled = anon;
         el.placeholder = anon ? "익명으로 전송됩니다" : (el===storyNick?"예: 신짱":"예: 251");
-        el.style.opacity = anon ? .6 : 1;
+        el.parentElement.style.opacity = anon ? .6 : 1;
       });
     }
     storyAnon?.addEventListener('change', updateAnonState);
     updateAnonState();
 
-    /* ====== 제출 ====== */
+    /* ===== 텍스트에어리어 자동 리사이즈 ===== */
+    function autoResize(){ this.style.height='auto'; this.style.height = (this.scrollHeight+2)+'px'; }
+    storyBody.addEventListener('input', autoResize); autoResize.call(storyBody);
+
+    /* ===== 제출 ===== */
     storyForm?.addEventListener("submit", async (e)=>{
       e.preventDefault();
       const anon = !!storyAnon.checked;
@@ -1075,8 +1093,8 @@
       const title = (storyTitle.value||"").trim();
       const song  = (storySong.value||"").trim();
       const body  = (storyBody.value||"").trim();
+      const category = storyCat.value || "기타";
 
-      // 유효성: 익명이 아니면 닉/고번 필수
       if(!title || !body || (!anon && (!nick || !govon))){
         storyMsg.textContent = "필수 항목을 확인해 주세요.";
         storyMsg.className = "bad";
@@ -1092,6 +1110,7 @@
           nick: anon ? "익명" : nick,
           govon: anon ? "" : govon,
           title, song, body,
+          category,
           anonymous: anon,
           createdAt: serverTimestamp()
         });
@@ -1099,6 +1118,8 @@
         storyMsg.className = "good";
         if(!anon){ storyNick.value = ""; storyGovon.value = ""; }
         storyTitle.value = ""; storySong.value = ""; storyBody.value = "";
+        storyCat.value = "기타";
+        storyBody.style.height = 'auto';
       }catch(err){
         storyMsg.textContent = "사연 전송 실패: " + (err?.message||err);
         storyMsg.className = "bad";
@@ -1107,39 +1128,68 @@
       }
     });
 
-    /* ====== 목록 (실시간) ====== */
-    const q = query(storiesRef, orderBy('createdAt','desc'), limit(30));
-    onSnapshot(q, (snap)=>{
+    /* ===== 목록 (실시간) – 전체 구독 후 클라이언트 필터 ===== */
+    let storiesData = [];
+    const qAll = query(storiesRef, orderBy('createdAt','desc'), limit(100));
+    onSnapshot(qAll, (snap)=>{
       const arr = [];
       snap.forEach(doc=> arr.push({ id: doc.id, ...doc.data() }));
-      renderStoryList(arr);
+      storiesData = arr;
+      renderStoryList(storiesData);
     }, (err)=>{
-      storyList.innerHTML = `<div class="empty">사연을 불러오지 못했어요: ${esc(err?.message||err)}</div>`;
+      storyList.innerHTML = `<div class="muted">사연을 불러오지 못했어요: ${esc(err?.message||err)}</div>`;
     });
 
+    function esc(s=''){ return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+    function fmtTime(ts){
+      try{ const d = ts?.toDate ? ts.toDate() : (ts instanceof Date ? ts : new Date());
+        const p=n=> (n<10?'0':'')+n; return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}`;
+      }catch{ return '' }
+    }
+
     function renderStoryList(items){
-      storyCount.textContent = items?.length ? `최근 ${items.length}건` : "0건";
-      if(!items || !items.length){
-        storyList.innerHTML = `<div class="empty">아직 등록된 사연이 없습니다.</div>`;
+      const filtered = currentCategory==="전체" ? items : items.filter(it => (it.category||"기타")===currentCategory);
+      storyCount.textContent = filtered?.length ? `최근 ${filtered.length}건` : "0건";
+      if(!filtered || !filtered.length){
+        storyList.innerHTML = `<div class="muted">해당 카테고리의 사연이 없습니다.</div>`;
         return;
       }
-      storyList.innerHTML = items.map(it=>{
+      storyList.innerHTML = filtered.map(it=>{
         const who = it.anonymous ? '익명' : `${esc(it.nick)}${it.govon?` (${esc(it.govon)})`:''}`;
         const when = it.createdAt ? fmtTime(it.createdAt) : '';
-        const song = it.song ? `<div class="song">🎵 신청곡: ${esc(it.song)}</div>` : '';
+        const song = it.song ? `<div class="song">🎵 ${esc(it.song)}</div>` : '';
+        const cat  = `<span class="tag cat">🏷 ${esc(it.category||'기타')}</span>`;
         return `
-          <article class="story-item" style="border-top:1px dashed #e5e7eb; padding-top:10px; margin-top:10px">
-            <div class="list-head">
-              <div class="list-title">${esc(it.title)}</div>
-              <span class="tag">${who}</span>
+          <article class="story-item" data-id="${it.id}" role="button" tabindex="0">
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:8px">
+              <div class="list-title" style="font-size:15.75px">${esc(it.title)}</div>
+              <div style="display:flex; gap:6px; align-items:center">
+                ${cat}
+                <span class="tag ${it.anonymous?'anon':''}">${who}</span>
+              </div>
             </div>
-            <div class="list-meta">${when}</div>
-            ${song}
-            <div class="list-body">${esc(it.body)}</div>
+            <div class="list-meta" style="margin-top:2px">${when} ${song}</div>
+            <div class="list-body line-clamp-3">${esc(it.body||'')}</div>
           </article>
         `;
       }).join("");
     }
+
+    /* ===== 스토리 카드 클릭 → 모달 ===== */
+    storyList.addEventListener('click', (e)=>{
+      const item = e.target.closest('.story-item'); if(!item) return;
+      const id = item.dataset.id;
+      const it = storiesData.find(d => d.id===id);
+      if(it) window.openStoryModal(it);
+    });
+    storyList.addEventListener('keydown', (e)=>{
+      if(e.key==='Enter' || e.key===' '){
+        const item = e.target.closest('.story-item'); if(!item) return;
+        const it = storiesData.find(d => d.id===item.dataset.id);
+        if(it){ e.preventDefault(); window.openStoryModal(it); }
+      }
+    });
+
   </script>
 </body>
 </html>
