@@ -191,11 +191,10 @@
     .modal.show .modal-content > *:nth-child(3){ animation-delay:.06s}
 
     /* ========= 파스텔톤 모달 배경 + 테마 변수 세트 ========= */
-    /* 기업 - (기존) 초록 테마 */
     .bg-tteok{ background:linear-gradient(135deg,#bbf7d0,#a7f3d0,#f0fdf4);}
     .bg-tteok{ --m-accent:#16a34a; --m-chip-bg:#ecfdf5; --m-chip-border:#bbf7d0; --m-chip-ink:#065f46; --m-badge-bg:#ecfdf5; --m-badge-border:#86efac; --m-badge-ink:#065f46; }
 
-    /* 🐝 벌집(노랑+블랙) 테마 */
+    /* 🐝 벌집 */
     .bg-beehive{
       background:
         radial-gradient(1200px 600px at 100% -50%, rgba(15,23,42,.55), transparent 60%),
@@ -205,7 +204,7 @@
       --m-badge-bg:#fffbeb; --m-badge-border:#fde68a; --m-badge-ink:#111827;
     }
 
-    /* InBack / 차카니 컬러 유지 */
+    /* InBack / 차카니 컬러 */
     .bg-inback{
       background:linear-gradient(135deg,#ede9fe,#f5d0fe,#fce7f3);
     }
@@ -223,7 +222,6 @@
       --m-badge-bg:#fff7ed; --m-badge-border:#fcd34d; --m-badge-ink:#92400e;
     }
 
-    /* 떡잎(복구용 초록 테마 별칭) */
     .bg-tteok-green{
       background:linear-gradient(135deg,#bbf7d0,#a7f3d0,#f0fdf4);
       --m-accent:#16a34a;
@@ -294,7 +292,6 @@
     .title{font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:48vw}
     .meta{font-size:12.5px;color:#6b7280}
     .story-empty{padding:18px;text-align:center;color:#6b7280}
-
   </style>
 </head>
 <body>
@@ -696,7 +693,7 @@
     </div>
   </div>
 
-  <!-- 기본 JS -->
+  <!-- 기본 JS (classic script) -->
   <script>
     /* ---------- 데이터 ---------- */
     const ENTITIES = { 
@@ -757,6 +754,7 @@
       const el=document.getElementById(pageId);
       if(el){ el.classList.add('active'); window.scrollTo({top:0,behavior:'smooth'}); }
       toggleBroadcastBox();
+      attachReveals(); // 페이지 전환 시 리빌 재적용
     }
     function goHome(){ showPage('home'); }
     function showSubPage(id){
@@ -930,9 +928,9 @@
     }
 
     /* ---------- 사연 상세 모달 ---------- */
-    const storyMap = new Map();
+    window.storyMap = new Map(); // ⬅️ 모듈/비모듈 모두 접근 가능
     function openStory(id){
-      const s = storyMap.get(id);
+      const s = window.storyMap.get(id);
       if(!s) return;
       document.getElementById('sModalTitle').textContent = s.title || '(제목 없음)';
       document.getElementById('sModalMeta').textContent = `${s.isAnon ? '익명' : (s.nick || '—')}${s.code? ' ('+s.code+')':''} · ${s._time || ''}`;
@@ -953,9 +951,6 @@
       document.body.style.overflow='';
     }
 
-    /* 초기 렌더 */
-    renderTable(); renderTop();
-
     /* ===== Scroll progress ===== */
     function onScrollProgress(){
       const h = document.documentElement;
@@ -965,9 +960,36 @@
     }
     window.addEventListener('scroll', onScrollProgress, { passive:true });
 
+    /* ===== Scroll reveal 복구 ===== */
+    let _io;
+    function attachReveals(){
+      // 목표: 방송국 박스만 리빌 적용(필요 시 확장 가능)
+      const target = document.getElementById('broadcastBox');
+      if(!target) return;
+
+      if(!_io){
+        _io = new IntersectionObserver((entries)=>{
+          entries.forEach(e=>{
+            if(e.isIntersecting){
+              e.target.classList.add('show');
+              _io.unobserve(e.target);
+            }
+          });
+        },{threshold:0.12});
+      }
+      // 처음 로딩 때 이미 뷰포트 안이면 바로 show
+      const rect = target.getBoundingClientRect();
+      if(rect.top < window.innerHeight) target.classList.add('show');
+      else _io.observe(target);
+    }
+
+    /* 초기 렌더 */
+    renderTable(); renderTop();
+
     document.addEventListener('DOMContentLoaded', ()=>{
       toggleBroadcastBox();
       onScrollProgress();
+      attachReveals();
     });
   </script>
 
@@ -1030,7 +1052,6 @@
       const song  = (storySong.value||"").trim();
       const category = storyCategory.value || "";
 
-      // 필수값: 제목/내용/카테고리, (비익명일 때 닉 또는 고번 하나는 필수)
       if(!title || !body || !category){
         storyMsg.textContent = "카테고리/제목/내용은 필수입니다.";
         storyMsg.style.color = "#dc2626";
@@ -1052,7 +1073,7 @@
         storyTitle.value = "";
         storyBody.value = "";
         storySong.value = "";
-        // 익명 유지, 카테고리 초기화는 선택
+        // 익명/카테고리는 유지
       }catch(err){
         storyMsg.textContent = "사연 전송 실패: " + (err?.message||err);
         storyMsg.style.color = "#dc2626";
@@ -1061,7 +1082,7 @@
       }
     });
 
-    /* ---- 최신 사연 구독 ---- */
+    /* ---- 최신 사연 구독 + 즉시 필터 렌더 ---- */
     function fmtTime(ts){
       try{
         const d = ts?.toDate ? ts.toDate() : (ts instanceof Date ? ts : new Date());
@@ -1071,24 +1092,17 @@
       }catch{ return ""; }
     }
 
-    const qLatest = query(storiesRef, orderBy('createdAt','desc'), limit(50));
-    onSnapshot(qLatest, (snap)=>{
-      const rows = [];
-      storyMap.clear();
-      snap.forEach(doc=>{
-        const s = { id: doc.id, ...doc.data() };
-        s._time = s.createdAt ? fmtTime(s.createdAt) : '';
-        storyMap.set(s.id, s);
-      });
-
+    function renderStoryListFromCache(){
+      const listEl = storyList;
       const filterCat = storyFilter?.value || "";
-      const arr = Array.from(storyMap.values()).filter(s=> !filterCat || s.category === filterCat);
+      const values = Array.from(window.storyMap?.values?.() || []);
+      const arr = values.filter(s=> !filterCat || s.category === filterCat);
 
       if(arr.length===0){
-        storyList.innerHTML = `<li class="story-empty">아직 등록된 사연이 없습니다.</li>`;
+        listEl.innerHTML = `<li class="story-empty">아직 등록된 사연이 없습니다.</li>`;
         return;
       }
-      storyList.innerHTML = arr.map(s=>{
+      listEl.innerHTML = arr.map(s=>{
         const who = s.isAnon ? '익명' : (s.nick || '—');
         const code = s.code ? ` (${s.code})` : '';
         const song = s.song ? ` · 🎵 ${s.song}` : '';
@@ -1106,18 +1120,23 @@
         `;
       }).join('');
 
-      // 클릭 핸들러 부착
-      storyList.querySelectorAll('.story-item').forEach(li=>{
-        li.addEventListener('click', ()=> openStory(li.getAttribute('data-id')));
+      listEl.querySelectorAll('.story-item').forEach(li=>{
+        li.addEventListener('click', ()=> window.openStory(li.getAttribute('data-id')));
       });
+    }
+
+    const qLatest = query(storiesRef, orderBy('createdAt','desc'), limit(50));
+    onSnapshot(qLatest, (snap)=>{
+      window.storyMap.clear();
+      snap.forEach(doc=>{
+        const s = { id: doc.id, ...doc.data() };
+        s._time = s.createdAt ? fmtTime(s.createdAt) : '';
+        window.storyMap.set(s.id, s);
+      });
+      renderStoryListFromCache();
     });
 
-    storyFilter?.addEventListener('change', ()=>{
-      // onSnapshot에서 storyFilter.value 읽어 다시 그리므로 강제 재구독 없이 이벤트만 트리거
-      // 간단하게 innerHTML 재설정 위해 빈 업데이트 유도: 아무것도 안 해도 다음 스냅샷에서 반영되므로,
-      // 빠른 반영이 필요하면 아래 줄처럼 수동으로 한 번 호출하는 로직을 추가할 수 있습니다.
-      // (여기선 onSnapshot이 실시간으로 계속 와서 생략)
-    });
+    storyFilter?.addEventListener('change', renderStoryListFromCache);
   </script>
 </body>
 </html>
