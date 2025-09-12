@@ -185,22 +185,11 @@
       --m-badge-bg:#fffbeb; --m-badge-border:#fde68a; --m-badge-ink:#111827;
     }
 
-    .bg-inback{
-      background:linear-gradient(135deg,#ede9fe,#f5d0fe,#fce7f3);
-    }
-    .bg-inback{
-      --m-accent:#8b5cf6;
-      --m-chip-bg:#f5f3ff; --m-chip-border:#ddd6fe; --m-chip-ink:#5b21b6;
-      --m-badge-bg:#faf5ff; --m-badge-border:#e9d5ff; --m-badge-ink:#6b21a8;
-    }
-    .bg-chakani{
-      background:linear-gradient(135deg,#fff7ed,#fde68a,#fef3c7);
-    }
-    .bg-chakani{
-      --m-accent:#f59e0b;
-      --m-chip-bg:#fffbeb; --m-chip-border:#fde68a; --m-chip-ink:#92400e;
-      --m-badge-bg:#fff7ed; --m-badge-border:#fcd34d; --m-badge-ink:#92400e;
-    }
+    .bg-inback{ background:linear-gradient(135deg,#ede9fe,#f5d0fe,#fce7f3); }
+    .bg-inback{ --m-accent:#8b5cf6; --m-chip-bg:#f5f3ff; --m-chip-border:#ddd6fe; --m-chip-ink:#5b21b6; --m-badge-bg:#faf5ff; --m-badge-border:#e9d5ff; --m-badge-ink:#6b21a8; }
+
+    .bg-chakani{ background:linear-gradient(135deg,#fff7ed,#fde68a,#fef3c7); }
+    .bg-chakani{ --m-accent:#f59e0b; --m-chip-bg:#fffbeb; --m-chip-border:#fde68a; --m-chip-ink:#92400e; --m-badge-bg:#fff7ed; --m-badge-border:#fcd34d; --m-badge-ink:#92400e; }
 
     .bg-tteok-green{
       background:linear-gradient(135deg,#bbf7d0,#a7f3d0,#f0fdf4);
@@ -232,7 +221,7 @@
     /* ===== 리얼 방송국 (홈 밖, 홈 아래) — 홈 섹션과 ‘완전 동일 폭’ ===== */
     #broadcastBox{
       background:#fff; border-radius:14px; box-shadow:0 4px 12px rgba(0,0,0,.05);
-      padding:28px; margin:20px 0; width:100%; max-width:none; /* 홈 섹션(section.page)와 동일 */
+      padding:28px; margin:20px 0; width:100%; max-width:none;
     }
     #broadcastBox .title-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}
     #broadcastBox h2{margin:0; color:#1e3a8a; font-size:22px; font-weight:900}
@@ -258,6 +247,10 @@
       display:block;width:100%;padding:12px;border:1px solid var(--border);border-radius:10px;font-size:15px;background:#fff;line-height:1.5;
     }
     .story-form textarea{min-height:140px;resize:vertical}
+    /* 비활성 입력 스타일 */
+    .story-form input:disabled, .story-form select:disabled, .story-form textarea:disabled{
+      background:#f3f4f6; color:#9ca3af; cursor:not-allowed;
+    }
 
     .inline{display:flex;align-items:center;gap:12px}
     .switch{position:relative;width:46px;height:26px;background:#e5e7eb;border-radius:999px;cursor:pointer;transition:background .2s var(--e)}
@@ -921,7 +914,9 @@
       const s = storyMap.get(id);
       if(!s) return;
       document.getElementById('sModalTitle').textContent = s.title || '(제목 없음)';
-      document.getElementById('sModalMeta').textContent = `${s.isAnon ? '익명' : (s.nick || '—')}${s.code? ' ('+s.code+')':''} · ${s._time || ''}`;
+      const nameStr = s.isAnon ? '익명' : (s.nick || '—');
+      const codeStr = (!s.isAnon && s.code) ? ` (${s.code})` : '';
+      document.getElementById('sModalMeta').textContent = `${nameStr}${codeStr} · ${s._time || ''}`;
       document.getElementById('sModalBody').textContent = s.body || '';
       const cat = document.getElementById('sModalCat');
       cat.textContent = s.category || '기타';
@@ -1000,8 +995,19 @@
     function setAnon(active){
       anonSwitch.classList.toggle('active', !!active);
       anonSwitch.setAttribute('aria-checked', active ? 'true' : 'false');
+      updateAnonUI();
+    }
+    function updateAnonUI(){
+      const anon = anonSwitch.classList.contains('active');
+      [storyNick, storyCode].forEach((el)=>{
+        el.disabled = anon;
+        if(anon) el.value = '';
+        if(el === storyNick) el.placeholder = anon ? '익명 모드' : '닉네임';
+        if(el === storyCode) el.placeholder = anon ? '익명 모드' : '고번 (예: 251)';
+      });
     }
     setAnon(false);
+    updateAnonUI();
     anonSwitch.addEventListener('click', ()=> setAnon(!anonSwitch.classList.contains('active')));
     anonSwitch.addEventListener('keydown', (e)=>{ if(e.key===' '||e.key==='Enter'){ e.preventDefault(); setAnon(!anonSwitch.classList.contains('active')); }});
 
@@ -1009,8 +1015,9 @@
     storyForm?.addEventListener("submit", async (e)=>{
       e.preventDefault();
       const isAnon = anonSwitch.classList.contains('active');
-      const nick  = (storyNick.value||"").trim();
-      const code  = (storyCode.value||"").trim();
+      // ✅ 익명이면 닉/고번 저장하지 않음
+      const nick  = isAnon ? "" : (storyNick.value||"").trim();
+      const code  = isAnon ? "" : (storyCode.value||"").trim();
       const title = (storyTitle.value||"").trim();
       const body  = (storyBody.value||"").trim();
       const song  = (storySong.value||"").trim();
@@ -1066,8 +1073,8 @@
         return;
       }
       storyList.innerHTML = arr.map(s=>{
-        const who = s.isAnon ? '익명' : (s.nick || '—');
-        const code = s.code ? ` (${s.code})` : '';
+        const who  = s.isAnon ? '익명' : (s.nick || '—');
+        const code = (!s.isAnon && s.code) ? ` (${s.code})` : '';
         const song = s.song ? ` · 🎵 ${s.song}` : '';
         return `
           <li class="story-item" data-id="${s.id}">
