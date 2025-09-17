@@ -321,8 +321,7 @@
     @keyframes fadeInUp{from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none}}
   </style>
 </head>
-
-  <body>
+<body>
   <header><h1 onclick="goHome()">떡잎방범대 정보 센터</h1></header>
   <div id="scrollProgress" aria-hidden="true"></div>
 
@@ -333,7 +332,7 @@
         <h3>📢 공지사항</h3>
         <ul>
           <li>떡잎방범대 정보 센터 OPEN</li>
-          <li>떡잎방범대 투자 센터 리뉴얼</li>
+          <li>떡잎방범대 투자 센터 리뉴얼 </li>
           <li>🙏문의: 703 김남정, 디코 dm</li>
         </ul>
       </div>
@@ -356,10 +355,7 @@
         <div class="nav-card" onclick="showPage('stats')"><div class="icon">📈</div><h3>거래 통계</h3></div>
       </div>
 
-      <div class="hero">
-        <h2>📊 정보 센터</h2>
-        <p>리얼월드의 아이템 시세와 조직 정보를 한눈에!</p>
-      </div>
+      <div class="hero"><h2>📊 정보 센터</h2><p>리얼월드의 아이템 시세와 조직 정보를 한눈에!</p></div>
 
       <!-- 홈 -->
       <section id="home" class="page active">
@@ -442,130 +438,239 @@
         </div>
       </section>
 
+      <!-- 리얼 방송국 (홈 섹션 바로 아래, 같은 폭) -->
+      <div id="broadcastBox">
+        <div class="title-row">
+          <h2>📡 리얼 방송국</h2>
+          <span class="pill">실시간 접수 · 익명 가능</span>
+        </div>
+        <p class="desc">사연을 보내면 운영진 확인 후 방송으로 소개돼요. <span class="hint">* 로그인 없이 익명 접수 가능</span></p>
+
+        <div class="broadcast-grid">
+          <!-- 사연 신청 -->
+          <div class="story-card">
+            <h3>📝 사연 신청</h3>
+            <form id="storyForm" class="story-form" novalidate>
+              <div class="row double">
+                <label for="storyNick">보내는 분</label>
+                <input id="storyNick" type="text" placeholder="닉네임" />
+                <input id="storyCode" type="text" placeholder="고번 (예: 251)" />
+              </div>
+
+              <div class="row">
+                <label for="storyCategory">카테고리</label>
+                <select id="storyCategory" required>
+                  <option value="" disabled selected>카테고리를 선택하세요</option>
+                  <option>연애</option><option>우정</option><option>사건/사고</option><option>일상</option>
+                  <option>웃긴 일</option><option>감동</option><option>음악사연</option><option>기타</option>
+                </select>
+              </div>
+
+              <div class="row">
+                <label for="storyTitle">제목</label>
+                <input id="storyTitle" type="text" placeholder="사연 제목" maxlength="60" required />
+              </div>
+
+              <div class="row">
+                <label for="storySong">신청곡</label>
+                <input id="storySong" type="text" placeholder="예: 아이유 - 밤편지 (선택)" />
+              </div>
+
+              <div class="row" style="align-items:start">
+                <label for="storyBody">내용</label>
+                <textarea id="storyBody" placeholder="사연 내용을 입력하세요" required></textarea>
+              </div>
+
+              <div class="row">
+                <label>익명</label>
+                <div class="inline">
+                  <div id="anonSwitch" class="switch" role="switch" aria-checked="false" tabindex="0"></div>
+                  <span class="hint">익명으로 보내기</span>
+                </div>
+              </div>
+
+              <div class="row actions">
+                <button type="submit" class="btn">사연 보내기</button>
+              </div>
+              <div id="storyMsg" class="hint" style="margin-top:4px" aria-live="polite"></div>
+            </form>
+          </div>
+
+          <!-- 최신 사연 -->
+          <div class="story-list">
+            <div class="head">
+              <h3>🗂 최신 사연</h3>
+              <div class="filters">
+                <select id="storyFilter" class="pill">
+                  <option value="">전체</option>
+                  <option>연애</option><option>우정</option><option>사건/사고</option><option>일상</option>
+                  <option>웃긴 일</option><option>감동</option><option>음악사연</option><option>기타</option>
+                </select>
+              </div>
+            </div>
+            <ul id="storyList"></ul>
+          </div>
+        </div>
+      </div>
+      <!-- /리얼 방송국 -->
+
+      <!-- 당근마켓 -->
+      <section id="market" class="page">
+        <div class="section-header">
+          <h2>🥕 당근마켓</h2>
+          <button class="help-pill" onclick="openHelp('market')">당근마켓이란?</button>
+        </div>
+        <div class="market-cards">
+          <div class="market-card"><h3>이름 <span class="id">#고번</span></h3><p class="label">판매물품</p><p class="item-name">달의자</p><div class="price">240억</div></div>
+          <div class="market-card"><h3>이름 <span class="id">#고번</span></h3><p class="label">판매물품</p><p class="item-name">테저렉트</p><div class="price">250억</div></div>
+          <div class="market-card"><h3>이름 <span class="id">#고번</span></h3><p class="label">판매물품</p><p class="item-name">불손 이펙트</p><div class="price">190억</div></div>
+          <div class="market-card"><h3>이름 <span class="id">#고번</span></h3><p class="label">판매물품</p><p class="item-name">브레이크댄스</p><div class="price">12억</div></div>
+          <div class="market-card"><h3>이름 <span class="id">#고번</span></h3><p class="label">판매물품</p><p class="item-name">구름의자</p><div class="price">260억</div></div>
+        </div>
+      </section>
+
       <!-- 카테고리 -->
       <section id="category" class="page">
-        <h2>📂 시세표</h2>
-
-        <!-- 🔻 탭 전환 버튼: 카테고리별 / 차량 판매 -->
-        <div class="sub-nav">
-          <button onclick="showCategoryTab('itemPrices')">카테고리별 시세표</button>
-          <button onclick="showCategoryTab('carPrices')">차량 판매 시세표</button>
+        <h2>📂 카테고리별 시세표</h2>
+        <div class="quick-nav">
+          <button onclick="scrollToSection('chair')">🪑 의자 종류</button>
+          <button onclick="scrollToSection('support-car')">🚗 후원 차량</button>
+          <button onclick="scrollToSection('island-car')">🏝 극락도 차량</button>
+          <button onclick="scrollToSection('effect')">✨ 이펙트</button>
+          <button onclick="scrollToSection('skin')">🎭 스킨</button>
+          <button onclick="scrollToSection('dance')">💃 행동·댄스·동상</button>
+          <button onclick="scrollToSection('item')">✨ 기타</button>
+          <button onclick="scrollToSection('car-sale')">🚗 차량 판매 시세표</button>
         </div>
 
-        <!-- 🔻 탭 1: 카테고리별 시세표 -->
-        <div id="itemPrices" class="sub-page active">
-          <div class="quick-nav">
-            <button onclick="scrollToSection('chair')">🪑 의자 종류</button>
-            <button onclick="scrollToSection('support-car')">🚗 후원 차량</button>
-            <button onclick="scrollToSection('island-car')">🏝 극락도 차량</button>
-            <button onclick="scrollToSection('effect')">✨ 이펙트</button>
-            <button onclick="scrollToSection('skin')">🎭 스킨</button>
-            <button onclick="scrollToSection('dance')">💃 행동·댄스·동상</button>
-            <button onclick="scrollToSection('item')">✨ 기타</button>
+        <h3 id="chair">🪑 의자 종류</h3>
+        <table>
+          <tr><th>아이템</th><th>시세</th></tr>
+          <tr><td>달의자</td><td>230억~250억</td></tr>
+          <tr><td>커피의자</td><td>230억~250억</td></tr>
+          <tr><td>새장의자</td><td>160억~190억</td></tr>
+          <tr><td>구름의자</td><td>270억~300억</td></tr>
+        </table>
+
+        <h3 id="support-car">🚗 후원 차량</h3>
+        <table>
+          <tr><th>아이템</th><th>시세</th></tr>
+          <tr><td>M1</td><td>170억~200억</td></tr>
+          <tr><td>미니바티</td><td>150억~180억</td></tr>
+          <tr><td>이그너스</td><td>245억~270억</td></tr>
+          <tr><td>M2</td><td>170억~200억</td></tr>
+          <tr><td>시노비</td><td>100억~120억</td></tr>
+          <tr><td>네로</td><td>230억~250억</td></tr>
+          <tr><td>쇼타로</td><td>80억~100억</td></tr>
+          <tr><td>M3</td><td>150억~200억</td></tr>
+          <tr><td>테저랙트</td><td>270억~300억</td></tr>
+          <tr><td>M4</td><td>170억~200억</td></tr>
+          <tr><td>하쿠쵸우</td><td>80억~110억</td></tr>
+        </table>
+
+        <h3 id="island-car">🏝 극락도 차량</h3>
+        <table>
+          <tr><th>아이템</th><th>시세</th></tr>
+          <tr><td>바나나카</td><td>60억~80억</td></tr>
+          <tr><td>고양카</td><td>70억~100억</td></tr>
+          <tr><td>피넛카</td><td>70억~100억</td></tr>
+        </table>
+
+        <h3 id="effect">✨ 이펙트</h3>
+        <table>
+          <tr><th>아이템</th><th>시세</th></tr>
+          <tr><td>불손</td><td>220억~270억</td></tr>
+          <tr><td>불발</td><td>200억~250억</td></tr>
+          <tr><td>리프</td><td>140억~180억</td></tr>
+          <tr><td>번개</td><td>130억~150억</td></tr>
+          <tr><td>꽃잎비</td><td>250억~280억</td></tr>
+        </table>
+
+        <h3 id="skin">🎭 스킨</h3>
+        <table>
+          <tr><th>아이템</th><th>시세</th></tr>
+          <tr><td>다니엘</td><td>200억~240억</td></tr>
+          <tr><td>HJ</td><td>150억~200억</td></tr>
+          <tr><td>YH</td><td>140억~180억</td></tr>
+          <tr><td>다혜</td><td>80억~130억</td></tr>
+          <tr><td>유자</td><td>80억~130억</td></tr>
+          <tr><td>문신남</td><td>????</td></tr>
+          <tr><td>병아리</td><td>150억~180억</td></tr>
+          <tr><td>고양이</td><td>150억~180억</td></tr>
+        </table>
+
+        <h3 id="dance">💃 행동·댄스·동상</h3>
+        <table>
+          <tr><th>아이템</th><th>시세</th></tr>
+          <tr><td>브레이크댄스</td><td>10억~15억</td></tr>
+          <tr><td>오징어댄스</td><td>10억~15억</td></tr>
+          <tr><td>브로큰레그</td><td>5억~8억</td></tr>
+          <tr><td>마그네틱</td><td>30억~45억</td></tr>
+          <tr><td>텔미댄스</td><td>30억~40억</td></tr>
+          <tr><td>버스안에서댄스</td><td>6억~8억</td></tr>
+          <tr><td>스마트댄스</td><td>30억~38억</td></tr>
+          <tr><td>소다팝댄스</td><td>38억~46억</td></tr>
+          <tr><td>팝핀댄스</td><td>5억~10억</td></tr>
+          <tr><td>스캇앤젤다댄스</td><td>20억~28억</td></tr>
+          <tr><td>뻣뻣로봇댄스</td><td>6억~10억</td></tr>
+          <tr><td>골반흔들기</td><td>15억~20억</td></tr>
+          <tr><td>크레이지트워킹</td><td>15억~20억</td></tr>
+          <tr><td>슬릭백</td><td>18억~27억</td></tr>
+          <tr><td>이리와</td><td>5억~8억</td></tr>
+          <tr><td>언더더씨</td><td>5억~8억</td></tr>
+          <tr><td>쌍뻐큐</td><td>10억~15억</td></tr>
+          <tr><td>맘맘</td><td>7억~11억</td></tr>
+          <tr><td>회전회오리</td><td>18억~24억</td></tr>
+          <tr><td>쏘리댄스</td><td>5억~10억</td></tr>
+          <tr><td>하트 동상포즈(남)</td><td>10억~15억</td></tr>
+          <tr><td>하트 동상포즈(여)</td><td>11억~16억</td></tr>
+          <tr><td>동상포즈(남)</td><td>10억~15억</td></tr>
+          <tr><td>동상포즈(여)</td><td>11억~15억</td></tr>
+          <tr><td>무릎앉기</td><td>7억~10억</td></tr>
+          <tr><td>조신하게 앉기</td><td>8억~10억</td></tr>
+          <tr><td>괴속질주</td><td>10억~13억</td></tr>
+          <tr><td>흔들어</td><td>15억~18억</td></tr>
+          <tr><td>오예스</td><td>9억~15억</td></tr>
+          <tr><td>요가포즈</td><td>13억~16억</td></tr>
+          <tr><td>냄새나</td><td>10억~15억</td></tr>
+          <tr><td>쓰러지기</td><td>5억~7억</td></tr>
+          <tr><td>기도하는</td><td>5억~10억</td></tr>
+          <tr><td>내빵뎅이</td><td>5억~8억</td></tr>
+        </table>
+
+        <h3 id="item">✨ 기타 아이템</h3>
+        <table>
+          <tr><th>아이템</th><th>시세</th></tr>
+          <tr><td>롤러</td><td>60억~80억</td></tr>
+          <tr><td>펫 입양권</td><td>160억~200억</td></tr>
+        </table>
+
+        <!-- ===== 🔽 추가: 차량 판매 시세표 (카드형 + 모달 연동) ===== -->
+        <h3 id="car-sale">🚗 차량 판매 시세표</h3>
+        <div class="car-sale-grid">
+          <div class="car-card" data-car="테저랙트">
+            <div class="icon">🚀</div>
+            <h4>테저랙트</h4>
+            <p class="price">300억</p>
           </div>
-
-                   <!-- 의자 종류 -->
-          <h3 id="chair">🪑 의자 종류</h3>
-          <table>
-            <tr><th>아이템</th><th>시세</th></tr>
-            <tr><td>달의자</td><td>230억~250억</td></tr>
-            <tr><td>커피의자</td><td>230억~250억</td></tr>
-            <tr><td>새장의자</td><td>160억~190억</td></tr>
-            <tr><td>구름의자</td><td>270억~300억</td></tr>
-          </table>
-
-          <!-- 후원 차량 -->
-          <h3 id="support-car">🚗 후원 차량</h3>
-          <table>
-            <tr><th>아이템</th><th>시세</th></tr>
-            <tr><td>M1</td><td>170억~200억</td></tr>
-            <tr><td>미니바티</td><td>150억~180억</td></tr>
-            <tr><td>이그너스</td><td>245억~270억</td></tr>
-            <tr><td>M2</td><td>170억~200억</td></tr>
-            <tr><td>시노비</td><td>100억~120억</td></tr>
-            <tr><td>네로</td><td>230억~250억</td></tr>
-            <tr><td>쇼타로</td><td>80억~100억</td></tr>
-            <tr><td>M3</td><td>150억~200억</td></tr>
-            <tr><td>테저랙트</td><td>270억~300억</td></tr>
-            <tr><td>M4</td><td>170억~200억</td></tr>
-            <tr><td>하쿠쵸우</td><td>80억~110억</td></tr>
-          </table>
-
-          <!-- 극락도 차량 -->
-          <h3 id="island-car">🏝 극락도 차량</h3>
-          <table>
-            <tr><th>아이템</th><th>시세</th></tr>
-            <tr><td>바나나카</td><td>60억~80억</td></tr>
-            <tr><td>고양카</td><td>70억~100억</td></tr>
-            <tr><td>피넛카</td><td>70억~100억</td></tr>
-          </table>
-
-          <!-- 이펙트 -->
-          <h3 id="effect">✨ 이펙트</h3>
-          <table>
-            <tr><th>아이템</th><th>시세</th></tr>
-            <tr><td>불손</td><td>220억~270억</td></tr>
-            <tr><td>불발</td><td>200억~250억</td></tr>
-            <tr><td>리프</td><td>140억~180억</td></tr>
-            <tr><td>번개</td><td>130억~150억</td></tr>
-            <tr><td>꽃잎비</td><td>250억~280억</td></tr>
-          </table>
-
-          <!-- 스킨 -->
-          <h3 id="skin">🎭 스킨</h3>
-          <table>
-            <tr><th>아이템</th><th>시세</th></tr>
-            <tr><td>다니엘</td><td>200억~240억</td></tr>
-            <tr><td>HJ</td><td>150억~200억</td></tr>
-            <tr><td>YH</td><td>140억~180억</td></tr>
-            <tr><td>다혜</td><td>80억~130억</td></tr>
-            <tr><td>유자</td><td>80억~130억</td></tr>
-            <tr><td>문신남</td><td>????</td></tr>
-            <tr><td>병아리</td><td>150억~180억</td></tr>
-            <tr><td>고양이</td><td>150억~180억</td></tr>
-          </table>
-
-          <!-- 기타 -->
-          <h3 id="item">✨ 기타 아이템</h3>
-          <table>
-            <tr><th>아이템</th><th>시세</th></tr>
-            <tr><td>롤러</td><td>60억~80억</td></tr>
-            <tr><td>펫 입양권</td><td>160억~200억</td></tr>
-          </table>
-        </div><!-- /itemPrices -->
-
-        <!-- 🔻 탭 2: 차량 판매 시세표 -->
-        <div id="carPrices" class="sub-page">
-          <h3>🚗 차량 판매 시세표</h3>
-          <div class="car-sale-grid">
-            <div class="car-card" data-car="테저랙트">
-              <div class="icon">🚀</div>
-              <h4>테저랙트</h4>
-              <p class="price">300억</p>
-              <button class="btn" onclick="openEstimateForm('테저랙트')">견적 문의</button>
-            </div>
-            <div class="car-card" data-car="네로">
-              <div class="icon">🏎️</div>
-              <h4>네로</h4>
-              <p class="price">250억</p>
-              <button class="btn" onclick="openEstimateForm('네로')">견적 문의</button>
-            </div>
-            <div class="car-card" data-car="M1">
-              <div class="icon">🚗</div>
-              <h4>M1</h4>
-              <p class="price">200억</p>
-              <button class="btn" onclick="openEstimateForm('M1')">견적 문의</button>
-            </div>
-            <div class="car-card" data-car="쇼타로">
-              <div class="icon">🏍️</div>
-              <h4>쇼타로</h4>
-              <p class="price">100억</p>
-              <button class="btn" onclick="openEstimateForm('쇼타로')">견적 문의</button>
-            </div>
+          <div class="car-card" data-car="네로">
+            <div class="icon">🏎️</div>
+            <h4>네로</h4>
+            <p class="price">250억</p>
           </div>
-        </div><!-- /carPrices -->
-
-      </section><!-- /category -->
+          <div class="car-card" data-car="M1">
+            <div class="icon">🚗</div>
+            <h4>M1</h4>
+            <p class="price">200억</p>
+          </div>
+          <div class="car-card" data-car="쇼타로">
+            <div class="icon">🏍️</div>
+            <h4>쇼타로</h4>
+            <p class="price">100억</p>
+          </div>
+        </div>
+        <!-- ===== /추가 끝 ===== -->
+      </section>
 
       <!-- 거래 통계 -->
       <section id="stats" class="page">
@@ -586,7 +691,7 @@
     </aside>
   </div>
 
-      <!-- 엔티티 모달 -->
+  <!-- 엔티티 모달 -->
   <div id="modal" class="modal" aria-hidden="true">
     <div id="modalContent" class="modal-content" role="dialog" aria-modal="true">
       <button class="close-btn" onclick="closeModal()">닫기</button>
@@ -635,7 +740,7 @@
     </div>
   </div>
 
-  <!-- 차량 상세 모달 -->
+  <!-- ===== ✅ 추가: 차량 상세 모달 ===== -->
   <div id="carModal" class="modal" aria-hidden="true">
     <div class="modal-content" role="dialog" aria-modal="true">
       <button class="close-btn" onclick="closeCarModal()">닫기</button>
@@ -644,36 +749,9 @@
       <div id="carModalDesc" style="line-height:1.8">세부 설명이 여기에 표시됩니다.</div>
     </div>
   </div>
+  <!-- ===== /추가 끝 ===== -->
 
-  <!-- 🚗 신규추가: 견적 문의 모달 -->
-  <div id="estimateModal" class="modal" aria-hidden="true">
-    <div class="modal-content bg-tteok-green" role="dialog" aria-modal="true">
-      <button class="close-btn" onclick="closeEstimateModal()">닫기</button>
-      <h3 id="estimateTitle">차량 견적 문의</h3>
-      <p class="modal-tagline">고번·이름·원하는 정보를 입력하세요</p>
-      <form id="estimateForm" class="story-form" style="max-width:500px;margin:0 auto">
-        <input type="hidden" id="estimateCar" />
-        <div class="row">
-          <label for="estimateName">이름</label>
-          <input id="estimateName" type="text" placeholder="이름을 입력하세요" required/>
-        </div>
-        <div class="row">
-          <label for="estimateCode">고번</label>
-          <input id="estimateCode" type="text" placeholder="고번 (예: 251)" required/>
-        </div>
-        <div class="row" style="align-items:start">
-          <label for="estimateInfo">원하는 정보</label>
-          <textarea id="estimateInfo" placeholder="원하는 차량 정보, 옵션 등을 입력하세요" required></textarea>
-        </div>
-        <div class="row actions">
-          <button type="submit" class="btn">견적 문의 보내기</button>
-        </div>
-        <div id="estimateMsg" class="hint" style="margin-top:4px" aria-live="polite"></div>
-      </form>
-    </div>
-  </div>
-
-      <!-- 기본 JS (모듈 아님) -->
+  <!-- 기본 JS -->
   <script>
     /* ---------- 데이터 ---------- */
     const ENTITIES = { 
@@ -740,6 +818,8 @@
       document.querySelectorAll('#home .sub-page').forEach(div=>div.classList.remove('active'));
       document.getElementById(id).classList.add('active');
     }
+
+    /* 홈에서만 리얼 방송국 표시 */
     function toggleBroadcastBox(){
       const isHome = document.getElementById('home')?.classList.contains('active');
       const bx = document.getElementById('broadcastBox');
@@ -863,7 +943,7 @@
       document.getElementById("modal-"+id).classList.add('active');
     }
 
-    /* ---------- 도움말 ---------- */
+    /* ---------- 도움말(보기 전용) ---------- */
     const HELP_TEXTS = {
       market: `
         <ul>
@@ -928,7 +1008,10 @@
       document.body.style.overflow='';
     }
 
-    /* ---------- 스크롤 진행바 ---------- */
+    /* 초기 렌더 */
+    renderTable(); renderTop();
+
+    /* 스크롤 진행바 */
     function onScrollProgress(){
       const h = document.documentElement;
       const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight || 1);
@@ -936,20 +1019,20 @@
       if(bar) bar.style.width = (Math.max(0, Math.min(1, scrolled)) * 100) + '%';
     }
     window.addEventListener('scroll', onScrollProgress, { passive:true });
+
     document.addEventListener('DOMContentLoaded', ()=>{
       toggleBroadcastBox();
       onScrollProgress();
-      renderTable();
-      renderTop();
     });
 
-    /* ---------- 차량 카드/모달 ---------- */
+    /* ===== ✅ 추가: 차량 카드 클릭 → 차량 모달 열기 ===== */
     const CAR_DATA = {
       '테저랙트': { price:'300억', desc:'최고속도 400km/h, 전자식 서스펜션, 탄소섬유 모노코크 섀시.' },
       '네로': { price:'250억', desc:'밸런스가 좋은 전천후 슈퍼카. 일상·레이스 모두 OK.' },
       'M1': { price:'200억', desc:'스포티한 클래식 모델. 커스텀 파츠 호환성 우수.' },
       '쇼타로': { price:'100억', desc:'바이크계의 아이콘. 가속·핸들링 특화.' }
     };
+
     function openCarModal(){
       const modal = document.getElementById('carModal');
       modal.classList.add('show');
@@ -962,6 +1045,7 @@
       modal.setAttribute('aria-hidden','true');
       document.body.style.overflow='';
     }
+
     document.addEventListener('click', (e)=>{
       const card = e.target.closest('.car-card');
       if(!card) return;
@@ -971,28 +1055,10 @@
       document.getElementById('carModalPrice').textContent = '가격: ' + (data.price || '-');
       document.getElementById('carModalDesc').textContent = data.desc || '세부 정보가 없습니다.';
       openCarModal();
-      // 더블클릭 시 견적 문의 모달 열기(선택)
-      card.ondblclick = () => openEstimateFor(name);
     });
-
-    /* ---------- 🚗 견적 문의 모달 (신규추가) ---------- */
-    function openEstimateFor(carName){
-      const m = document.getElementById('estimateModal');
-      document.getElementById('estimateCar').value = carName || '';
-      document.getElementById('estimateTitle').textContent = `차량 견적 문의 — ${carName || ''}`;
-      m.classList.add('show');
-      m.setAttribute('aria-hidden','false');
-      document.body.style.overflow='hidden';
-    }
-    function closeEstimateModal(){
-      const m = document.getElementById('estimateModal');
-      m.classList.remove('show');
-      m.setAttribute('aria-hidden','true');
-      document.body.style.overflow='';
-    }
   </script>
 
-  <!-- Firebase + Firestore (사연/견적 저장 & 실시간 조회) -->
+  <!-- ===== Firebase + Firestore (사연 신청 + 목록) ===== -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-analytics.js";
@@ -1013,13 +1079,12 @@
     try { getAnalytics(app); } catch(e){}
     const db = getFirestore(app);
     const auth = getAuth(app);
+
     signInAnonymously(auth).catch(console.error);
 
-    /* ---- 컬렉션 참조 ---- */
-    const storiesRef   = collection(db, "stories");
-    const estimatesRef = collection(db, "estimates"); // 신규
+    const storiesRef = collection(db, "stories");
 
-    /* ---- 폼 엘리먼트 (사연) ---- */
+    /* ---- 폼 엘리먼트 ---- */
     const storyForm = document.getElementById("storyForm");
     const storyNick = document.getElementById("storyNick");
     const storyCode = document.getElementById("storyCode");
@@ -1049,13 +1114,14 @@
     }
     setAnon(false);
     updateAnonUI();
-    anonSwitch?.addEventListener('click', ()=> setAnon(!anonSwitch.classList.contains('active')));
-    anonSwitch?.addEventListener('keydown', (e)=>{ if(e.key===' '||e.key==='Enter'){ e.preventDefault(); setAnon(!anonSwitch.classList.contains('active')); }});
+    anonSwitch.addEventListener('click', ()=> setAnon(!anonSwitch.classList.contains('active')));
+    anonSwitch.addEventListener('keydown', (e)=>{ if(e.key===' '||e.key==='Enter'){ e.preventDefault(); setAnon(!anonSwitch.classList.contains('active')); }});
 
-    /* ---- 사연 제출 ---- */
+    /* ---- 제출 ---- */
     storyForm?.addEventListener("submit", async (e)=>{
       e.preventDefault();
       const isAnon = anonSwitch.classList.contains('active');
+      // ✅ 익명이면 닉/고번 저장하지 않음
       const nick  = isAnon ? "" : (storyNick.value||"").trim();
       const code  = isAnon ? "" : (storyCode.value||"").trim();
       const title = (storyTitle.value||"").trim();
@@ -1084,6 +1150,7 @@
         storyTitle.value = "";
         storyBody.value = "";
         storySong.value = "";
+        // 카테고리/익명 설정은 유지
       }catch(err){
         storyMsg.textContent = "사연 전송 실패: " + (err?.message||err);
         storyMsg.style.color = "#dc2626";
@@ -1101,6 +1168,7 @@
         return `${y}.${m}.${da} ${hh}:${mm}`;
       }catch{ return ""; }
     }
+
     function renderStoryList(){
       const filterCat = storyFilter?.value || "";
       const all = Array.from(storyMap.values());
@@ -1132,6 +1200,7 @@
         li.addEventListener('click', ()=> openStory(li.getAttribute('data-id')));
       });
     }
+
     const qLatest = query(storiesRef, orderBy('createdAt','desc'), limit(50));
     onSnapshot(qLatest, (snap)=>{
       storyMap.clear();
@@ -1142,46 +1211,9 @@
       });
       renderStoryList();
     });
+
     storyFilter?.addEventListener('change', renderStoryList);
-
-    /* ---- 🚗 견적 문의 제출 ---- */
-    const estimateForm = document.getElementById("estimateForm");
-    const estimateMsg  = document.getElementById("estimateMsg");
-    const estimateName = document.getElementById("estimateName");
-    const estimateCode = document.getElementById("estimateCode");
-    const estimateInfo = document.getElementById("estimateInfo");
-    const estimateCar  = document.getElementById("estimateCar");
-
-    estimateForm?.addEventListener("submit", async (e)=>{
-      e.preventDefault();
-      const name = (estimateName.value||"").trim();
-      const code = (estimateCode.value||"").trim();
-      const info = (estimateInfo.value||"").trim();
-      const car  = (estimateCar.value||"").trim();
-      if(!name || !code || !info){
-        estimateMsg.textContent = "이름/고번/요청 내용을 입력하세요.";
-        estimateMsg.style.color = "#dc2626";
-        return;
-      }
-      estimateForm.querySelector("button[type=submit]").disabled = true;
-      estimateMsg.textContent = "전송 중...";
-      estimateMsg.style.color = "#6b7280";
-      try{
-        await addDoc(estimatesRef, { name, code, info, car, createdAt: serverTimestamp() });
-        estimateMsg.textContent = "견적 문의가 접수되었습니다!";
-        estimateMsg.style.color = "#16a34a";
-        estimateName.value = "";
-        estimateCode.value = "";
-        estimateInfo.value = "";
-        // 닫을지 유지할지 선택 — 유지
-      }catch(err){
-        estimateMsg.textContent = "전송 실패: " + (err?.message||err);
-        estimateMsg.style.color = "#dc2626";
-      }finally{
-        estimateForm.querySelector("button[type=submit]").disabled = false;
-      }
-    });
   </script>
 </body>
 </html>
-          
+
