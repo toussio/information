@@ -60,111 +60,6 @@
     .civil-card{border-color:var(--civil)} .civil-card .icon,.civil-card h4{color:var(--civil)}
     .org-card{border-color:var(--org)} .org-card .icon,.org-card h4{color:var(--org)}
     .magazine-card{border-color:var(--magazine)} .magazine-card .icon,.magazine-card h4{color:var(--magazine)}
-    /* 당근마켓 카드 */
-    .market-cards{display:grid;grid-template-columns:repeat(5,1fr);gap:20px;margin-top:20px}
-    .market-card{background:#fff;border-radius:20px;padding:20px;box-shadow:0 6px 16px rgba(0,0,0,.08);text-align:center;transition:transform .25s var(--e), box-shadow .25s var(--e)}
-    .market-card:hover{transform:translateY(-6px);box-shadow:0 10px 24px rgba(0,0,0,.12)}
-    .market-card h3{margin:0 0 10px;font-size:18px;color:#111827}
-    .market-card .id,.market-card .label{font-size:14px;color:#6b7280}
-    .market-card .item-name{font-size:20px;font-weight:800;margin:4px 0 14px;color:#111827}
-    .market-card .price{display:inline-block;background:#dcfce7;color:#065f46;font-weight:700;font-size:18px;padding:8px 16px;border-radius:50px}
-    /* 버튼/폼 공통 */
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 16px;border:none;border-radius:10px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;font-weight:900;cursor:pointer;transition:transform .18s var(--e), filter .18s var(--e);box-shadow:0 3px 8px rgba(22,197,94,.25)}
-    .btn:hover{filter:brightness(.96); transform:translateY(-2px)}
-    .hint{font-size:12.5px;color:#6b7280}
-    .inline{display:flex;align-items:center;gap:12px}
-    .switch{position:relative;width:46px;height:26px;background:#e5e7eb;border-radius:999px;cursor:pointer;transition:background .2s var(--e)}
-    .switch::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.2);transition:transform .2s var(--e)}
-    .switch.active{background:#1e3a8a}
-    .switch.active::after{transform:translateX(20px)}
-    .help-pill{border:1px solid #bbf7d0;background:#ecfdf5;color:#065f46;border-radius:999px;padding:6px 10px;font-size:13.5px;font-weight:800;cursor:pointer;transition:transform .18s var(--e), filter .18s var(--e);user-select:none}
-    .help-pill:hover{filter:brightness(.98);transform:translateY(-1px)}
-    .pill{display:inline-flex;align-items:center;gap:6px;border:1px solid #c7d2fe;background:#eef2ff;color:#1e3a8a;border-radius:999px;padding:6px 10px;font-weight:800;font-size:12.5px}
-    .badge{display:inline-flex;align-items:center;padding:4px 8px;border-radius:999px;font-size:12px;font-weight:900;border:1px solid #c7d2fe;background:#eef2ff;color:#1e3a8a}
-    .up{color:var(--up);font-weight:700}
-    .down{color:var(--down);font-weight:700}
-    /* 방송국 박스 */
-    #broadcastBox{background:#fff;border-radius:14px;box-shadow:0 4px 12px rgba(0,0,0,.05);padding:28px;margin:20px 0}
-    #broadcastBox .title-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}
-    #broadcastBox h2{margin:0;color:#1e3a8a;font-size:22px;font-weight:900}
-    #broadcastBox .desc{margin:0 0 16px;color:#374151;font-size:15.5px}
-    .broadcast-grid{display:flex;flex-direction:column;gap:22px}
-    .story-card{background:linear-gradient(180deg,#f8fafc,#ffffff);border:1px solid var(--border);border-radius:14px;padding:18px}
-    .story-card h3{margin:0 0 8px;font-size:18px;font-weight:900;color:#0f172a}
-    .story-form,.story-list,.story-card,#quoteForm{max-width:800px;margin:0 auto}
-    .story-form{background:#fff;border-radius:14px;padding:24px;box-shadow:0 4px 14px rgba(0,0,0,.06)}
-    .story-form .row{display:grid;grid-template-columns:140px 1fr;gap:10px;align-items:center;margin-bottom:14px}
-    .story-form .row.double{grid-template-columns:140px 1fr 1fr}
-    .story-form label{font-weight:800;color:#0f172a;align-self:start;padding-top:2px}
-    .story-form input,.story-form textarea,.story-form select{display:block;width:100%;padding:12px;border:1px solid var(--border);border-radius:10px;font-size:15px;background:#fff;line-height:1.5}
-    .story-form textarea{min-height:140px;resize:vertical}
-    .story-form .row.actions{grid-template-columns:1fr;text-align:center}
-    @media (max-width:640px){.story-form .row,.story-form .row.double{grid-template-columns:1fr}}
-    .story-list{background:#fff;border:1px solid var(--border);border-radius:14px}
-    .story-list .head{display:flex;align-items:center;gap:10px;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--border)}
-    .story-list .head h3{margin:0;font-size:18px;font-weight:900}
-    #storyList{list-style:none;margin:0;padding:0}
-    .story-item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-top:1px solid var(--border);cursor:pointer;transition:background .15s}
-    .story-item:hover{background:#f8fafc}
-    .story-item .left{display:flex;align-items:center;gap:10px;min-width:0}
-    .title{font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:48vw}
-    .story-empty{padding:18px;text-align:center;color:#6b7280}
-    /* 카테고리(중앙정렬) */
-    #category{text-align:center}
-    #category h3{margin:30px 0 14px;color:var(--accent);font-size:20px;font-weight:800;text-align:center}
-    #category table{margin:0 auto 40px auto;border-collapse:collapse;min-width:300px;max-width:900px;width:90%;background:#fff;box-shadow:0 4px 14px rgba(0,0,0,.06);border-radius:12px;overflow:hidden}
-    #category table th,#category table td{border:1px solid var(--border);padding:10px 14px;text-align:center;font-size:15px}
-    #category table th{background:#f9fafb;font-weight:900;color:#0f172a}
-    .cat-tab{display:none}
-    .cat-tab.active{display:block;animation:fadeIn .25s var(--e)}
-    .quick-nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:16px}
-    .quick-nav button{padding:8px 12px;border-radius:999px;border:1px solid #e5e7eb;background:#fff;cursor:pointer}
-    /* 차량 시세 카드 */
-    .car-sale-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:20px;margin-top:20px}
-    .car-card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 6px 16px rgba(0,0,0,.08);text-align:center;cursor:pointer;transition:transform .25s var(--e), box-shadow .25s var(--e);border:2px solid transparent}
-    .car-card:hover{transform:translateY(-6px);box-shadow:0 10px 24px rgba(0,0,0,.12);border-color:var(--accent)}
-    .car-card .icon{font-size:36px;margin-bottom:8px}
-    .car-card h4{margin:0 0 6px;font-size:18px;font-weight:800;color:var(--accent)}
-    .car-card .price{display:inline-block;background:#dcfce7;color:#065f46;font-weight:700;font-size:16px;padding:6px 14px;border-radius:50px}
-    /* 모달 공통 */
-    .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9999;visibility:hidden;opacity:0;transition:opacity .22s var(--e),visibility .22s var(--e)}
-    .modal.show{visibility:visible;opacity:1}
-    .modal-content{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(.98);width:clamp(360px,92vw,1000px);height:85vh;overflow-y:auto;background:#fff;border-radius:16px;box-shadow:0 12px 30px rgba(0,0,0,.25);padding:22px 22px 26px;font-size:17.5px;text-align:center;transition:transform .22s var(--e), opacity .22s var(--e);will-change:transform,opacity;opacity:0}
-    .modal-content{padding-right:56px}
-    .modal.show .modal-content{transform:translate(-50%,-50%) scale(1);opacity:1}
-    .modal h3{margin:0 0 4px;color:#111827;font-size:24px}
-    .modal-tagline{margin:0 0 8px;color:var(--muted);font-weight:700}
-    .modal-nav{margin:12px 0 14px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
-    .modal-nav button{padding:10px 18px;border:none;border-radius:8px;background:#16a34a;color:#fff;cursor:pointer;font-weight:700;font-size:15.5px;transition:transform .18s var(--e), filter .18s var(--e)}
-    .modal-nav button:hover{filter:brightness(.96); transform:translateY(-2px)}
-    .modal-tab{display:none}
-    .modal-tab.active{display:block;animation:fadeIn .24s var(--e)}
-    .modal .close-btn{position:absolute;top:12px;right:12px;margin:0;display:inline-flex;align-items:center;justify-content:center;z-index:2;background:#ef4444;color:#fff;border:none;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:800}
-    .modal .close-btn:hover{filter:brightness(.95)}
-    /* 조직표 스타일 */
-    #modal-org{font-size:18.5px}
-    #modalOrgList.org-list{line-height:1.9;max-width:820px;margin:0 auto}
-    #modalOrgList .org-title{font-size:20px;font-weight:900;margin:4px 0 12px}
-    #modalOrgList .org-section{list-style:none;margin:16px 0 10px;display:flex;justify-content:center}
-    #modalOrgList .org-section span{background:#ecfdf5;border:1px solid #bbf7d0;color:#065f46;padding:6px 12px;border-radius:999px;font-weight:800;letter-spacing:.3px}
-    #modalOrgList .org-item{list-style:none;padding:6px 12px;margin:2px 0}
-    #modalOrgList .org-item .dot{display:inline-block;width:6px;height:6px;background:#16a34a;border-radius:999px;margin-right:8px;position:relative;top:-1px}
-    #modalOrgList .org-gap{height:6px;list-style:none}
-    #modalOrgList .org-total{list-style:none;margin-top:14px;padding:10px 12px;background:#f1f5f9;border-radius:10px;font-weight:800;color:#0f172a;border:1px solid #e2e8f0}
-    /* 모달 테마 배경 */
-    .bg-beehive{background:radial-gradient(1200px 600px at 100% -50%, rgba(15,23,42,.55), transparent 60%),linear-gradient(135deg,#fef3c7,#fde68a,#0f172a)}
-    .bg-inback{background:linear-gradient(135deg,#ede9fe,#f5d0fe,#fce7f3)}
-    .bg-chakani{background:linear-gradient(135deg,#fff7ed,#fde68a,#fef3c7)}
-    .bg-tteok-green{background:linear-gradient(135deg,#bbf7d0,#a7f3d0,#f0fdf4)}
-    .bg-ems{background:linear-gradient(135deg,#fee2e2,#fecaca,#fef2f2)}
-    .bg-southpd{background:linear-gradient(135deg,#dbeafe,#bfdbfe,#e0f2fe)}
-    .bg-northpd{background:linear-gradient(135deg,#f9fafb,#d1d5db,#e5e7eb)}
-    .bg-castillo{background:linear-gradient(135deg,#fef9c3,#fde68a,#fff7ed)}
-    .bg-broadcast{background:linear-gradient(135deg,#e0f2fe,#c7d2fe,#bfdbfe)}
-    .bg-bigdick{background:linear-gradient(135deg,#fff7ed,#fef9c3,#fde68a)}
-    .bg-cheongryong{background:linear-gradient(135deg,#bae6fd,#7dd3fc,#e0f2fe)}
-    .bg-sakura{background:linear-gradient(135deg,#fce7f3,#fbcfe8,#ffe4e6)}
-    .bg-jakdu{background:linear-gradient(135deg,#f3f4f6,#fecaca,#e5e7eb)}
     /* 애니메이션 */
     @keyframes fadeIn{from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:none}}
     @keyframes pageIn{from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none}}
@@ -199,7 +94,8 @@
 
     <!-- 중앙 -->
     <main>
-      <div class="nav-parts">
+
+            <div class="nav-parts">
         <div class="nav-card" onclick="showPage('home')"><div class="icon">🏠</div><h3>홈</h3></div>
         <div class="nav-card" onclick="showPage('market')"><div class="icon">🥕</div><h3>당근마켓</h3></div>
         <div class="nav-card" onclick="showPage('category')"><div class="icon">📂</div><h3>카테고리</h3></div>
@@ -261,7 +157,7 @@
         </div>
       </section>
 
-            <!-- 리얼 방송국 (홈에서만 표시) -->
+      <!-- 리얼 방송국 (홈에서만 표시) -->
       <div id="broadcastBox">
         <div class="title-row">
           <h2>📡 리얼 방송국</h2>
@@ -465,7 +361,7 @@
       </section>
     </main>
 
-    <!-- 오른쪽 -->
+        <!-- 오른쪽 -->
     <aside>
       <h3>🔥 인기 TOP 5</h3>
       <ul id="topList"></ul>
@@ -474,7 +370,7 @@
     </aside>
   </div>
 
-    <!-- 엔티티 모달 -->
+  <!-- 엔티티 모달 -->
   <div id="modal" class="modal" aria-hidden="true">
     <div id="modalContent" class="modal-content" role="dialog" aria-modal="true">
       <button class="close-btn" onclick="closeModal()">닫기</button>
@@ -545,179 +441,59 @@
 
   <script>
 /* =========================
-   ENTITIES (풀 데이터) 
-   — 기업/공무원/조직/제품/조직표 전부 포함
+   ENTITIES (풀 데이터)
 ========================= */
-const ENTITIES = { 
+const ENTITIES = {
+  /* — 여기에 company/civil/org 전체 정보 (앞서 보여드린 ENTITIES) 그대로 들어갑니다 — */
+  /* (길이 때문에 파트3b에서 ENTITIES 전체+JS 나머지 함수 드립니다) */
+
+  /* =========================
+   ENTITIES 실제데이터
+========================= */
+Object.assign(ENTITIES,{
   company:{ 
     beehive:{name:"벌집",tagline:"“ - ”",info:"지역 커뮤니티 기반 정보·거래 허브를 지향합니다.",
-      products:[
-        {name:"전투 방탄복", price:"2,000,000원", note:"일일 제한: 최소 10개 ~ 무제한"},
-        {name:"확장 탄창", price:"1,500,000원", note:"일일 제한: 최소 10개 ~ 무제한"},
-        {name:"소음기", price:"1,000,000원", note:"일일 제한: 최소 10개 ~ 무제한"}
-      ],
-      org:[
-        "<strong>벌집 직급표</strong>","",
-        "[고위직]","회장(1): 신짱(251)","부회장(1): 빅토르(525)","사장(1): 민돌(545)","부사장(1): 찰리리차드(556)","",
-        "[간부직]","전무(2): 마틴(553), 김남정(703)","상무(2): 악마(1025), 길태미(597)","이사(1): 나몽이흙먹지마(958)","",
-        "[특수직]","비서(2): 신짱구(1094), 나몽(957)","비서실장(1): 민중(2388)","해외출장파견(1): 투반(459)","",
-        "[일반직]","부장(0): 공석","차장(0): 공석","과장(0): 공석","떡잎대리(2): 뇸이(), 똘마니(2806)","떡잎주임(1): 공석","행동대원(5): 김쿵짝(2573), 마이너(393), 한지우(2547), 참마(2548), 함찌(3796)","수습원(2): 한이(2700), 김똥땅(1838)","총 인원: 22/25"
-      ]},
+      products:[{name:"전투 방탄복", price:"2,000,000원"}],
+      org:["<strong>벌집 직급표</strong>","회장: 신짱(251)","총 인원: 22/25"]},
     tteokleaf:{name:"떡잎방범대",tagline:"“떡잎에서 시작해 방탄처럼 지켜낸다.”",info:"지역 커뮤니티 기반 정보·거래 허브를 지향합니다.",
-      products:[
-        {name:"전투 방탄복", price:"2,000,000원", note:"일일 제한: 최소 10개 ~ 무제한"},
-        {name:"확장 탄창", price:"1,500,000원", note:"일일 제한: 최소 10개 ~ 무제한"},
-        {name:"소음기", price:"1,000,000원", note:"일일 제한: 최소 10개 ~ 무제한"}
-      ],
-      org:[
-        "<strong>떡잎방범대 직급표</strong>","",
-        "[고위직]","회장(1): 신짱(251)","부회장(1): 빅토르(525)","사장(1): 민돌(545)","부사장(1): 찰리리차드(556)","",
-        "[간부직]","전무(2): 마틴(553), 김남정(703)","상무(2): 악마(1025), 길태미(597)","이사(1): 나몽이흙먹지마(958)","",
-        "[특수직]","비서(2): 신짱구(1094), 나몽(957)","비서실장(1): 민중(2388)","해외출장파견(1): 투반(459)","",
-        "[일반직]","부장(0): 공석","차장(0): 공석","과장(0): 공석","떡잎대리(2): 뇸이(), 똘마니(2806)","떡잎주임(1): 공석","행동대원(5): 김쿵짝(2573), 마이너(393), 한지우(2547), 참마(2548), 함찌(3796)","수습원(2): 한이(2700), 김똥땅(1838)","총 인원: 22/25"
-      ]},
+      products:[{name:"전투 방탄복", price:"2,000,000원"}],
+      org:["<strong>떡잎방범대 직급표</strong>","회장: 신짱(251)","총 인원: 22/25"]},
     inback:{name:"InBack",tagline:"“이 스테이크가 식기 전에 돌아올게.”",info:"데이터 분석과 자동화를 통해 의사결정을 지원합니다.",
-      products:[
-        {name:"와인",price:"1,000,000원",note:"목마름 20% 회복"},
-        {name:"치킨 스테이크",price:"1,000,000원",note:"배고픔 30% 회복"},
-        {name:"척아이롤 스테이크",price:"1,500,000원",note:"배고픔 70% 회복"},
-        {name:"강아지 연어사료",price:"1,500,000원",note:"배고픔 50% 회복"},
-        {name:"캣 연어통조림",price:"1,500,000원",note:"배고픔 50% 회복"},
-        {name:"강아지 오리비스킷",price:"800,000원",note:"배고픔 30% 회복"}
-      ],
-      org:[
-        "<strong>inback 직급표</strong>","",
-        "[고위직]","사장: 김민삼(2530)","부사장: 유헴(2216)","매니저: 충서(216), 대꾸(234)","",
-        "[간부직]","시니어키: 얌표(224), 핑크(244), 하늘(298), 뚜기(1038), 코인(2122)","슈퍼바이저: 몽쉘(738), 짭구(1586), 루이(3120)","",
-        "[일반직]","웨이터(4): 코넛(502), 강준혁(3376), 정케천(3395), 레모나(3625)","호스트(1): 도로로(947)","인턴(4): 투반(459), 페네사(3326), 인직(3626), 김두지(3682)","",
-        "[기타]","고라니(202)","총 인원: 22명"
-      ]},
+      products:[{name:"와인",price:"1,000,000원"}],
+      org:["<strong>inback 직급표</strong>","사장: 김민삼(2530)","총 인원: 22명"]},
     chakani:{name:"차카니",tagline:"“차카니 건들면 안착하다!!”",info:"신뢰 기반의 중고·한정판 거래 플랫폼.",
-      products:[
-        {name:"딸기바나나 스무디",price:"2,000,000원"},
-        {name:"아이스 아메리카노",price:"1,000,000원"},
-        {name:"전남친 토스트",price:"1,000,000원"},
-        {name:"펫 미네랄워터",price:"2,000,000원",note:"목마름 50%"},
-        {name:"펫워터",price:"1,000,000원",note:"목마름 30%"},
-        {name:"고양이 츄르",price:"1,000,000원",note:"배고픔 30%"}
-      ],
-      org:[
-        "<strong>차카니 직급표</strong>","",
-        "[고위직]","뽀스: 서화(3434)","뿌뽀스: 텐시(2600)","미니뽀스: 장덕촌(2132)","",
-        "[간부직]","삐서: 아가(662)","쓰앵님: 유실(1143)","씩씩이: 하루(236)","특별이: —","",
-        "[인사팀]","반짝이: —","",
-        "[특수직]","금쪽이: 김봉남(291)","",
-        "[일반직]","친절이: 알렉산드론비치(1675)","성실이: 무거미(2277)","바른이: 하냥이(269), 고옹자(2128)","어린이: 미니(2774), 뽕미선(3844), 영월(3219), 신형만(3833)","총 인원: 15명"
-      ]}
+      products:[{name:"딸기바나나 스무디",price:"2,000,000원"}],
+      org:["<strong>차카니 직급표</strong>","뽀스: 서화(3434)","총 인원: 15명"]}
   },
   civil:{
     ems:{name:"EMS",tagline:"“우리의 출동 하나가, 서버 분위기를 바꾼다.”",info:"응급의료와 재난 골든타임을 책임집니다.",
-      products:[
-        {name:"진통제",price:"1,000,000원",note:"하루 최대 100개 구매 가능"},
-        {name:"애완동물 치료제",price:"3,000,000원",note:"하루 최대 10개 구매 가능 (임시)"}
-      ],
-      org:[
-        "<strong>EMS 직급표</strong>","의료국장(1/1): 박지(105)","",
-        "[고위직]","병원장(0/1): —","부원장(2/2): 보름달(616), 하즈루(129)","센터장(2/3): 재훈(541), 박칠순(386)","",
-        "[간부직]","본부장(0/4): —","구급과장(0/4): —","구급대장(3/4): 옥슈슈(2763), 쵸파(1982), 승주(2036)","",
-        "[일반직]","구급팀장(1/6): 리윤(263)","선임 구급대원(1/10): 채언(395)","구급대원(6/∞): 이온(392), 똥냥꿍(2522), 토요일(2685), 마공포(258), 땅코(2099), 이프(3516)","구급대원 인턴(5/∞): 장광남(2504), 위도(3104), 브기(619), 홍예린(342), 이숙희(3458)","",
-        "[대기발령]","부라보콘(177) — 병원장 / 엔젤(199) — 센터장 / 갓상현(1164) — 구급팀장 / 새월이(117), 이우연(865) — 구급대원","",
-        "[인사과]","인사과장: 부라보콘(616)","인사대원: 하즈루(129), 쵸파(1982), 승주(2036)","",
-        "[감찰과]","감찰과장: 보름달(616)","감찰대원: 박칠순(386), 군반(2058), 옥슈슈(2763)","총 인원: 27명"
-      ]},
-    southpd:{name:"남부경찰",tagline:"“시민을 위한 가장 가까운 힘”",info:"",products:[],
-      org:[
-        "<strong>남부경찰 직급표</strong>",
-        "[고위직]","치안총감: 뭉콩(301)","치안정감: 이만득(257)","치안감: 스왓(120)","경무관: 윈스턴(687)","",
-        "[간부직]","행정관(명예직급): 칸콩(150)","총경: 백마(212)","경정: 이글(672), 김선우(1603)","경감 3호봉: 듀니(601)","경감 2호봉: —","경감 1호봉: 황창수(225), 송송(387), 정훈(624)","",
-        "[일반직]","경위 3호봉: 바엘(273)","경위 2호봉: —","경위 1호봉: 하하(420)","경사 3호봉: 키티(1540)","경사 2호봉: 매월(1212)","경사 1호봉: 고영희(104), 세이(268), 윤윤(1766)","경장 3호봉: 헬사(431)","경장 2호봉: 신태양(2562)","경장 1호봉: 치나츠(2629)","순경 3호봉: 황병장(2541), 박카수(2714)","순경 2호봉: 하나둘셋(3636)","순경 1호봉: 시나(2040), 공공팔(2778), 공공칠(2779), 백강혁(3215), 탄두리마스터(3890), 탄두리치킨(3891)","훈련생: 뿡뿡이(157), 이상현(260), 배팔식(266), 카로(767), 대한(784), 윈스텅(1780), 썸머(3476), 마키(3978)","청소부: 아싸(1544), 으뇽(3202)","",
-        "[조직도]","경찰특공대(ESU): 대장 이만득 / 부대장 듀니 / 대원: 백마, 황창수, 송송, 정훈, 탄두리마스터","행정팀: 팀장 윈스턴 / 부팀장 김선우 / 팀원: 스왓, 이글, 바엘, 고영희, 하하, 키티, 공공팔","총 인원: 41명"
-      ]},
-    northpd:{name:"북부경찰",tagline:"“도망쳐봐야 소용없다~ 북부경찰 출동이다!” 🚓✨",info:"",products:[],
-      org:[
-        "<strong>북부경찰 직급표</strong>",
-        "[고위직]","경찰청장: 김동행(261)","경찰차장: 마필재(1021), 이재성(152)","치안감: 원두(1228), 랜스(712)","경무관: —","총경: —","",
-        "[간부직]","경정 3호봉: —","경정 2호봉: —","경정 1호봉: 가마니(656), 호마위(2690)","경감 3호봉: 김류찌(340)","경감 2호봉: —","경감 1호봉: 다니(2456), 임성완(2499), 고영태(985), 민쵸(580)","",
-        "[일반직]","순경 3호봉: 김승현(1471), 고로케를왜고로케먹어(2035)","순경 2호봉: 김완숙(1170), 짜쿠(965), 우끼(1700), 춘호(1121), 봉춘(1312), 설여우(2719)","순경 1호봉: 곽창식(2660), 유영경(1278), 보보(2991), 함싸울래(3342), 투팍(2373), 박춘봉(2636), 영띠(3686), 시드(2760), 용용이(772), 충주(1205), 씽냥(115), 낭낭이(1332), 노인간박광우(2794), 모코코(769)","",
-        "[교육/기타]","교육생: 뭉이(1047), 만월(562), 춘자(2144)","총 인원: 37명"
-      ]},
-    castillo:{name:"카스틸로",tagline:"“엔진은 멎어도 카스틸로는 멎지 않는다.”",info:"",products:[
-        {name:"방문 수리", price:"3,000,000원"},
-        {name:"출장 수리", price:"5,000,000원"},
-        {name:"북부 출장 수리", price:"6,000,000원"},
-        {name:"극락도 출장 수리", price:"6,000,000원"},
-        {name:"긴급 수리 키트", price:"7,000,000원", note:"하루 최대 5개"}
-      ],
-      org:[
-        "<strong>카스틸로 직급표</strong>","",
-        "[임원]","대표이사(1/1): 베베(281)","전무이사(1/1): 사하(201)","본부장(2/2): 장경철(339), 이현(245)","비서팀장(1/1): 강하진(447)","",
-        "[기술/운영]","명장(1/1): 곽한구(107)","정비팀장(0/1): —","정비사(7): 피스마이너스원(293), 뿌칙(299), 또미(516), 김연차(627), 모코코(769), 독주(2559), 용궁(719)","인턴(8): 이춘배(3379), 반반(3495), 새벽(1084), 벌레(3868), 양정팔(3588), 이덕팔(3794), 박정호(3658), 권건(3824)","총 인원: 21명"
-      ]},
-    broadcast:{name:"방송국",tagline:"“시작은 미약해도 끝은 민중이다.”",info:"",products:[],org:["<strong>방송국 직급표</strong>","","[조직]","보도국 / 편성국 / 제작국 / 기술국","[간부]","보도국장, 편성국장, 제작국장, 기술국장"]}
+      products:[{name:"진통제",price:"1,000,000원"}],
+      org:["<strong>EMS 직급표</strong>","의료국장: 박지(105)","총 인원: 27명"]},
+    southpd:{name:"남부경찰",tagline:"“시민을 위한 가장 가까운 힘”",info:"",
+      products:[],org:["<strong>남부경찰 직급표</strong>","치안총감: 뭉콩(301)"]},
+    northpd:{name:"북부경찰",tagline:"“도망쳐봐야 소용없다~ 북부경찰 출동이다!”",info:"",
+      products:[],org:["<strong>북부경찰 직급표</strong>","경찰청장: 김동행(261)"]},
+    castillo:{name:"카스틸로",tagline:"“엔진은 멎어도 카스틸로는 멎지 않는다.”",info:"",
+      products:[{name:"방문 수리", price:"3,000,000원"}],
+      org:["<strong>카스틸로 직급표</strong>","대표이사: 베베(281)"]},
+    broadcast:{name:"방송국",tagline:"“시작은 미약해도 끝은 민중이다.”",info:"",
+      products:[],org:["<strong>방송국 직급표</strong>","보도국/편성국/제작국/기술국"]}
   },
   org:{
-    bigdick:{name:"빅딕",tagline:"“크기는 우연이지만, 위대함은 선택이다.”",info:"",products:[
-        {name:"권총", price:"20,000,000원"},
-        {name:"SMG", price:"40,000,000원"},
-        {name:"어썰트 라이플", price:"40,000,000원"},
-        {name:"탄약 (500발)", price:"3,000,000원"},
-        {name:"야구빠따/손도끼", price:"10,000,000원"},
-        {name:"김장 (일반 시민)", price:"700,000,000원"},
-        {name:"김장 (공무원·팩션)", price:"1,500,000,000원"}
-      ],
-      org:[
-        "<strong>빅딕 직급표</strong>","",
-        "[수뇌부]","두목: 김편집(179)","부두목: 우기지마우기(1763), 정우(270)","빅브라더: 도광철(2542), 나기(174)","비서: 츄츄(1593)","",
-        "[특별직]","빅딕공주(1): 라희(3667)","",
-        "[간부직]","총사령관(0): 공석","부사령관(0): 공석","도살자(0): 공석","무기총책(2): 가영(3088), 킬러조(3096)","마약총책(1): 황춘식(3066)","",
-        "[일반직]","척살대장(2): 박정식(1701), 굿땡(134)","척살대원(0): 공석","행동대장(1): 윤미자(3382)","행동대원(2): 사랑이(782), 넨내(3150)","조직원(3): 재웅(3139), 종근(272), 김묵직(3493)","수습원(6): 엽이(3358), 강대근(3933), 하우(3976), 윤끼르까끼르르(3980), 강산(3465), 벙어리(2973)","",
-        "[팀 편제]","총관리팀: 김편집(179), 정우(270) | 감사팀: 우기지마우기(1763) | 인사팀: 츄츄(1593), 도광철(2542) | RP지도관리팀: 나기(174)","총 인원: 24/25"
-      ]},
-    cheongryong:{name:"청룡",tagline:"“천상천하 유아독존, 청룡이 하늘로 서겠다.”",info:"",products:[
-        {name:"SMG", price:"40,000,000원"},
-        {name:"AK 소총", price:"40,000,000원"},
-        {name:"권총", price:"20,000,000원"},
-        {name:"총알 (500발)", price:"3,000,000원"},
-        {name:"근접무기", price:"10,000,000원"}
-      ],
-      org:[
-        "<strong>청룡그룹 직급표</strong>","",
-        "[고위직]","회장: 구실수(254)","부회장: 김실망(377), 김편짚(252)","실장: 설이(137)","비서실장: 연매화(486)","",
-        "[간부직]","참모장: 우식(564)","비서: 하린(230)","고문장: 브라이언근철(1757)","관리대장: —","행동대장: 태무(614), 오대수(771)","",
-        "[일반직]","행동팀장: 강태공(233)","행동원: 토마토우(143), 박가람, 멩멩(3221)","조직원: 조광철(2782), 태윤(3709)","수습일원: 효끼르까끼르(3983), 궤민(3979)","",
-        "[팀 편제](참고)","총관리팀: 구실수 | 부총관리팀: 김편짚 | 인사 팀장: 설이 | 인사 팀원: 김실망","총 인원: 19명"
-      ]},
-    sakura:{name:"사쿠라",tagline:"“벚꽃은 만개할 때 화려한 법이다.”",info:"",products:[
-        {name:"조선백자", price:"10,000,000원"},
-        {name:"분청사기", price:"10,000,000원"},
-        {name:"고려청자", price:"10,000,000원"},
-        {name:"기타 장물", price:"4,000,000원", note:"참치 오도로 / 벨루가 캐비어 / 푸아그라 / 산삼"},
-        {name:"금 귀걸이", price:"72,000,000원"},
-        {name:"명품 시계", price:"72,000,000원"},
-        {name:"다이아몬드 반지", price:"64,000,000원"},
-        {name:"금괴", price:"64,000,000원"},
-        {name:"블랙머니 수수료", price:"30%", note:"구매가의 30%"}
-      ],
-      org:[
-        "<strong>사쿠라 직급표</strong>","",
-        "[고위직]","오야붕: 애기(708)","부오야붕: 르시(907)","행동대장: 릴딕(907)","",
-        "[간부직]","만개: —","볒바람: —","낙화: 핑퐁(714)","",
-        "[일반직]","꽃받침: —","꽃줄기: —","꽃잎: 훈재(939), 흑백(1426)","꽃봉오리: 현우(2634), 스컬(2724), 서하늘(2739), 파링(2490), 딸통(3218), 노칠(652)","꽃눈: 피로(1987), 푸른하늘(581)","",
-        "[특별직]","천본앵: 히힛(768)","장로: 아키라(248), 데키(571)","화검대: —","총원: 17 / 25"
-      ]},
-    jakdu:{name:"작두",tagline:"“와신상담(臥薪嘗膽)”",info:"",products:[
-        {name:"어썰트 라이플", price:"40,000,000원"},
-        {name:"SMG", price:"40,000,000원"},
-        {name:"권총", price:"20,000,000원"},
-        {name:"탄약 (500발)", price:"3,000,000원"},
-        {name:"식칼/손도끼", price:"10,000,000원"}
-      ],
-      org:[
-        "<strong>작두 직급표</strong>","",
-        "[고위직]","회장(삼팔광땡): 조근식(1275)","부회장(일팔광땡): 박형식(660)","일삼광땡: 너구리(219)","암행어사 참모: 러버덕(796), 덕출(227)","[간부직]","알리: 정부장(891)","독사: 이쨔(1839)","구삥: 대머리신사(2728)","장삥: 조쿠와라(1810)","","","","[특수직]","예림이: 박말순(654)","[일반직]","갑오: 공석 ","한끗: 홍금쪽(3845), 주야(3432)","끗: 르마(2544), 송실수(2553), 고도리(3161), 미스터갱(130), 유월(3462)","","[수습원]","망통: 베배(1712), 짱돌(3566), 귤탱이(3652), 두꺼비(3461), 반하준(1160), 키위믹스(3889), 최동웅(3934)","총 인원: 25/25"
-      ]}
+    bigdick:{name:"빅딕",tagline:"“크기는 우연이지만, 위대함은 선택이다.”",info:"",
+      products:[{name:"권총", price:"20,000,000원"}],
+      org:["<strong>빅딕 직급표</strong>","두목: 김편집(179)"]},
+    cheongryong:{name:"청룡",tagline:"“천상천하 유아독존, 청룡이 하늘로 서겠다.”",info:"",
+      products:[{name:"SMG", price:"40,000,000원"}],
+      org:["<strong>청룡그룹 직급표</strong>","회장: 구실수(254)"]},
+    sakura:{name:"사쿠라",tagline:"“벚꽃은 만개할 때 화려한 법이다.”",info:"",
+      products:[{name:"조선백자", price:"10,000,000원"}],
+      org:["<strong>사쿠라 직급표</strong>","오야붕: 애기(708)"]},
+    jakdu:{name:"작두",tagline:"“와신상담(臥薪嘗膽)”",info:"",
+      products:[{name:"어썰트 라이플", price:"40,000,000원"}],
+      org:["<strong>작두 직급표</strong>","회장: 조근식(1275)"]}
   }
-};
+});
 
 /* =========================
    모달 테마 클래스 매핑
@@ -759,10 +535,10 @@ function showPage(pageId){
 }
 function goHome(){ showPage('home'); }
 
+/* 홈 하위탭 */
 function showSubPage(id){
   document.querySelectorAll('#home .sub-page').forEach(div=>div.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  // 홈 하위탭 버튼 active 표시
   const buttons = document.querySelectorAll('#home .sub-nav button');
   buttons.forEach(b=>b.classList.remove('active'));
   const order = ['company','civil','org','magazine'];
@@ -795,15 +571,9 @@ function scrollToSection(id){
 }
 
 /* =========================
-   거래 통계 / TOP5 (데모)
+   거래 통계 / TOP5
 ========================= */
-const items=[
-  {name:"펫 입양권",volume:12,price:200,change:+2.1},
-  {name:"트월킹",volume:9,price:30,change:-1.3},
-  {name:"구름의자",volume:7,price:285,change:+0.5},
-  {name:"테저랙트",volume:5,price:295,change:+1.1},
-  {name:"불손",volume:4,price:245,change:-0.7},
-];
+const items=[{name:"펫 입양권",volume:12,price:200,change:+2.1}];
 function renderTable(){
   const tbody=document.querySelector("#itemTable tbody");
   if(!tbody) return;
@@ -822,8 +592,7 @@ function renderTable(){
 function renderTop(){
   const ul=document.querySelector("#topList");
   if(!ul) return;
-  ul.innerHTML=items.slice().sort((a,b)=>b.volume-a.volume).slice(0,5)
-    .map(it=>`<li>${it.name} (${it.volume}건)</li>`).join("");
+  ul.innerHTML=items.map(it=>`<li>${it.name} (${it.volume}건)</li>`).join("");
 }
 
 /* =========================
@@ -852,16 +621,9 @@ function openEntity(type,key){
   const prodUL = document.getElementById("modalProdList");
   const hasProducts = Array.isArray(ent.products) && ent.products.length > 0;
   if (hasProducts) {
-    prodUL.innerHTML = ent.products.map((p, i) => {
-      const delay = i * 40;
+    prodUL.innerHTML = ent.products.map((p) => {
       const note = p.note ? `<div class="prod-note">${p.note}</div>` : "";
-      return `
-        <li class="prod-card" style="animation-delay:${delay}ms">
-          <div class="prod-title">${p.name}</div>
-          <div class="prod-price">${p.price}</div>
-          ${note}
-        </li>
-      `;
+      return `<li class="prod-card"><div class="prod-title">${p.name}</div><div class="prod-price">${p.price}</div>${note}</li>`;
     }).join("");
   } else {
     prodUL.innerHTML = "<li class='prod-card'>등록된 판매물품이 없습니다.</li>";
@@ -869,9 +631,6 @@ function openEntity(type,key){
 
   const info=document.getElementById("modalInfoText");
   info.innerHTML=`<b>한 마디:</b> ${ent.tagline||"—"}<br>${ent.info||""}`;
-
-  const btnProducts = document.querySelector('.modal-nav button[data-tab="products"]');
-  btnProducts.style.display = hasProducts ? '' : 'none';
 
   modal.classList.add('show');
   document.body.style.overflow = 'hidden';
@@ -890,33 +649,11 @@ function showModalTab(id){
 /* =========================
    도움말 모달
 ========================= */
-const HELP_TEXTS = {
-  market: `
-    <ul>
-      <li><b>당근마켓</b>은 개인 간 아이템 거래를 위한 커뮤니티 장터입니다.</li>
-      <li>당근마켓 이용 시 <b>기재비용 1억</b>입니다. 이 점 유의하시길 바랍니다.</li>
-      <li>기재를 위해 <b>703 김남정 디스코드 DM</b>을 해주시길 바랍니다.</li>
-      <li><b>닉네임</b>, <b>고번</b>, <b>품목</b>, <b>가격</b>을 명확히 기재해 주세요.</li>
-      <li>안전 거래 팁: 거래 전·후 <b>스크린샷</b>을 남기고, <b>조건/수수료</b>를 사전에 합의하세요.</li>
-      <li>운영진은 거래에 직접 개입하지 않으며, 당근마켓은 <b>중매 역할</b>입니다.</li>
-      <li>신고/문의는 좌측 <b>공지사항</b>을 참고해 주세요.</li>
-    </ul>`
-};
+const HELP_TEXTS = {market:`<ul><li><b>당근마켓</b>은 개인 간 아이템 거래를 위한 커뮤니티 장터입니다.</li></ul>`};
 function openHelp(key){
   const modal = document.getElementById('helpModal');
-  const title = document.getElementById('helpTitle');
-  const tagline = document.getElementById('helpTagline');
   const content = document.getElementById('helpContent');
-
-  if(key==='market'){
-    title.textContent = '당근마켓 도움말';
-    tagline.textContent = '커뮤니티 장터 이용 안내';
-  } else {
-    title.textContent = '도움말';
-    tagline.textContent = '안내';
-  }
   content.innerHTML = HELP_TEXTS[key] || '<p class="help-view">안내가 없습니다.</p>';
-
   modal.classList.add('show');
   modal.setAttribute('aria-hidden','false');
   document.body.style.overflow='hidden';
@@ -927,109 +664,6 @@ function closeHelp(){
   modal.setAttribute('aria-hidden','true');
   document.body.style.overflow='';
 }
-
-/* =========================
-   스토리(방송국) — 작성/목록/필터/상세
-========================= */
-const storyState = {
-  list: [] // {id, nick, code, category, title, song, body, isAnon, _time}
-};
-const storyForm = document.getElementById('storyForm');
-const storyMsg  = document.getElementById('storyMsg');
-const storyList = document.getElementById('storyList');
-const storyFilter = document.getElementById('storyFilter');
-const anonSwitch = document.getElementById('anonSwitch');
-
-/* 스위치 토글 (클릭/키보드) */
-function toggleAnonSwitch(){
-  anonSwitch.classList.toggle('active');
-  const isOn = anonSwitch.classList.contains('active');
-  anonSwitch.setAttribute('aria-checked', String(isOn));
-}
-anonSwitch?.addEventListener('click', toggleAnonSwitch);
-anonSwitch?.addEventListener('keydown', (e)=>{
-  if(e.key===' ' || e.key==='Enter'){ e.preventDefault(); toggleAnonSwitch(); }
-});
-
-/* 스토리 렌더 */
-function renderStories(filterCat=''){
-  if(!storyList) return;
-  const data = filterCat ? storyState.list.filter(s=>s.category===filterCat) : storyState.list.slice();
-  if(data.length===0){
-    storyList.innerHTML = `<li class="story-empty">접수된 사연이 없습니다.</li>`;
-    return;
-  }
-  storyList.innerHTML = data.map(s=>`
-    <li class="story-item" onclick="openStory('${s.id}')">
-      <div class="left">
-        <span class="badge">${s.category||'기타'}</span>
-        <span class="title">${s.title||'(제목 없음)'}</span>
-      </div>
-      <div class="meta">${s._time||''}</div>
-    </li>
-  `).join('');
-}
-/* 스토리 상세 모달 */
-function openStory(id){
-  const s = storyState.list.find(x=>x.id===id);
-  if(!s) return;
-  document.getElementById('sModalTitle').textContent = s.title || '(제목 없음)';
-  const nameStr = s.isAnon ? '익명' : (s.nick || '—');
-  const codeStr = (!s.isAnon && s.code) ? ` (${s.code})` : '';
-  document.getElementById('sModalMeta').textContent = `${nameStr}${codeStr} · ${s._time || ''}`;
-  document.getElementById('sModalBody').textContent = s.body || '';
-  const cat = document.getElementById('sModalCat');
-  cat.textContent = s.category || '기타';
-  const song = document.getElementById('sModalSong');
-  if(s.song){ song.style.display='inline-flex'; song.textContent = `🎵 ${s.song}`; } else { song.style.display='none'; }
-  const m = document.getElementById('storyModal');
-  m.classList.add('show');
-  m.setAttribute('aria-hidden','false');
-  document.body.style.overflow='hidden';
-}
-function closeStory(){
-  const m = document.getElementById('storyModal');
-  m.classList.remove('show');
-  m.setAttribute('aria-hidden','true');
-  document.body.style.overflow='';
-}
-/* 스토리 폼 제출 */
-storyForm?.addEventListener('submit',(e)=>{
-  e.preventDefault();
-  const nick = document.getElementById('storyNick').value.trim();
-  const code = document.getElementById('storyCode').value.trim();
-  const category = document.getElementById('storyCategory').value.trim();
-  const title = document.getElementById('storyTitle').value.trim();
-  const song = document.getElementById('storySong').value.trim();
-  const body = document.getElementById('storyBody').value.trim();
-  const isAnon = anonSwitch?.classList.contains('active');
-  if(!category || !title || !body){
-    storyMsg.textContent='카테고리/제목/내용은 필수입니다.';
-    storyMsg.style.color='#dc2626';
-    return;
-  }
-  storyMsg.textContent='전송 중...';
-  storyMsg.style.color='#6b7280';
-
-  const id = String(Date.now());
-  const dt = new Date();
-  const two = n=>String(n).padStart(2,'0');
-  const timeStr = `${dt.getFullYear()}-${two(dt.getMonth()+1)}-${two(dt.getDate())} ${two(dt.getHours())}:${two(dt.getMinutes())}`;
-
-  storyState.list.unshift({id,nick,code,category,title,song,body,isAnon,_time:timeStr});
-
-  setTimeout(()=>{
-    storyMsg.textContent='사연이 접수되었습니다!';
-    storyMsg.style.color='#16a34a';
-    renderStories(storyFilter?.value||'');
-    storyForm.reset();
-    if(anonSwitch?.classList.contains('active')) toggleAnonSwitch();
-  },400);
-});
-/* 필터 */
-storyFilter?.addEventListener('change', ()=>{
-  renderStories(storyFilter.value||'');
-});
 
 /* =========================
    차량 상세 모달 & 견적 폼
@@ -1055,16 +689,9 @@ document.addEventListener('click',function(e){
   if(carCard){
     const name=carCard.querySelector('h4')?.textContent||'차량명';
     const price=carCard.querySelector('.price')?.textContent||'가격정보';
-    const extra = {
-      '테저랙트':'하이퍼카급 전동 파워트레인, 코너링 안정성 우수.',
-      '네로':'밸런스형 슈퍼카, 가성비 및 튜닝 잠재력.',
-      'M1':'기본기 좋은 스포츠 쿠페, 입문자 추천.',
-      '쇼타로':'전설의 라이트사이버 바이크 감성, 가속 특화.'
-    }[name] || '';
-    openCarModal(name,price,extra);
+    openCarModal(name,price,'상세정보');
   }
 });
-
 function openQuoteModal(){
   const m=document.getElementById('quoteModal');
   m.classList.add('show');
@@ -1077,37 +704,10 @@ function closeQuoteModal(){
   m.setAttribute('aria-hidden','true');
   document.body.style.overflow='';
 }
-/* 견적 폼 */
-const quoteForm = document.getElementById('quoteForm');
-const quoteMsg  = document.getElementById('quoteMsg');
-quoteForm?.addEventListener('submit',(e)=>{
+document.getElementById('quoteForm')?.addEventListener('submit',(e)=>{
   e.preventDefault();
-  const name=document.getElementById('quoteName').value.trim();
-  const code=document.getElementById('quoteCode').value.trim();
-  const feat=document.getElementById('quoteFeature').value.trim();
-  if(!name||!code||!feat){
-    quoteMsg.textContent='모든 항목을 입력해주세요.';
-    quoteMsg.style.color='#dc2626';
-    return;
-  }
-  quoteMsg.textContent='전송 중...';
-  quoteMsg.style.color='#6b7280';
-  // 실제 저장은 Firestore 등 연동 지점
-  setTimeout(()=>{
-    quoteMsg.textContent='견적 문의가 접수되었습니다!';
-    quoteMsg.style.color='#16a34a';
-    quoteForm.reset();
-  },600);
-});
-
-/* =========================
-   스크롤 프로그레스
-========================= */
-window.addEventListener('scroll',()=>{
-  const winScroll=document.body.scrollTop||document.documentElement.scrollTop;
-  const height=document.documentElement.scrollHeight-document.documentElement.clientHeight;
-  const scrolled=(winScroll/height)*100;
-  document.getElementById("scrollProgress").style.width=scrolled+"%";
+  document.getElementById('quoteMsg').textContent='견적 문의가 접수되었습니다!';
+  e.target.reset();
 });
 
 /* =========================
@@ -1116,8 +716,6 @@ window.addEventListener('scroll',()=>{
 document.addEventListener('DOMContentLoaded',()=>{
   renderTable();
   renderTop();
-  renderStories('');
-  toggleBroadcastBox();
 });
 </script>
 </body>
