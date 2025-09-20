@@ -11,314 +11,119 @@
       --up:#16a34a; --down:#dc2626; --e:cubic-bezier(.22,.9,.24,1);
     }
 
-    /* ★ 전역 박스사이징: 폭 계산에 padding/border 포함 → 입력칸 삐져나옴 해결 */
+    /* 전역 */
     html { box-sizing: border-box; font-size:17px; overflow-y:scroll; }
     *, *::before, *::after { box-sizing: inherit; }
-
-    body{margin:0;font-family:"Noto Sans KR",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:#f0fdf4;line-height:1.6}
+    body{
+      margin:0;
+      font-family:"Noto Sans KR",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+      color:var(--ink);
+      background:#f0fdf4;
+      line-height:1.6
+    }
 
     /* 헤더 */
-    header{background:#fff;border-bottom:1px solid var(--border);padding:20px;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.05)}
-    header h1{margin:0;font-size:30px;color:var(--accent);font-weight:900;cursor:pointer;transition:transform .2s var(--e)}
+    header{
+      background:#fff;
+      border-bottom:1px solid var(--border);
+      padding:20px;
+      text-align:center;
+      box-shadow:0 2px 6px rgba(0,0,0,.05)
+    }
+    header h1{
+      margin:0;
+      font-size:30px;
+      color:var(--accent);
+      font-weight:900;
+      cursor:pointer;
+      transition:transform .2s var(--e)
+    }
     header h1:hover{transform:scale(1.02)}
 
     /* 레이아웃 */
-    .layout{display:grid;grid-template-columns:300px 1fr 300px;column-gap:40px;row-gap:24px;max-width:1600px;margin:20px auto;padding:0 30px}
+    .layout{
+      display:grid;
+      grid-template-columns:300px 1fr 300px;
+      column-gap:40px;row-gap:24px;
+      max-width:1600px;margin:20px auto;
+      padding:0 30px
+    }
     main{display:flex;flex-direction:column;gap:20px}
 
-    /* 좌우 사이드 */
-    aside{background:var(--card);border-radius:14px;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,.06);position:sticky;top:20px;height:500px;overflow-y:auto}
-    aside h3{margin:0 0 12px;color:var(--accent);font-size:16px;font-weight:700}
+    /* 좌우 사이드 공통 */
+    aside{
+      background:var(--card);
+      border-radius:14px;
+      padding:20px;
+      box-shadow:0 4px 12px rgba(0,0,0,.06);
+      position:sticky;top:20px;height:500px;overflow-y:auto
+    }
+    aside h3{
+      margin:0 0 12px;
+      color:var(--accent);
+      font-size:16px;font-weight:700
+    }
     aside ul{margin:0;padding-left:18px}
     aside li{margin-bottom:6px}
-    .aside-box{margin-bottom:20px;padding:12px;border-radius:10px;background:#fff}
-    .aside-box h3{margin:0 0 10px;font-size:16px;font-weight:700;color:var(--accent)}
+    .aside-box{
+      margin-bottom:20px;
+      padding:12px;
+      border-radius:10px;
+      background:#fff
+    }
+    .aside-box h3{
+      margin:0 0 10px;font-size:16px;font-weight:700;color:var(--accent)
+    }
 
     /* 히어로 */
-    .hero{text-align:center;padding:40px;border-radius:16px;background:linear-gradient(135deg,#bbf7d0,#ecfdf5);box-shadow:0 6px 16px rgba(0,0,0,.08);margin:20px 0;animation:fadeIn .35s var(--e)}
+    .hero{
+      text-align:center;
+      padding:40px;
+      border-radius:16px;
+      background:linear-gradient(135deg,#bbf7d0,#ecfdf5);
+      box-shadow:0 6px 16px rgba(0,0,0,.08);
+      margin:20px 0;
+      animation:fadeIn .35s var(--e)
+    }
     .hero h2{margin:0 0 14px;color:var(--accent);font-size:26px;font-weight:800}
     .hero p{font-size:16px;color:#374151}
 
     /* 상단 네비 카드 */
-    .nav-parts{display:flex;justify-content:center;gap:24px;margin:20px auto;flex-wrap:wrap}
-    .nav-card{flex:1;min-width:150px;max-width:200px;background:linear-gradient(135deg,#dcfce7,#f0fdf4);padding:22px 16px;text-align:center;border-radius:16px;box-shadow:0 6px 14px rgba(0,0,0,.08);cursor:pointer;transition:transform .25s var(--e), box-shadow .25s var(--e)}
+    .nav-parts{
+      display:flex;justify-content:center;gap:24px;
+      margin:20px auto;flex-wrap:wrap
+    }
+    .nav-card{
+      flex:1;min-width:150px;max-width:200px;
+      background:linear-gradient(135deg,#dcfce7,#f0fdf4);
+      padding:22px 16px;text-align:center;border-radius:16px;
+      box-shadow:0 6px 14px rgba(0,0,0,.08);
+      cursor:pointer;
+      transition:transform .25s var(--e), box-shadow .25s var(--e)
+    }
     .nav-card:hover{transform:translateY(-6px);box-shadow:0 10px 24px rgba(0,0,0,.12)}
     .nav-card .icon{font-size:28px;margin-bottom:10px}
     .nav-card h3{margin:0;font-size:18px;color:var(--accent);font-weight:700}
 
-    /* 페이지(홈 등) */
-    section.page{display:none;padding:28px;background:var(--card);border-radius:14px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+    /* 페이지 공통 */
+    section.page{
+      display:none;padding:28px;background:var(--card);
+      border-radius:14px;box-shadow:0 4px 12px rgba(0,0,0,.05)
+    }
     section.page.active{display:block;animation:pageIn .28s var(--e)}
     section h2{margin:0 0 16px;color:var(--accent);font-size:21px;font-weight:700}
-
-    /* 홈 하위 탭 */
-    .sub-nav{display:flex;gap:12px;margin:20px 0;flex-wrap:wrap}
-    .sub-nav button{padding:10px 18px;border:none;border-radius:8px;background:var(--accent);color:#fff;font-size:15px;font-weight:600;cursor:pointer;transition:transform .18s var(--e), filter .18s var(--e)}
-    .sub-nav button:hover{filter:brightness(.96); transform:translateY(-2px)}
-    .sub-page{display:none;margin-top:16px}
-    .sub-page.active{display:block;animation:fadeIn .25s var(--e)}
-
-    /* 홈 카드 */
-    .card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px;margin-top:16px}
-    .card{background:#fff;border-radius:14px;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,.08);transition:transform .25s var(--e),box-shadow .25s var(--e);cursor:pointer;text-align:center;border:2px solid transparent}
-    .card:hover{transform:translateY(-6px);box-shadow:0 10px 24px rgba(0,0,0,.12)}
-    .card .icon{font-size:30px;margin-bottom:12px}
-    .card h4{margin:0 0 6px;font-size:17px;font-weight:700}
-    .card p{margin:0;font-size:14.5px;color:#4b5563}
-    .company-card{border-color:var(--company)} .company-card .icon,.company-card h4{color:var(--company)}
-    .civil-card{border-color:var(--civil)} .civil-card .icon,.civil-card h4{color:var(--civil)}
-    .org-card{border-color:var(--org)} .org-card .icon,.org-card h4{color:var(--org)}
-    .magazine-card{border-color:var(--magazine)} .magazine-card .icon,.magazine-card h4{color:var(--magazine)}
-
-    /* 당근마켓(→ 카탈로그) 카드 */
-    .market-cards{display:grid;grid-template-columns:repeat(5,1fr);gap:20px;margin-top:20px}
-    .market-card{background:#fff;border-radius:20px;padding:20px;box-shadow:0 6px 16px rgba(0,0,0,.08);text-align:center;transition:transform .25s var(--e), box-shadow .25s var(--e)}
-    .market-card:hover{transform:translateY(-6px);box-shadow:0 10px 24px rgba(0,0,0,.12)}
-    .market-card h3{margin:0 0 10px;font-size:18px;color:#111827}
-    .market-card .id,.market-card .label{font-size:14px;color:#6b7280}
-    .market-card .item-name{font-size:20px;font-weight:800;margin:4px 0 14px;color:#111827}
-    .market-card .price{display:inline-block;background:#dcfce7;color:#065f46;font-weight:700;font-size:18px;padding:8px 16px;border-radius:50px}
-
-    /* 섹션 타이틀 옆 도움말 버튼 */
-    .section-header{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-    .help-pill{
-      border:1px solid #bbf7d0;background:#ecfdf5;color:#065f46;
-      border-radius:999px;padding:6px 10px;font-size:13.5px;font-weight:800;
-      cursor:pointer;transition:transform .18s var(--e), filter .18s var(--e); user-select:none;
-    }
-    .help-pill:hover{filter:brightness(.98);transform:translateY(-1px)}
-
-    /* 카테고리 표 (Part 2에서 본문 포함) */
-    #category table{width:100%;border-collapse:collapse;margin:16px 0 32px;font-size:16px}
-    #category th,#category td{padding:14px 12px;border-bottom:1px solid var(--border);text-align:center}
-    #category th{background:#e6f9ef;color:#065f46;font-size:17px}
-    #category tr:nth-child(even) td{background:#f9fafb}
-    #category tr:hover td{background:#dcfce7}
-    #category h3{margin-top:40px;font-size:20px;color:var(--accent);font-weight:800;border-left:6px solid var(--accent);padding-left:10px}
-    .quick-nav{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 24px}
-    .quick-nav button{padding:8px 14px;border:none;border-radius:8px;background:var(--accent);color:#fff;font-size:14px;cursor:pointer;transition:transform .18s var(--e), filter .18s var(--e)}
-    .quick-nav button:hover{filter:brightness(.96); transform:translateY(-2px)}
-
-    .up{color:var(--up);font-weight:700}
-    .down{color:var(--down);font-weight:700}
-
-    /* 공용 모달 */
-    .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9999;visibility:hidden;opacity:0;transition:opacity .22s var(--e),visibility .22s var(--e)}
-    .modal.show{visibility:visible;opacity:1}
-    .modal-content{
-      position:absolute;left:50%;top:50%;transform:translate(-50%, -50%) scale(.98);
-      width:clamp(360px,92vw,1000px);height:85vh;overflow-y:auto;background:#fff;border-radius:16px;
-      box-shadow:0 12px 30px rgba(0,0,0,.25);padding:22px 22px 26px;font-size:17.5px;text-align:center;
-      transition:transform .22s var(--e), opacity .22s var(--e); will-change:transform,opacity; opacity:0;
-
-      /* ✨ 모달 테마 공통 변수 (기본값: 녹색) */
-      --m-accent:#16a34a;
-      --m-chip-bg:#ecfdf5; --m-chip-border:#bbf7d0; --m-chip-ink:#065f46;
-      --m-badge-bg:#ecfdf5; --m-badge-border:#86efac; --m-badge-ink:#065f46;
-    }
-    .modal-content{ padding-right:56px; }
-    .modal.show .modal-content{transform:translate(-50%, -50%) scale(1);opacity:1}
-    .modal h3{margin:0 0 4px;color:#111827;font-size:24px}
-    .modal-tagline{margin:0 0 8px;color:var(--muted);font-weight:700}
-    .modal-nav{margin:12px 0 14px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
-    .modal-nav button{padding:10px 18px;border:none;border-radius:8px;background:var(--m-accent);color:#fff;cursor:pointer;font-weight:700;font-size:15.5px;transition:transform .18s var(--e), filter .18s var(--e)}
-    .modal-nav button:hover{filter:brightness(.96); transform:translateY(-2px)}
-    .modal-tab{display:none}
-    .modal-tab.active{display:block;animation:tabIn .24s var(--e)}
-    .modal-tab ul{list-style-position:inside;padding-left:0;margin:8px auto}
-    .modal-tab p,.modal-tab li{text-align:center;line-height:1.8;margin:6px 0}
-
-    /* 닫기 버튼 위치 */
-    .modal .close-btn, #helpModal .close-btn, #storyModal .close-btn{
-      position:absolute !important; top:12px !important; right:12px !important; left:auto !important;
-      margin:0 !important; display:inline-flex; align-items:center; justify-content:center; z-index:2;
-    }
-    .close-btn{background:#ef4444;color:#fff;border:none;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:800}
-    .close-btn:hover{filter:brightness(.95)}
-
-    /* 조직표(모달) */
-    #modal-org{font-size:18.5px}
-    #modalOrgList.org-list{line-height:1.9; max-width:820px; margin:0 auto}
-    #modalOrgList .org-title{font-size:20px;font-weight:900;margin:4px 0 12px}
-    #modalOrgList .org-section{list-style:none;margin:16px 0 10px;display:flex;justify-content:center}
-    #modalOrgList .org-section span{
-      background:var(--m-chip-bg);border:1px solid var(--m-chip-border);color:var(--m-chip-ink);
-      padding:6px 12px;border-radius:999px;font-weight:800;letter-spacing:.3px
-    }
-    #modalOrgList .org-item{list-style:none;padding:6px 12px;margin:2px 0}
-    #modalOrgList .org-item .dot{display:inline-block;width:6px;height:6px;background:var(--m-accent);border-radius:999px;margin-right:8px;position:relative;top:-1px}
-    #modalOrgList .org-gap{height:6px;list-style:none}
-    #modalOrgList .org-total{list-style:none;margin-top:14px;padding:10px 12px;background:#f1f5f9;border-radius:10px;font-weight:800;color:#0f172a;border:1px solid #e2e8f0}
-
-    /* 판매물품(모달) */
-    #modalProdList{max-width:680px; margin:6px auto 0; padding:0; display:flex; flex-direction:column; gap:12px;}
-    #modalProdList .prod-card{list-style:none; background:#fff; border:1px solid #e6efe9; border-radius:14px; box-shadow:0 2px 10px rgba(0,0,0,.04); padding:14px 16px; position:relative; overflow:hidden; opacity:0; transform:translateY(6px); animation:listIn .34s var(--e) forwards; will-change:transform,opacity;}
-    #modalProdList .prod-card::before{content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background:linear-gradient(180deg,var(--m-accent),rgba(0,0,0,.08)); opacity:.6;}
-    #modalProdList .prod-title{font-weight:900; font-size:16.75px; color:var(--ink); letter-spacing:.2px;}
-    #modalProdList .prod-price{display:inline-block; margin-top:6px; background:var(--m-badge-bg); border:1px solid var(--m-badge-border); color:var(--m-badge-ink); font-weight:900; font-size:14.5px; border-radius:999px; padding:6px 12px;}
-    #modalProdList .prod-note{margin-top:8px; color:var(--muted); font-size:13.5px; line-height:1.7;}
-    #modalProdList .prod-card:hover{transform:translateY(-2px); box-shadow:0 10px 24px rgba(0,0,0,.08);}
 
     /* 애니메이션 */
     @keyframes fadeIn{from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:none}}
     @keyframes pageIn{from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none}}
-    @keyframes tabIn{from{opacity:.0;transform:translateY(6px)} to{opacity:1;transform:none}}
-    @keyframes listIn{from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none}}
     @media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important} }
 
+    /* 스크롤 진행바 */
     #scrollProgress {
       position: fixed; left: 0; top: 0; height: 3px; width: 0%;
       background: linear-gradient(90deg, #22c55e, #86efac);
       z-index: 99999; box-shadow: 0 0 8px rgba(34,197,94,.5);
     }
-
-    /* ========= 파스텔톤 모달 배경 + 테마 변수 세트 ========= */
-    .bg-tteok{ background:linear-gradient(135deg,#bbf7d0,#a7f3d0,#f0fdf4);}
-    .bg-tteok{ --m-accent:#16a34a; --m-chip-bg:#ecfdf5; --m-chip-border:#bbf7d0; --m-chip-ink:#065f46; --m-badge-bg:#ecfdf5; --m-badge-border:#86efac; --m-badge-ink:#065f46; }
-
-    .bg-beehive{
-      background:
-        radial-gradient(1200px 600px at 100% -50%, rgba(15,23,42,.55), transparent 60%),
-        linear-gradient(135deg,#fef3c7,#fde68a,#0f172a);
-      --m-accent:#111827;
-      --m-chip-bg:#fff7ed; --m-chip-border:#fcd34d; --m-chip-ink:#78350f;
-      --m-badge-bg:#fffbeb; --m-badge-border:#fde68a; --m-badge-ink:#111827;
-    }
-
-    .bg-inback{ background:linear-gradient(135deg,#ede9fe,#f5d0fe,#fce7f3); }
-    .bg-inback{ --m-accent:#8b5cf6; --m-chip-bg:#f5f3ff; --m-chip-border:#ddd6fe; --m-chip-ink:#5b21b6; --m-badge-bg:#faf5ff; --m-badge-border:#e9d5ff; --m-badge-ink:#6b21a8; }
-
-    .bg-chakani{ background:linear-gradient(135deg,#fff7ed,#fde68a,#fef3c7); }
-    .bg-chakani{ --m-accent:#f59e0b; --m-chip-bg:#fffbeb; --m-chip-border:#fde68a; --m-chip-ink:#92400e; --m-badge-bg:#fff7ed; --m-badge-border:#fcd34d; --m-badge-ink:#92400e; }
-
-    .bg-tteok-green{
-      background:linear-gradient(135deg,#bbf7d0,#a7f3d0,#f0fdf4);
-      --m-accent:#16a34a;
-      --m-chip-bg:#ecfdf5; --m-chip-border:#bbf7d0; --m-chip-ink:#065f46;
-      --m-badge-bg:#ecfdf5; --m-badge-border:#86efac; --m-badge-ink:#065f46;
-    }
-
-    .bg-ems{ background:linear-gradient(135deg,#fee2e2,#fecaca,#fef2f2);}
-    .bg-ems{ --m-accent:#ef4444; --m-chip-bg:#fef2f2; --m-chip-border:#fecaca; --m-chip-ink:#7f1d1d; --m-badge-bg:#fff1f2; --m-badge-border:#fecdd3; --m-badge-ink:#7f1d1d; }
-    .bg-southpd{ background:linear-gradient(135deg,#dbeafe,#bfdbfe,#e0f2fe);}
-    .bg-southpd{ --m-accent:#3b82f6; --m-chip-bg:#eff6ff; --m-chip-border:#bfdbfe; --m-chip-ink:#1e40af; --m-badge-bg:#eff6ff; --m-badge-border:#bfdbfe; --m-badge-ink:#1e40af; }
-    .bg-northpd{ background:linear-gradient(135deg,#f9fafb,#d1d5db,#e5e7eb);}
-    .bg-northpd{ --m-accent:#374151; --m-chip-bg:#f3f4f6; --m-chip-border:#d1d5db; --m-chip-ink:#111827; --m-badge-bg:#f8fafc; --m-badge-border:#e5e7eb; --m-badge-ink:#111827; }
-    .bg-castillo{ background:linear-gradient(135deg,#fef9c3,#fde68a,#fff7ed);}
-    .bg-castillo{ --m-accent:#eab308; --m-chip-bg:#fffbeb; --m-chip-border:#fef3c7; --m-chip-ink:#78350f; --m-badge-bg:#fffbeb; --m-badge-border:#fde68a; --m-badge-ink:#78350f; }
-    .bg-broadcast{ background:linear-gradient(135deg,#e0f2fe,#c7d2fe,#bfdbfe);}
-    .bg-broadcast{ --m-accent:#1e3a8a; --m-chip-bg:#eef2ff; --m-chip-border:#c7d2fe; --m-chip-ink:#1e3a8a; --m-badge-bg:#eff6ff; --m-badge-border:#bfdbfe; --m-badge-ink:#1e3a8a; }
-
-    .bg-bigdick{ background:linear-gradient(135deg,#fff7ed,#fef9c3,#fde68a);}
-    .bg-bigdick{ --m-accent:#eab308; --m-chip-bg:#fffbeb; --m-chip-border:#fde68a; --m-chip-ink:#78350f; --m-badge-bg:#fff7ed; --m-badge-border:#fcd34d; --m-badge-ink:#78350f; }
-    .bg-cheongryong{ background:linear-gradient(135deg,#bae6fd,#7dd3fc,#e0f2fe);}
-    .bg-cheongryong{ --m-accent:#0ea5e9; --m-chip-bg:#e0f2fe; --m-chip-border:#bae6fd; --m-chip-ink:#075985; --m-badge-bg:#e0f2fe; --m-badge-border:#93c5fd; --m-badge-ink:#075985; }
-    .bg-sakura{ background:linear-gradient(135deg,#fce7f3,#fbcfe8,#ffe4e6);}
-    .bg-sakura{ --m-accent:#ec4899; --m-chip-bg:#fdf2f8; --m-chip-border:#fbcfe8; --m-chip-ink:#86198f; --m-badge-bg:#fdf2f8; --m-badge-border:#f5d0fe; --m-badge-ink:#86198f; }
-    .bg-jakdu{ background:linear-gradient(135deg,#f3f4f6,#fecaca,#e5e7eb);}
-    .bg-jakdu{ --m-accent:#b91c1c; --m-chip-bg:#fff1f2; --m-chip-border:#fecaca; --m-chip-ink:#7f1d1d; --m-badge-bg:#fef2f2; --m-badge-border:#fecaca; --m-badge-ink:#7f1d1d; }
-
-    /* ===== 리얼 방송국 (홈 밖, 홈 아래) — 홈 섹션과 ‘완전 동일 폭’ ===== */
-    #broadcastBox{
-      background:#fff; border-radius:14px; box-shadow:0 4px 12px rgba(0,0,0,.05);
-      padding:28px; margin:20px 0; width:100%; max-width:none;
-    }
-    #broadcastBox .title-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}
-    #broadcastBox h2{margin:0; color:#1e3a8a; font-size:22px; font-weight:900}
-    #broadcastBox .desc{margin:0 0 16px; color:#374151; font-size:15.5px}
-
-    .broadcast-grid{display:flex; flex-direction:column; gap:22px}
-
-    /* 사연 신청 카드 */
-    .story-card{background:linear-gradient(180deg,#f8fafc,#ffffff);border:1px solid var(--border);border-radius:14px;padding:18px}
-    .story-card h3{margin:0 0 8px;font-size:18px;font-weight:900;color:#0f172a}
-
-    /* ★ 폼 레이아웃 정돈(삐져나옴/정렬 문제 해결) */
-    .story-form{display:grid;gap:12px}
-    .story-form .row{
-      display:grid; grid-template-columns:140px minmax(0,1fr); align-items:center; gap:10px;
-    }
-    .story-form .row.double{
-      grid-template-columns:140px minmax(0,1fr) minmax(0,1fr);
-    }
-    .story-form .row.actions{ grid-template-columns: 1fr; }
-    .story-form label{font-weight:800;color:#0f172a;align-self:start;padding-top:2px}
-    .story-form input,.story-form textarea,.story-form select{
-      display:block;width:100%;padding:12px;border:1px solid var(--border);border-radius:10px;font-size:15px;background:#fff;line-height:1.5;
-    }
-    .story-form textarea{min-height:140px;resize:vertical}
-    /* 비활성 입력 스타일 */
-    .story-form input:disabled, .story-form select:disabled, .story-form textarea:disabled{
-      background:#f3f4f6; color:#9ca3af; cursor:not-allowed;
-    }
-
-    .inline{display:flex;align-items:center;gap:12px}
-    .switch{position:relative;width:46px;height:26px;background:#e5e7eb;border-radius:999px;cursor:pointer;transition:background .2s var(--e)}
-    .switch::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.2);transition:transform .2s var(--e)}
-    .switch.active{background:#1e3a8a}
-    .switch.active::after{transform:translateX(20px)}
-
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 16px;border:none;border-radius:10px;background:#1e3a8a;color:#fff;font-weight:900;cursor:pointer;transition:transform .18s var(--e), filter .18s var(--e)}
-    .btn:hover{filter:brightness(.96); transform:translateY(-2px)}
-    .hint{font-size:12.5px; color:#6b7280}
-
-    /* 최신 사연 리스트 */
-    .story-list{background:#fff;border:1px solid var(--border);border-radius:14px}
-    .story-list .head{display:flex;align-items:center;gap:10px;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--border)}
-    .story-list .head h3{margin:0;font-size:18px;font-weight:900}
-    .story-list .head .filters{display:flex;gap:8px;align-items:center}
-    .pill{display:inline-flex;align-items:center;gap:6px;border:1px solid #c7d2fe;background:#eef2ff;color:#1e3a8a;border-radius:999px;padding:6px 10px;font-weight:800;font-size:12.5px}
-    #storyList{list-style:none;margin:0;padding:0}
-    .story-item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-top:1px solid var(--border);cursor:pointer;transition:background .15s}
-    .story-item:hover{background:#f8fafc}
-    .story-item .left{display:flex;align-items:center;gap:10px;min-width:0}
-    .badge{display:inline-flex;align-items:center;padding:4px 8px;border-radius:999px;font-size:12px;font-weight:900;border:1px solid #c7d2fe;background:#eef2ff;color:#1e3a8a}
-    .title{font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:48vw}
-    .meta{font-size:12.5px;color:#6b7280}
-    .story-empty{padding:18px;text-align:center;color:#6b7280}
-
-    /* 모바일 폼 스택 */
-    @media (max-width: 640px){
-      .story-form .row,
-      .story-form .row.double{ grid-template-columns: 1fr; }
-      .story-form label{ margin-bottom:6px; }
-    }
-
-    /* ===== 🔽 추가: 차량 판매 시세표 카드 + 애니메이션 (카테고리 내 다른 용도 재사용 가능) ===== */
-    .car-sale-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
-      gap:20px;
-      margin-top:20px;
-    }
-    .car-card{
-      background:#fff;
-      border-radius:16px;
-      padding:20px;
-      box-shadow:0 6px 16px rgba(0,0,0,.08);
-      text-align:center;
-      cursor:pointer;
-      transition:transform .25s var(--e), box-shadow .25s var(--e);
-      border:2px solid transparent;
-      animation:fadeInUp .4s ease forwards;
-    }
-    .car-card:hover{
-      transform:translateY(-6px);
-      box-shadow:0 10px 24px rgba(0,0,0,.12);
-      border-color:var(--accent);
-    }
-    .car-card .icon{
-      font-size:36px;margin-bottom:8px
-    }
-    .car-card h4{
-      margin:0 0 6px;font-size:18px;font-weight:800;color:var(--accent)
-    }
-    .car-card .price{
-      display:inline-block;
-      background:#dcfce7;color:#065f46;font-weight:700;font-size:16px;
-      padding:6px 14px;border-radius:50px
-    }
-    @keyframes fadeInUp{from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none}}
   </style>
 </head>
 <body>
@@ -326,7 +131,7 @@
   <div id="scrollProgress" aria-hidden="true"></div>
 
   <div class="layout">
-    <!-- 왼쪽 -->
+    <!-- 왼쪽 사이드 -->
     <aside>
       <div class="aside-box">
         <h3>📢 공지사항</h3>
@@ -346,7 +151,7 @@
       </div>
     </aside>
 
-    <!-- 중앙 -->
+    <!-- 중앙 컨텐츠 시작 -->
     <main>
       <div class="nav-parts">
         <div class="nav-card" onclick="showPage('home')"><div class="icon">🏠</div><h3>홈</h3></div>
@@ -357,7 +162,7 @@
 
       <div class="hero"><h2>📊 정보 센터</h2><p>리얼월드의 아이템 시세와 조직 정보를 한눈에!</p></div>
 
-      <!-- 홈 -->
+            <!-- 홈 -->
       <section id="home" class="page active">
         <h2>🏠 홈</h2>
         <div class="sub-nav">
@@ -514,35 +319,128 @@
       </div>
       <!-- /리얼 방송국 -->
 
-      <!-- 카탈로그 (구 당근마켓) -->
+            <!-- 카탈로그 -->
       <section id="market" class="page">
         <div class="section-header">
           <h2>📚 카탈로그</h2>
-          <button class="help-pill" onclick="openHelp('market')">카탈로그란?</button>
+          <button class="help-pill" onclick="openHelp('market')">카탈로그 안내</button>
         </div>
+
+        <!-- 오프로드 -->
+        <h3>🚙 오프로드</h3>
         <div class="market-cards">
-          <div class="market-card"><h3>이름 <span class="id">#고번</span></h3><p class="label">판매물품</p><p class="item-name">달의자</p><div class="price">240억</div></div>
-          <div class="market-card"><h3>이름 <span class="id">#고번</span></h3><p class="label">판매물품</p><p class="item-name">테저렉트</p><div class="price">250억</div></div>
-          <div class="market-card"><h3>이름 <span class="id">#고번</span></h3><p class="label">판매물품</p><p class="item-name">불손 이펙트</p><div class="price">190억</div></div>
-          <div class="market-card"><h3>이름 <span class="id">#고번</span></h3><p class="label">판매물품</p><p class="item-name">브레이크댄스</p><div class="price">12억</div></div>
-          <div class="market-card"><h3>이름 <span class="id">#고번</span></h3><p class="label">판매물품</p><p class="item-name">구름의자</p><div class="price">260억</div></div>
+          <div class="market-card"><p class="item-name">디로더</p><div class="price">1,650,000,000원</div></div>
+          <div class="market-card"><p class="item-name">에버온</p><div class="price">1,650,000,000원</div></div>
+          <div class="market-card"><p class="item-name">요세미터3</p><div class="price">1,650,000,000원</div></div>
+          <div class="market-card"><p class="item-name">메사</p><div class="price">1,782,000,000원</div></div>
+          <div class="market-card"><p class="item-name">듀브스타</p><div class="price">2,794,000,000원</div></div>
+          <div class="market-card"><p class="item-name">프리크롤러</p><div class="price">4,037,000,000원</div></div>
+        </div>
+
+        <!-- 머슬카 -->
+        <h3>💪 머슬카</h3>
+        <div class="market-cards">
+          <div class="market-card"><p class="item-name">탐파2</p><div class="price">3,124,000,000원</div></div>
+        </div>
+
+        <!-- 밴 -->
+        <h3>🚐 밴</h3>
+        <div class="market-cards">
+          <div class="market-card"><p class="item-name">반캣XL</p><div class="price">1,650,000,000원</div></div>
+          <div class="market-card"><p class="item-name">부리토</p><div class="price">1,650,000,000원</div></div>
+          <div class="market-card"><p class="item-name">서버</p><div class="price">2,882,000,000원</div></div>
+        </div>
+
+        <!-- 스포츠카 -->
+        <h3>🏎️ 스포츠카</h3>
+        <div class="market-cards">
+          <div class="market-card"><p class="item-name">엘리지2</p><div class="price">1,672,000,000원</div></div>
+          <div class="market-card"><p class="item-name">코그브리오</p><div class="price">1,848,000,000원</div></div>
+          <div class="market-card"><p class="item-name">재칼</p><div class="price">1,914,000,000원</div></div>
+          <div class="market-card"><p class="item-name">미쉘리</p><div class="price">1,925,000,000원</div></div>
+          <div class="market-card"><p class="item-name">버팔로</p><div class="price">1,980,000,000원</div></div>
+          <div class="market-card"><p class="item-name">버팔로2</p><div class="price">2,002,000,000원</div></div>
+          <div class="market-card"><p class="item-name">버팔로3</p><div class="price">2,024,000,000원</div></div>
+          <div class="market-card"><p class="item-name">GB200</p><div class="price">1,848,000,000원</div></div>
+          <div class="market-card"><p class="item-name">재스터3</p><div class="price">2,090,000,000원</div></div>
+          <div class="market-card"><p class="item-name">마사크로</p><div class="price">2,112,000,000원</div></div>
+          <div class="market-card"><p class="item-name">마사크로2</p><div class="price">2,134,000,000원</div></div>
+          <div class="market-card"><p class="item-name">베스트아GTS</p><div class="price">2,772,000,000원</div></div>
+          <div class="market-card"><p class="item-name">펠론</p><div class="price">2,860,000,000원</div></div>
+          <div class="market-card"><p class="item-name">트로포스</p><div class="price">2,926,000,000원</div></div>
+          <div class="market-card"><p class="item-name">슬라겐</p><div class="price">3,168,000,000원</div></div>
+          <div class="market-card"><p class="item-name">코멧3</p><div class="price">3,190,000,000원</div></div>
+          <div class="market-card"><p class="item-name">백트레</p><div class="price">3,212,000,000원</div></div>
+          <div class="market-card"><p class="item-name">드래프터</p><div class="price">3,234,000,000원</div></div>
+          <div class="market-card"><p class="item-name">주글러</p><div class="price">3,256,000,000원</div></div>
+          <div class="market-card"><p class="item-name">팡테르</p><div class="price">4,070,000,000원</div></div>
+          <div class="market-card"><p class="item-name">펠른2</p><div class="price">4,103,000,000원</div></div>
+          <div class="market-card"><p class="item-name">파리아</p><div class="price">4,169,000,000원</div></div>
+          <div class="market-card"><p class="item-name">네온</p><div class="price">4,367,000,000원</div></div>
+        </div>
+
+        <!-- 클래식 -->
+        <h3>🎩 클래식</h3>
+        <div class="market-cards">
+          <div class="market-card"><p class="item-name">토르네이도</p><div class="price">1,716,000,000원</div></div>
+          <div class="market-card"><p class="item-name">토나도5</p><div class="price">1,738,000,000원</div></div>
+          <div class="market-card"><p class="item-name">토네이도6</p><div class="price">1,760,000,000원</div></div>
+          <div class="market-card"><p class="item-name">디이너스티</p><div class="price">1,936,000,000원</div></div>
+          <div class="market-card"><p class="item-name">Z190</p><div class="price">2,068,000,000원</div></div>
+          <div class="market-card"><p class="item-name">GT500</p><div class="price">2,156,000,000원</div></div>
+          <div class="market-card"><p class="item-name">코켓2</p><div class="price">2,178,000,000원</div></div>
+          <div class="market-card"><p class="item-name">코켓5</p><div class="price">2,200,000,000원</div></div>
+          <div class="market-card"><p class="item-name">인퍼너스2</p><div class="price">2,838,000,000원</div></div>
+        </div>
+
+        <!-- 세단 -->
+        <h3>🚗 세단</h3>
+        <div class="market-cards">
+          <div class="market-card"><p class="item-name">콕55</p><div class="price">1,694,000,000원</div></div>
+          <div class="market-card"><p class="item-name">스태포드</p><div class="price">1,870,000,000원</div></div>
+          <div class="market-card"><p class="item-name">라인하트</p><div class="price">3,080,000,000원</div></div>
+          <div class="market-card"><p class="item-name">친퀘밀라</p><div class="price">4,301,000,000원</div></div>
+        </div>
+
+        <!-- 슈퍼카 -->
+        <h3>🏎️ 슈퍼카</h3>
+        <div class="market-cards">
+          <div class="market-card"><p class="item-name">페네트레이터</p><div class="price">2,948,000,000원</div></div>
+          <div class="market-card"><p class="item-name">GP1</p><div class="price">3,278,000,000원</div></div>
+          <div class="market-card"><p class="item-name">치타2</p><div class="price">3,300,000,000원</div></div>
+          <div class="market-card"><p class="item-name">몰릭</p><div class="price">4,202,000,000원</div></div>
+          <div class="market-card"><p class="item-name">바카</p><div class="price">4,235,000,000원</div></div>
+          <div class="market-card"><p class="item-name">인퍼너스</p><div class="price">4,334,000,000원</div></div>
+          <div class="market-card"><p class="item-name">반시2</p><div class="price">4,400,000,000원</div></div>
+        </div>
+
+        <!-- SUV -->
+        <h3>🚙 SUV</h3>
+        <div class="market-cards">
+          <div class="market-card"><p class="item-name">그레슬리</p><div class="price">1,804,000,000원</div></div>
+          <div class="market-card"><p class="item-name">FQ2</p><div class="price">1,826,000,000원</div></div>
+          <div class="market-card"><p class="item-name">힌틀리</p><div class="price">1,892,000,000원</div></div>
+          <div class="market-card"><p class="item-name">더브스타2</p><div class="price">2,816,000,000원</div></div>
+          <div class="market-card"><p class="item-name">이시8</p><div class="price">2,970,000,000원</div></div>
+          <div class="market-card"><p class="item-name">발러3</p><div class="price">2,992,000,000원</div></div>
+          <div class="market-card"><p class="item-name">발러4</p><div class="price">3,014,000,000원</div></div>
+          <div class="market-card"><p class="item-name">발러7</p><div class="price">3,036,000,000원</div></div>
+          <div class="market-card"><p class="item-name">핫 링 에바론</p><div class="price">3,058,000,000원</div></div>
+          <div class="market-card"><p class="item-name">노박</p><div class="price">3,102,000,000원</div></div>
+          <div class="market-card"><p class="item-name">비반나이트</p><div class="price">4,136,000,000원</div></div>
+          <div class="market-card"><p class="item-name">에스트론</p><div class="price">4,268,000,000원</div></div>
+          <div class="market-card"><p class="item-name">하바네로</p><div class="price">5,500,000,000원</div></div>
+        </div>
+
+        <!-- 소형 -->
+        <h3>🚗 소형</h3>
+        <div class="market-cards">
+          <div class="market-card"><p class="item-name">이씨클래식</p><div class="price">1,650,000,000원</div></div>
+          <div class="market-card"><p class="item-name">브리오소</p><div class="price">2,904,000,000원</div></div>
         </div>
       </section>
-      <!-- /카탈로그 -->
 
-      <!-- ※ 여기까지 Part 1 -->
-    </main>
-
-    <!-- 오른쪽 -->
-    <aside>
-      <h3>🔥 인기 TOP 5</h3>
-      <ul id="topList"></ul>
-      <h3>⏰ 실시간 알림</h3>
-      <ul><li>-</li></ul>
-    </aside>
-  </div>
-
-        <!-- 카테고리 -->
+            <!-- 카테고리 -->
       <section id="category" class="page">
         <h2>📂 카테고리별 시세표</h2>
         <div class="quick-nav">
@@ -553,6 +451,7 @@
           <button onclick="scrollToSection('skin')">🎭 스킨</button>
           <button onclick="scrollToSection('dance')">💃 행동·댄스·동상</button>
           <button onclick="scrollToSection('item')">✨ 기타</button>
+          <button onclick="scrollToSection('car-sale')">🚗 차량 판매 시세표</button>
         </div>
 
         <h3 id="chair">🪑 의자 종류</h3>
@@ -612,13 +511,41 @@
         </table>
 
         <h3 id="dance">💃 행동·댄스·동상</h3>
-        <!-- (생략 없이 모든 댄스 테이블이 그대로 들어감) -->
         <table>
           <tr><th>아이템</th><th>시세</th></tr>
           <tr><td>브레이크댄스</td><td>10억~15억</td></tr>
           <tr><td>오징어댄스</td><td>10억~15억</td></tr>
           <tr><td>브로큰레그</td><td>5억~8억</td></tr>
-          <!-- …(중략 없이 나머지 동작 전부)… -->
+          <tr><td>마그네틱</td><td>30억~45억</td></tr>
+          <tr><td>텔미댄스</td><td>30억~40억</td></tr>
+          <tr><td>버스안에서댄스</td><td>6억~8억</td></tr>
+          <tr><td>스마트댄스</td><td>30억~38억</td></tr>
+          <tr><td>소다팝댄스</td><td>38억~46억</td></tr>
+          <tr><td>팝핀댄스</td><td>5억~10억</td></tr>
+          <tr><td>스캇앤젤다댄스</td><td>20억~28억</td></tr>
+          <tr><td>뻣뻣로봇댄스</td><td>6억~10억</td></tr>
+          <tr><td>골반흔들기</td><td>15억~20억</td></tr>
+          <tr><td>크레이지트워킹</td><td>15억~20억</td></tr>
+          <tr><td>슬릭백</td><td>18억~27억</td></tr>
+          <tr><td>이리와</td><td>5억~8억</td></tr>
+          <tr><td>언더더씨</td><td>5억~8억</td></tr>
+          <tr><td>쌍뻐큐</td><td>10억~15억</td></tr>
+          <tr><td>맘맘</td><td>7억~11억</td></tr>
+          <tr><td>회전회오리</td><td>18억~24억</td></tr>
+          <tr><td>쏘리댄스</td><td>5억~10억</td></tr>
+          <tr><td>하트 동상포즈(남)</td><td>10억~15억</td></tr>
+          <tr><td>하트 동상포즈(여)</td><td>11억~16억</td></tr>
+          <tr><td>동상포즈(남)</td><td>10억~15억</td></tr>
+          <tr><td>동상포즈(여)</td><td>11억~15억</td></tr>
+          <tr><td>무릎앉기</td><td>7억~10억</td></tr>
+          <tr><td>조신하게 앉기</td><td>8억~10억</td></tr>
+          <tr><td>괴속질주</td><td>10억~13억</td></tr>
+          <tr><td>흔들어</td><td>15억~18억</td></tr>
+          <tr><td>오예스</td><td>9억~15억</td></tr>
+          <tr><td>요가포즈</td><td>13억~16억</td></tr>
+          <tr><td>냄새나</td><td>10억~15억</td></tr>
+          <tr><td>쓰러지기</td><td>5억~7억</td></tr>
+          <tr><td>기도하는</td><td>5억~10억</td></tr>
           <tr><td>내빵뎅이</td><td>5억~8억</td></tr>
         </table>
 
@@ -628,6 +555,27 @@
           <tr><td>롤러</td><td>60억~80억</td></tr>
           <tr><td>펫 입양권</td><td>160억~200억</td></tr>
         </table>
+
+        <!-- 차량 판매 시세표 -->
+        <h3 id="car-sale">🚗 차량 판매 시세표</h3>
+        <div class="car-sale-grid">
+          <div class="car-card" data-car="테저랙트">
+            <h4>테저랙트</h4>
+            <p class="price">300억</p>
+          </div>
+          <div class="car-card" data-car="네로">
+            <h4>네로</h4>
+            <p class="price">250억</p>
+          </div>
+          <div class="car-card" data-car="M1">
+            <h4>M1</h4>
+            <p class="price">200억</p>
+          </div>
+          <div class="car-card" data-car="쇼타로">
+            <h4>쇼타로</h4>
+            <p class="price">100억</p>
+          </div>
+        </div>
       </section>
 
       <!-- 거래 통계 -->
@@ -638,77 +586,8 @@
           <tbody></tbody>
         </table>
       </section>
-    </main>
 
-    <!-- 오른쪽 사이드바 -->
-    <aside>
-      <h3>🔥 인기 TOP 5</h3>
-      <ul id="topList"></ul>
-      <h3>⏰ 실시간 알림</h3>
-      <ul><li>-</li></ul>
-    </aside>
-  </div>
-
-    <!-- 엔티티 모달 -->
-  <div id="modal" class="modal" aria-hidden="true">
-    <div id="modalContent" class="modal-content" role="dialog" aria-modal="true">
-      <button class="close-btn" onclick="closeModal()">닫기</button>
-      <h3 id="modalTitle"></h3>
-      <p id="modalTagline" class="modal-tagline"></p>
-      <div class="modal-nav">
-        <button data-tab="org" onclick="showModalTab('org')">조직도</button>
-        <button data-tab="products" onclick="showModalTab('products')">판매물품</button>
-        <button data-tab="info" onclick="showModalTab('info')">기업정보</button>
-      </div>
-      <div id="modal-org" class="modal-tab">
-        <ul id="modalOrgList" class="org-list"></ul>
-      </div>
-      <div id="modal-products" class="modal-tab">
-        <ul id="modalProdList"></ul>
-      </div>
-      <div id="modal-info" class="modal-tab"><p id="modalInfoText"></p></div>
-    </div>
-  </div>
-
-  <!-- 사연 상세 모달 -->
-  <div id="storyModal" class="modal" aria-hidden="true">
-    <div class="modal-content bg-broadcast" role="dialog" aria-modal="true">
-      <button class="close-btn" onclick="closeStory()">닫기</button>
-      <h3 id="sModalTitle">사연 제목</h3>
-      <p class="modal-tagline" id="sModalMeta">작성자 · 시간</p>
-      <div class="help-body">
-        <div class="help-view" id="sModalBody" style="white-space:pre-wrap"></div>
-        <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
-          <span class="badge" id="sModalCat">카테고리</span>
-          <span class="badge" id="sModalSong" style="display:none"></span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 도움말 모달 -->
-  <div id="helpModal" class="modal" aria-hidden="true">
-    <div class="modal-content" role="dialog" aria-modal="true">
-      <button class="close-btn" onclick="closeHelp()">닫기</button>
-      <h3 id="helpTitle">카탈로그 도움말</h3>
-      <p class="modal-tagline" id="helpTagline">아이템/차량 정보 안내</p>
-      <div class="help-body">
-        <div id="helpContent" class="help-view"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- (옵션) 차량 상세 모달 — 이미지 제외, 이름/가격/설명 표시 -->
-  <div id="carModal" class="modal" aria-hidden="true">
-    <div class="modal-content" role="dialog" aria-modal="true">
-      <button class="close-btn" onclick="closeCarModal()">닫기</button>
-      <h3 id="carModalTitle">차량명</h3>
-      <p id="carModalPrice" class="modal-tagline">가격 정보</p>
-      <div id="carModalDesc" style="line-height:1.8">세부 설명이 여기에 표시됩니다.</div>
-    </div>
-  </div>
-
-  <!-- 기본 JS -->
+        <!-- 기본 JS -->
   <script>
     /* ---------- 데이터 ---------- */
     const ENTITIES = { 
@@ -904,11 +783,12 @@
     const HELP_TEXTS = {
       market: `
         <ul>
-          <li><b>카탈로그</b>는 아이템·차량 등의 정보를 한눈에 모아둔 공간입니다.</li>
-          <li>거래/신청 등 운영 문의는 <b>703 김남정</b> 디스코드 DM로 진행해 주세요.</li>
+          <li><b>당근마켓</b>은 개인 간 아이템 거래를 위한 커뮤니티 장터입니다.</li>
+          <li>당근마켓 이용 시 <b>기재비용 1억</b>입니다. 이 점 유의하시길 바랍니다.</li>
+          <li>기재를 위해 <b>703 김남정 디스코드 DM</b>을 해주시길 바랍니다.</li>
           <li><b>닉네임</b>, <b>고번</b>, <b>품목</b>, <b>가격</b>을 명확히 기재해 주세요.</li>
-          <li>안전 팁: 거래 전·후 <b>스크린샷</b>을 남기고, <b>조건/수수료</b>를 사전에 합의하세요.</li>
-          <li>운영진은 거래에 직접 개입하지 않으며, 카탈로그는 <b>정보 제공</b> 목적입니다.</li>
+          <li>안전 거래 팁: 거래 전·후 <b>스크린샷</b>을 남기고, <b>조건/수수료</b>를 사전에 합의하세요.</li>
+          <li>운영진은 거래에 직접 개입하지 않으며, 당근마켓은 <b>중매 역할</b>입니다.</li>
           <li>신고/문의는 좌측 <b>공지사항</b>을 참고해 주세요.</li>
         </ul>`
     };
@@ -919,8 +799,8 @@
       const content = document.getElementById('helpContent');
 
       if(key==='market'){
-        title.textContent = '카탈로그 도움말';
-        tagline.textContent = '아이템/차량 정보 안내';
+        title.textContent = '당근마켓 도움말';
+        tagline.textContent = '커뮤니티 장터 이용 안내';
       } else {
         title.textContent = '도움말';
         tagline.textContent = '안내';
@@ -975,18 +855,20 @@
       if(bar) bar.style.width = (Math.max(0, Math.min(1, scrolled)) * 100) + '%';
     }
     window.addEventListener('scroll', onScrollProgress, { passive:true });
+
     document.addEventListener('DOMContentLoaded', ()=>{
       toggleBroadcastBox();
       onScrollProgress();
     });
 
-    /* ===== 차량 모달(선택) — 현재는 이미지 없이 텍스트만 사용 ===== */
+    /* ===== ✅ 추가: 차량 카드 클릭 → 차량 모달 열기 ===== */
     const CAR_DATA = {
       '테저랙트': { price:'300억', desc:'최고속도 400km/h, 전자식 서스펜션, 탄소섬유 모노코크 섀시.' },
       '네로': { price:'250억', desc:'밸런스가 좋은 전천후 슈퍼카. 일상·레이스 모두 OK.' },
       'M1': { price:'200억', desc:'스포티한 클래식 모델. 커스텀 파츠 호환성 우수.' },
       '쇼타로': { price:'100억', desc:'바이크계의 아이콘. 가속·핸들링 특화.' }
     };
+
     function openCarModal(){
       const modal = document.getElementById('carModal');
       modal.classList.add('show');
@@ -999,6 +881,7 @@
       modal.setAttribute('aria-hidden','true');
       document.body.style.overflow='';
     }
+
     document.addEventListener('click', (e)=>{
       const card = e.target.closest('.car-card');
       if(!card) return;
@@ -1033,7 +916,6 @@
     const db = getFirestore(app);
     const auth = getAuth(app);
 
-    // 익명 로그인
     signInAnonymously(auth).catch(console.error);
 
     const storiesRef = collection(db, "stories");
@@ -1075,6 +957,7 @@
     storyForm?.addEventListener("submit", async (e)=>{
       e.preventDefault();
       const isAnon = anonSwitch.classList.contains('active');
+      // ✅ 익명이면 닉/고번 저장하지 않음
       const nick  = isAnon ? "" : (storyNick.value||"").trim();
       const code  = isAnon ? "" : (storyCode.value||"").trim();
       const title = (storyTitle.value||"").trim();
