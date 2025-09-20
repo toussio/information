@@ -102,6 +102,37 @@
     .up{color:var(--up);font-weight:700}
     .down{color:var(--down);font-weight:700}
 
+  /* 당근마켓 테이블 스타일 (카테고리와 동일) */
+#market table {
+  width:100%;
+  border-collapse:collapse;
+  margin:16px 0 32px;
+  font-size:16px;
+}
+#market th, #market td {
+  padding:14px 12px;
+  border-bottom:1px solid var(--border);
+  text-align:center;
+}
+#market th {
+  background:#e6f9ef;
+  color:#065f46;
+  font-size:17px;
+}
+#market tr:nth-child(even) td {
+  background:#f9fafb;
+}
+#market tr:hover td {
+  background:#dcfce7;
+}
+#market h3 {
+  margin-top:40px;
+  font-size:20px;
+  color:var(--accent);
+  font-weight:800;
+  border-left:6px solid var(--accent);
+  padding-left:10px;
+}
     /* 공용 모달 */
     .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9999;visibility:hidden;opacity:0;transition:opacity .22s var(--e),visibility .22s var(--e)}
     .modal.show{visibility:visible;opacity:1}
@@ -515,19 +546,28 @@
       <!-- /리얼 방송국 -->
 
       <!-- 당근마켓 -->
-      <section id="market" class="page">
-        <div class="section-header">
-          <h2>🥕 당근마켓</h2>
-          <button class="help-pill" onclick="openHelp('market')">당근마켓이란?</button>
-        </div>
-        <div class="market-cards">
-          <div class="market-card"><h3>이름 <span class="id">#고번</span></h3><p class="label">판매물품</p><p class="item-name">달의자</p><div class="price">240억</div></div>
-          <div class="market-card"><h3>이름 <span class="id">#고번</span></h3><p class="label">판매물품</p><p class="item-name">테저렉트</p><div class="price">250억</div></div>
-          <div class="market-card"><h3>이름 <span class="id">#고번</span></h3><p class="label">판매물품</p><p class="item-name">불손 이펙트</p><div class="price">190억</div></div>
-          <div class="market-card"><h3>이름 <span class="id">#고번</span></h3><p class="label">판매물품</p><p class="item-name">브레이크댄스</p><div class="price">12억</div></div>
-          <div class="market-card"><h3>이름 <span class="id">#고번</span></h3><p class="label">판매물품</p><p class="item-name">구름의자</p><div class="price">260억</div></div>
-        </div>
-      </section>
+      <!-- 당근마켓 (카테고리와 동일한 테이블형) -->
+<section id="market" class="page">
+  <h2>🥕 당근마켓</h2>
+
+  <div class="quick-nav">
+    <button>🪑 의자</button>
+    <button>🚗 차량</button>
+    <button>✨ 이펙트</button>
+    <button>🎭 스킨</button>
+  </div>
+
+  <h3>🥕 판매물품 목록</h3>
+  <table>
+    <tr><th>닉네임</th><th>아이템</th><th>가격</th></tr>
+    <tr><td>고번</td><td>달의자</td><td>240억</td></tr>
+    <tr><td>고번</td><td>테저렉트</td><td>250억</td></tr>
+    <tr><td>고번</td><td>불손 이펙트</td><td>190억</td></tr>
+    <tr><td>고번</td><td>브레이크댄스</td><td>12억</td></tr>
+    <tr><td>고번</td><td>구름의자</td><td>260억</td></tr>
+  </table>
+</section>
+
 
       <!-- 카테고리 -->
       <section id="category" class="page">
@@ -1216,4 +1256,5 @@
   </script>
 </body>
 </html>
+
 
