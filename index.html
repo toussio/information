@@ -349,7 +349,7 @@
     <main>
       <div class="nav-parts">
         <div class="nav-card" onclick="showPage('home')"><div class="icon">🏠</div><h3>홈</h3></div>
-        <div class="nav-card" onclick="showPage('market')"><div class="icon">🥕</div><h3>당근마켓</h3></div>
+        <div class="nav-card" onclick="showPage('market')"><div class="icon">🥕</div><h3>카탈로그그</h3></div>
         <div class="nav-card" onclick="showPage('category')"><div class="icon">📂</div><h3>카테고리</h3></div>
         <div class="nav-card" onclick="showPage('stats')"><div class="icon">📈</div><h3>거래 통계</h3></div>
       </div>
@@ -513,20 +513,142 @@
       </div>
       <!-- /리얼 방송국 -->
 
-      <!-- 당근마켓 -->
-      <section id="market" class="page">
-        <div class="section-header">
-          <h2>🥕 당근마켓</h2>
-          <button class="help-pill" onclick="openHelp('market')">당근마켓이란?</button>
-        </div>
-        <div class="market-cards">
-          <div class="market-card"><h3>이름 <span class="id">#고번</span></h3><p class="label">판매물품</p><p class="item-name">달의자</p><div class="price">240억</div></div>
-          <div class="market-card"><h3>이름 <span class="id">#고번</span></h3><p class="label">판매물품</p><p class="item-name">테저렉트</p><div class="price">250억</div></div>
-          <div class="market-card"><h3>이름 <span class="id">#고번</span></h3><p class="label">판매물품</p><p class="item-name">불손 이펙트</p><div class="price">190억</div></div>
-          <div class="market-card"><h3>이름 <span class="id">#고번</span></h3><p class="label">판매물품</p><p class="item-name">브레이크댄스</p><div class="price">12억</div></div>
-          <div class="market-card"><h3>이름 <span class="id">#고번</span></h3><p class="label">판매물품</p><p class="item-name">구름의자</p><div class="price">260억</div></div>
-        </div>
-      </section>
+     <!-- ===== 카탈로그 시작 ===== -->
+<section id="catalog" class="page">
+  <div class="section-header">
+    <h2>📚 카탈로그</h2>
+    <button class="help-pill" onclick="openHelp('catalog')">카탈로그란?</button>
+  </div>
+
+  <!-- 상단 카테고리 버튼 -->
+  <div class="quick-nav">
+    <button onclick="scrollToSection('offroad')">🏔 오프로드</button>
+    <button onclick="scrollToSection('muscle')">💪 머슬카</button>
+    <button onclick="scrollToSection('van')">🚐 밴</button>
+    <button onclick="scrollToSection('sports')">🏎 스포츠카</button>
+    <button onclick="scrollToSection('classic')">🏛 클래식</button>
+    <button onclick="scrollToSection('sedan')">🚗 세단</button>
+    <button onclick="scrollToSection('supercar')">🚀 슈퍼카</button>
+    <button onclick="scrollToSection('suv')">🚙 SUV</button>
+    <button onclick="scrollToSection('compact')">🚘 소형</button>
+  </div>
+
+  <!-- 💥 오프로드 -->
+  <h3 id="offroad">💥 오프로드</h3>
+  <div class="car-sale-grid">
+    <div class="car-card"><div class="icon">🚗</div><h4>디로더</h4><p class="price">1,650,000,000원 · 2인승</p></div>
+    <div class="car-card"><div class="icon">🚗</div><h4>에버온</h4><p class="price">1,650,000,000원 · 4인승</p></div>
+    <div class="car-card"><div class="icon">🚗</div><h4>요세미터3</h4><p class="price">1,650,000,000원 · 2인승</p></div>
+    <div class="car-card"><div class="icon">🚗</div><h4>메사</h4><p class="price">1,782,000,000원 · 4인승</p></div>
+    <div class="car-card"><div class="icon">🚗</div><h4>듀브스타</h4><p class="price">2,794,000,000원 · 4인승</p></div>
+    <div class="car-card"><div class="icon">🚗</div><h4>프리크롤러</h4><p class="price">4,037,000,000원 · 4인승</p></div>
+  </div>
+
+  <!-- 💥 머슬카 -->
+  <h3 id="muscle">💥 머슬카</h3>
+  <div class="car-sale-grid">
+    <div class="car-card"><div class="icon">🚗</div><h4>탐파2</h4><p class="price">3,124,000,000원 · 2인승</p></div>
+  </div>
+
+  <!-- 💥 밴 -->
+  <h3 id="van">💥 밴</h3>
+  <div class="car-sale-grid">
+    <div class="car-card"><div class="icon">🚗</div><h4>반캣XL</h4><p class="price">1,650,000,000원 · 4인</p></div>
+    <div class="car-card"><div class="icon">🚗</div><h4>부리토</h4><p class="price">1,650,000,000원 · 6인</p></div>
+    <div class="car-card"><div class="icon">🚗</div><h4>서버</h4><p class="price">2,882,000,000원 · 6인</p></div>
+  </div>
+
+  <!-- 💥 스포츠카 -->
+  <h3 id="sports">💥 스포츠카</h3>
+  <div class="car-sale-grid">
+    <div class="car-card"><h4>엘리지2</h4><p class="price">1,672,000,000원</p></div>
+    <div class="car-card"><h4>코그브리오</h4><p class="price">1,848,000,000원</p></div>
+    <div class="car-card"><h4>재칼</h4><p class="price">1,914,000,000원</p></div>
+    <div class="car-card"><h4>미쉘리</h4><p class="price">1,925,000,000원</p></div>
+    <div class="car-card"><h4>버팔로</h4><p class="price">1,980,000,000원</p></div>
+    <div class="car-card"><h4>버팔로2</h4><p class="price">2,002,000,000원</p></div>
+    <div class="car-card"><h4>버팔로3</h4><p class="price">2,024,000,000원</p></div>
+    <div class="car-card"><h4>GB200</h4><p class="price">1,848,000,000원</p></div>
+    <div class="car-card"><h4>재스터3</h4><p class="price">2,090,000,000원</p></div>
+    <div class="car-card"><h4>마사크로</h4><p class="price">2,112,000,000원</p></div>
+    <div class="car-card"><h4>마사크로2</h4><p class="price">2,134,000,000원</p></div>
+    <div class="car-card"><h4>베스트아GTS</h4><p class="price">2,772,000,000원</p></div>
+    <div class="car-card"><h4>펠론</h4><p class="price">2,860,000,000원</p></div>
+    <div class="car-card"><h4>트로포스</h4><p class="price">2,926,000,000원</p></div>
+    <div class="car-card"><h4>슬라겐</h4><p class="price">3,168,000,000원</p></div>
+    <div class="car-card"><h4>코멧3</h4><p class="price">3,190,000,000원</p></div>
+    <div class="car-card"><h4>백트레</h4><p class="price">3,212,000,000원</p></div>
+    <div class="car-card"><h4>드래프터</h4><p class="price">3,234,000,000원</p></div>
+    <div class="car-card"><h4>주글러</h4><p class="price">3,256,000,000원</p></div>
+    <div class="car-card"><h4>팡테르</h4><p class="price">4,070,000,000원</p></div>
+    <div class="car-card"><h4>펠른2</h4><p class="price">4,103,000,000원</p></div>
+    <div class="car-card"><h4>파리아</h4><p class="price">4,169,000,000원</p></div>
+    <div class="car-card"><h4>네온</h4><p class="price">4,367,000,000원</p></div>
+  </div>
+
+  <!-- 💥 클래식 -->
+  <h3 id="classic">💥 클래식</h3>
+  <div class="car-sale-grid">
+    <div class="car-card"><h4>토르네이도</h4><p class="price">1,716,000,000원</p></div>
+    <div class="car-card"><h4>토나도5</h4><p class="price">1,738,000,000원</p></div>
+    <div class="car-card"><h4>토네이도6</h4><p class="price">1,760,000,000원</p></div>
+    <div class="car-card"><h4>디이너스티</h4><p class="price">1,936,000,000원</p></div>
+    <div class="car-card"><h4>Z190</h4><p class="price">2,068,000,000원</p></div>
+    <div class="car-card"><h4>GT500</h4><p class="price">2,156,000,000원</p></div>
+    <div class="car-card"><h4>코켓2</h4><p class="price">2,178,000,000원</p></div>
+    <div class="car-card"><h4>코켓5</h4><p class="price">2,200,000,000원</p></div>
+    <div class="car-card"><h4>인퍼너스2</h4><p class="price">2,838,000,000원</p></div>
+  </div>
+
+  <!-- 💥 세단 -->
+  <h3 id="sedan">💥 세단</h3>
+  <div class="car-sale-grid">
+    <div class="car-card"><h4>콕55</h4><p class="price">1,694,000,000원</p></div>
+    <div class="car-card"><h4>스태포드</h4><p class="price">1,870,000,000원</p></div>
+    <div class="car-card"><h4>라인하트</h4><p class="price">3,080,000,000원</p></div>
+    <div class="car-card"><h4>친퀘밀라</h4><p class="price">4,301,000,000원</p></div>
+  </div>
+
+  <!-- 💥 슈퍼카 -->
+  <h3 id="supercar">💥 슈퍼카</h3>
+  <div class="car-sale-grid">
+    <div class="car-card"><h4>페네트레이터</h4><p class="price">2,948,000,000원</p></div>
+    <div class="car-card"><h4>GP1</h4><p class="price">3,278,000,000원</p></div>
+    <div class="car-card"><h4>치타2</h4><p class="price">3,300,000,000원</p></div>
+    <div class="car-card"><h4>몰릭</h4><p class="price">4,202,000,000원</p></div>
+    <div class="car-card"><h4>바카</h4><p class="price">4,658,500,000원</p></div>
+    <div class="car-card"><h4>인퍼너스</h4><p class="price">4,334,000,000원</p></div>
+    <div class="car-card"><h4>반시2</h4><p class="price">4,400,000,000원</p></div>
+  </div>
+
+  <!-- 💥 SUV -->
+  <h3 id="suv">💥 SUV</h3>
+  <div class="car-sale-grid">
+    <div class="car-card"><h4>그레슬리</h4><p class="price">1,804,000,000원</p></div>
+    <div class="car-card"><h4>FQ2</h4><p class="price">1,826,000,000원</p></div>
+    <div class="car-card"><h4>힌틀리</h4><p class="price">1,892,000,000원</p></div>
+    <div class="car-card"><h4>더브스타2</h4><p class="price">2,816,000,000원</p></div>
+    <div class="car-card"><h4>이시8</h4><p class="price">2,970,000,000원</p></div>
+    <div class="car-card"><h4>발러3</h4><p class="price">2,992,000,000원</p></div>
+    <div class="car-card"><h4>발러4</h4><p class="price">3,014,000,000원</p></div>
+    <div class="car-card"><h4>발러7</h4><p class="price">3,036,000,000원</p></div>
+    <div class="car-card"><h4>핫 링 에바론</h4><p class="price">3,058,000,000원</p></div>
+    <div class="car-card"><h4>노박</h4><p class="price">3,102,000,000원</p></div>
+    <div class="car-card"><h4>비반나이트</h4><p class="price">4,136,000,000원</p></div>
+    <div class="car-card"><h4>에스트론</h4><p class="price">4,268,000,000원</p></div>
+    <div class="car-card"><h4>하바네로</h4><p class="price">5,500,000,000원</p></div>
+  </div>
+
+  <!-- 💥 소형 -->
+  <h3 id="compact">💥 소형</h3>
+  <div class="car-sale-grid">
+    <div class="car-card"><h4>이씨클래식</h4><p class="price">1,650,000,000원</p></div>
+    <div class="car-card"><h4>브리오소</h4><p class="price">2,904,000,000원</p></div>
+  </div>
+
+</section>
+<!-- ===== 카탈로그 끝 ===== -->
+
 
       <!-- 카테고리 -->
       <section id="category" class="page">
@@ -1215,5 +1337,6 @@
   </script>
 </body>
 </html>
+
 
 
