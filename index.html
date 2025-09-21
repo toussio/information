@@ -1152,13 +1152,94 @@
       onScrollProgress();
     });
 
-    /* ===== ✅ 추가: 차량 카드 클릭 → 차량 모달 열기 ===== */
-    const CAR_DATA = {
-      '테저랙트': { price:'300억', desc:'최고속도 400km/h, 전자식 서스펜션, 탄소섬유 모노코크 섀시.' },
-      '네로': { price:'250억', desc:'밸런스가 좋은 전천후 슈퍼카. 일상·레이스 모두 OK.' },
-      'M1': { price:'200억', desc:'스포티한 클래식 모델. 커스텀 파츠 호환성 우수.' },
-      '쇼타로': { price:'100억', desc:'바이크계의 아이콘. 가속·핸들링 특화.' }
-    };
+    <script>
+const CAR_DATA = {
+  /* 💥 오프로드 */
+  '디로더': {price:'1,650,000,000원', desc:'강력한 오프로드 성능.', img:'images/dloader.jpg'},
+  '에버온': {price:'1,650,000,000원', desc:'4인승 패밀리 오프로드 SUV.', img:'images/everon.jpg'},
+  '요세미터3': {price:'1,650,000,000원', desc:'2인승 경량 오프로더.', img:'images/yosemite3.jpg'},
+  '메사': {price:'1,782,000,000원', desc:'4인승 클래식 오프로더.', img:'images/mesa.jpg'},
+  '듀브스타': {price:'2,794,000,000원', desc:'하드코어 SUV 듀브스타.', img:'images/dubsta.jpg'},
+  '프리크롤러': {price:'4,037,000,000원', desc:'4인승 프리미엄 오프로드 차량.', img:'images/freecrawler.jpg'},
+
+  /* 💥 머슬카 */
+  '탐파2': {price:'3,124,000,000원', desc:'머슬카의 전설, 탐파2.', img:'images/tampa2.jpg'},
+
+  /* 💥 밴 */
+  '반캣XL': {price:'1,650,000,000원', desc:'4인 밴.', img:'images/van-catxl.jpg'},
+  '부리토': {price:'1,650,000,000원', desc:'6인 밴.', img:'images/burrito.jpg'},
+  '서버': {price:'2,882,000,000원', desc:'6인 서버 밴.', img:'images/surfer.jpg'},
+
+  /* 💥 스포츠카 (일부만 예시, 나머지도 동일한 패턴으로 추가 가능) */
+  '엘리지2': {price:'1,672,000,000원', desc:'스포츠카 엘리지2.', img:'images/eligy2.jpg'},
+  '코그브리오': {price:'1,848,000,000원', desc:'스포츠카 코그브리오.', img:'images/cogbrio.jpg'},
+  '재칼': {price:'1,914,000,000원', desc:'스포츠카 재칼.', img:'images/jackal.jpg'},
+  '미쉘리': {price:'1,925,000,000원', desc:'스포츠카 미쉘리.', img:'images/michelli.jpg'},
+  '버팔로': {price:'1,980,000,000원', desc:'스포츠카 버팔로.', img:'images/buffalo.jpg'},
+  '버팔로2': {price:'2,002,000,000원', desc:'스포츠카 버팔로2.', img:'images/buffalo2.jpg'},
+  '버팔로3': {price:'2,024,000,000원', desc:'스포츠카 버팔로3.', img:'images/buffalo3.jpg'},
+  'GB200': {price:'1,848,000,000원', desc:'스포츠카 GB200.', img:'images/gb200.jpg'},
+  '재스터3': {price:'2,090,000,000원', desc:'스포츠카 재스터3.', img:'images/jester3.jpg'},
+  '마사크로': {price:'2,112,000,000원', desc:'스포츠카 마사크로.', img:'images/massacro.jpg'},
+  '마사크로2': {price:'2,134,000,000원', desc:'스포츠카 마사크로2.', img:'images/massacro2.jpg'},
+  '베스트아GTS': {price:'2,772,000,000원', desc:'스포츠카 베스트아GTS.', img:'images/bestaGTS.jpg'},
+  '펠론': {price:'2,860,000,000원', desc:'스포츠카 펠론.', img:'images/felon.jpg'},
+  '트로포스': {price:'2,926,000,000원', desc:'스포츠카 트로포스.', img:'images/tropos.jpg'},
+  '슬라겐': {price:'3,168,000,000원', desc:'스포츠카 슬라겐.', img:'images/slagen.jpg'},
+  '코멧3': {price:'3,190,000,000원', desc:'스포츠카 코멧3.', img:'images/comet3.jpg'},
+  '백트레': {price:'3,212,000,000원', desc:'스포츠카 백트레.', img:'images/backtre.jpg'},
+  '드래프터': {price:'3,234,000,000원', desc:'스포츠카 드래프터.', img:'images/drafter.jpg'},
+  '주글러': {price:'3,256,000,000원', desc:'스포츠카 주글러.', img:'images/jugular.jpg'},
+  '팡테르': {price:'4,070,000,000원', desc:'스포츠카 팡테르.', img:'images/pfister.jpg'},
+  '펠른2': {price:'4,103,000,000원', desc:'스포츠카 펠른2.', img:'images/felon2.jpg'},
+  '파리아': {price:'4,169,000,000원', desc:'스포츠카 파리아.', img:'images/pariah.jpg'},
+  '네온': {price:'4,367,000,000원', desc:'스포츠카 네온.', img:'images/neon.jpg'},
+
+  /* 💥 클래식 */
+  '토르네이도': {price:'1,716,000,000원', desc:'클래식 토르네이도.', img:'images/tornado.jpg'},
+  '토나도5': {price:'1,738,000,000원', desc:'클래식 토나도5.', img:'images/tornado5.jpg'},
+  '토네이도6': {price:'1,760,000,000원', desc:'클래식 토네이도6.', img:'images/tornado6.jpg'},
+  '디이너스티': {price:'1,936,000,000원', desc:'클래식 디이너스티.', img:'images/dynasty.jpg'},
+  'Z190': {price:'2,068,000,000원', desc:'클래식 Z190.', img:'images/z190.jpg'},
+  'GT500': {price:'2,156,000,000원', desc:'클래식 GT500.', img:'images/gt500.jpg'},
+  '코켓2': {price:'2,178,000,000원', desc:'클래식 코켓2.', img:'images/coquette2.jpg'},
+  '코켓5': {price:'2,200,000,000원', desc:'클래식 코켓5.', img:'images/coquette5.jpg'},
+  '인퍼너스2': {price:'2,838,000,000원', desc:'클래식 인퍼너스2.', img:'images/infernus2.jpg'},
+
+  /* 💥 세단 */
+  '콕55': {price:'1,694,000,000원', desc:'세단 콕55.', img:'images/cog55.jpg'},
+  '스태포드': {price:'1,870,000,000원', desc:'세단 스태포드.', img:'images/stafford.jpg'},
+  '라인하트': {price:'3,080,000,000원', desc:'세단 라인하트.', img:'images/reinhart.jpg'},
+  '친퀘밀라': {price:'4,301,000,000원', desc:'세단 친퀘밀라.', img:'images/cinquemila.jpg'},
+
+  /* 💥 슈퍼카 */
+  '페네트레이터': {price:'2,948,000,000원', desc:'슈퍼카 페네트레이터.', img:'images/penetrator.jpg'},
+  'GP1': {price:'3,278,000,000원', desc:'슈퍼카 GP1.', img:'images/gp1.jpg'},
+  '치타2': {price:'3,300,000,000원', desc:'슈퍼카 치타2.', img:'images/cheetah2.jpg'},
+  '몰릭': {price:'4,202,000,000원', desc:'슈퍼카 몰릭.', img:'images/molik.jpg'},
+  '바카': {price:'4,658,500,000원', desc:'슈퍼카 바카.', img:'images/vacca.jpg'},
+  '인퍼너스': {price:'4,334,000,000원', desc:'슈퍼카 인퍼너스.', img:'images/infernus.jpg'},
+  '반시2': {price:'4,400,000,000원', desc:'슈퍼카 반시2.', img:'images/banshee2.jpg'},
+
+  /* 💥 SUV */
+  '그레슬리': {price:'1,804,000,000원', desc:'SUV 그레슬리.', img:'images/grizzly.jpg'},
+  'FQ2': {price:'1,826,000,000원', desc:'SUV FQ2.', img:'images/fq2.jpg'},
+  '힌틀리': {price:'1,892,000,000원', desc:'SUV 힌틀리.', img:'images/huntley.jpg'},
+  '더브스타2': {price:'2,816,000,000원', desc:'SUV 더브스타2.', img:'images/dubsta2.jpg'},
+  '이시8': {price:'2,970,000,000원', desc:'SUV 이시8.', img:'images/issi8.jpg'},
+  '발러3': {price:'2,992,000,000원', desc:'SUV 발러3.', img:'images/baller3.jpg'},
+  '발러4': {price:'3,014,000,000원', desc:'SUV 발러4.', img:'images/baller4.jpg'},
+  '발러7': {price:'3,036,000,000원', desc:'SUV 발러7.', img:'images/baller7.jpg'},
+  '핫 링 에바론': {price:'3,058,000,000원', desc:'SUV 핫 링 에바론.', img:'images/hotring.jpg'},
+  '노박': {price:'3,102,000,000원', desc:'SUV 노박.', img:'images/novak.jpg'},
+  '비반나이트': {price:'4,136,000,000원', desc:'SUV 비반나이트.', img:'images/vivanight.jpg'},
+  '에스트론': {price:'4,268,000,000원', desc:'SUV 에스트론.', img:'images/astron.jpg'},
+  '하바네로': {price:'5,500,000,000원', desc:'SUV 하바네로.', img:'images/habanero.jpg'},
+
+  /* 💥 소형 */
+  '이씨클래식': {price:'1,650,000,000원', desc:'소형 이씨클래식.', img:'images/issi-classic.jpg'},
+  '브리오소': {price:'2,904,000,000원', desc:'소형 브리오소.', img:'images/brioso.jpg'}
+};
 
     function openCarModal(){
       const modal = document.getElementById('carModal');
@@ -1350,6 +1431,7 @@
   </script>
 </body>
 </html>
+
 
 
 
