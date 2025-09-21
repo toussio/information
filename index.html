@@ -379,7 +379,64 @@
     <main>
       <div class="nav-parts">
         <div class="nav-card" onclick="showPage('home')"><div class="icon">🏠</div><h3>홈</h3></div>
-        <div class="nav-card" onclick="showPage('market')"><div class="icon">🥕</div><h3>당근마켓</h3></div>
+        <div class="nav-card" onclick="showPage('market')"><div class="icon">🥕</div><h3>카탈로그   .car-card{
+      background:#fff;
+      border-radius:16px;
+      padding:20px;
+      box-shadow:0 6px 16px rgba(0,0,0,.08);
+      text-align:center;
+      cursor:pointer;
+      transition:transform .25s var(--e), box-shadow .25s var(--e);
+      border:2px solid transparent;
+      animation:fadeInUp .4s ease forwards;
+    }
+    .car-card:hover{
+      transform:translateY(-6px);
+      box-shadow:0 10px 24px rgba(0,0,0,.12);
+      border-color:var(--accent);
+    }
+    .car-card .icon{
+      font-size:36px;margin-bottom:8px
+    }
+    .car-card h4{
+      margin:0 0 6px;font-size:18px;font-weight:800;color:var(--accent)
+    }
+    .car-card .price{
+      display:inline-block;
+      background:#dcfce7;color:#065f46;font-weight:700;font-size:16px;
+      padding:6px 14px;border-radius:50px
+    }
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none}}
+  </style>
+</head>
+<body>
+  <header><h1 onclick="goHome()">떡잎방범대 정보 센터</h1></header>
+  <div id="scrollProgress" aria-hidden="true"></div>
+
+  <div class="layout">
+    <!-- 왼쪽 -->
+    <aside>
+      <div class="aside-box">
+        <h3>📢 공지사항</h3>
+        <ul>
+          <li>떡잎방범대 정보 센터 OPEN</li>
+          <li>떡잎방범대 투자 센터 리뉴얼 </li>
+          <li>🙏문의: 703 김남정, 디코 dm</li>
+        </ul>
+      </div>
+      <div class="aside-box">
+        <h3>🎉 다가오는 이벤트</h3>
+        <ul>
+          <li> .</li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- 중앙 -->
+    <main>
+      <div class="nav-parts">
+        <div class="nav-card" onclick="showPage('home')"><div class="icon">🏠</div><h3>홈</h3></div>
+        <div class="nav-card" onclick="showPage('market')"><div class="icon">📚</div><h3>카탈로그</h3></div>
         <div class="nav-card" onclick="showPage('category')"><div class="icon">📂</div><h3>카테고리</h3></div>
         <div class="nav-card" onclick="showPage('stats')"><div class="icon">📈</div><h3>거래 통계</h3></div>
       </div>
@@ -547,7 +604,7 @@
       <!-- 당근마켓 (카테고리와 동일한 테이블형) -->
 <!-- ===== 당근마켓 (카테고리별 이동 가능, 풀버전) ===== -->
 <section id="market" class="page">
-  <h2>🥕 당근마켓</h2>
+  <h2>📚 카탈로그</h2>
 
   <!-- 빠른 이동 버튼 -->
   <div class="quick-nav">
@@ -891,7 +948,7 @@
   <div id="helpModal" class="modal" aria-hidden="true">
     <div class="modal-content" role="dialog" aria-modal="true">
       <button class="close-btn" onclick="closeHelp()">닫기</button>
-      <h3 id="helpTitle">당근마켓 도움말</h3>
+      <h3 id="helpTitle">도움말</h3>
       <p class="modal-tagline" id="helpTagline">커뮤니티 장터 이용 안내</p>
       <div class="help-body">
         <div id="helpContent" class="help-view"></div>
@@ -1122,7 +1179,7 @@
       const content = document.getElementById('helpContent');
 
       if(key==='market'){
-        title.textContent = '당근마켓 도움말';
+        title.textContent = '도움말';
         tagline.textContent = '커뮤니티 장터 이용 안내';
       } else {
         title.textContent = '도움말';
@@ -1382,6 +1439,7 @@
   </script>
 </body>
 </html>
+
 
 
 
