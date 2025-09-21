@@ -1183,39 +1183,7 @@
       document.getElementById('carModalDesc').textContent = data.desc || '세부 정보가 없습니다.';
       openCarModal();
     });
-
-  window.scrollToMarket = scrollToMarket;
-
-    /* ===== ✅ 추가: 카탈로그 차량 표 자동으로 CAR_DATA 구성 + 클릭 시 모달 열기 ===== */
-    const CAR_DATA = {};
-    document.querySelectorAll('section#market table').forEach(table=>{
-      table.querySelectorAll('tr').forEach(tr=>{
-        const tds = tr.querySelectorAll('td');
-        if(!tds.length) return; 
-        const name = tds[0]?.textContent.trim();
-        if(!name) return;
-        const price = tds[1]?.textContent.trim() || '-';
-        if(!CAR_DATA[name]){
-          CAR_DATA[name] = {price:price, desc:'세부 정보가 없습니다.'};
-        }
-      });
-    });
-
-    document.addEventListener('click', (e)=>{
-      const row = e.target.closest('section#market table tr'); 
-      if(!row) return;
-      if(row.querySelector('th')) return; 
-      const firstTd = row.querySelector('td');
-      if(!firstTd) return;
-      const name = firstTd.textContent.trim();
-      if(!name) return;
-      const data = CAR_DATA[name] || {};
-      document.getElementById('carModalTitle').textContent = name;
-      document.getElementById('carModalPrice').textContent = '가격: ' + (data.price || '-');
-      document.getElementById('carModalDesc').textContent = data.desc || '세부 정보가 없습니다.';
-      openCarModal();
-    });
-   </script>
+  </script>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
@@ -1382,9 +1350,6 @@
   </script>
 </body>
 </html>
-
-
-
 
 
 
