@@ -686,9 +686,126 @@
   </table>
 </section>
 
+<!-- ② 모달 HTML (맨 아래에 추가) -->
+  <div id="carModal" class="modal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true">
+      <button class="close-btn" onclick="closeCarModal()">닫기</button>
+      <h3 id="carModalTitle">차량명</h3>
+      <img id="carModalImg" src="" alt="" style="max-width:100%;border-radius:14px;margin-bottom:14px">
+      <p id="carModalPrice" class="modal-tagline">가격 정보</p>
+      <div id="carModalDesc">세부 설명이 여기에 표시됩니다.</div>
+    </div>
+  </div>
 
+const CAR_CATALOG_DATA = {
+  "디로더":{img:"https://via.placeholder.com/600x300?text=디로더",price:"1,650,000,000원",desc:"디로더 차량 설명"},
+  "에버온":{img:"https://via.placeholder.com/600x300?text=에버온",price:"1,650,000,000원",desc:"에버온 차량 설명"},
+  "요세미터3":{img:"https://via.placeholder.com/600x300?text=요세미터3",price:"1,650,000,000원",desc:"요세미터3 차량 설명"},
+  "메사":{img:"https://via.placeholder.com/600x300?text=메사",price:"1,782,000,000원",desc:"메사 차량 설명"},
+  "듀브스타":{img:"https://via.placeholder.com/600x300?text=듀브스타",price:"2,794,000,000원",desc:"듀브스타 차량 설명"},
+  "프리크롤러":{img:"https://via.placeholder.com/600x300?text=프리크롤러",price:"4,037,000,000원",desc:"프리크롤러 차량 설명"},
+  "탐파2":{img:"https://via.placeholder.com/600x300?text=탐파2",price:"3,124,000,000원",desc:"탐파2 차량 설명"},
+  "반캣XL":{img:"https://via.placeholder.com/600x300?text=반캣XL",price:"1,650,000,000원",desc:"반캣XL 차량 설명"},
+  "부리토":{img:"https://via.placeholder.com/600x300?text=부리토",price:"1,650,000,000원",desc:"부리토 차량 설명"},
+  "서버":{img:"https://via.placeholder.com/600x300?text=서버",price:"2,882,000,000원",desc:"서버 차량 설명"},
+  "엘리지2":{img:"https://via.placeholder.com/600x300?text=엘리지2",price:"1,672,000,000원",desc:"엘리지2 차량 설명"},
+  "코그브리오":{img:"https://via.placeholder.com/600x300?text=코그브리오",price:"1,848,000,000원",desc:"코그브리오 차량 설명"},
+  "재칼":{img:"https://via.placeholder.com/600x300?text=재칼",price:"1,914,000,000원",desc:"재칼 차량 설명"},
+  "미쉘리":{img:"https://via.placeholder.com/600x300?text=미쉘리",price:"1,925,000,000원",desc:"미쉘리 차량 설명"},
+  "버팔로":{img:"https://via.placeholder.com/600x300?text=버팔로",price:"1,980,000,000원",desc:"버팔로 차량 설명"},
+  "버팔로2":{img:"https://via.placeholder.com/600x300?text=버팔로2",price:"2,002,000,000원",desc:"버팔로2 차량 설명"},
+  "버팔로3":{img:"https://via.placeholder.com/600x300?text=버팔로3",price:"2,024,000,000원",desc:"버팔로3 차량 설명"},
+  "GB200":{img:"https://via.placeholder.com/600x300?text=GB200",price:"1,848,000,000원",desc:"GB200 차량 설명"},
+  "재스터3":{img:"https://via.placeholder.com/600x300?text=재스터3",price:"2,090,000,000원",desc:"재스터3 차량 설명"},
+  "마사크로":{img:"https://via.placeholder.com/600x300?text=마사크로",price:"2,112,000,000원",desc:"마사크로 차량 설명"},
+  "마사크로2":{img:"https://via.placeholder.com/600x300?text=마사크로2",price:"2,134,000,000원",desc:"마사크로2 차량 설명"},
+  "베스트아GTS":{img:"https://via.placeholder.com/600x300?text=베스트아GTS",price:"2,772,000,000원",desc:"베스트아GTS 차량 설명"},
+  "펠론":{img:"https://via.placeholder.com/600x300?text=펠론",price:"2,860,000,000원",desc:"펠론 차량 설명"},
+  "트로포스":{img:"https://via.placeholder.com/600x300?text=트로포스",price:"2,926,000,000원",desc:"트로포스 차량 설명"},
+  "슬라겐":{img:"https://via.placeholder.com/600x300?text=슬라겐",price:"3,168,000,000원",desc:"슬라겐 차량 설명"},
+  "코멧3":{img:"https://via.placeholder.com/600x300?text=코멧3",price:"3,190,000,000원",desc:"코멧3 차량 설명"},
+  "백트레":{img:"https://via.placeholder.com/600x300?text=백트레",price:"3,212,000,000원",desc:"백트레 차량 설명"},
+  "드래프터":{img:"https://via.placeholder.com/600x300?text=드래프터",price:"3,234,000,000원",desc:"드래프터 차량 설명"},
+  "주글러":{img:"https://via.placeholder.com/600x300?text=주글러",price:"3,256,000,000원",desc:"주글러 차량 설명"},
+  "팡테르":{img:"https://via.placeholder.com/600x300?text=팡테르",price:"4,070,000,000원",desc:"팡테르 차량 설명"},
+  "펠른2":{img:"https://via.placeholder.com/600x300?text=펠른2",price:"4,103,000,000원",desc:"펠른2 차량 설명"},
+  "파리아":{img:"https://via.placeholder.com/600x300?text=파리아",price:"4,169,000,000원",desc:"파리아 차량 설명"},
+  "네온":{img:"https://via.placeholder.com/600x300?text=네온",price:"4,367,000,000원",desc:"네온 차량 설명"},
+  "토르네이도":{img:"https://via.placeholder.com/600x300?text=토르네이도",price:"1,716,000,000원",desc:"토르네이도 차량 설명"},
+  "토나도5":{img:"https://via.placeholder.com/600x300?text=토나도5",price:"1,738,000,000원",desc:"토나도5 차량 설명"},
+  "토네이도6":{img:"https://via.placeholder.com/600x300?text=토네이도6",price:"1,760,000,000원",desc:"토네이도6 차량 설명"},
+  "디이너스티":{img:"https://via.placeholder.com/600x300?text=디이너스티",price:"1,936,000,000원",desc:"디이너스티 차량 설명"},
+  "Z190":{img:"https://via.placeholder.com/600x300?text=Z190",price:"2,068,000,000원",desc:"Z190 차량 설명"},
+  "GT500":{img:"https://via.placeholder.com/600x300?text=GT500",price:"2,156,000,000원",desc:"GT500 차량 설명"},
+  "코켓2":{img:"https://via.placeholder.com/600x300?text=코켓2",price:"2,178,000,000원",desc:"코켓2 차량 설명"},
+  "코켓5":{img:"https://via.placeholder.com/600x300?text=코켓5",price:"2,200,000,000원",desc:"코켓5 차량 설명"},
+  "인퍼너스2":{img:"https://via.placeholder.com/600x300?text=인퍼너스2",price:"2,838,000,000원",desc:"인퍼너스2 차량 설명"},
+  "콕55":{img:"https://via.placeholder.com/600x300?text=콕55",price:"1,694,000,000원",desc:"콕55 차량 설명"},
+  "스태포드":{img:"https://via.placeholder.com/600x300?text=스태포드",price:"1,870,000,000원",desc:"스태포드 차량 설명"},
+  "라인하트":{img:"https://via.placeholder.com/600x300?text=라인하트",price:"3,080,000,000원",desc:"라인하트 차량 설명"},
+  "친퀘밀라":{img:"https://via.placeholder.com/600x300?text=친퀘밀라",price:"4,301,000,000원",desc:"친퀘밀라 차량 설명"},
+  "페네트레이터":{img:"https://via.placeholder.com/600x300?text=페네트레이터",price:"2,948,000,000원",desc:"페네트레이터 차량 설명"},
+  "GP1":{img:"https://via.placeholder.com/600x300?text=GP1",price:"3,278,000,000원",desc:"GP1 차량 설명"},
+  "치타2":{img:"https://via.placeholder.com/600x300?text=치타2",price:"3,300,000,000원",desc:"치타2 차량 설명"},
+  "몰릭":{img:"https://via.placeholder.com/600x300?text=몰릭",price:"4,202,000,000원",desc:"몰릭 차량 설명"},
+  "바카":{img:"https://via.placeholder.com/600x300?text=바카",price:"4,658,500,000원",desc:"바카 차량 설명"},
+  "인퍼너스":{img:"https://via.placeholder.com/600x300?text=인퍼너스",price:"4,334,000,000원",desc:"인퍼너스 차량 설명"},
+  "반시2":{img:"https://via.placeholder.com/600x300?text=반시2",price:"4,400,000,000원",desc:"반시2 차량 설명"},
+  "그레슬리":{img:"https://via.placeholder.com/600x300?text=그레슬리",price:"1,804,000,000원",desc:"그레슬리 차량 설명"},
+  "FQ2":{img:"https://via.placeholder.com/600x300?text=FQ2",price:"1,826,000,000원",desc:"FQ2 차량 설명"},
+  "힌틀리":{img:"https://via.placeholder.com/600x300?text=힌틀리",price:"1,892,000,000원",desc:"힌틀리 차량 설명"},
+  "더브스타2":{img:"https://via.placeholder.com/600x300?text=더브스타2",price:"2,816,000,000원",desc:"더브스타2 차량 설명"},
+  "이시8":{img:"https://via.placeholder.com/600x300?text=이시8",price:"2,970,000,000원",desc:"이시8 차량 설명"},
+  "발러3":{img:"https://via.placeholder.com/600x300?text=발러3",price:"2,992,000,000원",desc:"발러3 차량 설명"},
+  "발러4":{img:"https://via.placeholder.com/600x300?text=발러4",price:"3,014,000,000원",desc:"발러4 차량 설명"},
+  "발러7":{img:"https://via.placeholder.com/600x300?text=발러7",price:"3,036,000,000원",desc:"발러7 차량 설명"},
+  "핫 링 에바론":{img:"https://via.placeholder.com/600x300?text=핫+링+에바론",price:"3,058,000,000원",desc:"핫 링 에바론 차량 설명"},
+  "노박":{img:"https://via.placeholder.com/600x300?text=노박",price:"3,102,000,000원",desc:"노박 차량 설명"},
+  "비반나이트":{img:"https://via.placeholder.com/600x300?text=비반나이트",price:"4,136,000,000원",desc:"비반나이트 차량 설명"},
+  "에스트론":{img:"https://via.placeholder.com/600x300?text=에스트론",price:"4,268,000,000원",desc:"에스트론 차량 설명"},
+  "하바네로":{img:"https://via.placeholder.com/600x300?text=하바네로",price:"5,500,000,000원",desc:"하바네로 차량 설명"},
+  "이씨클래식":{img:"https://via.placeholder.com/600x300?text=이씨클래식",price:"1,650,000,000원",desc:"이씨클래식 차량 설명"},
+  "브리오소":{img:"https://via.placeholder.com/600x300?text=브리오소",price:"2,904,000,000원",desc:"브리오소 차량 설명"}
+};
+    <script>
+/* === 차량 데이터 === */
+const CAR_CATALOG_DATA = {
+  "디로더":{img:"https://via.placeholder.com/600x300?text=디로더",price:"1,650,000,000원",desc:"디로더 차량 설명"},
+  "에버온":{img:"https://via.placeholder.com/600x300?text=에버온",price:"1,650,000,000원",desc:"에버온 차량 설명"},
+  /* … 중략 … (위에서 드린 전체 CAR_CATALOG_DATA 복사해서 붙여넣으시면 됩니다) */
+  "브리오소":{img:"https://via.placeholder.com/600x300?text=브리오소",price:"2,904,000,000원",desc:"브리오소 차량 설명"}
+};
 
+/* === 모달 열기/닫기 === */
+function openCarModal(name){
+  const modal=document.getElementById('carModal');
+  const data=CAR_CATALOG_DATA[name]||{};
+  document.getElementById('carModalTitle').textContent=name;
+  document.getElementById('carModalImg').src=data.img||'';
+  document.getElementById('carModalImg').alt=name;
+  document.getElementById('carModalPrice').textContent='가격: '+(data.price||'-');
+  document.getElementById('carModalDesc').textContent=data.desc||'세부 설명이 없습니다.';
+  modal.classList.add('show');
+  modal.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+}
 
+function closeCarModal(){
+  const modal=document.getElementById('carModal');
+  modal.classList.remove('show');
+  modal.setAttribute('aria-hidden','true');
+  document.body.style.overflow='';
+}
+
+/* === 테이블 행 클릭 === */
+document.addEventListener('click', (e)=>{
+  const tr=e.target.closest('tr[data-car]');
+  if(!tr) return;
+  openCarModal(tr.dataset.car);
+});
+</script>
+
+    
       <!-- 카테고리 -->
       <section id="category" class="page">
         <h2>📂 카테고리별 시세표</h2>
@@ -1152,94 +1269,13 @@
       onScrollProgress();
     });
 
-    <script>
-const CAR_DATA = {
-  /* 💥 오프로드 */
-  '디로더': {price:'1,650,000,000원', desc:'강력한 오프로드 성능.', img:'images/dloader.jpg'},
-  '에버온': {price:'1,650,000,000원', desc:'4인승 패밀리 오프로드 SUV.', img:'images/everon.jpg'},
-  '요세미터3': {price:'1,650,000,000원', desc:'2인승 경량 오프로더.', img:'images/yosemite3.jpg'},
-  '메사': {price:'1,782,000,000원', desc:'4인승 클래식 오프로더.', img:'images/mesa.jpg'},
-  '듀브스타': {price:'2,794,000,000원', desc:'하드코어 SUV 듀브스타.', img:'images/dubsta.jpg'},
-  '프리크롤러': {price:'4,037,000,000원', desc:'4인승 프리미엄 오프로드 차량.', img:'images/freecrawler.jpg'},
-
-  /* 💥 머슬카 */
-  '탐파2': {price:'3,124,000,000원', desc:'머슬카의 전설, 탐파2.', img:'images/tampa2.jpg'},
-
-  /* 💥 밴 */
-  '반캣XL': {price:'1,650,000,000원', desc:'4인 밴.', img:'images/van-catxl.jpg'},
-  '부리토': {price:'1,650,000,000원', desc:'6인 밴.', img:'images/burrito.jpg'},
-  '서버': {price:'2,882,000,000원', desc:'6인 서버 밴.', img:'images/surfer.jpg'},
-
-  /* 💥 스포츠카 (일부만 예시, 나머지도 동일한 패턴으로 추가 가능) */
-  '엘리지2': {price:'1,672,000,000원', desc:'스포츠카 엘리지2.', img:'images/eligy2.jpg'},
-  '코그브리오': {price:'1,848,000,000원', desc:'스포츠카 코그브리오.', img:'images/cogbrio.jpg'},
-  '재칼': {price:'1,914,000,000원', desc:'스포츠카 재칼.', img:'images/jackal.jpg'},
-  '미쉘리': {price:'1,925,000,000원', desc:'스포츠카 미쉘리.', img:'images/michelli.jpg'},
-  '버팔로': {price:'1,980,000,000원', desc:'스포츠카 버팔로.', img:'images/buffalo.jpg'},
-  '버팔로2': {price:'2,002,000,000원', desc:'스포츠카 버팔로2.', img:'images/buffalo2.jpg'},
-  '버팔로3': {price:'2,024,000,000원', desc:'스포츠카 버팔로3.', img:'images/buffalo3.jpg'},
-  'GB200': {price:'1,848,000,000원', desc:'스포츠카 GB200.', img:'images/gb200.jpg'},
-  '재스터3': {price:'2,090,000,000원', desc:'스포츠카 재스터3.', img:'images/jester3.jpg'},
-  '마사크로': {price:'2,112,000,000원', desc:'스포츠카 마사크로.', img:'images/massacro.jpg'},
-  '마사크로2': {price:'2,134,000,000원', desc:'스포츠카 마사크로2.', img:'images/massacro2.jpg'},
-  '베스트아GTS': {price:'2,772,000,000원', desc:'스포츠카 베스트아GTS.', img:'images/bestaGTS.jpg'},
-  '펠론': {price:'2,860,000,000원', desc:'스포츠카 펠론.', img:'images/felon.jpg'},
-  '트로포스': {price:'2,926,000,000원', desc:'스포츠카 트로포스.', img:'images/tropos.jpg'},
-  '슬라겐': {price:'3,168,000,000원', desc:'스포츠카 슬라겐.', img:'images/slagen.jpg'},
-  '코멧3': {price:'3,190,000,000원', desc:'스포츠카 코멧3.', img:'images/comet3.jpg'},
-  '백트레': {price:'3,212,000,000원', desc:'스포츠카 백트레.', img:'images/backtre.jpg'},
-  '드래프터': {price:'3,234,000,000원', desc:'스포츠카 드래프터.', img:'images/drafter.jpg'},
-  '주글러': {price:'3,256,000,000원', desc:'스포츠카 주글러.', img:'images/jugular.jpg'},
-  '팡테르': {price:'4,070,000,000원', desc:'스포츠카 팡테르.', img:'images/pfister.jpg'},
-  '펠른2': {price:'4,103,000,000원', desc:'스포츠카 펠른2.', img:'images/felon2.jpg'},
-  '파리아': {price:'4,169,000,000원', desc:'스포츠카 파리아.', img:'images/pariah.jpg'},
-  '네온': {price:'4,367,000,000원', desc:'스포츠카 네온.', img:'images/neon.jpg'},
-
-  /* 💥 클래식 */
-  '토르네이도': {price:'1,716,000,000원', desc:'클래식 토르네이도.', img:'images/tornado.jpg'},
-  '토나도5': {price:'1,738,000,000원', desc:'클래식 토나도5.', img:'images/tornado5.jpg'},
-  '토네이도6': {price:'1,760,000,000원', desc:'클래식 토네이도6.', img:'images/tornado6.jpg'},
-  '디이너스티': {price:'1,936,000,000원', desc:'클래식 디이너스티.', img:'images/dynasty.jpg'},
-  'Z190': {price:'2,068,000,000원', desc:'클래식 Z190.', img:'images/z190.jpg'},
-  'GT500': {price:'2,156,000,000원', desc:'클래식 GT500.', img:'images/gt500.jpg'},
-  '코켓2': {price:'2,178,000,000원', desc:'클래식 코켓2.', img:'images/coquette2.jpg'},
-  '코켓5': {price:'2,200,000,000원', desc:'클래식 코켓5.', img:'images/coquette5.jpg'},
-  '인퍼너스2': {price:'2,838,000,000원', desc:'클래식 인퍼너스2.', img:'images/infernus2.jpg'},
-
-  /* 💥 세단 */
-  '콕55': {price:'1,694,000,000원', desc:'세단 콕55.', img:'images/cog55.jpg'},
-  '스태포드': {price:'1,870,000,000원', desc:'세단 스태포드.', img:'images/stafford.jpg'},
-  '라인하트': {price:'3,080,000,000원', desc:'세단 라인하트.', img:'images/reinhart.jpg'},
-  '친퀘밀라': {price:'4,301,000,000원', desc:'세단 친퀘밀라.', img:'images/cinquemila.jpg'},
-
-  /* 💥 슈퍼카 */
-  '페네트레이터': {price:'2,948,000,000원', desc:'슈퍼카 페네트레이터.', img:'images/penetrator.jpg'},
-  'GP1': {price:'3,278,000,000원', desc:'슈퍼카 GP1.', img:'images/gp1.jpg'},
-  '치타2': {price:'3,300,000,000원', desc:'슈퍼카 치타2.', img:'images/cheetah2.jpg'},
-  '몰릭': {price:'4,202,000,000원', desc:'슈퍼카 몰릭.', img:'images/molik.jpg'},
-  '바카': {price:'4,658,500,000원', desc:'슈퍼카 바카.', img:'images/vacca.jpg'},
-  '인퍼너스': {price:'4,334,000,000원', desc:'슈퍼카 인퍼너스.', img:'images/infernus.jpg'},
-  '반시2': {price:'4,400,000,000원', desc:'슈퍼카 반시2.', img:'images/banshee2.jpg'},
-
-  /* 💥 SUV */
-  '그레슬리': {price:'1,804,000,000원', desc:'SUV 그레슬리.', img:'images/grizzly.jpg'},
-  'FQ2': {price:'1,826,000,000원', desc:'SUV FQ2.', img:'images/fq2.jpg'},
-  '힌틀리': {price:'1,892,000,000원', desc:'SUV 힌틀리.', img:'images/huntley.jpg'},
-  '더브스타2': {price:'2,816,000,000원', desc:'SUV 더브스타2.', img:'images/dubsta2.jpg'},
-  '이시8': {price:'2,970,000,000원', desc:'SUV 이시8.', img:'images/issi8.jpg'},
-  '발러3': {price:'2,992,000,000원', desc:'SUV 발러3.', img:'images/baller3.jpg'},
-  '발러4': {price:'3,014,000,000원', desc:'SUV 발러4.', img:'images/baller4.jpg'},
-  '발러7': {price:'3,036,000,000원', desc:'SUV 발러7.', img:'images/baller7.jpg'},
-  '핫 링 에바론': {price:'3,058,000,000원', desc:'SUV 핫 링 에바론.', img:'images/hotring.jpg'},
-  '노박': {price:'3,102,000,000원', desc:'SUV 노박.', img:'images/novak.jpg'},
-  '비반나이트': {price:'4,136,000,000원', desc:'SUV 비반나이트.', img:'images/vivanight.jpg'},
-  '에스트론': {price:'4,268,000,000원', desc:'SUV 에스트론.', img:'images/astron.jpg'},
-  '하바네로': {price:'5,500,000,000원', desc:'SUV 하바네로.', img:'images/habanero.jpg'},
-
-  /* 💥 소형 */
-  '이씨클래식': {price:'1,650,000,000원', desc:'소형 이씨클래식.', img:'images/issi-classic.jpg'},
-  '브리오소': {price:'2,904,000,000원', desc:'소형 브리오소.', img:'images/brioso.jpg'}
-};
+    /* ===== ✅ 추가: 차량 카드 클릭 → 차량 모달 열기 ===== */
+    const CAR_DATA = {
+      '테저랙트': { price:'300억', desc:'최고속도 400km/h, 전자식 서스펜션, 탄소섬유 모노코크 섀시.' },
+      '네로': { price:'250억', desc:'밸런스가 좋은 전천후 슈퍼카. 일상·레이스 모두 OK.' },
+      'M1': { price:'200억', desc:'스포티한 클래식 모델. 커스텀 파츠 호환성 우수.' },
+      '쇼타로': { price:'100억', desc:'바이크계의 아이콘. 가속·핸들링 특화.' }
+    };
 
     function openCarModal(){
       const modal = document.getElementById('carModal');
@@ -1431,8 +1467,6 @@ const CAR_DATA = {
   </script>
 </body>
 </html>
-
-
 
 
 
