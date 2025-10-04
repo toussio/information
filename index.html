@@ -920,15 +920,25 @@ document.addEventListener('click', (e)=>{
     </div>
   </div>
 
-  <!-- ===== ✅ 추가: 차량 상세 모달 ===== -->
-  <div id="carModal" class="modal" aria-hidden="true">
-    <div class="modal-content" role="dialog" aria-modal="true">
-      <button class="close-btn" onclick="closeCarModal()">닫기</button>
-      <h3 id="carModalTitle">차량명</h3>
-      <p id="carModalPrice" class="modal-tagline">가격 정보</p>
-      <div id="carModalDesc" style="line-height:1.8">세부 설명이 여기에 표시됩니다.</div>
+ <!-- 차량 상세 모달 -->
+<div id="carModal" class="modal" aria-hidden="true">
+  <div class="modal-content" role="dialog" aria-modal="true">
+    <button class="close-btn" onclick="closeCarModal()">닫기</button>
+    <h3 id="carModalTitle">차량명</h3>
+
+    <!-- ✅ 추가된 부분 -->
+    <img id="carModalImg"
+         src=""
+         alt=""
+         style="max-width:100%;border-radius:14px;margin:14px 0;">
+
+    <p id="carModalPrice" class="modal-tagline">가격 정보</p>
+    <div id="carModalDesc" style="line-height:1.8">
+      세부 설명이 여기에 표시됩니다.
     </div>
   </div>
+</div>
+
   <!-- ===== /추가 끝 ===== -->
 
   <!-- 기본 JS -->
@@ -1276,6 +1286,7 @@ document.addEventListener('click', (e)=>{
   </script>
 </body>
 </html>
+
 
 
 
