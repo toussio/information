@@ -390,84 +390,6 @@
       <!-- 홈 -->
       <section id="home" class="page active">
         <h2>🏠 홈</h2>
-        <div class="sub-nav">
-          <button onclick="showSubPage('company')">기업</button>
-          <button onclick="showSubPage('civil')">공무원</button>
-          <button onclick="showSubPage('org')">조직</button>
-          <button onclick="showSubPage('magazine')">메거진</button>
-        </div>
-
-        <!-- 기업 -->
-        <div id="company" class="sub-page active">
-          <h3>🏢 기업</h3>
-          <div class="card-grid">
-            <div class="card company-card" onclick="openEntity('company','beehive')">
-              <div class="icon">🐝</div><h4>벌집</h4><p>-</p>
-            </div>
-            <div class="card company-card" onclick="openEntity('company','inback')">
-              <div class="icon">🍖</div><h4>InBack</h4><p>-</p>
-            </div>
-            <div class="card company-card" onclick="openEntity('company','chakani')">
-              <div class="icon">🦄</div><h4>차카니</h4><p>-</p>
-            </div>
-            <div class="card company-card" onclick="openEntity('company','tteokleaf')">
-              <div class="icon">🍀</div><h4>떡잎방범대</h4><p>-</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- 공무원 -->
-        <div id="civil" class="sub-page">
-          <h3>🏛 공무원</h3>
-          <div class="card-grid">
-            <div class="card civil-card" onclick="openEntity('civil','ems')">
-              <div class="icon">🚑</div><h4>EMS</h4><p>-</p>
-            </div>
-            <div class="card civil-card" onclick="openEntity('civil','southpd')">
-              <div class="icon">👮</div><h4>남부경찰</h4><p>-</p>
-            </div>
-            <div class="card civil-card" onclick="openEntity('civil','northpd')">
-              <div class="icon">🚓</div><h4>북부경찰</h4><p>-</p>
-            </div>
-            <div class="card civil-card" onclick="openEntity('civil','castillo')">
-              <div class="icon">🚧</div><h4>카스틸로</h4><p>-</p>
-            </div>
-            <div class="card civil-card" onclick="openEntity('civil','broadcast')">
-              <div class="icon">🌐</div><h4>방송국</h4><p>-</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- 조직 -->
-        <div id="org" class="sub-page">
-          <h3>👥 조직</h3>
-          <div class="card-grid">
-            <div class="card org-card" onclick="openEntity('org','bigdick')">
-              <div class="icon">🍌</div><h4>빅딕</h4><p>-</p>
-            </div>
-            <div class="card org-card" onclick="openEntity('org','cheongryong')">
-              <div class="icon">💎</div><h4>청룡</h4><p>-</p>
-            </div>
-            <div class="card org-card" onclick="openEntity('org','sakura')">
-              <div class="icon">🌸</div><h4>사쿠라</h4><p>-</p>
-            </div>
-            <div class="card org-card" onclick="openEntity('org','jakdu')">
-              <div class="icon">🎴</div><h4>작두</h4><p>-</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- 메거진 -->
-        <div id="magazine" class="sub-page">
-          <h3>📰 메거진</h3>
-          <div class="card-grid">
-            <div class="card magazine-card">
-              <div class="icon">🚀</div><h4>미래 기술 트렌드</h4><p>AI, 메타버스, 친환경 산업</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <!-- 리얼 방송국 (홈 섹션 바로 아래, 같은 폭) -->
       <div id="broadcastBox">
         <div class="title-row">
@@ -984,27 +906,6 @@ document.addEventListener('click', (e)=>{
     </aside>
   </div>
 
-  <!-- 엔티티 모달 -->
-  <div id="modal" class="modal" aria-hidden="true">
-    <div id="modalContent" class="modal-content" role="dialog" aria-modal="true">
-      <button class="close-btn" onclick="closeModal()">닫기</button>
-      <h3 id="modalTitle"></h3>
-      <p id="modalTagline" class="modal-tagline"></p>
-      <div class="modal-nav">
-        <button data-tab="org" onclick="showModalTab('org')">조직도</button>
-        <button data-tab="products" onclick="showModalTab('products')">판매물품</button>
-        <button data-tab="info" onclick="showModalTab('info')">기업정보</button>
-      </div>
-      <div id="modal-org" class="modal-tab">
-        <ul id="modalOrgList" class="org-list"></ul>
-      </div>
-      <div id="modal-products" class="modal-tab">
-        <ul id="modalProdList"></ul>
-      </div>
-      <div id="modal-info" class="modal-tab"><p id="modalInfoText"></p></div>
-    </div>
-  </div>
-
   <!-- 사연 상세 모달 -->
   <div id="storyModal" class="modal" aria-hidden="true">
     <div class="modal-content bg-broadcast" role="dialog" aria-modal="true">
@@ -1046,13 +947,6 @@ document.addEventListener('click', (e)=>{
 
   <!-- 기본 JS -->
   <script>
-    /* ---------- 데이터 ---------- */
-    const ENTITIES = { 
-      company:{ 
-       알리: 정부장(891)","독사: 이쨔(1839)","구삥: 대머리신사(2728)","장삥: 조쿠와라(1810)","","","","[특수직]","예림이: 박말순(654)","[일반직]","갑오: 공석 ","한끗: 홍금쪽(3845), 주야(3432)","끗: 르마(2544), 송실수(2553), 고도리(3161), 미스터갱(130), 유월(3462)","","[수습원]","망통: 베배(1712), 짱돌(3566), 귤탱이(3652), 두꺼비(3461), 반하준(1160), 키위믹스(3889), 최동웅(3934)","총 인원: 25/25"]}
-      }
-    };
-
     /* ---------- 네비/서브페이지 ---------- */
     function showPage(pageId){
       document.querySelectorAll('.page').forEach(s=>s.classList.remove('active'));
@@ -1122,74 +1016,6 @@ document.addEventListener('click', (e)=>{
         return `<li class="org-item"><span class="dot"></span>${t}</li>`;
       }).join("");
     }
-
-    /* ---------- 엔티티 모달 ---------- */
-    const KEY_TO_BG = {
-      beehive:'bg-beehive', tteokleaf:'bg-tteok-green',
-      inback:'bg-inback', chakani:'bg-chakani',
-      ems:'bg-ems', southpd:'bg-southpd', northpd:'bg-northpd', castillo:'bg-castillo', broadcast:'bg-broadcast',
-      bigdick:'bg-bigdick', cheongryong:'bg-cheongryong', sakura:'bg-sakura', jakdu:'bg-jakdu',
-    };
-
-    function openEntity(type,key){
-      const group=ENTITIES[type]||{};
-      const ent=group[key];
-      if(!ent) return;
-
-      const modal=document.getElementById("modal");
-      const content=document.getElementById("modalContent");
-
-      content.className = "modal-content " + (KEY_TO_BG[key] || "");
-
-      document.getElementById("modalTitle").textContent=ent.name;
-      document.getElementById("modalTagline").textContent = ent.tagline || "—";
-
-      document.querySelectorAll('.modal-tab').forEach(t=>t.classList.remove('active'));
-      document.getElementById("modal-org").classList.add('active');
-
-      const orgUL=document.getElementById("modalOrgList");
-      orgUL.innerHTML = (ent.org && ent.org.length)
-        ? formatOrg(ent.org)
-        : "<li class='org-item'><span class='dot'></span>등록된 조직도 정보가 없습니다.</li>";
-
-      const prodUL = document.getElementById("modalProdList");
-      const hasProducts = Array.isArray(ent.products) && ent.products.length > 0;
-      if (hasProducts) {
-        prodUL.innerHTML = ent.products.map((p, i) => {
-          const delay = i * 40;
-          const note = p.note ? `<div class="prod-note">${p.note}</div>` : "";
-          return `
-            <li class="prod-card" style="animation-delay:${delay}ms">
-              <div class="prod-title">${p.name}</div>
-              <div class="prod-price">${p.price}</div>
-              ${note}
-            </li>
-          `;
-        }).join("");
-      } else {
-        prodUL.innerHTML = "";
-      }
-
-      const info=document.getElementById("modalInfoText");
-      info.innerHTML=`<b>한 마디:</b> ${ent.tagline||"—"}<br>${ent.info||""}`;
-
-      const btnProducts = document.querySelector('.modal-nav button[data-tab="products"]');
-      btnProducts.style.display = hasProducts ? '' : 'none';
-
-      modal.classList.add('show');
-      document.body.style.overflow = 'hidden';
-      document.getElementById("modal").setAttribute('aria-hidden','false');
-    }
-    function closeModal(){
-      document.getElementById("modal").classList.remove('show');
-      document.body.style.overflow = '';
-      document.getElementById("modal").setAttribute('aria-hidden','true');
-    }
-    function showModalTab(id){
-      document.querySelectorAll('.modal-tab').forEach(t=>t.classList.remove('active'));
-      document.getElementById("modal-"+id).classList.add('active');
-    }
-
     /* ---------- 도움말(보기 전용) ---------- */
     const HELP_TEXTS = {
       market: `
@@ -1464,6 +1290,7 @@ document.addEventListener('click', (e)=>{
   </script>
 </body>
 </html>
+
 
 
 
