@@ -898,28 +898,6 @@ document.addEventListener('click', (e)=>{
       <ul><li>-</li></ul>
     </aside>
   </div>
-
-  <!-- 엔티티 모달 -->
-  <div id="modal" class="modal" aria-hidden="true">
-    <div id="modalContent" class="modal-content" role="dialog" aria-modal="true">
-      <button class="close-btn" onclick="closeModal()">닫기</button>
-      <h3 id="modalTitle"></h3>
-      <p id="modalTagline" class="modal-tagline"></p>
-      <div class="modal-nav">
-        <button data-tab="org" onclick="showModalTab('org')">조직도</button>
-        <button data-tab="products" onclick="showModalTab('products')">판매물품</button>
-        <button data-tab="info" onclick="showModalTab('info')">기업정보</button>
-      </div>
-      <div id="modal-org" class="modal-tab">
-        <ul id="modalOrgList" class="org-list"></ul>
-      </div>
-      <div id="modal-products" class="modal-tab">
-        <ul id="modalProdList"></ul>
-      </div>
-      <div id="modal-info" class="modal-tab"><p id="modalInfoText"></p></div>
-    </div>
-  </div>
-
   <!-- 사연 상세 모달 -->
   <div id="storyModal" class="modal" aria-hidden="true">
     <div class="modal-content bg-broadcast" role="dialog" aria-modal="true">
@@ -1012,90 +990,6 @@ document.addEventListener('click', (e)=>{
       if(!ul) return;
       ul.innerHTML=items.slice().sort((a,b)=>b.volume-a.volume).slice(0,5)
         .map(it=>`<li>${it.name} (${it.volume}건)</li>`).join("");
-    }
-
-    /* ---------- 조직도 포맷터 ---------- */
-    function formatOrg(lines){
-      return lines.map(raw=>{
-        const t=(raw??"").trim();
-        if(!t) return `<li class="org-gap"></li>`;
-        if(/^<strong/i.test(t)) return `<li class="org-title">${t}</li>`;
-        if(/^\[.*\]$/.test(t)) {
-          const label=t.replace(/^\[|\]$/g,"");
-          return `<li class="org-section"><span>${label}</span></li>`;
-        }
-        if(t.includes("총 인원") || t.includes("총원")) {
-          return `<li class="org-total">${t}</li>`;
-        }
-        return `<li class="org-item"><span class="dot"></span>${t}</li>`;
-      }).join("");
-    }
-
-    /* ---------- 엔티티 모달 ---------- */
-    const KEY_TO_BG = {
-      beehive:'bg-beehive', tteokleaf:'bg-tteok-green',
-      inback:'bg-inback', chakani:'bg-chakani',
-      ems:'bg-ems', southpd:'bg-southpd', northpd:'bg-northpd', castillo:'bg-castillo', broadcast:'bg-broadcast',
-      bigdick:'bg-bigdick', cheongryong:'bg-cheongryong', sakura:'bg-sakura', jakdu:'bg-jakdu',
-    };
-
-    function openEntity(type,key){
-      const group=ENTITIES[type]||{};
-      const ent=group[key];
-      if(!ent) return;
-
-      const modal=document.getElementById("modal");
-      const content=document.getElementById("modalContent");
-
-      content.className = "modal-content " + (KEY_TO_BG[key] || "");
-
-      document.getElementById("modalTitle").textContent=ent.name;
-      document.getElementById("modalTagline").textContent = ent.tagline || "—";
-
-      document.querySelectorAll('.modal-tab').forEach(t=>t.classList.remove('active'));
-      document.getElementById("modal-org").classList.add('active');
-
-      const orgUL=document.getElementById("modalOrgList");
-      orgUL.innerHTML = (ent.org && ent.org.length)
-        ? formatOrg(ent.org)
-        : "<li class='org-item'><span class='dot'></span>등록된 조직도 정보가 없습니다.</li>";
-
-      const prodUL = document.getElementById("modalProdList");
-      const hasProducts = Array.isArray(ent.products) && ent.products.length > 0;
-      if (hasProducts) {
-        prodUL.innerHTML = ent.products.map((p, i) => {
-          const delay = i * 40;
-          const note = p.note ? `<div class="prod-note">${p.note}</div>` : "";
-          return `
-            <li class="prod-card" style="animation-delay:${delay}ms">
-              <div class="prod-title">${p.name}</div>
-              <div class="prod-price">${p.price}</div>
-              ${note}
-            </li>
-          `;
-        }).join("");
-      } else {
-        prodUL.innerHTML = "";
-      }
-
-      const info=document.getElementById("modalInfoText");
-      info.innerHTML=`<b>한 마디:</b> ${ent.tagline||"—"}<br>${ent.info||""}`;
-
-      const btnProducts = document.querySelector('.modal-nav button[data-tab="products"]');
-      btnProducts.style.display = hasProducts ? '' : 'none';
-
-      modal.classList.add('show');
-      document.body.style.overflow = 'hidden';
-      document.getElementById("modal").setAttribute('aria-hidden','false');
-    }
-    function closeModal(){
-      document.getElementById("modal").classList.remove('show');
-      document.body.style.overflow = '';
-      document.getElementById("modal").setAttribute('aria-hidden','true');
-    }
-    function showModalTab(id){
-      document.querySelectorAll('.modal-tab').forEach(t=>t.classList.remove('active'));
-      document.getElementById("modal-"+id).classList.add('active');
     }
 
     /* ---------- 도움말(보기 전용) ---------- */
@@ -1372,6 +1266,7 @@ document.addEventListener('click', (e)=>{
   </script>
 </body>
 </html>
+
 
 
 
