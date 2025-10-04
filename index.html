@@ -608,16 +608,16 @@
   </table>
 </section>
 
-<!-- ② 모달 HTML (맨 아래에 추가) -->
-  <div id="carModal" class="modal" aria-hidden="true">
-    <div class="modal-content" role="dialog" aria-modal="true">
-      <button class="close-btn" onclick="closeCarModal()">닫기</button>
-      <h3 id="carModalTitle">차량명</h3>
-      <img id="carModalImg" src="" alt="" style="max-width:100%;border-radius:14px;margin-bottom:14px">
-      <p id="carModalPrice" class="modal-tagline">가격 정보</p>
-      <div id="carModalDesc">세부 설명이 여기에 표시됩니다.</div>
-    </div>
+<!-- 모달은 하나만 남기기 -->
+<div id="carModal" class="modal" aria-hidden="true">
+  <div class="modal-content" role="dialog" aria-modal="true">
+    <button class="close-btn" onclick="closeCarModal()">닫기</button>
+    <h3 id="carModalTitle">차량명</h3>
+    <img id="carModalImg" src="" alt="" style="max-width:100%;border-radius:14px;margin-bottom:14px">
+    <p id="carModalPrice" class="modal-tagline">가격 정보</p>
+    <div id="carModalDesc">세부 설명이 여기에 표시됩니다.</div>
   </div>
+</div>
 
     <script>
 /* === 차량 데이터 === */
@@ -1287,6 +1287,7 @@ document.addEventListener('click', (e)=>{
   </script>
 </body>
 </html>
+
 
 
 
