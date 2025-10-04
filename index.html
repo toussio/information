@@ -1096,12 +1096,6 @@ document.addEventListener('click', (e)=>{
       '쇼타로': { price:'100억', desc:'바이크계의 아이콘. 가속·핸들링 특화.' }
     };
 
-    function openCarModal(){
-      const modal = document.getElementById('carModal');
-      modal.classList.add('show');
-      modal.setAttribute('aria-hidden','false');
-      document.body.style.overflow='hidden';
-    }
     function closeCarModal(){
       const modal = document.getElementById('carModal');
       modal.classList.remove('show');
@@ -1110,15 +1104,10 @@ document.addEventListener('click', (e)=>{
     }
 
     document.addEventListener('click', (e)=>{
-      const card = e.target.closest('.car-card');
-      if(!card) return;
-      const name = card.dataset.car;
-      const data = CAR_DATA[name] || {};
-      document.getElementById('carModalTitle').textContent = name || '차량';
-      document.getElementById('carModalPrice').textContent = '가격: ' + (data.price || '-');
-      document.getElementById('carModalDesc').textContent = data.desc || '세부 정보가 없습니다.';
-      openCarModal();
-    });
+  const card = e.target.closest('.car-card');
+  if(!card) return;
+  openCarModal(card.dataset.car); // ✅ 이렇게 name 넘겨서 호출
+});
   </script>
 
   <script type="module">
@@ -1286,6 +1275,7 @@ document.addEventListener('click', (e)=>{
   </script>
 </body>
 </html>
+
 
 
 
