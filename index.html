@@ -706,13 +706,6 @@ function openCarModal(name){
   document.body.style.overflow='hidden';
 }
 
-function closeCarModal(){
-  const modal=document.getElementById('carModal');
-  modal.classList.remove('show');
-  modal.setAttribute('aria-hidden','true');
-  document.body.style.overflow='';
-}
-
 /* === 테이블 행 클릭 === */
 document.addEventListener('click', (e)=>{
   const tr=e.target.closest('tr[data-car]');
@@ -1290,6 +1283,7 @@ document.addEventListener('click', (e)=>{
   </script>
 </body>
 </html>
+
 
 
 
