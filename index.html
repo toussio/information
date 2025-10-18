@@ -37,6 +37,25 @@ body{
     header h1{margin:0;font-size:30px;color:var(--accent);font-weight:900;cursor:pointer;transition:transform .2s var(--e)}
     header h1:hover{transform:scale(1.02)}
 
+    /* ✨ 메뉴·패널 붕뜸 방지 / 자연스러운 느낌 */
+aside, main section{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:14px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.5);
+  backdrop-filter:blur(8px);
+  transition:transform .25s ease, box-shadow .3s ease;
+}
+aside:hover, main section:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 25px rgba(239,68,68,0.25);
+}
+aside h3, main h2{
+  color:#ef4444;
+  text-shadow:0 0 6px rgba(239,68,68,0.5);
+}
+p,li{color:#e5e7eb;}
+    
     /* 레이아웃 */
     .layout{display:grid;grid-template-columns:300px 1fr 300px;column-gap:40px;row-gap:24px;max-width:1600px;margin:20px auto;padding:0 30px}
     main{display:flex;flex-direction:column;gap:20px}
@@ -1162,6 +1181,7 @@ document.addEventListener('click', (e)=>{
   </script>
 </body>
 </html>
+
 
 
 
