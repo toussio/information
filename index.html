@@ -31,7 +31,6 @@ body{
   100%{background-position:0% 50%;}
 }
 
-   /* 헤더 (작두 테마에 맞게 자연스럽게 조정) */
 header{
   background:rgba(0,0,0,0.45);
   border-bottom:1px solid rgba(255,255,255,0.08);
@@ -49,11 +48,7 @@ header h1{
   transition:transform .25s ease,text-shadow .25s ease;
   text-shadow:0 0 10px rgba(239,68,68,0.6);
 }
-header h1:hover{
-  transform:scale(1.05);
-  text-shadow:0 0 14px rgba(239,68,68,0.8);
-}
-
+    
 /* 전체 글자톤 완화 */
 body{ color:#d1d5db; }
 p, li, td, th, span { color:#d1d5db; }
@@ -69,11 +64,23 @@ aside, main section, .hero, .nav-card, .market-card, .card{
   color:#f3f4f6;
   transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
 }
-aside:hover, main section:hover, .hero:hover, .card:hover{
-  background:rgba(255,255,255,0.1);
-  transform:translateY(-3px);
-  box-shadow:0 6px 20px rgba(239,68,68,0.18);
+/* 상자 hover 효과 제거 */
+aside, main section, .hero, .nav-card, .market-card, .card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  backdrop-filter: blur(8px);
+  color: #f3f4f6;
+  transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
 }
+/* hover 때 아무 변화 없음 */
+aside:hover, main section:hover, .hero:hover, .card:hover {
+  background: rgba(255,255,255,0.06);
+  transform: none;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
     /* 레이아웃 */
     .layout{display:grid;grid-template-columns:300px 1fr 300px;column-gap:40px;row-gap:24px;max-width:1600px;margin:20px auto;padding:0 30px}
     main{display:flex;flex-direction:column;gap:20px}
@@ -91,12 +98,46 @@ aside:hover, main section:hover, .hero:hover, .card:hover{
     .hero h2{margin:0 0 14px;color:var(--accent);font-size:26px;font-weight:800}
     .hero p{font-size:16px;color:#374151}
 
-    /* 상단 네비 카드 */
-    .nav-parts{display:flex;justify-content:center;gap:24px;margin:20px auto;flex-wrap:wrap}
-    .nav-card{flex:1;min-width:150px;max-width:200px;background:linear-gradient(135deg,#dcfce7,#f0fdf4);padding:22px 16px;text-align:center;border-radius:16px;box-shadow:0 6px 14px rgba(0,0,0,.08);cursor:pointer;transition:transform .25s var(--e), box-shadow .25s var(--e)}
-    .nav-card:hover{transform:translateY(-6px);box-shadow:0 10px 24px rgba(0,0,0,.12)}
-    .nav-card .icon{font-size:28px;margin-bottom:10px}
-    .nav-card h3{margin:0;font-size:18px;color:var(--accent);font-weight:700}
+   /* 상단 네비 카드 – 작두 테마용 */
+.nav-parts {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin: 20px auto;
+  flex-wrap: wrap;
+}
+
+.nav-card {
+  flex: 1;
+  min-width: 150px;
+  max-width: 200px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #f3f4f6;
+  padding: 22px 16px;
+  text-align: center;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  transition: transform .25s ease;
+}
+
+.nav-card .icon {
+  font-size: 28px;
+  margin-bottom: 10px;
+  opacity: 0.9;
+}
+
+.nav-card h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #f87171;
+  font-weight: 700;
+}
+
+.nav-card:hover {
+  transform: scale(1.02);
+}
 
     /* 페이지(홈 등) */
     section.page{display:none;padding:28px;background:var(--card);border-radius:14px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
@@ -1199,6 +1240,7 @@ document.addEventListener('click', (e)=>{
   </script>
 </body>
 </html>
+
 
 
 
