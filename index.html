@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>작두 정보 센터</title>
+  <title>작 정보 센터</title>
   <style>
     :root{
       --card:#ffffff; --ink:#0f172a; --muted:#475569; --accent:#22c55e; --border:#e5e7eb;
@@ -15,73 +15,28 @@
     html { box-sizing: border-box; font-size:17px; overflow-y:scroll; }
     *, *::before, *::after { box-sizing: inherit; }
 
-/* ✨ 한층 더 밝은 붉은-검정 그라데이션 */
-body {
-  margin: 0;
-  font-family: "Noto Sans KR", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  color: #f9fafb; /* 더 밝은 글씨 */
-  line-height: 1.6;
-
-  /* 🔥 붉은 톤 강조 + 검정 비중 줄이기 */
-  background: linear-gradient(270deg, #ef4444, #b91c1c, #450a0a, #991b1b);
-  background-size: 400% 400%;
-  animation: bgMove 16s ease infinite;
-}
-
-/* 부드러운 그라데이션 이동 */
-@keyframes bgMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* 🔄 그라데이션 애니메이션 */
-@keyframes bgMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-header{
-  background:rgba(0,0,0,0.45);
-  border-bottom:1px solid rgba(255,255,255,0.08);
-  padding:20px;
-  text-align:center;
-  box-shadow:0 4px 12px rgba(0,0,0,0.4);
-  backdrop-filter:blur(8px);
-}
-header h1{
+  /* ✨ 움직이는 빨강-검정 그라데이션 배경 */
+body{
   margin:0;
-  font-size:30px;
-  color:#f87171;
-  font-weight:900;
-  cursor:pointer;
-  transition:transform .25s ease,text-shadow .25s ease;
-  text-shadow:0 0 10px rgba(239,68,68,0.6);
-}
-    
-/* 전체 글자톤 완화 */
-body{ color:#d1d5db; }
-p, li, td, th, span { color:#d1d5db; }
-h2, h3, h4, h5 { color:#f87171; text-shadow:0 0 4px rgba(239,68,68,0.25); }
-
-/* 왼쪽·오른쪽 aside, 메인 section 기본 스타일 */
-aside, main section, .hero, .card {
-  background: rgba(0, 0, 0, 0.45); /* 어두운 투명 검정 */
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 14px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
-  color: #f3f4f6;
-  backdrop-filter: blur(8px);
-  transition: none; /* hover시 색상변경 X */
+  font-family:"Noto Sans KR",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  color:var(--ink);
+  line-height:1.6;
+  background:linear-gradient(270deg,#7f1d1d,#000000,#7f1d1d);
+  background-size:600% 600%;
+  animation:bgMove 12s ease infinite;
 }
 
-/* hover시 변화 없애기 */
-aside:hover, main section:hover, .hero:hover, .card:hover {
-  background: rgba(0, 0, 0, 0.45);
-  transform: none;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+/* 배경 애니메이션 */
+@keyframes bgMove {
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
 }
+    /* 헤더 */
+    header{background:#fff;border-bottom:1px solid var(--border);padding:20px;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.05)}
+    header h1{margin:0;font-size:30px;color:var(--accent);font-weight:900;cursor:pointer;transition:transform .2s var(--e)}
+    header h1:hover{transform:scale(1.02)}
+
     /* 레이아웃 */
     .layout{display:grid;grid-template-columns:300px 1fr 300px;column-gap:40px;row-gap:24px;max-width:1600px;margin:20px auto;padding:0 30px}
     main{display:flex;flex-direction:column;gap:20px}
@@ -94,61 +49,17 @@ aside:hover, main section:hover, .hero:hover, .card:hover {
     .aside-box{margin-bottom:20px;padding:12px;border-radius:10px;background:#fff}
     .aside-box h3{margin:0 0 10px;font-size:16px;font-weight:700;color:var(--accent)}
 
-    .hero {
-  text-align: center;
-  padding: 40px;
-  border-radius: 16px;
-  background: rgba(0, 0, 0, 0.45);
-  color: #f3f4f6;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
-}
-.hero h2 {
-  margin: 0 0 14px;
-  color: #f87171;
-  font-size: 26px;
-  font-weight: 800;
-}
-.hero p {
-  font-size: 16px;
-  color: #e5e7eb;
-}
-   /* 상단 네비 카드 – 작두 테마용 */
-.nav-parts {
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-  margin: 20px auto;
-  flex-wrap: wrap;
-}
+    /* 히어로 */
+    .hero{text-align:center;padding:40px;border-radius:16px;background:linear-gradient(135deg,#bbf7d0,#ecfdf5);box-shadow:0 6px 16px rgba(0,0,0,.08);margin:20px 0;animation:fadeIn .35s var(--e)}
+    .hero h2{margin:0 0 14px;color:var(--accent);font-size:26px;font-weight:800}
+    .hero p{font-size:16px;color:#374151}
 
-.nav-card {
-  flex: 1;
-  min-width: 150px;
-  max-width: 200px;
-  background: rgba(0,0,0,0.55);
-  border: 1px solid rgba(255,255,255,0.08);
-  color: #e5e7eb;
-  padding: 22px 16px;
-  text-align: center;
-  border-radius: 16px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.6);
-  cursor: pointer;
-  transition: transform .25s ease;
-}
-.nav-card .icon {
-  font-size: 28px;
-  margin-bottom: 10px;
-  opacity: 0.9;
-}
-.nav-card h3 {
-  margin: 0;
-  font-size: 18px;
-  color: #f87171; /* 부드러운 붉은 글씨 */
-  font-weight: 700;
-}
-.nav-card:hover {
-  transform: scale(1.02);
-}
+    /* 상단 네비 카드 */
+    .nav-parts{display:flex;justify-content:center;gap:24px;margin:20px auto;flex-wrap:wrap}
+    .nav-card{flex:1;min-width:150px;max-width:200px;background:linear-gradient(135deg,#dcfce7,#f0fdf4);padding:22px 16px;text-align:center;border-radius:16px;box-shadow:0 6px 14px rgba(0,0,0,.08);cursor:pointer;transition:transform .25s var(--e), box-shadow .25s var(--e)}
+    .nav-card:hover{transform:translateY(-6px);box-shadow:0 10px 24px rgba(0,0,0,.12)}
+    .nav-card .icon{font-size:28px;margin-bottom:10px}
+    .nav-card h3{margin:0;font-size:18px;color:var(--accent);font-weight:700}
 
     /* 페이지(홈 등) */
     section.page{display:none;padding:28px;background:var(--card);border-radius:14px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
@@ -457,7 +368,7 @@ aside:hover, main section:hover, .hero:hover, .card:hover {
   </style>
 </head>
 <body>
-  <header><h1 onclick="goHome()">작두 정보 센터</h1></header>
+  <header><h1 onclick="goHome()">리얼 정보 센터</h1></header>
   <div id="scrollProgress" aria-hidden="true"></div>
 
   <div class="layout">
@@ -466,7 +377,8 @@ aside:hover, main section:hover, .hero:hover, .card:hover {
       <div class="aside-box">
         <h3>📢 공지사항</h3>
         <ul>
-          <li>작두 정보 센터 OPEN</li>
+          <li>리얼 정보 센터 OPEN</li>
+          <li>리얼 투자 센터 리뉴얼 </li>
           <li>🙏문의: 703 김남정, 디코 dm</li>
         </ul>
       </div>
@@ -1250,13 +1162,6 @@ document.addEventListener('click', (e)=>{
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
 
 
 
