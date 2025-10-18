@@ -15,24 +15,38 @@
     html { box-sizing: border-box; font-size:17px; overflow-y:scroll; }
     *, *::before, *::after { box-sizing: inherit; }
 
-/* ✨ 은은하게 움직이는 밝은 붉은-검정 그라데이션 */
-body {
-  margin: 0;
-  font-family: "Noto Sans KR", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  color: #f1f5f9; /* 밝은 회색 글씨 */
-  line-height: 1.6;
-
-  /* 🔥 기존보다 밝고 부드러운 톤으로 변경 */
-  background: linear-gradient(270deg, #b91c1c, #450a0a, #1a0000, #450a0a);
-  background-size: 400% 400%;
-  animation: bgMove 18s ease infinite;
+/* ✨ 은은하게 움직이는 붉은-검정 그라데이션 (톤 완화 버전) */
+body{
+  margin:0;
+  font-family:"Noto Sans KR",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  color:#f1f5f9; /* 밝은 회색 글씨 */
+  line-height:1.6;
+  background:linear-gradient(270deg,#7f1d1d,#2b0000,#000000,#2b0000);
+  background-size:400% 400%;
+  animation:bgMove 16s ease infinite;
+}
+@keyframes bgMove{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
 }
 
-/* 🔄 그라데이션 애니메이션 */
-@keyframes bgMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+header{
+  background:rgba(0,0,0,0.45);
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  padding:20px;
+  text-align:center;
+  box-shadow:0 4px 12px rgba(0,0,0,0.4);
+  backdrop-filter:blur(8px);
+}
+header h1{
+  margin:0;
+  font-size:30px;
+  color:#f87171;
+  font-weight:900;
+  cursor:pointer;
+  transition:transform .25s ease,text-shadow .25s ease;
+  text-shadow:0 0 10px rgba(239,68,68,0.6);
 }
     
 /* 전체 글자톤 완화 */
@@ -1225,8 +1239,6 @@ document.addEventListener('click', (e)=>{
   </script>
 </body>
 </html>
-
-
 
 
 
