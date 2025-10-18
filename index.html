@@ -31,27 +31,49 @@ body{
   100%{background-position:0% 50%;}
 }
 
-    /* 헤더 */
-    header{background:#fff;border-bottom:1px solid var(--border);padding:20px;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.05)}
-    header h1{margin:0;font-size:30px;color:var(--accent);font-weight:900;cursor:pointer;transition:transform .2s var(--e)}
-    header h1:hover{transform:scale(1.02)}
+   /* 헤더 (작두 테마에 맞게 자연스럽게 조정) */
+header{
+  background:rgba(0,0,0,0.45);
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  padding:20px;
+  text-align:center;
+  box-shadow:0 4px 12px rgba(0,0,0,0.4);
+  backdrop-filter:blur(8px);
+}
+header h1{
+  margin:0;
+  font-size:30px;
+  color:#f87171;
+  font-weight:900;
+  cursor:pointer;
+  transition:transform .25s ease,text-shadow .25s ease;
+  text-shadow:0 0 10px rgba(239,68,68,0.6);
+}
+header h1:hover{
+  transform:scale(1.05);
+  text-shadow:0 0 14px rgba(239,68,68,0.8);
+}
 
-/* ✨ 카드·패널·박스 색상 조정 (붕뜸 방지) */
+/* 전체 글자톤 완화 */
+body{ color:#d1d5db; }
+p, li, td, th, span { color:#d1d5db; }
+h2, h3, h4, h5 { color:#f87171; text-shadow:0 0 4px rgba(239,68,68,0.25); }
+
+/* 카드 hover 부드럽게 */
 aside, main section, .hero, .nav-card, .market-card, .card{
-  background:rgba(255,255,255,0.07);
-  border:1px solid rgba(255,255,255,0.1);
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.08);
   border-radius:14px;
   box-shadow:0 4px 20px rgba(0,0,0,0.4);
   backdrop-filter:blur(8px);
   color:#f3f4f6;
   transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
 }
-aside:hover, main section:hover, .hero:hover{
+aside:hover, main section:hover, .hero:hover, .card:hover{
   background:rgba(255,255,255,0.1);
   transform:translateY(-3px);
-  box-shadow:0 8px 25px rgba(239,68,68,0.25);
+  box-shadow:0 6px 20px rgba(239,68,68,0.18);
 }
-    
     /* 레이아웃 */
     .layout{display:grid;grid-template-columns:300px 1fr 300px;column-gap:40px;row-gap:24px;max-width:1600px;margin:20px auto;padding:0 30px}
     main{display:flex;flex-direction:column;gap:20px}
@@ -1177,6 +1199,7 @@ document.addEventListener('click', (e)=>{
   </script>
 </body>
 </html>
+
 
 
 
