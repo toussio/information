@@ -162,62 +162,90 @@ body{
       --m-chip-bg:#ecfdf5; --m-chip-border:#bbf7d0; --m-chip-ink:#065f46;
       --m-badge-bg:#ecfdf5; --m-badge-border:#86efac; --m-badge-ink:#065f46;
     }
-    .modal-content{ padding-right:56px; }
-    .modal.show .modal-content{transform:translate(-50%, -50%) scale(1);opacity:1}
-    .modal h3{margin:0 0 4px;color:#111827;font-size:24px}
-    .modal-tagline{margin:0 0 8px;color:var(--muted);font-weight:700}
-    .modal-nav{margin:12px 0 14px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
-    .modal-nav button{padding:10px 18px;border:none;border-radius:8px;background:var(--m-accent);color:#fff;cursor:pointer;font-weight:700;font-size:15.5px;transition:transform .18s var(--e), filter .18s var(--e)}
-    .modal-nav button:hover{filter:brightness(.96); transform:translateY(-2px)}
-    .modal-tab{display:none}
-    .modal-tab.active{display:block;animation:tabIn .24s var(--e)}
-    .modal-tab ul{list-style-position:inside;padding-left:0;margin:8px auto}
-    .modal-tab p,.modal-tab li{text-align:center;line-height:1.8;margin:6px 0}
+    /* 🌫️ 모달 (배경 위에 뜨는 팝업창) */
+.modal-content {
+  background: rgba(40, 20, 20, 0.6); /* 어두운 와인 반투명 */
+  backdrop-filter: blur(20px); /* 유리 효과 */
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.45);
+  border-radius: 20px;
+  color: #f8fafc; /* 거의 흰색에 가까운 텍스트 */
+  transition: all 0.3s var(--e);
+}
 
-    /* 닫기 버튼 위치 */
-    .modal .close-btn, #helpModal .close-btn, #storyModal .close-btn{
-      position:absolute !important; top:12px !important; right:12px !important; left:auto !important;
-      margin:0 !important; display:inline-flex; align-items:center; justify-content:center; z-index:2;
-    }
-    .close-btn{background:#ef4444;color:#fff;border:none;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:800}
-    .close-btn:hover{filter:brightness(.95)}
+/* ❌ 닫기 버튼 */
+.close-btn {
+  background: linear-gradient(135deg, #dc2626, #7f1d1d); /* 어두운 빨강→와인 */
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.4);
+  border: none;
+  color: #fff;
+  font-weight: 800;
+  border-radius: 10px;
+  transition: transform .18s var(--e), box-shadow .18s var(--e);
+}
+.close-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.5);
+}
 
-    /* 조직표(모달) */
-    #modal-org{font-size:18.5px}
-    #modalOrgList.org-list{line-height:1.9; max-width:820px; margin:0 auto}
-    #modalOrgList .org-title{font-size:20px;font-weight:900;margin:4px 0 12px}
-    #modalOrgList .org-section{list-style:none;margin:16px 0 10px;display:flex;justify-content:center}
-    #modalOrgList .org-section span{
-      background:var(--m-chip-bg);border:1px solid var(--m-chip-border);color:var(--m-chip-ink);
-      padding:6px 12px;border-radius:999px;font-weight:800;letter-spacing:.3px
-    }
-    #modalOrgList .org-item{list-style:none;padding:6px 12px;margin:2px 0}
-    #modalOrgList .org-item .dot{display:inline-block;width:6px;height:6px;background:var(--m-accent);border-radius:999px;margin-right:8px;position:relative;top:-1px}
-    #modalOrgList .org-gap{height:6px;list-style:none}
-    #modalOrgList .org-total{list-style:none;margin-top:14px;padding:10px 12px;background:#f1f5f9;border-radius:10px;font-weight:800;color:#0f172a;border:1px solid #e2e8f0}
+/* 🟡 주요 버튼 */
+.btn {
+  background: linear-gradient(135deg, #f59e0b, #fbbf24); /* 진한 노랑~골드 */
+  box-shadow: 0 4px 12px rgba(251, 191, 36, 0.3);
+  font-weight: 900;
+  border-radius: 12px;
+  color: #fff;
+}
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(251, 191, 36, 0.35);
+}
 
-    /* 판매물품(모달) */
-    #modalProdList{max-width:680px; margin:6px auto 0; padding:0; display:flex; flex-direction:column; gap:12px;}
-    #modalProdList .prod-card{list-style:none; background:#fff; border:1px solid #e6efe9; border-radius:14px; box-shadow:0 2px 10px rgba(0,0,0,.04); padding:14px 16px; position:relative; overflow:hidden; opacity:0; transform:translateY(6px); animation:listIn .34s var(--e) forwards; will-change:transform,opacity;}
-    #modalProdList .prod-card::before{content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background:linear-gradient(180deg,var(--m-accent),rgba(0,0,0,.08)); opacity:.6;}
-    #modalProdList .prod-title{font-weight:900; font-size:16.75px; color:var(--ink); letter-spacing:.2px;}
-    #modalProdList .prod-price{display:inline-block; margin-top:6px; background:var(--m-badge-bg); border:1px solid var(--m-badge-border); color:var(--m-badge-ink); font-weight:900; font-size:14.5px; border-radius:999px; padding:6px 12px;}
-    #modalProdList .prod-note{margin-top:8px; color:var(--muted); font-size:13.5px; line-height:1.7;}
-    #modalProdList .prod-card:hover{transform:translateY(-2px); box-shadow:0 10px 24px rgba(0,0,0,.08);}
+/* 🪟 상자(aside, story-card 등) */
+.aside-box,
+.story-card,
+.card,
+.market-card {
+  background: rgba(255, 248, 240, 0.12); /* 크림빛 반투명 (투명도 0.12) */
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px); /* 유리 효과 */
+  border-radius: 18px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35); /* 입체감 */
+  color: #f1f5f9; /* 밝은 글자 */
+  transition: transform .25s var(--e), box-shadow .25s var(--e);
+}
 
-    /* 애니메이션 */
-    @keyframes fadeIn{from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:none}}
-    @keyframes pageIn{from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none}}
-    @keyframes tabIn{from{opacity:.0;transform:translateY(6px)} to{opacity:1;transform:none}}
-    @keyframes listIn{from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none}}
-    @media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important} }
+/* 마우스 올릴 때 카드 부드럽게 떠오르게 */
+.aside-box:hover,
+.story-card:hover,
+.card:hover,
+.market-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5);
+  background: rgba(255, 255, 255, 0.18);
+}
 
-    #scrollProgress {
-      position: fixed; left: 0; top: 0; height: 3px; width: 0%;
-      background: linear-gradient(90deg, #22c55e, #86efac);
-      z-index: 99999; box-shadow: 0 0 8px rgba(34,197,94,.5);
-    }
+/* 🪩 카드 제목(텍스트) */
+aside h3,
+.story-card h3,
+.card h4 {
+  background: linear-gradient(90deg, #fbbf24, #f59e0b);
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow: 0 2px 10px rgba(251, 191, 36, 0.2);
+}
 
+/* ✨ 배경 위 빛나는 효과 */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.12), transparent 60%),
+    radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.12), transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
     /* ========= 파스텔톤 모달 배경 + 테마 변수 세트 ========= */
     .bg-tteok{ background:linear-gradient(135deg,#bbf7d0,#a7f3d0,#f0fdf4);}
     .bg-tteok{ --m-accent:#16a34a; --m-chip-bg:#ecfdf5; --m-chip-border:#bbf7d0; --m-chip-ink:#065f46; --m-badge-bg:#ecfdf5; --m-badge-border:#86efac; --m-badge-ink:#065f46; }
@@ -1232,6 +1260,7 @@ document.addEventListener('click', (e)=>{
   </script>
 </body>
 </html>
+
 
 
 
