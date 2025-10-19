@@ -365,6 +365,76 @@ body{
       padding:6px 14px;border-radius:50px
     }
     @keyframes fadeInUp{from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none}}
+
+      ...
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none}}
+
+    /* ✅ 여기에 붙여넣기 */
+    /* ✨ 글래스모피즘 & 파스텔 상자 스타일 강화 */
+
+    .modal-content {
+      background: rgba(255, 255, 255, 0.85) !important;
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+      border-radius: 20px;
+      transition: all 0.3s var(--e);
+    }
+
+    .close-btn {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      box-shadow: 0 2px 8px rgba(239,68,68,0.4);
+      border: none;
+      color: #fff;
+      font-weight: 800;
+      border-radius: 10px;
+      transition: transform .18s var(--e), box-shadow .18s var(--e);
+    }
+    .close-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(239,68,68,0.5);
+    }
+
+    .btn {
+      background: linear-gradient(135deg, #2563eb, #60a5fa);
+      box-shadow: 0 4px 12px rgba(37,99,235,0.3);
+      font-weight: 900;
+      border-radius: 12px;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37,99,235,0.35);
+    }
+
+    .aside-box, .story-card, .card, .market-card {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(255,255,255,0.5);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+      backdrop-filter: blur(10px);
+      border-radius: 18px;
+      transition: transform .25s var(--e), box-shadow .25s var(--e);
+    }
+    .aside-box:hover, .story-card:hover, .card:hover, .market-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+    }
+
+    aside h3, .story-card h3, .card h4 {
+      background: linear-gradient(90deg, #16a34a, #86efac);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at top left, rgba(255,255,255,0.15), transparent 60%),
+                  radial-gradient(circle at bottom right, rgba(255,255,255,0.15), transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    
   </style>
 </head>
 <body>
@@ -1162,6 +1232,7 @@ document.addEventListener('click', (e)=>{
   </script>
 </body>
 </html>
+
 
 
 
