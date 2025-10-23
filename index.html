@@ -1083,13 +1083,44 @@ document.addEventListener('click', (e)=>{
   openCarModal(card.dataset.car); // ✅ 이렇게 name 넘겨서 호출
 });
 
-/* RP 타이머 로직 */
-function initRPTimers(){
+import { 
+  getFirestore, doc, getDoc, setDoc, serverTimestamp 
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+const db = getFirestore();
+
+async function initRPTimers(){
   const items = document.querySelectorAll('.rp-item');
-  items.forEach(it=>{
+  const now = Date.now();
+
+  for(const it of items){
     const name = it.dataset.name;
-    const max = parseInt(it.dataset.time||0); // 초 단위
-    const start = Date.now();
+    const max = parseInt(it.dataset.time||0);
+    const id = name.replace(/\s+/g,'_'); // 문서ID용
+    const ref = doc(db, "rp_timers", id);
+
+    let startAt, endAt;
+
+    // 🔹 Firestore에서 기존 타이머 불러오기
+    const snap = await getDoc(ref);
+    if(snap.exists()){
+      const data = snap.data();
+      startAt = data.startAt?.toDate()?.getTime();
+      endAt = data.endAt?.toDate()?.getTime();
+    }
+
+    // 🔹 타이머 데이터가 없거나 완료되었으면 새로 시작
+    if(!endAt || endAt <= now){
+      startAt = now;
+      endAt = now + max * 1000;
+      await setDoc(ref, {
+        name,
+        startAt: new Date(startAt),
+        endAt: new Date(endAt),
+        duration: max,
+        updatedAt: serverTimestamp()
+      });
+    }
 
     // 라벨 & 바 생성
     it.innerHTML = `
@@ -1102,266 +1133,187 @@ function initRPTimers(){
     const timeText = it.querySelector('.rp-time');
 
     function update(){
-      const elapsed = (Date.now()-start)/1000;
-      const remain = Math.max(0, max - elapsed);
-      const pct = Math.min(100, (elapsed/max)*100);
+      const remain = Math.max(0, endAt - Date.now());
+      const pct = Math.min(100, ((max*1000 - remain)/(max*1000))*100);
       fill.style.width = pct + "%";
 
-      const min = Math.floor(remain/60);
-      const sec = Math.floor(remain%60);
+      const min = Math.floor(remain/60000);
+      const sec = Math.floor((remain%60000)/1000);
       timeText.textContent = remain>0 ? `${min}분 ${sec.toString().padStart(2,'0')}초 남음` : "⏰ 완료!";
-      if(remain<=0){ clearInterval(timer); }
+      if(remain<=0) clearInterval(timer);
     }
+
     update();
     const timer = setInterval(update, 1000);
-  });
+  }
 }
 
 document.addEventListener('DOMContentLoaded', initRPTimers);
 </script>
 
   <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
-import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, addDoc, serverTimestamp, query, orderBy, limit, onSnapshot } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
-import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-analytics.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-analytics.js";
+    import { getFirestore, collection, addDoc, serverTimestamp, query, orderBy, limit, onSnapshot } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+    import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBQt_sPa5B4rHWAHTn9piQ6mYYmTDpxykM",
-  authDomain: "information-5461a.firebaseapp.com",
-  projectId: "information-5461a",
-  storageBucket: "information-5461a.firebasestorage.app",
-  messagingSenderId: "1051085585657",
-  appId: "1:1051085585657:web:c9b43d1b000aa30a233628",
-  measurementId: "G-2VD58S8V9C"
-};
+    const firebaseConfig = {
+      apiKey: "AIzaSyBQt_sPa5B4rHWAHTn9piQ6mYYmTDpxykM",
+      authDomain: "information-5461a.firebaseapp.com",
+      projectId: "information-5461a",
+      storageBucket: "information-5461a.firebasestorage.app",
+      messagingSenderId: "1051085585657",
+      appId: "1:1051085585657:web:c9b43d1b000aa30a233628",
+      measurementId: "G-2VD58S8V9C"
+    };
 
-const app = initializeApp(firebaseConfig);
-try { getAnalytics(app); } catch(e){}
-const db = getFirestore(app);
-const auth = getAuth(app);
-const storiesRef = collection(db, "stories");
+    const app = initializeApp(firebaseConfig);
+    try { getAnalytics(app); } catch(e){}
+    const db = getFirestore(app);
+    const auth = getAuth(app);
 
-// 🔹 로그인 (익명)
-let currentUser = null;
-signInAnonymously(auth).catch(console.error);
-onAuthStateChanged(auth, async (user)=>{
-  if(user){
-    currentUser = user;
-    console.log("✅ 로그인:", user.uid);
-    await loadUserState(user.uid);
-  }
-});
+    signInAnonymously(auth).catch(console.error);
 
-// 🔹 Firestore에 상태 저장/불러오기 함수
-async function saveUserState(uid, data){
-  const ref = doc(db, "users", uid);
-  try {
-    await setDoc(ref, data, { merge:true });
-  } catch(err){ console.error("🔥 상태 저장 실패:", err); }
-}
-async function loadUserState(uid){
-  const ref = doc(db, "users", uid);
-  const snap = await getDoc(ref);
-  if(!snap.exists()) return;
-  const data = snap.data();
+    const storiesRef = collection(db, "stories");
 
-  // 마지막 페이지 복원
-  if(data.lastPage && document.getElementById(data.lastPage)){
-    showPage(data.lastPage);
-  }
+    /* ---- 폼 엘리먼트 ---- */
+    const storyForm = document.getElementById("storyForm");
+    const storyNick = document.getElementById("storyNick");
+    const storyCode = document.getElementById("storyCode");
+    const storyTitle = document.getElementById("storyTitle");
+    const storyBody = document.getElementById("storyBody");
+    const storyMsg  = document.getElementById("storyMsg");
+    const storySong = document.getElementById("storySong");
+    const storyCategory = document.getElementById("storyCategory");
+    const anonSwitch = document.getElementById("anonSwitch");
+    const storyList = document.getElementById("storyList");
+    const storyFilter = document.getElementById("storyFilter");
 
-  // 익명 모드 복원
-  if(typeof data.isAnon === "boolean"){
-    setAnon(data.isAnon);
-  }
+    /* ---- 익명 스위치 ---- */
+    function setAnon(active){
+      anonSwitch.classList.toggle('active', !!active);
+      anonSwitch.setAttribute('aria-checked', active ? 'true' : 'false');
+      updateAnonUI();
+    }
+    function updateAnonUI(){
+      const anon = anonSwitch.classList.contains('active');
+      [storyNick, storyCode].forEach((el)=>{
+        el.disabled = anon;
+        if(anon) el.value = '';
+        if(el === storyNick) el.placeholder = anon ? '익명 모드' : '닉네임';
+        if(el === storyCode) el.placeholder = anon ? '익명 모드' : '고번 (예: 251)';
+      });
+    }
+    setAnon(false);
+    updateAnonUI();
+    anonSwitch.addEventListener('click', ()=> setAnon(!anonSwitch.classList.contains('active')));
+    anonSwitch.addEventListener('keydown', (e)=>{ if(e.key===' '||e.key==='Enter'){ e.preventDefault(); setAnon(!anonSwitch.classList.contains('active')); }});
 
-  // RP 타이머 복원
-  if(data.rpTimers){
-    Object.entries(data.rpTimers).forEach(([name, start])=>{
-      localStorage.setItem(`rpStart_${name}`, start);
+    /* ---- 제출 ---- */
+    storyForm?.addEventListener("submit", async (e)=>{
+      e.preventDefault();
+      const isAnon = anonSwitch.classList.contains('active');
+      // ✅ 익명이면 닉/고번 저장하지 않음
+      const nick  = isAnon ? "" : (storyNick.value||"").trim();
+      const code  = isAnon ? "" : (storyCode.value||"").trim();
+      const title = (storyTitle.value||"").trim();
+      const body  = (storyBody.value||"").trim();
+      const song  = (storySong.value||"").trim();
+      const category = storyCategory.value || "";
+
+      if(!title || !body || !category){
+        storyMsg.textContent = "카테고리/제목/내용은 필수입니다.";
+        storyMsg.style.color = "#dc2626";
+        return;
+      }
+      if(!isAnon && !nick && !code){
+        storyMsg.textContent = "익명이 아니면 닉네임 또는 고번을 입력하세요.";
+        storyMsg.style.color = "#dc2626";
+        return;
+      }
+
+      storyForm.querySelector("button[type=submit]").disabled = true;
+      storyMsg.textContent = "전송 중...";
+      storyMsg.style.color = "#6b7280";
+      try{
+        await addDoc(storiesRef, { isAnon, nick, code, title, body, song, category, createdAt: serverTimestamp() });
+        storyMsg.textContent = "사연이 접수되었습니다! 감사합니다.";
+        storyMsg.style.color = "#16a34a";
+        storyTitle.value = "";
+        storyBody.value = "";
+        storySong.value = "";
+        // 카테고리/익명 설정은 유지
+      }catch(err){
+        storyMsg.textContent = "사연 전송 실패: " + (err?.message||err);
+        storyMsg.style.color = "#dc2626";
+      }finally{
+        storyForm.querySelector("button[type=submit]").disabled = false;
+      }
     });
-  }
-  initRPTimers();
-}
 
-// 🔹 익명 스위치
-function setAnon(active){
-  anonSwitch.classList.toggle('active', !!active);
-  anonSwitch.setAttribute('aria-checked', active ? 'true' : 'false');
-  updateAnonUI();
-  if(currentUser){
-    saveUserState(currentUser.uid, { isAnon: active, lastUpdated:new Date() });
-  }
-}
-function updateAnonUI(){
-  const anon = anonSwitch.classList.contains('active');
-  [storyNick, storyCode].forEach((el)=>{
-    el.disabled = anon;
-    if(anon) el.value = '';
-    if(el === storyNick) el.placeholder = anon ? '익명 모드' : '닉네임';
-    if(el === storyCode) el.placeholder = anon ? '익명 모드' : '고번 (예: 251)';
-  });
-}
-anonSwitch.addEventListener('click', ()=> setAnon(!anonSwitch.classList.contains('active')));
-anonSwitch.addEventListener('keydown', (e)=>{ if(e.key===' '||e.key==='Enter'){ e.preventDefault(); setAnon(!anonSwitch.classList.contains('active')); }});
-
-// 🔹 RP 타이머 (Firestore + Local 연동)
-function saveRPTimer(name, start){
-  if(currentUser){
-    const ref = doc(db, "users", currentUser.uid);
-    updateDoc(ref, { [`rpTimers.${name}`]: start, lastUpdated:new Date() }).catch(()=>{});
-  }
-}
-function initRPTimers(){
-  const items = document.querySelectorAll('.rp-item');
-  items.forEach(it=>{
-    const name = it.dataset.name;
-    const max = parseInt(it.dataset.time||0);
-    let start = localStorage.getItem(`rpStart_${name}`);
-
-    if(!start){
-      start = Date.now();
-      localStorage.setItem(`rpStart_${name}`, start);
-      saveRPTimer(name, start);
-    } else {
-      start = parseInt(start);
+    /* ---- 최신 사연 구독 + 렌더러 ---- */
+    function fmtTime(ts){
+      try{
+        const d = ts?.toDate ? ts.toDate() : (ts instanceof Date ? ts : new Date());
+        const y = d.getFullYear(), m = ('0'+(d.getMonth()+1)).slice(-2), da=('0'+d.getDate()).slice(-2);
+        const hh=('0'+d.getHours()).slice(-2), mm=('0'+d.getMinutes()).slice(-2);
+        return `${y}.${m}.${da} ${hh}:${mm}`;
+      }catch{ return ""; }
     }
 
-    it.innerHTML = `
-      <div class="label">${name}</div>
-      <div class="rp-bar"><div class="rp-fill"></div></div>
-      <div class="rp-time">남은 시간 계산중...</div>
-    `;
-    const fill = it.querySelector('.rp-fill');
-    const timeText = it.querySelector('.rp-time');
+    function renderStoryList(){
+      const filterCat = storyFilter?.value || "";
+      const all = Array.from(storyMap.values());
+      const arr = all.filter(s=> !filterCat || s.category === filterCat);
 
-    function update(){
-      const elapsed = (Date.now()-start)/1000;
-      const remain = Math.max(0, max - elapsed);
-      const pct = Math.min(100, (elapsed/max)*100);
-      fill.style.width = pct + "%";
-      const min = Math.floor(remain/60);
-      const sec = Math.floor(remain%60);
-      timeText.textContent = remain>0 ? `${min}분 ${sec.toString().padStart(2,'0')}초 남음` : "⏰ 완료!";
-      if(remain<=0){ clearInterval(timer); localStorage.removeItem(`rpStart_${name}`); }
+      if(arr.length===0){
+        storyList.innerHTML = `<li class="story-empty">아직 등록된 사연이 없습니다.</li>`;
+        return;
+      }
+      storyList.innerHTML = arr.map(s=>{
+        const who  = s.isAnon ? '익명' : (s.nick || '—');
+        const code = (!s.isAnon && s.code) ? ` (${s.code})` : '';
+        const song = s.song ? ` · 🎵 ${s.song}` : '';
+        return `
+          <li class="story-item" data-id="${s.id}">
+            <div class="left">
+              <span class="badge">${s.category||'기타'}</span>
+              <div style="display:flex;flex-direction:column;min-width:0">
+                <div class="title">${s.title||'(제목 없음)'}</div>
+                <div class="meta">${who}${code} · ${s._time || ''}${song}</div>
+              </div>
+            </div>
+            <div class="meta">보기 ▸</div>
+          </li>
+        `;
+      }).join('');
+
+      storyList.querySelectorAll('.story-item').forEach(li=>{
+        li.addEventListener('click', ()=> openStory(li.getAttribute('data-id')));
+      });
     }
-    update();
-    const timer = setInterval(update, 1000);
-  });
-}
 
-// 🔹 페이지 이동 시 상태 저장
-function showPage(pageId){
-  document.querySelectorAll('.page').forEach(s=>s.classList.remove('active'));
-  const el=document.getElementById(pageId);
-  if(el){ el.classList.add('active'); window.scrollTo({top:0,behavior:'smooth'}); }
-  toggleBroadcastBox();
-  if(currentUser){
-    saveUserState(currentUser.uid, { lastPage: pageId, lastUpdated:new Date() });
-  }
-}
-function goHome(){ showPage('home'); }
+    const qLatest = query(storiesRef, orderBy('createdAt','desc'), limit(50));
+    onSnapshot(qLatest, (snap)=>{
+      storyMap.clear();
+      snap.forEach(doc=>{
+        const s = { id: doc.id, ...doc.data() };
+        s._time = s.createdAt ? fmtTime(s.createdAt) : '';
+        storyMap.set(s.id, s);
+      });
+      renderStoryList();
+    });
 
-// 🔹 사연 저장/조회 (기존 로직 그대로)
-const storyForm = document.getElementById("storyForm");
-const storyNick = document.getElementById("storyNick");
-const storyCode = document.getElementById("storyCode");
-const storyTitle = document.getElementById("storyTitle");
-const storyBody = document.getElementById("storyBody");
-const storyMsg  = document.getElementById("storyMsg");
-const storySong = document.getElementById("storySong");
-const storyCategory = document.getElementById("storyCategory");
-const anonSwitch = document.getElementById("anonSwitch");
-const storyList = document.getElementById("storyList");
-const storyFilter = document.getElementById("storyFilter");
+    storyFilter?.addEventListener('change', renderStoryList);
 
-storyForm?.addEventListener("submit", async (e)=>{
-  e.preventDefault();
-  const isAnon = anonSwitch.classList.contains('active');
-  const nick  = isAnon ? "" : (storyNick.value||"").trim();
-  const code  = isAnon ? "" : (storyCode.value||"").trim();
-  const title = (storyTitle.value||"").trim();
-  const body  = (storyBody.value||"").trim();
-  const song  = (storySong.value||"").trim();
-  const category = storyCategory.value || "";
-  if(!title || !body || !category){
-    storyMsg.textContent = "카테고리/제목/내용은 필수입니다.";
-    storyMsg.style.color = "#dc2626"; return;
-  }
-  if(!isAnon && !nick && !code){
-    storyMsg.textContent = "익명이 아니면 닉네임 또는 고번을 입력하세요.";
-    storyMsg.style.color = "#dc2626"; return;
-  }
-  storyForm.querySelector("button[type=submit]").disabled = true;
-  storyMsg.textContent = "전송 중...";
-  storyMsg.style.color = "#6b7280";
-  try{
-    await addDoc(storiesRef, { isAnon, nick, code, title, body, song, category, createdAt: serverTimestamp() });
-    storyMsg.textContent = "사연이 접수되었습니다! 감사합니다.";
-    storyMsg.style.color = "#16a34a";
-    storyTitle.value = "";
-    storyBody.value = "";
-    storySong.value = "";
-  }catch(err){
-    storyMsg.textContent = "사연 전송 실패: " + (err?.message||err);
-    storyMsg.style.color = "#dc2626";
-  }finally{
-    storyForm.querySelector("button[type=submit]").disabled = false;
-  }
-});
-
-// 🔹 최신 사연 실시간 렌더링 (기존 그대로)
-const storyMap = new Map();
-function fmtTime(ts){
-  try{
-    const d = ts?.toDate ? ts.toDate() : (ts instanceof Date ? ts : new Date());
-    const y = d.getFullYear(), m = ('0'+(d.getMonth()+1)).slice(-2), da=('0'+d.getDate()).slice(-2);
-    const hh=('0'+d.getHours()).slice(-2), mm=('0'+d.getMinutes()).slice(-2);
-    return `${y}.${m}.${da} ${hh}:${mm}`;
-  }catch{ return ""; }
-}
-function renderStoryList(){
-  const filterCat = storyFilter?.value || "";
-  const all = Array.from(storyMap.values());
-  const arr = all.filter(s=> !filterCat || s.category === filterCat);
-  if(arr.length===0){
-    storyList.innerHTML = `<li class="story-empty">아직 등록된 사연이 없습니다.</li>`;
-    return;
-  }
-  storyList.innerHTML = arr.map(s=>{
-    const who  = s.isAnon ? '익명' : (s.nick || '—');
-    const code = (!s.isAnon && s.code) ? ` (${s.code})` : '';
-    const song = s.song ? ` · 🎵 ${s.song}` : '';
-    return `
-      <li class="story-item" data-id="${s.id}">
-        <div class="left">
-          <span class="badge">${s.category||'기타'}</span>
-          <div style="display:flex;flex-direction:column;min-width:0">
-            <div class="title">${s.title||'(제목 없음)'}</div>
-            <div class="meta">${who}${code} · ${s._time || ''}${song}</div>
-          </div>
-        </div>
-        <div class="meta">보기 ▸</div>
-      </li>
-    `;
-  }).join('');
-  storyList.querySelectorAll('.story-item').forEach(li=>{
-    li.addEventListener('click', ()=> openStory(li.getAttribute('data-id')));
-  });
-}
-const qLatest = query(storiesRef, orderBy('createdAt','desc'), limit(50));
-onSnapshot(qLatest, (snap)=>{
-  storyMap.clear();
-  snap.forEach(doc=>{
-    const s = { id: doc.id, ...doc.data() };
-    s._time = s.createdAt ? fmtTime(s.createdAt) : '';
-    storyMap.set(s.id, s);
-  });
-  renderStoryList();
-});
-storyFilter?.addEventListener('change', renderStoryList);
-</script>
+    function scrollToMarket(id){
+      const el = document.getElementById(id);
+      if(el){
+        el.scrollIntoView({behavior:"smooth", block:"start"});
+      }
+    }
+    window.scrollToMarket = scrollToMarket;
+  </script>
 </body>
 </html>
 
