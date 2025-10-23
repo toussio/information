@@ -1294,10 +1294,125 @@ async function initRPTimers(){
   }
 }
 
-// ✅ Firebase 초기화가 끝난 뒤 실행
 window.addEventListener("DOMContentLoaded", () => {
   initRPTimers();
 });
-  </script>
+
+/* ✅ 여기에 붙이세요 — 아래 전체를 추가 */
+const { updateDoc, deleteDoc, doc } = await import("https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js");
+
+const ADMIN_CODE = "703REAL"; // 관리자 코드
+let isAdmin = false;
+
+// 모달 열기/닫기
+window.openAdminModal = function(){
+  document.getElementById('adminModal').classList.add('show');
+  document.body.style.overflow='hidden';
+};
+window.closeAdminModal = function(){
+  document.getElementById('adminModal').classList.remove('show');
+  document.body.style.overflow='';
+};
+
+// 관리자 인증
+window.verifyAdmin = function(){
+  const input = document.getElementById('adminCodeInput').value.trim();
+  if(input === ADMIN_CODE){
+    isAdmin = true;
+    document.getElementById('adminPanel').style.display = 'block';
+    alert("✅ 관리자 인증 성공!");
+    populateRPList();
+  }else{
+    alert("❌ 잘못된 관리자 코드입니다.");
+  }
+};
+
+// Firestore에서 RP 목록 채우기
+async function populateRPList(){
+  const sel = document.getElementById('rpSelect');
+  sel.innerHTML = '<option value="">선택</option>';
+  const all = document.querySelectorAll('.rp-item');
+  all.forEach(it=>{
+    const name = it.dataset.name;
+    sel.innerHTML += `<option value="${name}">${name}</option>`;
+  });
+}
+
+// RP 쿨타임 초기화
+window.resetCooldown = async function(){
+  if(!isAdmin) return alert("관리자 인증이 필요합니다.");
+  const name = document.getElementById('rpSelect').value;
+  if(!name) return alert("대상 RP를 선택하세요.");
+  if(!confirm(`'${name}' 쿨타임을 초기화하시겠습니까?`)) return;
+
+  const ref = doc(db, "rpTimers", name);
+  await deleteDoc(ref);
+  alert(`✅ ${name} 쿨타임이 초기화되었습니다.`);
+  initRPTimers(); // 즉시 반영
+};
+
+// ✅ “37분 40초” 형식 입력 처리
+window.applyNewTime = async function(){
+  if(!isAdmin) return alert("관리자 인증이 필요합니다.");
+  const name = document.getElementById('rpSelect').value;
+  const timeText = document.getElementById('newRemain').value.trim();
+  if(!name) return alert("대상 RP를 선택하세요.");
+  if(!timeText) return alert("남은 시간을 입력하세요. 예: 37분 40초");
+
+  // "37분 40초" → 총 초로 변환
+  let hour = 0, min = 0, sec = 0;
+  const hourMatch = timeText.match(/(\d+)\s*시간/);
+  const minMatch = timeText.match(/(\d+)\s*분/);
+  const secMatch = timeText.match(/(\d+)\s*초/);
+  if(hourMatch) hour = parseInt(hourMatch[1]);
+  if(minMatch) min = parseInt(minMatch[1]);
+  if(secMatch) sec = parseInt(secMatch[1]);
+  const remain = hour * 3600 + min * 60 + sec;
+
+  if(remain <= 0) return alert("0초 이하로 설정할 수 없습니다.");
+
+  const ref = doc(db, "rpTimers", name);
+  const now = Date.now();
+  const max = parseInt(document.querySelector(`[data-name='${name}']`).dataset.time||0);
+  const newStart = now - (max - remain) * 1000; // 현재 시점 기준 재계산
+
+  await updateDoc(ref, { startTime: newStart, duration: max });
+  alert(`✅ ${name}의 남은 시간이 ${hour ? hour+'시간 ' : ''}${min}분 ${sec}초로 변경되었습니다.`);
+  initRPTimers(); // 즉시 반영
+};
+</script>
+  <!-- ✅ 관리자용 RP 타이머 제어 모달 -->
+<div id="adminModal" class="modal" aria-hidden="true">
+  <div class="modal-content" role="dialog" aria-modal="true" style="max-width:500px;">
+    <button class="close-btn" onclick="closeAdminModal()">닫기</button>
+    <h3>🔧 RP 타이머 관리</h3>
+    <p class="modal-tagline">쿨타임 초기화 / 남은 시간 조정</p>
+
+    <div style="text-align:left;margin-top:20px;">
+      <label style="font-weight:700;">관리자 코드</label>
+      <input id="adminCodeInput" type="password" placeholder="관리자 코드 입력" style="width:100%;padding:10px;border:1px solid #ccc;border-radius:8px;margin-top:6px;">
+      <button onclick="verifyAdmin()" class="btn" style="width:100%;margin-top:10px;">인증</button>
+    </div>
+
+    <div id="adminPanel" style="display:none;margin-top:20px;">
+      <label style="font-weight:700;">대상 RP</label>
+      <select id="rpSelect" style="width:100%;padding:10px;border:1px solid #ccc;border-radius:8px;margin-top:6px;">
+        <option value="">선택</option>
+      </select>
+
+      <label style="font-weight:700;margin-top:12px;">남은 시간 (예: 1시간 20분 30초)</label>
+      <input id="newRemain" type="text" placeholder="예: 37분 40초 / 1시간 20분 30초" style="width:100%;padding:10px;border:1px solid #ccc;border-radius:8px;margin-top:6px;">
+
+      <div style="display:flex;gap:10px;margin-top:16px;">
+        <button onclick="applyNewTime()" class="btn" style="flex:1;background:#16a34a;">적용</button>
+        <button onclick="resetCooldown()" class="btn" style="flex:1;background:#dc2626;">초기화</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 관리자 열기 버튼 -->
+<button onclick="openAdminModal()" class="btn" style="position:fixed;bottom:20px;right:20px;z-index:9999;background:#111827;">관리자</button>
 </body>
 </html>
+
