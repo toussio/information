@@ -1083,44 +1083,13 @@ document.addEventListener('click', (e)=>{
   openCarModal(card.dataset.car); // ✅ 이렇게 name 넘겨서 호출
 });
 
-import { 
-  getFirestore, doc, getDoc, setDoc, serverTimestamp 
-} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
-
-const db = getFirestore();
-
-async function initRPTimers(){
+/* RP 타이머 로직 */
+function initRPTimers(){
   const items = document.querySelectorAll('.rp-item');
-  const now = Date.now();
-
-  for(const it of items){
+  items.forEach(it=>{
     const name = it.dataset.name;
-    const max = parseInt(it.dataset.time||0);
-    const id = name.replace(/\s+/g,'_'); // 문서ID용
-    const ref = doc(db, "rp_timers", id);
-
-    let startAt, endAt;
-
-    // 🔹 Firestore에서 기존 타이머 불러오기
-    const snap = await getDoc(ref);
-    if(snap.exists()){
-      const data = snap.data();
-      startAt = data.startAt?.toDate()?.getTime();
-      endAt = data.endAt?.toDate()?.getTime();
-    }
-
-    // 🔹 타이머 데이터가 없거나 완료되었으면 새로 시작
-    if(!endAt || endAt <= now){
-      startAt = now;
-      endAt = now + max * 1000;
-      await setDoc(ref, {
-        name,
-        startAt: new Date(startAt),
-        endAt: new Date(endAt),
-        duration: max,
-        updatedAt: serverTimestamp()
-      });
-    }
+    const max = parseInt(it.dataset.time||0); // 초 단위
+    const start = Date.now();
 
     // 라벨 & 바 생성
     it.innerHTML = `
@@ -1133,19 +1102,19 @@ async function initRPTimers(){
     const timeText = it.querySelector('.rp-time');
 
     function update(){
-      const remain = Math.max(0, endAt - Date.now());
-      const pct = Math.min(100, ((max*1000 - remain)/(max*1000))*100);
+      const elapsed = (Date.now()-start)/1000;
+      const remain = Math.max(0, max - elapsed);
+      const pct = Math.min(100, (elapsed/max)*100);
       fill.style.width = pct + "%";
 
-      const min = Math.floor(remain/60000);
-      const sec = Math.floor((remain%60000)/1000);
+      const min = Math.floor(remain/60);
+      const sec = Math.floor(remain%60);
       timeText.textContent = remain>0 ? `${min}분 ${sec.toString().padStart(2,'0')}초 남음` : "⏰ 완료!";
-      if(remain<=0) clearInterval(timer);
+      if(remain<=0){ clearInterval(timer); }
     }
-
     update();
     const timer = setInterval(update, 1000);
-  }
+  });
 }
 
 document.addEventListener('DOMContentLoaded', initRPTimers);
@@ -1316,4 +1285,3 @@ document.addEventListener('DOMContentLoaded', initRPTimers);
   </script>
 </body>
 </html>
-
