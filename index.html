@@ -463,7 +463,20 @@ body{
         <!-- RP 시간표 -->
 <div id="rpTimerBox" class="rp-timer-box">
   <h3>⏱ RP 활동 쿨타임</h3>
-
+  
+<!-- ✅ 안내 문구 추가 -->
+  <p style="
+    background:#dcfce7;
+    border:1px solid #86efac;
+    color:#065f46;
+    padding:10px 14px;
+    border-radius:8px;
+    font-size:14.5px;
+    font-weight:700;
+    margin:10px 0 18px;
+  ">
+    ⚠️ 각 RP의 쿨타임은 실제 인게임 기준과 다를 수 있으며, 참고용으로 표시됩니다.
+  </p>
   <!-- 보석상 -->
   <div class="rp-section">
     <h4>💎 보석상 (1시간)</h4>
@@ -760,6 +773,20 @@ document.addEventListener('click', (e)=>{
       <!-- 카테고리 -->
       <section id="category" class="page">
         <h2>📂 카테고리별 시세표</h2>
+        <!-- ✅ 안내 문구 추가 -->
+  <p style="
+    background:#fef9c3;
+    border:1px solid #fde68a;
+    color:#78350f;
+    padding:10px 14px;
+    border-radius:8px;
+    font-size:14.5px;
+    font-weight:700;
+    margin:12px 0 20px;
+  ">
+    ⚠️ 최대한 많은 정보를 취합 중이며, 인게임 시세와 다를 수 있습니다.<br>
+    참고용으로만 확인해주세요.
+  </p>
         <div class="quick-nav">
           <button onclick="scrollToSection('chair')">🪑 의자 종류</button>
           <button onclick="scrollToSection('support-car')">🚗 후원 차량</button>
@@ -1437,6 +1464,7 @@ window.applyNewTime = async function(){
 <button onclick="openAdminModal()" class="btn" style="position:fixed;bottom:20px;right:20px;z-index:9999;background:#111827;">관리자</button>
 </body>
 </html>
+
 
 
 
