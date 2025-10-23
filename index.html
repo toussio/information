@@ -1083,41 +1083,6 @@ document.addEventListener('click', (e)=>{
   openCarModal(card.dataset.car); // ✅ 이렇게 name 넘겨서 호출
 });
 
-/* RP 타이머 로직 */
-function initRPTimers(){
-  const items = document.querySelectorAll('.rp-item');
-  items.forEach(it=>{
-    const name = it.dataset.name;
-    const max = parseInt(it.dataset.time||0); // 초 단위
-    const start = Date.now();
-
-    // 라벨 & 바 생성
-    it.innerHTML = `
-      <div class="label">${name}</div>
-      <div class="rp-bar"><div class="rp-fill"></div></div>
-      <div class="rp-time">남은 시간 계산중...</div>
-    `;
-
-    const fill = it.querySelector('.rp-fill');
-    const timeText = it.querySelector('.rp-time');
-
-    function update(){
-      const elapsed = (Date.now()-start)/1000;
-      const remain = Math.max(0, max - elapsed);
-      const pct = Math.min(100, (elapsed/max)*100);
-      fill.style.width = pct + "%";
-
-      const min = Math.floor(remain/60);
-      const sec = Math.floor(remain%60);
-      timeText.textContent = remain>0 ? `${min}분 ${sec.toString().padStart(2,'0')}초 남음` : "⏰ 완료!";
-      if(remain<=0){ clearInterval(timer); }
-    }
-    update();
-    const timer = setInterval(update, 1000);
-  });
-}
-
-document.addEventListener('DOMContentLoaded', initRPTimers);
 </script>
 
   <script type="module">
@@ -1138,7 +1103,7 @@ document.addEventListener('DOMContentLoaded', initRPTimers);
 
     const app = initializeApp(firebaseConfig);
     try { getAnalytics(app); } catch(e){}
-    const db = getFirestore(app);
+     window.db = getFirestore(app);
     const auth = getAuth(app);
 
     signInAnonymously(auth).catch(console.error);
@@ -1282,6 +1247,57 @@ document.addEventListener('DOMContentLoaded', initRPTimers);
       }
     }
     window.scrollToMarket = scrollToMarket;
+    /* ✅ Firestore 기반 RP 타이머 */
+import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+async function initRPTimers(){
+  const items = document.querySelectorAll('.rp-item');
+  for(const it of items){
+    const name = it.dataset.name;
+    const max = parseInt(it.dataset.time||0); // 초 단위
+    const ref = doc(db, "rpTimers", name);
+
+    let snap = await getDoc(ref);
+    let startTime;
+    if(!snap.exists()){
+      startTime = Date.now();
+      await setDoc(ref, { startTime, duration: max });
+    } else {
+      startTime = snap.data().startTime;
+    }
+
+    it.innerHTML = `
+      <div class="label">${name}</div>
+      <div class="rp-bar"><div class="rp-fill"></div></div>
+      <div class="rp-time">남은 시간 계산중...</div>
+    `;
+    const fill = it.querySelector('.rp-fill');
+    const timeText = it.querySelector('.rp-time');
+
+    function update(){
+      const elapsed = (Date.now() - startTime) / 1000;
+      const remain = Math.max(0, max - elapsed);
+      const pct = Math.min(100, (elapsed / max) * 100);
+      fill.style.width = pct + "%";
+      const min = Math.floor(remain / 60);
+      const sec = Math.floor(remain % 60);
+      timeText.textContent = remain > 0
+        ? `${min}분 ${sec.toString().padStart(2, '0')}초 남음`
+        : "⏰ 완료!";
+      if(remain <= 0){
+        clearInterval(timer);
+      }
+    }
+
+    update();
+    const timer = setInterval(update, 1000);
+  }
+}
+
+// ✅ Firebase 초기화가 끝난 뒤 실행
+window.addEventListener("DOMContentLoaded", () => {
+  initRPTimers();
+});
   </script>
 </body>
 </html>
