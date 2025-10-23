@@ -1274,25 +1274,25 @@ async function initRPTimers(){
     const fill = it.querySelector('.rp-fill');
     const timeText = it.querySelector('.rp-time');
 
-    function update(){
-      const elapsed = (Date.now() - startTime) / 1000;
-      const remain = Math.max(0, max - elapsed);
-      const pct = Math.min(100, (elapsed / max) * 100);
-      fill.style.width = pct + "%";
-      const min = Math.floor(remain / 60);
-      const sec = Math.floor(remain % 60);
-      timeText.textContent = remain > 0
-        ? `${min}분 ${sec.toString().padStart(2, '0')}초 남음`
-        : "⏰ 완료!";
-      if(remain <= 0){
-        clearInterval(timer);
-      }
-    }
-
-    update();
-    const timer = setInterval(update, 1000);
+   function update(){
+  const elapsed = (Date.now() - startTime) / 1000;
+  const remain = Math.max(0, max - elapsed);
+  const pct = Math.min(100, (elapsed / max) * 100);
+  fill.style.width = pct + "%";
+  const min = Math.floor(remain / 60);
+  const sec = Math.floor(remain % 60);
+  timeText.textContent = remain > 0
+    ? `${min}분 ${sec.toString().padStart(2, '0')}초 남음`
+    : "⏰ 완료!";
+  if(remain <= 0){
+    clearInterval(timer);
   }
 }
+
+// ❌ 기존: update() → setInterval()
+// ✅ 변경: setInterval() → update()
+const timer = setInterval(update, 1000);
+update();
 
 window.addEventListener("DOMContentLoaded", () => {
   initRPTimers();
@@ -1415,5 +1415,6 @@ window.applyNewTime = async function(){
 <button onclick="openAdminModal()" class="btn" style="position:fixed;bottom:20px;right:20px;z-index:9999;background:#111827;">관리자</button>
 </body>
 </html>
+
 
 
