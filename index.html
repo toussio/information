@@ -1266,33 +1266,55 @@ async function initRPTimers(){
       startTime = snap.data().startTime;
     }
 
+    // UI 구성
     it.innerHTML = `
       <div class="label">${name}</div>
       <div class="rp-bar"><div class="rp-fill"></div></div>
       <div class="rp-time">남은 시간 계산중...</div>
     `;
+
     const fill = it.querySelector('.rp-fill');
     const timeText = it.querySelector('.rp-time');
 
-   function update(){
-  const elapsed = (Date.now() - startTime) / 1000;
-  const remain = Math.max(0, max - elapsed);
-  const pct = Math.min(100, (elapsed / max) * 100);
-  fill.style.width = pct + "%";
-  const min = Math.floor(remain / 60);
-  const sec = Math.floor(remain % 60);
-  timeText.textContent = remain > 0
-    ? `${min}분 ${sec.toString().padStart(2, '0')}초 남음`
-    : "⏰ 완료!";
-  if(remain <= 0){
-    clearInterval(timer);
+    // 업데이트 함수
+    function update(){
+      const elapsed = (Date.now() - startTime) / 1000;
+      const remain = Math.max(0, max - elapsed);
+      const pct = Math.min(100, (elapsed / max) * 100);
+      fill.style.width = pct + "%";
+
+      const min = Math.floor(remain / 60);
+      const sec = Math.floor(remain % 60);
+      timeText.textContent = remain > 0
+        ? `${min}분 ${sec.toString().padStart(2, '0')}초 남음`
+        : "⏰ 완료! (자동 초기화 대기 중)";
+
+      // ✅ 자동 초기화 로직
+      if(remain <= 0){
+        clearInterval(timer);
+        autoReset();
+      }
+    }
+
+    // ✅ Firestore에 자동 초기화 함수
+    async function autoReset(){
+      try{
+        const newStart = Date.now();
+        await setDoc(ref, { startTime: newStart, duration: max });
+        console.log(`🔁 ${name} 자동 초기화됨`);
+        startTime = newStart;  // 로컬 타이머도 갱신
+        update();              // 즉시 0초로 갱신 표시
+        const newTimer = setInterval(update, 1000); // 새 주기 시작
+      }catch(err){
+        console.error("자동 초기화 실패:", err);
+      }
+    }
+
+    // ✅ 순서 수정: setInterval 먼저, update 나중에 호출
+    const timer = setInterval(update, 1000);
+    update();
   }
 }
-
-// ❌ 기존: update() → setInterval()
-// ✅ 변경: setInterval() → update()
-const timer = setInterval(update, 1000);
-update();
 
 window.addEventListener("DOMContentLoaded", () => {
   initRPTimers();
@@ -1415,6 +1437,7 @@ window.applyNewTime = async function(){
 <button onclick="openAdminModal()" class="btn" style="position:fixed;bottom:20px;right:20px;z-index:9999;background:#111827;">관리자</button>
 </body>
 </html>
+
 
 
 
