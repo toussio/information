@@ -365,6 +365,60 @@ body{
       padding:6px 14px;border-radius:50px
     }
     @keyframes fadeInUp{from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none}}
+    /* RP 타이머 박스 */
+.rp-timer-box {
+  background:#fff;
+  border-radius:14px;
+  padding:20px;
+  box-shadow:0 4px 12px rgba(0,0,0,.08);
+  margin-bottom:30px;
+}
+.rp-timer-box h3 {
+  margin-top:0;
+  color:#1e3a8a;
+  font-size:20px;
+  font-weight:900;
+  border-bottom:2px solid #e5e7eb;
+  padding-bottom:6px;
+  margin-bottom:12px;
+}
+.rp-section {
+  margin-top:18px;
+}
+.rp-section h4 {
+  margin:0 0 8px;
+  color:#111827;
+  font-size:17px;
+  font-weight:800;
+}
+.rp-item {
+  margin:6px 0 10px;
+}
+.rp-item .label {
+  font-weight:700;
+  color:#374151;
+  margin-bottom:4px;
+}
+.rp-bar {
+  height:10px;
+  background:#e5e7eb;
+  border-radius:10px;
+  overflow:hidden;
+  position:relative;
+}
+.rp-fill {
+  height:100%;
+  background:linear-gradient(90deg,#22c55e,#86efac);
+  width:0%;
+  transition:width .2s linear;
+}
+.rp-time {
+  font-size:13px;
+  color:#6b7280;
+  margin-top:2px;
+  text-align:right;
+}
+
   </style>
 </head>
 <body>
@@ -406,6 +460,39 @@ body{
       <section id="home" class="page active">
         <h2>🏠 홈</h2>
       <!-- 리얼 방송국 (홈 섹션 바로 아래, 같은 폭) -->
+        <!-- RP 시간표 -->
+<div id="rpTimerBox" class="rp-timer-box">
+  <h3>⏱ RP 활동 쿨타임</h3>
+
+  <!-- 보석상 -->
+  <div class="rp-section">
+    <h4>💎 보석상 (1시간)</h4>
+    <div class="rp-item" data-name="락포스 보석상" data-time="3600"></div>
+  </div>
+
+  <!-- 편의점 -->
+  <div class="rp-section">
+    <h4>🏪 편의점 (40분)</h4>
+    <div class="rp-item" data-name="이노센스 대로" data-time="2400"></div>
+    <div class="rp-item" data-name="클린턴가" data-time="2400"></div>
+    <div class="rp-item" data-name="웨스트 미러 드라이브" data-time="2400"></div>
+    <div class="rp-item" data-name="루트68" data-time="2400"></div>
+    <div class="rp-item" data-name="새뇨라" data-time="2400"></div>
+    <div class="rp-item" data-name="샌디 쇼어스" data-time="2400"></div>
+  </div>
+
+  <!-- ATM -->
+  <div class="rp-section">
+    <h4>🏧 ATM (1시간)</h4>
+    <div class="rp-item" data-name="델페로 지점" data-time="3600"></div>
+    <div class="rp-item" data-name="미러파크 지점" data-time="3600"></div>
+    <div class="rp-item" data-name="다운타운 지점" data-time="3600"></div>
+    <div class="rp-item" data-name="바인우드 힐스 지점" data-time="3600"></div>
+    <div class="rp-item" data-name="반햄 협곡 지점" data-time="3600"></div>
+    <div class="rp-item" data-name="밀튼 로드 지점" data-time="3600"></div>
+  </div>
+</div>
+
       <div id="broadcastBox">
         <div class="title-row">
           <h2>📡 리얼 방송국</h2>
@@ -995,7 +1082,43 @@ document.addEventListener('click', (e)=>{
   if(!card) return;
   openCarModal(card.dataset.car); // ✅ 이렇게 name 넘겨서 호출
 });
-  </script>
+
+/* RP 타이머 로직 */
+function initRPTimers(){
+  const items = document.querySelectorAll('.rp-item');
+  items.forEach(it=>{
+    const name = it.dataset.name;
+    const max = parseInt(it.dataset.time||0); // 초 단위
+    const start = Date.now();
+
+    // 라벨 & 바 생성
+    it.innerHTML = `
+      <div class="label">${name}</div>
+      <div class="rp-bar"><div class="rp-fill"></div></div>
+      <div class="rp-time">남은 시간 계산중...</div>
+    `;
+
+    const fill = it.querySelector('.rp-fill');
+    const timeText = it.querySelector('.rp-time');
+
+    function update(){
+      const elapsed = (Date.now()-start)/1000;
+      const remain = Math.max(0, max - elapsed);
+      const pct = Math.min(100, (elapsed/max)*100);
+      fill.style.width = pct + "%";
+
+      const min = Math.floor(remain/60);
+      const sec = Math.floor(remain%60);
+      timeText.textContent = remain>0 ? `${min}분 ${sec.toString().padStart(2,'0')}초 남음` : "⏰ 완료!";
+      if(remain<=0){ clearInterval(timer); }
+    }
+    update();
+    const timer = setInterval(update, 1000);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', initRPTimers);
+</script>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
@@ -1162,3 +1285,4 @@ document.addEventListener('click', (e)=>{
   </script>
 </body>
 </html>
+
