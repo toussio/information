@@ -1299,7 +1299,7 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 /* ✅ 여기에 붙이세요 — 아래 전체를 추가 */
-const { updateDoc, deleteDoc, doc } = await import("https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js");
+const { updateDoc, deleteDoc } = await import("https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js");
 
 const ADMIN_CODE = "703REAL"; // 관리자 코드
 let isAdmin = false;
@@ -1415,4 +1415,5 @@ window.applyNewTime = async function(){
 <button onclick="openAdminModal()" class="btn" style="position:fixed;bottom:20px;right:20px;z-index:9999;background:#111827;">관리자</button>
 </body>
 </html>
+
 
