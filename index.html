@@ -315,41 +315,6 @@ body{
       .story-form label{ margin-bottom:6px; }
     }
 
-    /* ===== 🔽 추가: 차량 판매 시세표 카드 + 애니메이션 ===== */
-    .car-sale-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
-      gap:20px;
-      margin-top:20px;
-    }
-    .car-card{
-      background:#fff;
-      border-radius:16px;
-      padding:20px;
-      box-shadow:0 6px 16px rgba(0,0,0,.08);
-      text-align:center;
-      cursor:pointer;
-      transition:transform .25s var(--e), box-shadow .25s var(--e);
-      border:2px solid transparent;
-      animation:fadeInUp .4s ease forwards;
-    }
-    .car-card:hover{
-      transform:translateY(-6px);
-      box-shadow:0 10px 24px rgba(0,0,0,.12);
-      border-color:var(--accent);
-    }
-    .car-card .icon{
-      font-size:36px;margin-bottom:8px
-    }
-    .car-card h4{
-      margin:0 0 6px;font-size:18px;font-weight:800;color:var(--accent)
-    }
-    .car-card .price{
-      display:inline-block;
-      background:#dcfce7;color:#065f46;font-weight:700;font-size:16px;
-      padding:6px 14px;border-radius:50px
-    }
-    @keyframes fadeInUp{from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none}}
     /* RP 타이머 박스 */
 .rp-timer-box {
   background:#fff;
@@ -434,7 +399,6 @@ body{
     <main>
       <div class="nav-parts">
         <div class="nav-card" onclick="showPage('home')"><div class="icon">🏠</div><h3>홈</h3></div>
-        <div class="nav-card" onclick="showPage('market')"><div class="icon">📚</div><h3>차량 카탈로그</h3></div>
         <div class="nav-card" onclick="showPage('category')"><div class="icon">📂</div><h3>카테고리</h3></div>
         <div class="nav-card" onclick="showPage('stats')"><div class="icon">📈</div><h3>거래 통계</h3></div>
       </div>
@@ -490,193 +454,7 @@ body{
     <div class="rp-item" data-name="밀튼 로드 지점" data-time="3600"></div>
   </div>
 </div>
-
-<section id="market" class="page">
-  <h2>📚 카탈로그</h2>
-
-  <!-- 빠른 이동 버튼 -->
-  <div class="quick-nav">
-    <button onclick="scrollToMarket('offroad')">💥 오프로드</button>
-    <button onclick="scrollToMarket('muscle')">💥 머슬카</button>
-    <button onclick="scrollToMarket('van')">💥 밴</button>
-    <button onclick="scrollToMarket('sportscar')">💥 스포츠카</button>
-    <button onclick="scrollToMarket('classic')">💥 클래식</button>
-    <button onclick="scrollToMarket('sedan')">💥 세단</button>
-    <button onclick="scrollToMarket('supercar')">💥 슈퍼카</button>
-    <button onclick="scrollToMarket('suv')">💥 SUV</button>
-    <button onclick="scrollToMarket('small')">💥 소형</button>
-  </div>
-
-  <!-- 💥 오프로드 -->
-  <h3 id="offroad">💥 오프로드</h3>
-  <table>
-    <tr><th>차량</th><th>가격</th><th>승차인원</th></tr>
-    <tr data-car="디로더"><td>디로더</td><td>1,650,000,000원</td><td>2인승</td><td>30칸</td></tr>
-    <tr data-car="에버온"><td>에버온</td><td>1,650,000,000원</td><td>4인승</td></tr>
-    <tr data-car="요세미터3"><td>요세미터3</td><td>1,650,000,000원</td><td>2인승</td></tr>
-    <tr data-car="메사"><td>메사</td><td>1,782,000,000원</td><td>4인승</td></tr>
-    <tr data-car="듀브스타"><td>듀브스타</td><td>2,794,000,000원</td><td>4인승</td></tr>
-    <tr data-car="프리크롤러"><td>프리크롤러</td><td>4,037,000,000원</td><td>2인승</td></tr>
-  </table>
-
-  <!-- 💥 머슬카 -->
-  <h3 id="muscle">💥 머슬카</h3>
-  <table>
-    <tr><th>차량</th><th>가격</th><th>승차인원</th></tr>
-    <tr data-car="클리크"><td>클리크</td><td>2,035,000,000원</td><td>2인승</td></tr>
-     <tr data-car="요세미티"><td>요세미티</td><td>2,090,000,000원</td><td>2인승</td></tr>
-     <tr data-car="슬림밴"><td>슬림밴</td><td>2,145,000,000원</td><td>2인승</td></tr>
-     <tr data-car="코켓 블랙핀"><td>코켓 플랙핀</td><td>2,200,000,000원</td><td>2인승</td></tr>
-     <tr data-car="문빔"><td>문빔</td><td>2,750,000,000원</td><td>2인승</td></tr>
-     <tr data-car="버고"><td>버고</td><td>2,750,000,000원</td><td>2인승</td></tr>
-     <tr data-car="부두 커스텀"><td>부두 커스텀</td><td>2,860,000,000원</td><td>2인승</td></tr>
-     <tr data-car="유도라"><td>유도라</td><td>2,915,000,000원</td><td>2인승</td></tr>
-     <tr data-car="탬파"><td>탬파</td><td>2,970,000,000원</td><td>2인승</td></tr>
-    <tr data-car="듀크"><td>듀크</td><td>3,025,000,000원</td><td>2인승</td></tr>
-     <tr data-car="탐파2"><td>탐파2</td><td>3,124,000,000원</td><td>2인승</td></tr>
-     <tr data-car="헤르메스"><td>헤르메스</td><td>3,135,000,000원</td><td>2인승</td></tr>
-     <tr data-car="비터 듀크스"><td>비터 듀크스</td><td>3,190,000,000원</td><td>2인승</td></tr>
-      <tr data-car="도미네이터 GTT"><td>도미네이터 GTT</td><td>3,245,000,000원</td><td>2인승</td></tr>
-      <tr data-car="도미네이터 ASP"><td>도미네이터 ASP</td><td>3,124,000,000원</td><td>2인승</td></tr>
-      <tr data-car="피요트 개서"><td>피요트 개서</td><td>4,180,000,000원</td><td>2인승</td></tr>
-      <tr data-car="문빔 커스텀"><td>문빔 커스텀</td><td>4,290,000,000원</td><td>2인승</td></tr>
-  </table>
-
-  <!-- 💥 밴 -->
-  <h3 id="van">💥 밴</h3>
-  <table>
-    <tr><th>차량</th><th>가격</th><th>승차인원</th></tr>
-    <tr data-car="밥캣XL"><td>밥캣XL</td><td>1,650,000,000원</td><td>4인</td></tr>
-    <tr data-car="부리토"><td>부리토</td><td>1,650,000,000원</td><td>6인</td></tr>
-    <tr data-car="서퍼"><td>서퍼</td><td>2,882,000,000원</td><td>6인</td></tr>
-  </table>
-
-  <!-- 💥 스포츠카 -->
-  <h3 id="sportscar">💥 스포츠카</h3>
-  <table>
-    <tr><th>차량</th><th>가격</th><th>승차인원</th></tr>
-    <tr data-car="엘리지2"><td>엘리지2</td><td>1,672,000,000원</td><td>2인승</td></tr>
-    <tr data-car="코그브리오"><td>코그브리오</td><td>1,848,000,000원</td><td>2인승</td></tr>
-    <tr data-car="재칼"><td>재칼</td><td>1,914,000,000원</td><td>4인승</td></tr>
-    <tr data-car="미쉘리"><td>미쉘리</td><td>1,925,000,000원</td><td>2인승</td></tr>
-    <tr data-car="버팔로"><td>버팔로</td><td>1,980,000,000원</td><td>2인승</td></tr>
-    <tr data-car="버팔로2"><td>버팔로2</td><td>2,002,000,000원</td><td>4인승</td></tr>
-    <tr data-car="버팔로3"><td>버팔로3</td><td>2,024,000,000원</td><td>4인승</td></tr>
-    <tr data-car="GB200"><td>GB200</td><td>1,848,000,000원</td><td>2인승</td></tr>
-    <tr data-car="재스터3"><td>재스터3</td><td>2,090,000,000원</td><td>2인승</td></tr>
-    <tr data-car="마사크로"><td>마사크로</td><td>2,112,000,000원</td><td>2인승</td></tr>
-    <tr data-car="마사크로2"><td>마사크로2</td><td>2,134,000,000원</td><td>2인승</td></tr>
-    <tr data-car="베스트아GTS"><td>베스트아GTS</td><td>2,772,000,000원</td><td>2인승</td></tr>
-    <tr data-car="펠론"><td>펠론</td><td>2,860,000,000원</td><td>4인승</td></tr>
-    <tr data-car="트로포스"><td>트로포스</td><td>2,2,948,000,000원</td><td>2인승</td></tr>
-    <tr data-car="오므니스"><td>오므니스</td><td>2,926,000,000원</td><td>2인승</td></tr>
-    <tr data-car="슐라겐"><td>슐라겐</td><td>3,168,000,000원</td><td>2인승</td></tr>
-    <tr data-car="코멧3"><td>코멧3</td><td>3,190,000,000원</td><td>2인승</td></tr>
-    <tr data-car="백트레"><td>백트레</td><td>3,212,000,000원</td><td>2인승</td></tr>
-    <tr data-car="드래프터"><td>드래프터</td><td>3,234,000,000원</td><td>2인승</td></tr>
-    <tr data-car="주글러"><td>주글러</td><td>3,256,000,000원</td><td>2인승</td></tr>
-    <tr data-car="팡테르"><td>팡테르</td><td>4,070,000,000원</td><td>4인승</td></tr>
-    <tr data-car="펠른2"><td>펠른2</td><td>4,103,000,000원</td><td>2인승</td></tr>
-    <tr data-car="파리아"><td>파리아</td><td>4,169,000,000원</td><td>2인승</td></tr>
-    <tr data-car="네온"><td>네온</td><td>4,367,000,000원</td><td>2인승</td></tr>
-  </table>
-
-  <!-- 💥 클래식 -->
-  <h3 id="classic">💥 클래식</h3>
-  <table>
-    <tr><th>차량</th><th>가격</th><th>승차인원</th></tr>
-    <tr data-car="토르네이도"><td>토르네이도</td><td>1,716,000,000원</td><td>2인승</td></tr>
-    <tr data-car="토나도5"><td>토나도5</td><td>1,738,000,000원</td><td>2인승</td></tr>
-    <tr data-car="토네이도6"><td>토네이도6</td><td>1,760,000,000원</td><td>2인승</td></tr>
-    <tr data-car="디이너스티"><td>디이너스티</td><td>1,936,000,000원</td><td>4인승</td></tr>
-    <tr data-car="Z190"><td>Z190</td><td>2,068,000,000원</td><td>2인승</td></tr>
-    <tr data-car="GT500"><td>GT500</td><td>2,156,000,000원</td><td>2인승</td></tr>
-    <tr data-car="코켓2"><td>코켓2</td><td>2,178,000,000원</td><td>2인승</td></tr>
-    <tr data-car="코켓5"><td>코켓5</td><td>2,200,000,000원</td><td>2인승</td></tr>
-    <tr data-car="인퍼너스2"><td>인퍼너스2</td><td>2,838,000,000원</td><td>2인승</td></tr>
-  </table>
-
-  <!-- 💥 세단 -->
-  <h3 id="sedan">💥 세단</h3>
-  <table>
-    <tr><th>차량</th><th>가격</th><th>승차인원</th></tr>
-    <tr data-car="콕55"><td>콕55</td><td>1,694,000,000원</td><td>4인승</td></tr>
-    <tr data-car="스태포드"><td>스태포드</td><td>1,870,000,000원</td><td>2인승</td></tr>
-    <tr data-car="라인하트"><td>라인하트</td><td>3,080,000,000원</td><td>4인승</td></tr>
-    <tr data-car="친퀘밀라"><td>친퀘밀라</td><td>4,301,000,000원</td><td>4인승</td></tr>
-  </table>
-
-  <!-- 💥 슈퍼카 -->
-  <h3 id="supercar">💥 슈퍼카</h3>
-  <table>
-    <tr><th>차량</th><th>가격</th><th>승차인원</th></tr>
-    <tr data-car="페네트레이터"><td>페네트레이터</td><td>2,948,000,000원</td><td>2인승</td></tr>
-    <tr data-car="GP1"><td>GP1</td><td>3,278,000,000원</td><td>2인승</td></tr>
-    <tr data-car="치타2"><td>치타2</td><td>3,300,000,000원</td><td>2인승</td></tr>
-    <tr data-car="몰릭"><td>몰릭</td><td>4,202,000,000원</td><td>2인승</td></tr>
-    <tr data-car="바카"><td>바카</td><td>4,658,500,000원</td><td>2인승</td></tr>
-    <tr data-car="인퍼너스"><td>인퍼너스</td><td>4,334,000,000원</td><td>2인승</td></tr>
-    <tr data-car="반시2"><td>반시2</td><td>4,400,000,000원</td><td>2인승</td></tr>
-  </table>
-
-  <!-- 💥 SUV -->
-  <h3 id="suv">💥 SUV</h3>
-  <table>
-    <tr><th>차량</th><th>가격</th><th>승차인원</th></tr>
-    <tr data-car="그레슬리"><td>그레슬리</td><td>1,804,000,000원</td><td>4인승</td></tr>
-    <tr data-car="FQ2"><td>FQ2</td><td>1,826,000,000원</td><td>4인승</td></tr>
-    <tr data-car="힌틀리"><td>힌틀리</td><td>1,892,000,000원</td><td>4인승</td></tr>
-    <tr data-car="더브스타2"><td>더브스타2</td><td>2,816,000,000원</td><td>4인승</td></tr>
-    <tr data-car="이시8"><td>이시8</td><td>2,970,000,000원</td><td>4인승</td></tr>
-    <tr data-car="발러3"><td>발러3</td><td>2,992,000,000원</td><td>4인승</td></tr>
-    <tr data-car="발러4"><td>발러4</td><td>3,014,000,000원</td><td>4인승</td></tr>
-    <tr data-car="발러7"><td>발러7</td><td>3,036,000,000원</td><td>4인승</td></tr>
-    <tr data-car="핫 링 에바론"><td>핫 링 에바론</td><td>3,058,000,000원</td><td>2인승</td></tr>
-    <tr data-car="노박"><td>노박</td><td>3,102,000,000원</td><td>4인승</td></tr>
-    <tr data-car="비반나이트"><td>비반나이트</td><td>4,136,000,000원</td><td>4인승</td></tr>
-    <tr data-car="에스트론"><td>에스트론</td><td>4,268,000,000원</td><td>4인승</td></tr>
-    <tr data-car="하바네로"><td>하바네로</td><td>5,500,000,000원</td><td>4인승</td></tr>
-  </table>
-
-  <!-- 💥 소형 -->
-  <h3 id="small">💥 소형</h3>
-  <table>
-    <tr><th>차량</th><th>가격</th><th>승차인원</th></tr>
-    <tr data-car="이씨클래식"><td>이씨클래식</td><td>1,650,000,000원</td><td>2인승</td></tr>
-    <tr data-car="브리오소"><td>브리오소</td><td>2,904,000,000원</td><td>2인승</td></tr>
-  </table>
-</section>
-      
-    <script>
-/* === 차량 데이터 === */
-const CAR_CATALOG_DATA = {
-  "디로더":{img:"https://i.imgur.com/tXYVoZq.png/700x400?text=브리오소",price:"1,650,000,000원",desc:"디로더 차량 설명"}, 
-  "브리오소":{img:"https://i.imgur.com/h0wKMZA.png/700x400?text=브리오소",price:"2,904,000,000원",desc:"브리오소 차량 설명"}
-};
-
-/* === 모달 열기/닫기 === */
-function openCarModal(name){
-  const modal=document.getElementById('carModal');
-  const data=CAR_CATALOG_DATA[name]||{};
-  document.getElementById('carModalTitle').textContent=name;
-  document.getElementById('carModalImg').src=data.img||'';
-  document.getElementById('carModalImg').alt=name;
-  document.getElementById('carModalPrice').textContent='가격: '+(data.price||'-');
-  document.getElementById('carModalDesc').textContent=data.desc||'세부 설명이 없습니다.';
-  modal.classList.add('show');
-  modal.setAttribute('aria-hidden','false');
-  document.body.style.overflow='hidden';
-}
-
-/* === 테이블 행 클릭 === */
-document.addEventListener('click', (e)=>{
-  const tr=e.target.closest('tr[data-car]');
-  if(!tr) return;
-  openCarModal(tr.dataset.car);
-});
-</script>
-
-    
+        
       <!-- 카테고리 -->
       <section id="category" class="page">
         <h2>📂 카테고리별 시세표</h2>
@@ -799,28 +577,7 @@ document.addEventListener('click', (e)=>{
       <ul><li>-</li></ul>
     </aside>
   </div>
-
- <!-- 차량 상세 모달 -->
-<div id="carModal" class="modal" aria-hidden="true">
-  <div class="modal-content" role="dialog" aria-modal="true">
-    <button class="close-btn" onclick="closeCarModal()">닫기</button>
-    <h3 id="carModalTitle">차량명</h3>
-
-    <!-- ✅ 추가된 부분 -->
-    <img id="carModalImg"
-         src=""
-         alt=""
-         style="max-width:100%;border-radius:14px;margin:14px 0;">
-
-    <p id="carModalPrice" class="modal-tagline">가격 정보</p>
-    <div id="carModalDesc" style="line-height:1.8">
-      세부 설명이 여기에 표시됩니다.
-    </div>
-  </div>
-</div>
-
-  <!-- ===== /추가 끝 ===== -->
-
+  
   <!-- 기본 JS -->
   <script>
     /* ---------- 네비/서브페이지 ---------- */
@@ -931,28 +688,6 @@ document.addEventListener('click', (e)=>{
     document.addEventListener('DOMContentLoaded', ()=>{
       onScrollProgress();
     });
-
-    /* ===== ✅ 추가: 차량 카드 클릭 → 차량 모달 열기 ===== */
-    const CAR_DATA = {
-      '테저랙트': { price:'300억', desc:'최고속도 400km/h, 전자식 서스펜션, 탄소섬유 모노코크 섀시.' },
-      '네로': { price:'250억', desc:'밸런스가 좋은 전천후 슈퍼카. 일상·레이스 모두 OK.' },
-      'M1': { price:'200억', desc:'스포티한 클래식 모델. 커스텀 파츠 호환성 우수.' },
-      '쇼타로': { price:'100억', desc:'바이크계의 아이콘. 가속·핸들링 특화.' }
-    };
-
-    function closeCarModal(){
-      const modal = document.getElementById('carModal');
-      modal.classList.remove('show');
-      modal.setAttribute('aria-hidden','true');
-      document.body.style.overflow='';
-    }
-
-    document.addEventListener('click', (e)=>{
-  const card = e.target.closest('.car-card');
-  if(!card) return;
-  openCarModal(card.dataset.car); // ✅ 이렇게 name 넘겨서 호출
-});
-
 </script>
 
   <script type="module">
@@ -978,13 +713,6 @@ document.addEventListener('click', (e)=>{
 
     signInAnonymously(auth).catch(console.error);
     
-    function scrollToMarket(id){
-      const el = document.getElementById(id);
-      if(el){
-        el.scrollIntoView({behavior:"smooth", block:"start"});
-      }
-    }
-    window.scrollToMarket = scrollToMarket;
     /* ✅ Firestore 기반 RP 타이머 */
 import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
@@ -1175,4 +903,5 @@ window.applyNewTime = async function(){
 <button onclick="openAdminModal()" class="btn" style="position:fixed;bottom:20px;right:20px;z-index:9999;background:#111827;">관리자</button>
 </body>
 </html>
+
 
