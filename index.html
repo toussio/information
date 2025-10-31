@@ -264,21 +264,6 @@ body{
     .bg-jakdu{ background:linear-gradient(135deg,#f3f4f6,#fecaca,#e5e7eb);}
     .bg-jakdu{ --m-accent:#b91c1c; --m-chip-bg:#fff1f2; --m-chip-border:#fecaca; --m-chip-ink:#7f1d1d; --m-badge-bg:#fef2f2; --m-badge-border:#fecaca; --m-badge-ink:#7f1d1d; }
 
-    /* ===== 리얼 방송국 (홈 밖, 홈 아래) — 홈 섹션과 ‘완전 동일 폭’ ===== */
-    #broadcastBox{
-      background:#fff; border-radius:14px; box-shadow:0 4px 12px rgba(0,0,0,.05);
-      padding:28px; margin:20px 0; width:100%; max-width:none;
-    }
-    #broadcastBox .title-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}
-    #broadcastBox h2{margin:0; color:#1e3a8a; font-size:22px; font-weight:900}
-    #broadcastBox .desc{margin:0 0 16px; color:#374151; font-size:15.5px}
-
-    .broadcast-grid{display:flex; flex-direction:column; gap:22px}
-
-    /* 사연 신청 카드 */
-    .story-card{background:linear-gradient(180deg,#f8fafc,#ffffff);border:1px solid var(--border);border-radius:14px;padding:18px}
-    .story-card h3{margin:0 0 8px;font-size:18px;font-weight:900;color:#0f172a}
-
     /* ★ 폼 레이아웃 정돈(삐져나옴/정렬 문제 해결) */
     .story-form{display:grid;gap:12px}
     .story-form .row{
@@ -506,84 +491,6 @@ body{
   </div>
 </div>
 
-      <div id="broadcastBox">
-        <div class="title-row">
-          <h2>📡 리얼 방송국</h2>
-          <span class="pill">실시간 접수 · 익명 가능</span>
-        </div>
-        <p class="desc">사연을 보내면 운영진 확인 후 방송으로 소개돼요. <span class="hint">* 로그인 없이 익명 접수 가능</span></p>
-
-        <div class="broadcast-grid">
-          <!-- 사연 신청 -->
-          <div class="story-card">
-            <h3>📝 사연 신청</h3>
-            <form id="storyForm" class="story-form" novalidate>
-              <div class="row double">
-                <label for="storyNick">보내는 분</label>
-                <input id="storyNick" type="text" placeholder="닉네임" />
-                <input id="storyCode" type="text" placeholder="고번 (예: 251)" />
-              </div>
-
-              <div class="row">
-                <label for="storyCategory">카테고리</label>
-                <select id="storyCategory" required>
-                  <option value="" disabled selected>카테고리를 선택하세요</option>
-                  <option>연애</option><option>우정</option><option>사건/사고</option><option>일상</option>
-                  <option>웃긴 일</option><option>감동</option><option>음악사연</option><option>기타</option>
-                </select>
-              </div>
-
-              <div class="row">
-                <label for="storyTitle">제목</label>
-                <input id="storyTitle" type="text" placeholder="사연 제목" maxlength="60" required />
-              </div>
-
-              <div class="row">
-                <label for="storySong">신청곡</label>
-                <input id="storySong" type="text" placeholder="예: 아이유 - 밤편지 (선택)" />
-              </div>
-
-              <div class="row" style="align-items:start">
-                <label for="storyBody">내용</label>
-                <textarea id="storyBody" placeholder="사연 내용을 입력하세요" required></textarea>
-              </div>
-
-              <div class="row">
-                <label>익명</label>
-                <div class="inline">
-                  <div id="anonSwitch" class="switch" role="switch" aria-checked="false" tabindex="0"></div>
-                  <span class="hint">익명으로 보내기</span>
-                </div>
-              </div>
-
-              <div class="row actions">
-                <button type="submit" class="btn">사연 보내기</button>
-              </div>
-              <div id="storyMsg" class="hint" style="margin-top:4px" aria-live="polite"></div>
-            </form>
-          </div>
-
-          <!-- 최신 사연 -->
-          <div class="story-list">
-            <div class="head">
-              <h3>🗂 최신 사연</h3>
-              <div class="filters">
-                <select id="storyFilter" class="pill">
-                  <option value="">전체</option>
-                  <option>연애</option><option>우정</option><option>사건/사고</option><option>일상</option>
-                  <option>웃긴 일</option><option>감동</option><option>음악사연</option><option>기타</option>
-                </select>
-              </div>
-            </div>
-            <ul id="storyList"></ul>
-          </div>
-        </div>
-      </div>
-      <!-- /리얼 방송국 -->
-</section>
-      <!-- 당근마켓 -->
-      <!-- 당근마켓 (카테고리와 동일한 테이블형) -->
-<!-- ===== 당근마켓 (카테고리별 이동 가능, 풀버전) ===== -->
 <section id="market" class="page">
   <h2>📚 카탈로그</h2>
 
@@ -893,34 +800,6 @@ document.addEventListener('click', (e)=>{
     </aside>
   </div>
 
-  <!-- 사연 상세 모달 -->
-  <div id="storyModal" class="modal" aria-hidden="true">
-    <div class="modal-content bg-broadcast" role="dialog" aria-modal="true">
-      <button class="close-btn" onclick="closeStory()">닫기</button>
-      <h3 id="sModalTitle">사연 제목</h3>
-      <p class="modal-tagline" id="sModalMeta">작성자 · 시간</p>
-      <div class="help-body">
-        <div class="help-view" id="sModalBody" style="white-space:pre-wrap"></div>
-        <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
-          <span class="badge" id="sModalCat">카테고리</span>
-          <span class="badge" id="sModalSong" style="display:none"></span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 도움말 모달 -->
-  <div id="helpModal" class="modal" aria-hidden="true">
-    <div class="modal-content" role="dialog" aria-modal="true">
-      <button class="close-btn" onclick="closeHelp()">닫기</button>
-      <h3 id="helpTitle">당근마켓 도움말</h3>
-      <p class="modal-tagline" id="helpTagline">커뮤니티 장터 이용 안내</p>
-      <div class="help-body">
-        <div id="helpContent" class="help-view"></div>
-      </div>
-    </div>
-  </div>
-
  <!-- 차량 상세 모달 -->
 <div id="carModal" class="modal" aria-hidden="true">
   <div class="modal-content" role="dialog" aria-modal="true">
@@ -949,21 +828,12 @@ document.addEventListener('click', (e)=>{
       document.querySelectorAll('.page').forEach(s=>s.classList.remove('active'));
       const el=document.getElementById(pageId);
       if(el){ el.classList.add('active'); window.scrollTo({top:0,behavior:'smooth'}); }
-      toggleBroadcastBox();
     }
     function goHome(){ showPage('home'); }
     function showSubPage(id){
       document.querySelectorAll('#home .sub-page').forEach(div=>div.classList.remove('active'));
       document.getElementById(id).classList.add('active');
     }
-
-    /* 홈에서만 리얼 방송국 표시 */
-    function toggleBroadcastBox(){
-      const isHome = document.getElementById('home')?.classList.contains('active');
-      const bx = document.getElementById('broadcastBox');
-      if(bx) bx.style.display = isHome ? '' : 'none';
-    }
-
     /* ---------- 카테고리 퀵 이동 ---------- */
     function scrollToSection(id){
       const el=document.getElementById(id);
@@ -1046,32 +916,6 @@ document.addEventListener('click', (e)=>{
       document.body.style.overflow='';
     }
 
-    /* ---------- 사연 상세 모달 ---------- */
-    const storyMap = new Map();
-    function openStory(id){
-      const s = storyMap.get(id);
-      if(!s) return;
-      document.getElementById('sModalTitle').textContent = s.title || '(제목 없음)';
-      const nameStr = s.isAnon ? '익명' : (s.nick || '—');
-      const codeStr = (!s.isAnon && s.code) ? ` (${s.code})` : '';
-      document.getElementById('sModalMeta').textContent = `${nameStr}${codeStr} · ${s._time || ''}`;
-      document.getElementById('sModalBody').textContent = s.body || '';
-      const cat = document.getElementById('sModalCat');
-      cat.textContent = s.category || '기타';
-      const song = document.getElementById('sModalSong');
-      if(s.song){ song.style.display='inline-flex'; song.textContent = `🎵 ${s.song}`; } else { song.style.display='none'; }
-      const m = document.getElementById('storyModal');
-      m.classList.add('show');
-      m.setAttribute('aria-hidden','false');
-      document.body.style.overflow='hidden';
-    }
-    function closeStory(){
-      const m = document.getElementById('storyModal');
-      m.classList.remove('show');
-      m.setAttribute('aria-hidden','true');
-      document.body.style.overflow='';
-    }
-
     /* 초기 렌더 */
     renderTable(); renderTop();
 
@@ -1085,7 +929,6 @@ document.addEventListener('click', (e)=>{
     window.addEventListener('scroll', onScrollProgress, { passive:true });
 
     document.addEventListener('DOMContentLoaded', ()=>{
-      toggleBroadcastBox();
       onScrollProgress();
     });
 
@@ -1134,139 +977,7 @@ document.addEventListener('click', (e)=>{
     const auth = getAuth(app);
 
     signInAnonymously(auth).catch(console.error);
-
-    const storiesRef = collection(db, "stories");
-
-    /* ---- 폼 엘리먼트 ---- */
-    const storyForm = document.getElementById("storyForm");
-    const storyNick = document.getElementById("storyNick");
-    const storyCode = document.getElementById("storyCode");
-    const storyTitle = document.getElementById("storyTitle");
-    const storyBody = document.getElementById("storyBody");
-    const storyMsg  = document.getElementById("storyMsg");
-    const storySong = document.getElementById("storySong");
-    const storyCategory = document.getElementById("storyCategory");
-    const anonSwitch = document.getElementById("anonSwitch");
-    const storyList = document.getElementById("storyList");
-    const storyFilter = document.getElementById("storyFilter");
-
-    /* ---- 익명 스위치 ---- */
-    function setAnon(active){
-      anonSwitch.classList.toggle('active', !!active);
-      anonSwitch.setAttribute('aria-checked', active ? 'true' : 'false');
-      updateAnonUI();
-    }
-    function updateAnonUI(){
-      const anon = anonSwitch.classList.contains('active');
-      [storyNick, storyCode].forEach((el)=>{
-        el.disabled = anon;
-        if(anon) el.value = '';
-        if(el === storyNick) el.placeholder = anon ? '익명 모드' : '닉네임';
-        if(el === storyCode) el.placeholder = anon ? '익명 모드' : '고번 (예: 251)';
-      });
-    }
-    setAnon(false);
-    updateAnonUI();
-    anonSwitch.addEventListener('click', ()=> setAnon(!anonSwitch.classList.contains('active')));
-    anonSwitch.addEventListener('keydown', (e)=>{ if(e.key===' '||e.key==='Enter'){ e.preventDefault(); setAnon(!anonSwitch.classList.contains('active')); }});
-
-    /* ---- 제출 ---- */
-    storyForm?.addEventListener("submit", async (e)=>{
-      e.preventDefault();
-      const isAnon = anonSwitch.classList.contains('active');
-      // ✅ 익명이면 닉/고번 저장하지 않음
-      const nick  = isAnon ? "" : (storyNick.value||"").trim();
-      const code  = isAnon ? "" : (storyCode.value||"").trim();
-      const title = (storyTitle.value||"").trim();
-      const body  = (storyBody.value||"").trim();
-      const song  = (storySong.value||"").trim();
-      const category = storyCategory.value || "";
-
-      if(!title || !body || !category){
-        storyMsg.textContent = "카테고리/제목/내용은 필수입니다.";
-        storyMsg.style.color = "#dc2626";
-        return;
-      }
-      if(!isAnon && !nick && !code){
-        storyMsg.textContent = "익명이 아니면 닉네임 또는 고번을 입력하세요.";
-        storyMsg.style.color = "#dc2626";
-        return;
-      }
-
-      storyForm.querySelector("button[type=submit]").disabled = true;
-      storyMsg.textContent = "전송 중...";
-      storyMsg.style.color = "#6b7280";
-      try{
-        await addDoc(storiesRef, { isAnon, nick, code, title, body, song, category, createdAt: serverTimestamp() });
-        storyMsg.textContent = "사연이 접수되었습니다! 감사합니다.";
-        storyMsg.style.color = "#16a34a";
-        storyTitle.value = "";
-        storyBody.value = "";
-        storySong.value = "";
-        // 카테고리/익명 설정은 유지
-      }catch(err){
-        storyMsg.textContent = "사연 전송 실패: " + (err?.message||err);
-        storyMsg.style.color = "#dc2626";
-      }finally{
-        storyForm.querySelector("button[type=submit]").disabled = false;
-      }
-    });
-
-    /* ---- 최신 사연 구독 + 렌더러 ---- */
-    function fmtTime(ts){
-      try{
-        const d = ts?.toDate ? ts.toDate() : (ts instanceof Date ? ts : new Date());
-        const y = d.getFullYear(), m = ('0'+(d.getMonth()+1)).slice(-2), da=('0'+d.getDate()).slice(-2);
-        const hh=('0'+d.getHours()).slice(-2), mm=('0'+d.getMinutes()).slice(-2);
-        return `${y}.${m}.${da} ${hh}:${mm}`;
-      }catch{ return ""; }
-    }
-
-    function renderStoryList(){
-      const filterCat = storyFilter?.value || "";
-      const all = Array.from(storyMap.values());
-      const arr = all.filter(s=> !filterCat || s.category === filterCat);
-
-      if(arr.length===0){
-        storyList.innerHTML = `<li class="story-empty">아직 등록된 사연이 없습니다.</li>`;
-        return;
-      }
-      storyList.innerHTML = arr.map(s=>{
-        const who  = s.isAnon ? '익명' : (s.nick || '—');
-        const code = (!s.isAnon && s.code) ? ` (${s.code})` : '';
-        const song = s.song ? ` · 🎵 ${s.song}` : '';
-        return `
-          <li class="story-item" data-id="${s.id}">
-            <div class="left">
-              <span class="badge">${s.category||'기타'}</span>
-              <div style="display:flex;flex-direction:column;min-width:0">
-                <div class="title">${s.title||'(제목 없음)'}</div>
-                <div class="meta">${who}${code} · ${s._time || ''}${song}</div>
-              </div>
-            </div>
-            <div class="meta">보기 ▸</div>
-          </li>
-        `;
-      }).join('');
-
-      storyList.querySelectorAll('.story-item').forEach(li=>{
-        li.addEventListener('click', ()=> openStory(li.getAttribute('data-id')));
-      });
-    }
-
-    const qLatest = query(storiesRef, orderBy('createdAt','desc'), limit(50));
-    onSnapshot(qLatest, (snap)=>{
-      storyMap.clear();
-      snap.forEach(doc=>{
-        const s = { id: doc.id, ...doc.data() };
-        s._time = s.createdAt ? fmtTime(s.createdAt) : '';
-        storyMap.set(s.id, s);
-      });
-      renderStoryList();
-    });
-
-    storyFilter?.addEventListener('change', renderStoryList);
-
+    
     function scrollToMarket(id){
       const el = document.getElementById(id);
       if(el){
@@ -1464,3 +1175,4 @@ window.applyNewTime = async function(){
 <button onclick="openAdminModal()" class="btn" style="position:fixed;bottom:20px;right:20px;z-index:9999;background:#111827;">관리자</button>
 </body>
 </html>
+
