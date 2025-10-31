@@ -42,7 +42,17 @@ body{
     main{display:flex;flex-direction:column;gap:20px}
 
     /* 좌우 사이드 */
-    aside{background:var(--card);border-radius:14px;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,.06);position:sticky;top:20px;height:500px;overflow-y:auto}
+   aside {
+  background:var(--card); border-radius:14px;
+  padding:20px;
+  box-shadow:0 4px 12px rgba(0,0,0,.06);
+  position:fixed; /* ← sticky → fixed로 변경 */
+  top:0;          /* 상단에 완전히 고정 */
+  height:auto;    /* 높이 자동 */
+  max-height:100vh; /* 화면 전체 높이 안 넘게 */
+  overflow-y:auto;  /* 내용 많을 경우 스크롤 */
+  z-index:999;      /* 다른 요소 위로 */
+}
     aside h3{margin:0 0 12px;color:var(--accent);font-size:16px;font-weight:700}
     aside ul{margin:0;padding-left:18px}
     aside li{margin-bottom:6px}
@@ -1464,6 +1474,7 @@ window.applyNewTime = async function(){
 <button onclick="openAdminModal()" class="btn" style="position:fixed;bottom:20px;right:20px;z-index:9999;background:#111827;">관리자</button>
 </body>
 </html>
+
 
 
 
