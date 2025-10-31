@@ -41,18 +41,22 @@ body{
     .layout{display:grid;grid-template-columns:300px 1fr 300px;column-gap:40px;row-gap:24px;max-width:1600px;margin:20px auto;padding:0 30px}
     main{display:flex;flex-direction:column;gap:20px}
 
-    /* 좌우 사이드 */
-   aside {
-  background:var(--card); border-radius:14px;
+  /* 공통 aside는 sticky로 되돌리는 걸 추천 */
+aside {
+  position: sticky;
+  top: 20px;
+  background:var(--card);
+  border-radius:14px;
   padding:20px;
   box-shadow:0 4px 12px rgba(0,0,0,.06);
-  position:fixed; /* ← sticky → fixed로 변경 */
-  top:0;          /* 상단에 완전히 고정 */
-  height:auto;    /* 높이 자동 */
-  max-height:100vh; /* 화면 전체 높이 안 넘게 */
-  overflow-y:auto;  /* 내용 많을 경우 스크롤 */
-  z-index:999;      /* 다른 요소 위로 */
+  max-height: calc(100vh - 40px);
+  overflow:auto;
 }
+
+/* 필요하면 고정으로 쓰되 좌/우를 분리 */
+.aside-left  { position:fixed; top:80px; left:30px; width:260px; }
+.aside-right { position:fixed; top:80px; right:30px; width:260px; }
+
     aside h3{margin:0 0 12px;color:var(--accent);font-size:16px;font-weight:700}
     aside ul{margin:0;padding-left:18px}
     aside li{margin-bottom:6px}
@@ -1040,21 +1044,7 @@ document.addEventListener('click', (e)=>{
       storyList.querySelectorAll('.story-item').forEach(li=>{
         li.addEventListener('click', ()=> openStory(li.getAttribute('data-id')));
       });
-    }
-
-    const qLatest = query(storiesRef, orderBy('createdAt','desc'), limit(50));
-    onSnapshot(qLatest, (snap)=>{
-      storyMap.clear();
-      snap.forEach(doc=>{
-        const s = { id: doc.id, ...doc.data() };
-        s._time = s.createdAt ? fmtTime(s.createdAt) : '';
-        storyMap.set(s.id, s);
-      });
-      renderStoryList();
-    });
-
-    storyFilter?.addEventListener('change', renderStoryList);
-
+    
     function scrollToMarket(id){
       const el = document.getElementById(id);
       if(el){
@@ -1092,38 +1082,48 @@ async function initRPTimers(){
     const timeText = it.querySelector('.rp-time');
 
     // 업데이트 함수
-    function update(){
-      const elapsed = (Date.now() - startTime) / 1000;
-      const remain = Math.max(0, max - elapsed);
-      const pct = Math.min(100, (elapsed / max) * 100);
-      fill.style.width = pct + "%";
+    // 업데이트 함수 밖에서 참조할 핸들
+let timerId = null;
 
-      const min = Math.floor(remain / 60);
-      const sec = Math.floor(remain % 60);
-      timeText.textContent = remain > 0
-        ? `${min}분 ${sec.toString().padStart(2, '0')}초 남음`
-        : "⏰ 완료! (자동 초기화 대기 중)";
+function update(){
+  const elapsed = (Date.now() - startTime) / 1000;
+  const remain = Math.max(0, max - elapsed);
+  const pct = Math.min(100, (elapsed / max) * 100);
+  fill.style.width = pct + "%";
 
-      // ✅ 자동 초기화 로직
-      if(remain <= 0){
-        clearInterval(timer);
-        autoReset();
-      }
-    }
+  const min = Math.floor(remain / 60);
+  const sec = Math.floor(remain % 60);
+  timeText.textContent = remain > 0
+    ? `${min}분 ${sec.toString().padStart(2, '0')}초 남음`
+    : "⏰ 완료! (자동 초기화 대기 중)";
 
-    // ✅ Firestore에 자동 초기화 함수
-    async function autoReset(){
-      try{
-        const newStart = Date.now();
-        await setDoc(ref, { startTime: newStart, duration: max });
-        console.log(`🔁 ${name} 자동 초기화됨`);
-        startTime = newStart;  // 로컬 타이머도 갱신
-        update();              // 즉시 0초로 갱신 표시
-        const newTimer = setInterval(update, 1000); // 새 주기 시작
-      }catch(err){
-        console.error("자동 초기화 실패:", err);
-      }
-    }
+  if(remain <= 0){
+    clearInterval(timerId);
+    timerId = null;
+    autoReset();
+  }
+}
+
+function startInterval(){
+  if(timerId) clearInterval(timerId);
+  timerId = setInterval(update, 1000);
+  update();
+}
+
+// ...초기 시작
+startInterval();
+
+// autoReset 내부에서
+async function autoReset(){
+  try{
+    const newStart = Date.now();
+    await setDoc(ref, { startTime: newStart, duration: max });
+    startTime = newStart;
+    startInterval(); // ✅ 재시작을 한곳에서
+  }catch(err){
+    console.error("자동 초기화 실패:", err);
+  }
+}
 
     // ✅ 순서 수정: setInterval 먼저, update 나중에 호출
     const timer = setInterval(update, 1000);
@@ -1252,6 +1252,7 @@ window.applyNewTime = async function(){
 <button onclick="openAdminModal()" class="btn" style="position:fixed;bottom:20px;right:20px;z-index:9999;background:#111827;">관리자</button>
 </body>
 </html>
+
 
 
 
