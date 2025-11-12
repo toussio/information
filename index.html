@@ -455,10 +455,9 @@ body{
   </div>
 </div>
         </section> 
-      <!-- 카테고리 -->
-      <section id="category" class="page">
-        <h2>📂 카테고리별 시세표</h2>
-        <!-- ✅ 안내 문구 추가 -->
+    <section id="category" class="page">
+  <h2>📂 카테고리별 시세표</h2>
+
   <p style="
     background:#fef9c3;
     border:1px solid #fde68a;
@@ -472,92 +471,13 @@ body{
     ⚠️ 최대한 많은 정보를 취합 중이며, 인게임 시세와 다를 수 있습니다.<br>
     참고용으로만 확인해주세요.
   </p>
-        <div class="quick-nav">
-          <button onclick="scrollToSection('chair')">🪑 의자 종류</button>
-          <button onclick="scrollToSection('support-car')">🚗 후원 차량</button>
-          <button onclick="scrollToSection('island-car')">🏝 극락도 차량</button>
-          <button onclick="scrollToSection('effect')">✨ 이펙트</button>
-          <button onclick="scrollToSection('skin')">🎭 스킨</button>
-          <button onclick="scrollToSection('dance')">💃 행동·댄스·동상</button>
-          <button onclick="scrollToSection('item')">✨ 기타</button>
-        </div>
 
-        <h3 id="chair">🪑 의자 종류</h3>
-        <table>
-          <tr><th>아이템</th><th>시세</th></tr>
-          <tr><td>달의자</td><td>230억~250억</td></tr>
-          <tr><td>커피의자</td><td>230억~250억</td></tr>
-          <tr><td>새장의자</td><td>160억~190억</td></tr>
-          <tr><td>구름의자</td><td>270억~300억</td></tr>
-           <tr><td>게이밍의자 블랙</td><td>책정불가</td></tr>
-          <tr><td>게이밍의자 화이트</td><td>책정불가</td></tr>
-        </table>
+  <!-- 🔥 자동 생성될 퀵네비 -->
+  <div class="quick-nav" id="quickNav"></div>
 
-        <h3 id="support-car">🚗 후원 차량</h3>
-        <table>
-          <tr><th>아이템</th><th>시세</th></tr>
-          <tr><td>M1</td><td>170억~200억</td></tr>
-          <tr><td>미니바티</td><td>150억~180억</td></tr>
-          <tr><td>이그너스</td><td>245억~270억</td></tr>
-          <tr><td>M2</td><td>170억~200억</td></tr>
-          <tr><td>시노비</td><td>100억~120억</td></tr>
-          <tr><td>네로</td><td>230억~250억</td></tr>
-          <tr><td>쇼타로</td><td>80억~100억</td></tr>
-          <tr><td>M3</td><td>150억~200억</td></tr>
-          <tr><td>테저랙트</td><td>270억~300억</td></tr>
-          <tr><td>M4</td><td>170억~200억</td></tr>
-          <tr><td>하쿠쵸우</td><td>80억~110억</td></tr>
-          <tr><td>디베스트</td><td>책정불가</td></tr>
-          <tr><td>M5</td><td>책정불가</td></tr>
-          <tr><td>바티 901</td><td>책정불가</td></tr>
-          <tr><td>비모타테지 H2</td><td>책정불가</td></tr>
-        </table>
-
-        <h3 id="island-car">🏝 극락도 차량</h3>
-        <table>
-          <tr><th>아이템</th><th>시세</th></tr>
-          <tr><td>바나나카</td><td>책정불가</td></tr>
-          <tr><td>고양카</td><td>책정불가</td></tr>
-          <tr><td>피넛카</td><td>40억~60억</td></tr>
-           <tr><td>쇼파카</td><td>50억~80억</td></tr>
-        </table>
-
-        <h3 id="effect">✨ 이펙트</h3>
-        <table>
-          <tr><th>아이템</th><th>시세</th></tr>
-          <tr><td>불손</td><td>220억~270억</td></tr>
-          <tr><td>불발</td><td>200억~250억</td></tr>
-          <tr><td>리프</td><td>140억~180억</td></tr>
-          <tr><td>번개</td><td>130억~150억</td></tr>
-          <tr><td>꽃잎비</td><td>250억~280억</td></tr>
-        </table>
-
-        <h3 id="skin">🎭 스킨</h3>
-        <table>
-          <tr><th>아이템</th><th>시세</th></tr>
-          <tr><td>다니엘</td><td>200억~240억</td></tr>
-          <tr><td>HJ</td><td>책정불가</td></tr>
-          <tr><td>YH</td><td>책정불가</td></tr>
-          <tr><td>다혜</td><td>책정불가</td></tr>
-          <tr><td>유자</td><td>80억~130억</td></tr>
-          <tr><td>문신남</td><td>????</td></tr>
-          <tr><td>병아리</td><td>150억~180억</td></tr>
-          <tr><td>고양이</td><td>150억~180억</td></tr>
-        </table>
-
-        <h3 id="dance">💃 행동·댄스·동상</h3>
-        <table>
-          <tr><th>아이템</th><th>시세</th></tr>
-<tr><td>액셀레이다</td><td>책정불가</td></tr>
-        </table>
-
-        <h3 id="item">✨ 기타 아이템</h3>
-        <table>
-          <tr><th>아이템</th><th>시세</th></tr>
-          <tr><td>롤러</td><td>60억~80억</td></tr>
-          <tr><td>펫 입양권</td><td>160억~200억</td></tr>
-        </table>
-      </section>
+  <!-- 🔥 자동 생성될 카테고리 -->
+  <div id="categoryContainer"></div>
+</section>
 
       <!-- 거래 통계 -->
       <section id="stats" class="page">
@@ -901,8 +821,39 @@ window.applyNewTime = async function(){
 
 <!-- 관리자 열기 버튼 -->
 <button onclick="openAdminModal()" class="btn" style="position:fixed;bottom:20px;right:20px;z-index:9999;background:#111827;">관리자</button>
+  <script type="module">
+  import { priceData } from "./data.js";
+
+  const quickNav = document.getElementById("quickNav");
+  const container = document.getElementById("categoryContainer");
+
+  // 🔥 퀵네비 버튼 자동 생성
+  quickNav.innerHTML = priceData
+    .map((cat) => `
+      <button onclick="document.getElementById('${cat.id}').scrollIntoView({ behavior: 'smooth' })">
+        ${cat.title}
+      </button>
+    `)
+    .join("");
+
+  // 🔥 카테고리 자동 생성
+  container.innerHTML = priceData
+    .map(
+      (cat) => `
+      <h3 id="${cat.id}">${cat.title}</h3>
+      <table>
+        <tr><th>아이템</th><th>시세</th></tr>
+        ${cat.items
+          .map(([name, price]) => `<tr><td>${name}</td><td>${price}</td></tr>`)
+          .join("")}
+      </table>
+    `
+    )
+    .join("");
+</script>
 </body>
 </html>
+
 
 
 
